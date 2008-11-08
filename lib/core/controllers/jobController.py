@@ -20,17 +20,15 @@ import lib.core.outputDeflector as log
 
 class jobs:
     """ 
-    Job manager
-
+    Job manager and controller
     @Author: Alessandro Tanasi
     """
     
     
     
-    def __init__(self,  debug = False):
+    def __init__(self, debug = False):
         """
         Initialize job controller
-        
         @params debug: enable debug mode
         """
         # It stores the status of each job, that can be:
@@ -52,8 +50,7 @@ class jobs:
 
     def alter(self, job, status):
         """
-        Store the change of status of jobs. Each job call this function when change its status.
-        
+        Store the change of status of jobs. Each job call this function when change its status.    
         @params job: job's name
         @params status: current status of the job
         """
@@ -74,7 +71,6 @@ class jobs:
     def check(self):
         """
         Check if all jobs are done
-        
         @returns: boolean that say if all jobs are done
         """
         
