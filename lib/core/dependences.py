@@ -16,31 +16,29 @@
 
 """
 Checks if required libraries are installed
-
 @author: Alessandro Tanasi <alessandro@tanasi.it>
 """
 
 
 
-import sys
 import outputDeflector as log
+from controllers.hmException import *
 
 
 
 def check():
     """
-    Checks for depencies
+    Checks for dependencies.
+    @return: hmImportException if dependencies aren't meets
     """
     
     log.out.debug("Checking dependencies...")
     
-    # Checks for Twisted 
+    # Import Twisted 
+    log.out.debug("Importing Twisted framework")
     try:
         import twisted
     except Exception, e:
-        print "ERROR: Twisted library not found. Aborting"
-        print "Install Twisted library (http://twistedmatrix.com). In Debian like systems you can type apt-get install python-twisted"
-        print "Aborting."
-        sys.exit(1)
+        raise hmImportException("Twisted library not found. Install Twisted library (http://twistedmatrix.com). In Debian like systems you can type apt-get install python-twisted")
     
     log.out.debug("All dependencies ok!")
