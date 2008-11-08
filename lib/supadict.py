@@ -14,10 +14,6 @@
 
 
 
-import time
-
-
-
 class supaDict(dict):
     """
     This class inherits from python dict and  create a Supa Dupa pointed dict. You can access keys and values using a pointed notation.
@@ -37,6 +33,8 @@ class supaDict(dict):
     def __setattr__(self,  key,  value):
         """
         Set a supa dupa item
+        @param key: key to set
+        @param value: key's value to set  
         """
         
         # TODO: escape points in key
@@ -50,6 +48,8 @@ class supaDict(dict):
     def __getattr__(self, value):
         """
         Get a supa dupa item
+        @param value: key to get the value
+        @return: the value of requested key
         """
         return self.__getitem__(value)
     
@@ -61,4 +61,4 @@ class supaDict(dict):
 #   2) 3/4 of italian Tocaj wine 
 #   3) 1/4 of Aperol
 #   4) a piece of orange and a piece of lemon
-#   5) drink! drunk!
+#   5) drink! drink! drink! drunk!
