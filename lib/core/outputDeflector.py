@@ -21,8 +21,7 @@ import lib.core.configuration as configuration
 
 class outputDirector:
     """
-    Manage output.
-
+    Manage output and logging
     @author: Alessandro Tanasi <alessandro@tanasi.it>
     """
     
@@ -34,10 +33,9 @@ class outputDirector:
 
 
 
-    def __message(self,  text, cr = True,  time = False,  tag = None):
+    def __message(self, text, cr = True, time = False, tag = None):
         """
-        Format and write a generic message
-        
+        Format and write a generic message      
         @params text: message text
         @params cr: presence of new line
         @params time: print timestamp
@@ -59,10 +57,9 @@ class outputDirector:
         
         
 
-    def info(self,  text, cr = True,  time = False,  tag = None):
+    def info(self, text, cr = True, time = False, tag = None):
         """
         A info message to all output plugins
-        
         @params text: message text
         @params cr: presence of new line
         @params time: print timestamp
@@ -73,10 +70,9 @@ class outputDirector:
 
 
     
-    def debug(self,  text, cr = True,  time = False,  tag = None):
+    def debug(self, text, cr = True, time = False, tag = None):
         """
         A debug message to all output plugins
-        
         @params text: message text
         @params cr: presence of new line
         @params time: print timestamp
@@ -88,10 +84,9 @@ class outputDirector:
 
 
 
-    def error(self,  text, cr = True,  time = False,  tag = None):
+    def error(self, text, cr = True, time = False, tag = None):
         """
         An error message to all output plugins
-        
         @params text: message text
         @params cr: presence of new line
         @params time: print timestamp
@@ -102,7 +97,7 @@ class outputDirector:
 
 
 
-    def fatal(self,  text, cr = True,  time = False,  tag = None):
+    def fatal(self, text, cr = True, time = False, tag = None):
         """
         A fatal message to all output plugins, the program must be aborted
         
@@ -113,7 +108,7 @@ class outputDirector:
         """
         
         self.__message(text, cr,  time,  tag)
-        # TODO:abort
+        # TODO:abort?
         # OH! WTF?! A fatality?!
 
 
