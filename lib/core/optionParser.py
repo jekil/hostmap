@@ -16,15 +16,14 @@
 
 from optparse import OptionParser
 from optparse import OptionError
-
 from lib.supadict import supaDict
+from lib.core.controllers.hmException import *
 import lib.core.configuration as configuration
 
 
 
 """
 Parse command line 
-
 @author: Alessandro Tanasi <alessandro@tanasi.it>
 """
 
@@ -87,7 +86,9 @@ def parseArgs():
 
     options, args = parser.parse_args()
     
-   # TODO: handle options.target is None:
+    # No target selected
+    if options.target is None:
+        raise hmOptionException("No target selected. You must select a target with -t option.")
 
     # Create configuation dict
     conf = supaDict()

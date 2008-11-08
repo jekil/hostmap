@@ -14,8 +14,9 @@
 
 
 
-
+import traceback
 from lib.settings import *
+from lib.core.controllers.hmException import *
 import lib.core.optionParser as options
 import lib.core.outputDeflector as log
 import lib.core.dependences as deps
@@ -25,20 +26,34 @@ import lib.core.controllers.engineController as engine
 
 def main():
     """ 
-    Start of the hostmap world
+    Start of the hostmap world. Main workflow
     """
     
     # Show banner, credits and stuff
     showCredits()
     
-    # Parse command line
-    options.parseArgs()
-    
-    # Preventive dependency check
-    deps.check()
-    
-    # Start hostmapping
-    engine.en.start()
+    try:       
+        # Parse command line
+        options.parseArgs()
+        
+        # Preventive dependency check
+        deps.check()
+        
+        # Start hostmapping
+        engine.en.start()
+        
+    except hmImportException, e:
+        print
+        print "Execution aborted, missing dependencies!"
+        print e
+        
+    except hmOptionException, e:
+        print
+        print "Execution aborted, missing option value!"
+        print e
+    except:
+        #TODO: unhandled excp
+        traceback.print_exc()
 
 
 
