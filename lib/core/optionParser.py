@@ -31,6 +31,7 @@ Parse command line
 def parseArgs():
     """
     Command line parsing function. Parse command line and create a configuration dict.
+    @raise hmOptionException: if target is not specified
     """
     
     # Menu default string
