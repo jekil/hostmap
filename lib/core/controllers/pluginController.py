@@ -15,6 +15,7 @@
 
 
 import os
+from lib.settings import *
 import lib.core.outputDeflector as log
 
 
@@ -22,7 +23,6 @@ import lib.core.outputDeflector as log
 class plugin:
     """ 
     Plugins engine that handle an event based host discovery
-
     @author: Alessandro Tanasi
     """
 
@@ -39,8 +39,7 @@ class plugin:
         self.debug = debug
         
         # Directory of plugins
-        # TODO: import from settings
-        self.pluginDir = "discovery"
+        self.pluginDir = PLUGINDIR
         
         # Preventive check
         self.precheck()

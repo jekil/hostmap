@@ -21,3 +21,6 @@ CODENAME = "ghironda"
 # Dictionaries settings
 HOSTLIST = "./dictionaries/hostnames.txt"
 HOSTLISTFULL = "./dictionaries/hostnames-full.txt"
+
+# Plugins settings
+PLUGINDIR = "./discovery"
