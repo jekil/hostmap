@@ -28,5 +28,5 @@ VERSION = "0.0.1 preview"
 CODENAME = "ghironda"
 
 # File settings
-HOSTLIST = "./txt/hostnames.txt"
-HOSTLISTFULL = "./txt/hostnames-full.txt"
+HOSTLIST = "./dictionaries/hostnames.txt"
+HOSTLISTFULL = "./dictionaries/hostnames-full.txt"
