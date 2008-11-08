@@ -26,7 +26,6 @@ import lib.core.discovery.hostDiscovery as discovery
 class engine:
     """ 
     Hostmap engine that handle an event based host discovery
-
     @author: Alessandro Tanasi
     """
 
@@ -43,12 +42,6 @@ class engine:
         # Host discovery debug mode
         self.debug = debug
 
-
-
-    def __jobStart(self):
-        """
-        Start all jobs
-        """    
         
         # TODO: remove this
         # Start jobs without dependences
@@ -79,7 +72,7 @@ class engine:
         Start the engine and its jobs
         """
         
-        log.out.debug("Engine started",  time=True,  tag=self.tag)
+        log.out.debug("Engine started", time=True, tag=self.tag)
         
         # Load plugins
         pluginControl = plugins.plugin(debug=True)
@@ -87,7 +80,7 @@ class engine:
         # For each target spawn a host discovery controller
         #TODO: dict for track status
         #for target in configuration.conf.Target:
-        hostDiscovery = discovery.hostMap(configuration.conf.Target, pluginControl,   debug=True)
+        hostDiscovery = discovery.hostMap(configuration.conf.Target, pluginControl, debug=True)
         hostDiscovery.start()
         
         # Start Twisted Reactor - let's go!

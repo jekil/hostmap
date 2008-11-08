@@ -25,16 +25,14 @@ from lib.common import *
 class hostMap:
     """ 
     Host Discovery
-
     @author: Alessandro Tanasi
     """
     
     
     
-    def __init__(self,  target, pluginController,   debug = False):
+    def __init__(self, target, pluginController, debug = False):
         """
         Initialize target host details
-        
         @params target: target ip address for host discovery
         @params pluginController: an instance of class pluginController
         @params debug: enable debug mode
@@ -72,10 +70,9 @@ class hostMap:
 
 
 
-    def job(self,  job,  status):
+    def job(self, job, status):
         """
         Get the status of each plugin
-        
         @param job: name of plugin
         @param status: status of the plugin
         """
@@ -93,8 +90,7 @@ class hostMap:
         Starts Host Discovery
         """
         
-        if self.debug:
-            log.out.debug("Host discovery started",  time=True, tag=self.tag)
+        if self.debug: log.out.debug("Host discovery started", time=True, tag=self.tag)
          
         # Start discovery
         self.notifyIp(self.name)
@@ -107,8 +103,7 @@ class hostMap:
         Stops Host Discovery
         """
         
-        if self.debug:
-            log.out.debug("Host discovery stopped",  time=True, tag=self.tag)
+        if self.debug: log.out.debug("Host discovery stopped", time=True, tag=self.tag)
         self.host.status()
 
 
@@ -116,7 +111,6 @@ class hostMap:
     def notifyIp(self, ip):
         """
         A new ip address has been detected, run all needed plugins
-        
         @params ip: ip address
         """
         
@@ -127,13 +121,12 @@ class hostMap:
     def notifyDomain(self, domain):
         """
         A new domain is detected, run all needed plugins
-        
         @params domain: name of found domain
         """
         
         # Check if this domain has been already discovered
         if self.host.addDomain(domain):
-            log.out.info("Found new domain: %s" % domain,  time=True, tag=self.tag)
+            log.out.info("Found new domain: %s" % domain, time=True, tag=self.tag)
             self.pluginControl.runByDomain(self, domain)
         # Get nameservers
         #if not self.conf.OnlyPassive:
@@ -144,7 +137,6 @@ class hostMap:
     def notifyNameserver(self, nameserver):
         """
         A new nameserver is detected, run all needed plugins
-        
         @params nameserver: nameserver found
         """
         
@@ -165,7 +157,6 @@ class hostMap:
     def notifyHost(self, fqdn):
         """
         A new virtual host has been enumerated
-        
         @params fqdn: fully qualified domain name of enumerated virtual host
         """
         

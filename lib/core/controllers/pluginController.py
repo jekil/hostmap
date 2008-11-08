@@ -15,6 +15,7 @@
 
 
 import os
+import sys
 from lib.settings import *
 import lib.core.outputDeflector as log
 
@@ -30,6 +31,7 @@ class plugin:
 
     def __init__(self,  debug = False):
         """
+        Initializes variables and does preventive checks
         """
         
         # Tag used in all output messages
@@ -41,7 +43,7 @@ class plugin:
         # Directory of plugins
         self.pluginDir = PLUGINDIR
         
-        # Preventive check
+        # Preventive check for plugin directory
         self.precheck()
         
         # Plugin dependencies array
@@ -57,7 +59,8 @@ class plugin:
 
     def precheck(self):
         """
-        Preventive check for plugin directory
+        Preventive check for plugin directory existance
+        @raise hmFileException: if plugin directory is not found
         """
         
         if os.path.exists(self.pluginDir):
@@ -67,11 +70,12 @@ class plugin:
             raise hmFileException("Plugin directory %s not found", self.pluginDir)
         
         
+        
     def getPlugins(self):
         """
         Scan plugins directory and make a list of available plugins
-        
         @returns: array with list of plugins
+        @raise hmFileException: if cannot found any plugin
         """
         
         # List of plugins in category.plugin syntax, useful for importing
@@ -101,12 +105,16 @@ class plugin:
                     plugins.append(plugin)
                     if self.debug: log.out.debug("Found plugin: %s" % plugin,  time=True,  tag=self.tag)
         
+        if plugins is None: raise hmFileException("No plugins found")
         return plugins
 
 
 
     def factory(self, ModuleName, *args):
-        import sys
+        """
+        Plugin factory, istantiate a plugin and return the handler
+        """
+        
         __import__(ModuleName)
         aModule = sys.modules[ModuleName]
         className = ModuleName.split('.')[len(ModuleName.split('.'))-1]
@@ -120,6 +128,7 @@ class plugin:
         Build plugin's dependencies
         """
         
+        # Get plugin list
         for plugin in self.getPlugins():
             try:
                 # Istantiate a the plugin
