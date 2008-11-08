@@ -100,7 +100,6 @@ class outputDirector:
     def fatal(self, text, cr = True, time = False, tag = None):
         """
         A fatal message to all output plugins, the program must be aborted
-        
         @params text: message text
         @params cr: presence of new line
         @params time: print timestamp
