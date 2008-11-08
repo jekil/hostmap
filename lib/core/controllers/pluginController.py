@@ -64,7 +64,7 @@ class plugin:
             if self.debug: log.out.debug("Plugin directory exist",  time=True,  tag=self.tag)
         else:
             if self.debug: log.out.debug("Plugin directory not exist",  time=True,  tag=self.tag)
-            # TODO: raise exception
+            raise hmFileException("Plugin directory %s not found", self.pluginDir)
         
         
     def getPlugins(self):

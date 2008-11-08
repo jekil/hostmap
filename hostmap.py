@@ -51,6 +51,12 @@ def main():
         print
         print "Execution aborted, missing option value!"
         print e
+        
+    except hmFileException, e:
+        print 
+        print "Execution aborted, file or directory not found!"
+        print e
+        
     except:
         #TODO: unhandled excp
         traceback.print_exc()

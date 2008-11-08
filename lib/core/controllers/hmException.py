@@ -37,9 +37,21 @@ class hmImportException(hmException):
     
     pass
 
+
+
 class hmOptionException(hmException):
     """
     HostMap Option excpetion
+    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    """
+    
+    pass
+
+
+
+class hmFileException(hmException):
+    """
+    HostMap File excpetion
     @author: Alessandro Tanasi <alessandro@tanasi.it>
     """
     
