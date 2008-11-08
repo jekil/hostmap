@@ -19,13 +19,10 @@ from lib.supadict import supaDict
 class configuration(supaDict):
     """
     User configuration / options
-
     @author: Alessandro Tanasi <alessandro@tanasi.it>
     """
     
 
-    
-    
-    
+
 # This class must be a Singleton. There is only one set of options.
 conf = configuration()
