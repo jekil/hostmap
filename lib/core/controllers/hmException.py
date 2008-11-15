@@ -66,3 +66,11 @@ class hmPluginException(hmException):
     """
     
     pass
+
+class hmParserException(hmException):
+    """
+    HostMap Plugin excpetion
+    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    """
+    
+    pass

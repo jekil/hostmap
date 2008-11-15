@@ -14,15 +14,23 @@
 
 
 
+from lib.core.controllers.hmException import *
+
+
+
 def parseDomain(fqdn):
     """
     Parse a fully qualified domain name and return a domain
+    @param fqdn: full qualified hostname
+    @return: extracted domain name 
     """
 
     # Check if we already have the domain or we must parse it
     if len(fqdn.split(".")) > 2:
         domain = ".".join(fqdn.split(".")[1:])
-    else:
+    elif len(fqdn.split(".")) == 2:
        domain = fqdn
+    else:
+        raise hmParserException("Unable to parse domain name %s" % fqdn)
 
     return domain
