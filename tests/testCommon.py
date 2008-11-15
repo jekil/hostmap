@@ -27,6 +27,7 @@ class testCommon(unittest.TestCase):
     Tests the common functions library
     @license: Private licensing
     @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
     """
 
     def setUp(self):

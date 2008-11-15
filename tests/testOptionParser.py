@@ -24,6 +24,12 @@ from lib.core.controllers.hmException import *
 
 
 class testOptionParser(unittest.TestCase):
+    """
+    Tests the option parser
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
+    """
 
     def setUp(self):
         pass
