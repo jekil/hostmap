@@ -22,8 +22,9 @@ from lib.supadict import supaDict
 class Host:
     """
     This class correlate and aggregate informations that comes from different modules.
-    
-    @Author: Alessandro Tanasi
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
     """
     
     
@@ -37,7 +38,7 @@ class Host:
         self.infos = supaDict()
         # Target ip address
         self.infos.target = ip
-        # Revers resolution hostname)
+        # Revers resolution hostname
         self.__hostname = None
         # Domains of the enurated virtual hosts
         self.infos.domains = []
@@ -62,25 +63,34 @@ class Host:
 
  
  
-    # __hostname
 
     def setHostname(self, fqdn):
         """
+        Set the hostname of target ip address, set via reverse dns lookup
+        @param fqdn: full qualified hostname
         """
         # Sanitize
         fqdn = fqdn.lower()
-        
         self.__hostname = fqdn
         
         # Add new found virtual host
-        self.__hosts.append(fqdn)
+        self.infos.vhosts.append(fqdn)
         
         # Get domian name and add to new domains found
         self.setDomain(parseDomain(fqdn))
 
+
+
     def getHostname(self):
+        """
+        Return target's hostname due reverse dns lookup
+        @return: target hostname
+        """
         return self.__hostname       
 
+    
+    
+    hostname = property(getHostname, setHostname)
 
 
     # __domain
