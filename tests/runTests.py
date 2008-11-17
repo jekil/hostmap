@@ -22,11 +22,15 @@ import unittest
 # Importing tests
 from testCommon import *
 from testOptionParser import *
+from testIntel import *
 
 
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
+    
     suite.addTest(unittest.makeSuite(testCommon))
     suite.addTest(unittest.makeSuite(testOptionParser))
+    suite.addTest(unittest.makeSuite(testIntel))
+    
     unittest.TextTestRunner(verbosity=4).run(suite)
