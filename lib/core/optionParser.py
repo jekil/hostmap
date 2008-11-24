@@ -16,7 +16,7 @@
 
 from optparse import OptionParser
 from optparse import OptionError
-from lib.supadict import supaDict
+from lib.supadict import supaDict # TODO: can be removed
 from lib.core.controllers.hmException import *
 import lib.core.configuration as configuration
 
@@ -24,7 +24,9 @@ import lib.core.configuration as configuration
 
 """
 Parse command line 
-@author: Alessandro Tanasi <alessandro@tanasi.it>
+@license: Private software
+@author: Alessandro Tanasi 
+@contact: alessandro@tanasi.it
 """
 
 
@@ -49,11 +51,12 @@ def parseArgs():
                                 action="store_false",
                                 dest="dnsbruteforce",
                                 default=True)
-    parser.add_option( "--without-webservercheck",
-                                help="disable web server check",
-                                action="store_false",
-                                dest="webservercheck",
-                                default=True)
+    # TODO: function not implemented now
+    #parser.add_option( "--without-webservercheck",
+    #                            help="disable web server check",
+    #                            action="store_false",
+    #                            dest="webservercheck",
+    #                            default=True)
     parser.add_option( "--without-be-paranoid",
                                 help="don't check the results consistency",
                                 action="store_false",
@@ -69,11 +72,12 @@ def parseArgs():
                                 action="store_true",
                                 dest="onlyactive",
                                 default=False)
-    parser.add_option("-d", "--target-dns",
-                                help="use this DNS server for queries",
-                                action="store",
-                                type="string",
-                                dest="dns")
+    # TODO: not implemented yet
+    #parser.add_option("-d", "--target-dns",
+    #                            help="use this DNS server for queries",
+    #                            action="store",
+    #                            type="string",
+    #                            dest="dns")
     parser.add_option("-v", "--verbose",
                                 help="set verbose mode",
                                 action="store_true",
@@ -85,7 +89,7 @@ def parseArgs():
                                 type="string",
                                 dest="target")
 
-    options, args = parser.parse_args()
+    options, _ = parser.parse_args()
     
     # No target selected
     if options.target is None:
@@ -104,9 +108,9 @@ def parseArgs():
     # DNS module options
     conf.DNSZoneTransfer = options.dnszonetransfer
     conf.DNSBruteforce = options.dnsbruteforce
-    conf.DNS= options.dns
+    #conf.DNS = options.dns
     # Web module
-    conf.WebServerCheck = options.webservercheck
+    #conf.WebServerCheck = options.webservercheck
 
-    # Set global configuration
+    # Save global configuration
     configuration.conf = conf 
