@@ -16,14 +16,15 @@
 
 from twisted.internet import reactor
 
-import lib.core.outputDeflector as log
+from lib.core.outputDeflector import *
 
 
 
 """
 Manage Twisted reactor
-
-@author: Alessandro Tanasi <alessandro@tanasi.it>
+@author:       Alessandro Tanasi
+@license:      Private software
+@contact:      alessandro@tanasi.it
 """
 
 
@@ -33,7 +34,7 @@ def start():
     Start Twisted reactor
     """
     
-    log.out.debug("Reactor started",  time=True, tag="REACTOR")
+    log.debug("Reactor started", time=True, tag="REACTOR")
     reactor.run()
 
 
@@ -43,5 +44,5 @@ def stop():
     Stop Twisted reactor
     """
     
-    log.out.debug("Reactor stopped",  time=True, tag="REACTOR")
+    log.debug("Reactor stopped", time=True, tag="REACTOR")
     reactor.stop()
