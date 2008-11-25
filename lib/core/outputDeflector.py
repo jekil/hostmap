@@ -15,14 +15,16 @@
 
 
 from time import strftime
-import lib.core.configuration as configuration
+from lib.core.configuration import *
 
 
 
 class outputDirector:
     """
     Manage output and logging
-    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    @author:       Alessandro Tanasi
+    @license:      Private software
+    @contact:      alessandro@tanasi.it
     """
     
     
@@ -43,11 +45,9 @@ class outputDirector:
         """
     
         # Add a tag (example [ENGINE] yadda yadda)
-        if tag:
-            text = "[%s] %s" % (tag,  text)
+        if tag: text = "[%s] %s" % (tag,  text)
         # Add timestamp
-        if time:
-            text = "[%s] %s" % (strftime("%X"),  text)
+        if time: text = "[%s] %s" % (strftime("%X"),  text)
         
         # Encode message in unicode
         text = unicode(text, errors='replace')
@@ -66,7 +66,7 @@ class outputDirector:
         @params tag: type
         """
         
-        self.__message(text, cr,  time,  tag)
+        self.__message(text, cr, time, tag)
 
 
     
@@ -79,8 +79,8 @@ class outputDirector:
         @params tag: type
         """
         
-        if  configuration.conf.Verbose == True:
-            self.__message(text, cr,  time,  tag)
+        if conf.Verbose == True:
+            self.__message(text, cr, time, tag)
 
 
 
@@ -93,7 +93,7 @@ class outputDirector:
         @params tag: type
         """
         
-        self.__message(text, cr,  time,  tag)
+        self.__message(text, cr, time, tag)
 
 
 
@@ -114,3 +114,5 @@ class outputDirector:
 
 # This class must be a Singleton. There is only one output handler.
 out = outputDirector()
+# TODO: remove
+log = out
