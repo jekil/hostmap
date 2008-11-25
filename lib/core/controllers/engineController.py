@@ -14,8 +14,8 @@
 
 
 
-import lib.core.configuration as configuration
-import lib.core.outputDeflector as log
+from lib.core.configuration import *
+from lib.core.outputDeflector import *
 import lib.core.controllers.reactorController as reactor
 import lib.core.controllers.pluginController as plugins
 import lib.core.controllers.jobController as jobs
@@ -26,7 +26,9 @@ import lib.core.discovery.hostDiscovery as discovery
 class engine:
     """ 
     Hostmap engine that handle an event based host discovery
-    @author: Alessandro Tanasi
+    @author:       Alessandro Tanasi
+    @license:      Private software
+    @contact:      alessandro@tanasi.it
     """
 
     
@@ -72,7 +74,7 @@ class engine:
         Start the engine and its jobs
         """
         
-        log.out.debug("Engine started", time=True, tag=self.tag)
+        log.debug("Engine started", time=True, tag=self.tag)
         
         # Load plugins
         pluginControl = plugins.plugin(debug=True)
@@ -80,7 +82,7 @@ class engine:
         # For each target spawn a host discovery controller
         #TODO: dict for track status
         #for target in configuration.conf.Target:
-        hostDiscovery = discovery.hostMap(configuration.conf.Target, pluginControl, debug=True)
+        hostDiscovery = discovery.hostMap(conf.Target, pluginControl, debug=True)
         hostDiscovery.start()
         
         # Start Twisted Reactor - let's go!
@@ -96,7 +98,7 @@ class engine:
         # Stop Twisted Reactor
         reactor.stop()
         
-        log.out.debug("Engine stopped",  time=True,  tag=self.tag)
+        log.debug("Engine stopped",  time=True,  tag=self.tag)
     
     
 # This class must be a Singleton. There is only one engine.
