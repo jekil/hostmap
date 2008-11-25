@@ -14,14 +14,16 @@
 
 
 
-import lib.core.outputDeflector as log
+from lib.core.outputDeflector import *
 
 
 
 class jobs:
     """ 
     Job manager and controller
-    @Author: Alessandro Tanasi
+    @author:       Alessandro Tanasi
+    @license:      Private software
+    @contact:      alessandro@tanasi.it
     """
     
     
@@ -56,12 +58,12 @@ class jobs:
         """
         
         self.jobs[job] = status
-        log.out.debug("Job %s changed status to %s" % ( job, status),  time=True,  tag=self.tag)
+        log.debug("Job %s changed status to %s" % (job, status), time=True, tag=self.tag)
         
         # If i debug mode print job status at every call
         if self.debug:
-            log.out.debug("DEBUG MODE: printing job tree at every job change",  time=True,  tag=self.tag)
-            self.status()
+            log.debug("DEBUG MODE: printing job tree at every job change", time=True, tag=self.tag)
+            #self.status()
             
         # Check if all jobs are doneself.engine.alter
         #self.__jobIsDone()
@@ -85,7 +87,7 @@ class jobs:
         # Work done
         if done:
             # All jobs are now done
-            log.out.debug("All jobs done",  time=True,  tag=self.tag)
+            log.debug("All jobs done", time=True, tag=self.tag)
             return True
 
 
@@ -95,8 +97,8 @@ class jobs:
         Print the status of the jobs, used only for debug
         """
         
-        log.out.debug("Current job status:",  time=True,  tag=self.tag)
+        log.debug("Current job status:", time=True, tag=self.tag)
         
         # Print the status of each job
         for job, status in self.jobs.items():
-            log.out.debug("> %s : %s" % (job, status),  time=True,  tag=self.tag)
+            log.debug("> %s : %s" % (job, status),  time=True,  tag=self.tag)
