@@ -29,7 +29,7 @@ class Host:
     
     
     
-    def __init__(self, engine, ip):
+    def __init__(self, ip):
         """
         Initialize host intelligence
         """
@@ -39,21 +39,16 @@ class Host:
         # Target ip address
         self.infos.target = ip
         # Revers resolution hostname
-        self.__hostname = None
+        self.infos.hostname = None
         # Domains of the enurated virtual hosts
         self.infos.domains = []
         # A list of namservers for enumerated domains
         self.infos.nameservers = []
         # A list of fqdn virtual hosts
         self.infos.vhosts = []
-        # Webservers
-        self.__webservers = []
-        # Reference to engine
-        self.__engine = engine
 
     
     
-    # __ip
     def getIp(self):
         """
         Getter for target IP address
@@ -61,7 +56,8 @@ class Host:
         
         return self.intel.target
 
- 
+    ip = property(getIp, _)
+    
  
 
     def setHostname(self, fqdn):
@@ -75,30 +71,21 @@ class Host:
         
         # Add new found virtual host
         self.infos.vhosts.append(fqdn)
-        
-        # Get domian name and add to new domains found
-        self.setDomain(parseDomain(fqdn))
-
-
 
     def getHostname(self):
         """
         Return target's hostname due reverse dns lookup
         @return: target hostname
         """
-        return self.__hostname       
+        return self.infos.hostname       
 
-    
-    
     hostname = property(getHostname, setHostname)
 
 
-    # __domain
     
     def addDomain(self, domain):
         """
-        Add a new domain from a enumeration plugin
-        
+        Add a new domain from a enumeration plugin        
         @params domain: domain name
         """
         
@@ -119,8 +106,7 @@ class Host:
     
     def addNameserver(self, nameserver):
         """
-        Add a new NS from a enumeration plugin
-        
+        Add a new NS from a enumeration plugin    
         @params nameserver: nameserver
         """
         
@@ -146,7 +132,6 @@ class Host:
     def addHost(self, fqdn):
         """
         Add a new host from a enumeration plugin
-        
         @params fqdn: fully qualified domain name of enumerated virtual host
         """
         
@@ -162,14 +147,6 @@ class Host:
         # Sanitize
         fqdn = fqdn.lower()
         
-        # TODO:
-        # Be paranoid, each result hostname is resolved to check consistency
-        #if not self.conf.Paranoid:
-        #   ip = self.d.getHostbyName(fqdn)
-        #    if ip == self.target.getIp():
-        #       self.target.setResult(fqdn)
-        #else:
-        #    self.target.setResult(fqdn)
         self.infos.vhosts.append(fqdn)
         return True
 
@@ -204,42 +181,44 @@ class Host:
         
         
     # TODO:
-    def setWebserver(self, fqdn):
-        """
-        A web server has been found
-        """
-        
-        # Check if host is already in enumerated web host list
-        for host in self.__webservers:
-            if fqdn == host:
-                return
-        
-        # Sanitize
-        fqdn = fqdn.lower()
-        
-        # Add found web server
-        self.__webservers.append(str(fqdn))
-        
-        
-    # TODO:
-    def setIpHomePage(self,  page):
-        """
-        Setter for home page of a web server by ip address
-        """
-        
-        self.intel['Web Server.IP Page'] = page
-        
-        
-    # TODO:
-    def getIpHomePage(self):
-        """
-        Getter for home page of a web server by ip address
-        """
-        
-        return self.intel['Web Server.IP Page']
-        
-        
-        
+#===============================================================================
+#    def setWebserver(self, fqdn):
+#        """
+#        A web server has been found
+#        """
+#        
+#        # Check if host is already in enumerated web host list
+#        for host in self.__webservers:
+#            if fqdn == host:
+#                return
+#        
+#        # Sanitize
+#        fqdn = fqdn.lower()
+#        
+#        # Add found web server
+#        self.__webservers.append(str(fqdn))
+#        
+#        
+#    # TODO:
+#    def setIpHomePage(self,  page):
+#        """
+#        Setter for home page of a web server by ip address
+#        """
+#        
+#        self.intel['Web Server.IP Page'] = page
+#        
+#        
+#    # TODO:
+#    def getIpHomePage(self):
+#        """
+#        Getter for home page of a web server by ip address
+#        """
+#        
+#        return self.intel['Web Server.IP Page']
+#        
+#        
+#        
+#===============================================================================
     def status(self):
         """
         """
