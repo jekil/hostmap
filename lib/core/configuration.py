@@ -19,9 +19,13 @@ from lib.supadict import supaDict
 class configuration(supaDict):
     """
     User configuration / options
-    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    @author:       Alessandro Tanasi
+    @license:      Private software
+    @contact:      alessandro@tanasi.it
     """
     
+    pass
+
 
 
 # This class must be a Singleton. There is only one set of options.
