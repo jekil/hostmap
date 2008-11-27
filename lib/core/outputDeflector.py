@@ -15,7 +15,7 @@
 
 
 from time import strftime
-from lib.core.configuration import *
+from lib.core.configuration import conf
 
 
 
@@ -115,4 +115,4 @@ class outputDirector:
 # This class must be a Singleton. There is only one output handler.
 out = outputDirector()
 # TODO: remove
-log = out
+log = outputDirector()
