@@ -16,9 +16,8 @@
 
 from optparse import OptionParser
 from optparse import OptionError
-from lib.supadict import supaDict # TODO: can be removed
 from lib.core.controllers.hmException import *
-import lib.core.configuration as configuration
+from lib.core.configuration import conf
 
 
 
@@ -94,9 +93,6 @@ def parseArgs():
     # No target selected
     if options.target is None:
         raise hmOptionException("No target selected. You must select a target with -t option.")
-
-    # Create configuation dict
-    conf = supaDict()
     
     # Set configuration
     # Global options
@@ -111,6 +107,3 @@ def parseArgs():
     #conf.DNS = options.dns
     # Web module
     #conf.WebServerCheck = options.webservercheck
-
-    # Save global configuration
-    configuration.conf = conf 
