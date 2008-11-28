@@ -17,6 +17,9 @@
 class supaDict(dict):
     """
     This class inherits from python dict and  create a Supa Dupa pointed dict. You can access keys and values using a pointed notation.
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
     """
     
     def __init__(self):
@@ -35,6 +38,7 @@ class supaDict(dict):
         Set a supa dupa item
         @param key: key to set
         @param value: key's value to set  
+        @todo: Add characters (like .) escaping
         """
         
         # TODO: escape points in key
