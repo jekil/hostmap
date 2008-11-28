@@ -35,13 +35,13 @@ class outputDirector:
 
 
 
-    def __message(self, text, cr = True, time = False, tag = None):
+    def __message(self, text, cr=True, time=False, tag=None):
         """
         Format and write a generic message      
-        @params text: message text
-        @params cr: presence of new line
-        @params time: print timestamp
-        @params tag: type
+        @params text: Message text
+        @params cr: Presence of new line
+        @params time: Print timestamp
+        @params tag: Type
         """
     
         # Add a tag (example [ENGINE] yadda yadda)
@@ -57,53 +57,52 @@ class outputDirector:
         
         
 
-    def info(self, text, cr = True, time = False, tag = None):
+    def info(self, text, cr=True, time=False, tag=None):
         """
         A info message to all output plugins
-        @params text: message text
-        @params cr: presence of new line
-        @params time: print timestamp
-        @params tag: type
+        @params text: Message text
+        @params cr: Presence of new line
+        @params time: Print timestamp
+        @params tag: Type
         """
         
         self.__message(text, cr, time, tag)
 
 
     
-    def debug(self, text, cr = True, time = False, tag = None):
+    def debug(self, text, cr=True, time=False, tag=None):
         """
         A debug message to all output plugins
-        @params text: message text
-        @params cr: presence of new line
-        @params time: print timestamp
-        @params tag: type
+        @params text: Message text
+        @params cr: Presence of new line
+        @params time: Print timestamp
+        @params tag: Type
         """
         
-        if conf.Verbose == True:
-            self.__message(text, cr, time, tag)
+        if conf.Verbose: self.__message(text, cr, time, tag)
 
 
 
-    def error(self, text, cr = True, time = False, tag = None):
+    def error(self, text, cr=True, time=False, tag=None):
         """
         An error message to all output plugins
-        @params text: message text
-        @params cr: presence of new line
-        @params time: print timestamp
-        @params tag: type
+        @params text: Message text
+        @params cr: Presence of new line
+        @params time: Print timestamp
+        @params tag: Type
         """
         
         self.__message(text, cr, time, tag)
 
 
 
-    def fatal(self, text, cr = True, time = False, tag = None):
+    def fatal(self, text, cr=True, time=False, tag=None):
         """
         A fatal message to all output plugins, the program must be aborted
-        @params text: message text
-        @params cr: presence of new line
-        @params time: print timestamp
-        @params tag: type
+        @params text: Message text
+        @params cr: Presence of new line
+        @params time: Print timestamp
+        @params tag: Type
         """
         
         self.__message(text, cr,  time,  tag)
@@ -112,7 +111,4 @@ class outputDirector:
 
 
 
-# This class must be a Singleton. There is only one output handler.
-out = outputDirector()
-# TODO: remove
 log = outputDirector()
