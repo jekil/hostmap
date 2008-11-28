@@ -36,8 +36,8 @@ class supaDict(dict):
     def __setattr__(self,  key,  value):
         """
         Set a supa dupa item
-        @param key: key to set
-        @param value: key's value to set  
+        @param key: Key to set
+        @param value: Key's value to set  
         @todo: Add characters (like .) escaping
         """
         
@@ -52,8 +52,8 @@ class supaDict(dict):
     def __getattr__(self, value):
         """
         Get a supa dupa item
-        @param value: key to get the value
-        @return: the value of requested key
+        @param value: Key to get the value
+        @return: The value of requested key
         """
         return self.__getitem__(value)
     
