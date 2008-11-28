@@ -31,7 +31,7 @@ from controllers.hmException import *
 def check():
     """
     Checks for dependencies.
-    @raise hmImportException: if dependencies aren't meets
+    @raise hmImportException: If dependencies aren't meets
     """
     
     log.debug("Checking dependencies...")
