@@ -15,6 +15,7 @@
 
 
 import lib.intel as intel
+from socket import gethostbyname
 from lib.core.outputDeflector import *
 from lib.core.configuration import *
 import lib.core.controllers.jobController as jobController
@@ -56,7 +57,7 @@ class hostMap:
         self.jobControl = jobController.jobs(debug=True)
         
         # Create a host intelligence model 
-        self.host = intel.Host(self, target)
+        self.host = intel.Host(target)
         
         if self.debug:
             log.debug("Created new HostDiscovery for %s" % self.name, time=True,tag=self.tag)
@@ -70,7 +71,7 @@ class hostMap:
         
         return self.name
 
-    name = property(getName, _)
+    name = property(getName, None)
 
 
     def job(self, job, status):
@@ -135,9 +136,13 @@ class hostMap:
         """
         
         # Check if this domain has been already discovered
-        if self.host.addDomain(domain):
+        if self.host.setDomain(domain):
             log.info("Found new domain: %s" % domain, time=True, tag=self.tag)
             self.pluginControl.runByDomain(self, domain)
+            
+            # The enumerated domain can be a valid virtual host
+            self.notifyHost(domain)
+        
         # Get nameservers
         #if not self.conf.OnlyPassive:
         #   self.d.getNameservers(domain)
@@ -155,7 +160,7 @@ class hostMap:
         """
         
         # Check if this domain has been already discovered
-        if self.host.addNameserver(domain):
+        if self.host.setNameserver(domain):
             log.info("Found new nameserver: %s" % domain, time=True, tag=self.tag)
             self.pluginControl.runByNameserver(self, nameserver)
         # Check if a name server is the target
@@ -178,8 +183,13 @@ class hostMap:
         @params fqdn: fully qualified domain name of enumerated virtual host
         """
         
+        # Paranoid check
+        if conf.Paranoid:
+            if gethostbyname(fqdn) != self.name:
+                return
+            
         # Check if this virtual host has been already discovered
-        if self.host.addHost(fqdn):
+        if self.host.setHost(fqdn):
             # TODO: host or virtual host?
             log.info("Found new host: %s" % fqdn, time=True,tag=self.tag)
             self.pluginControl.runByHostname(self, fqdn)

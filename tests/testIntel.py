@@ -31,13 +31,26 @@ class testIntel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.intel = Host(None, "127.0.0.1")
+        self.intel = Host("127.0.0.1")
         
     def testSetHostname(self):
         host = "abc.antani.com"
         self.intel.hostname = host
         self.assertEqual(self.intel.hostname, host)
-    
+
+    def testSetHost(self):
+        # Add one
+        self.assertEqual(self.intel.setHost("a.a"), True)
+        # Add two
+        self.assertEqual(self.intel.setHost("b.a"), True)
+        self.assertEqual(self.intel.setHost("b.a"), False)
+        
+    def testSetDomain(self):
+        # Add one
+        self.assertEqual(self.intel.setDomain("a.a"), True)
+        # Add two
+        self.assertEqual(self.intel.setDomain("b.a"), True)
+        self.assertEqual(self.intel.setDomain("b.a"), False)
     
         
         

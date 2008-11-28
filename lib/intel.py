@@ -25,6 +25,7 @@ class Host:
     @license: Private licensing
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
+    @todo: Refactor and change return with raise, add getter and setters
     """
     
     
@@ -56,7 +57,7 @@ class Host:
         
         return self.intel.target
 
-    ip = property(getIp, _)
+    ip = property(getIp, None)
     
  
 
@@ -83,17 +84,14 @@ class Host:
 
 
     
-    def addDomain(self, domain):
+    def setDomain(self, domain):
         """
         Add a new domain from a enumeration plugin        
         @params domain: domain name
         """
         
         # Check if domain is already been enumerated
-        # TODO: Refactor this shit!
-        for dom in self.infos.domains:
-            if domain == dom:
-                return False
+        if domain in self.infos.domains: return False
         
         # Sanitize
         domain = domain.lower()
@@ -104,21 +102,17 @@ class Host:
     
 
     
-    def addNameserver(self, nameserver):
+    def setNameserver(self, nameserver):
         """
         Add a new NS from a enumeration plugin    
         @params nameserver: nameserver
         """
         
         # Check if NS is already been enumerated
-        # TODO: Refactor this shit!
-        for ns in self.infos.nameservers:
-            if nameserver == ns:
-                return False
+        for nameserver in self.infos.nameservers: return False
                 
         # Check if domain is null of empty
-        if ns is None or ns == "":
-            return False
+        if ns is None or ns == "": return False
     
         # Sanitize
         nameserver = nameserver.lower()
@@ -129,20 +123,17 @@ class Host:
 
     
 
-    def addHost(self, fqdn):
+    def setHost(self, fqdn):
         """
         Add a new host from a enumeration plugin
         @params fqdn: fully qualified domain name of enumerated virtual host
         """
         
         # Check if host is already in enumerated host list
-        for host in self.infos.vhosts:
-            if fqdn == host:
-                return False
+        if fqdn in self.infos.vhosts: return False
         
         # Check if host is null of empty
-        if fqdn is None or fqdn == "":
-            return False
+        if fqdn is None or fqdn == "": return False
             
         # Sanitize
         fqdn = fqdn.lower()
@@ -152,27 +143,7 @@ class Host:
 
     
     
-    def setFoundHostbyIp(self, fqdn, ip):
-        """
-        Add a result from a enumeration plugin 
-        """
-        
-        # Preventive check)
-        if ip != self.intel['Target IP']:
-            return
-        
-        # Add host
-        self.setFoundHost(fqdn)
 
-    
-    
-    def setResult(self,  fqdn):
-        """
-        Add new enumerated hostname
-        """
-        
-        # Sanitize
-        fqdn = fqdn.lower()
         
         # Add found host
         self.__hosts.append(str(fqdn))
