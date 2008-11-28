@@ -17,7 +17,9 @@
 class hmException(Exception):
     """
     Generic HostMap excpetion
-    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
     """
     
     def __init__(self, value):
@@ -32,7 +34,9 @@ class hmException(Exception):
 class hmImportException(hmException):
     """
     HostMap Import excpetion
-    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
     """
     
     pass
@@ -42,7 +46,9 @@ class hmImportException(hmException):
 class hmOptionException(hmException):
     """
     HostMap Option excpetion
-    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
     """
     
     pass
@@ -52,7 +58,9 @@ class hmOptionException(hmException):
 class hmFileException(hmException):
     """
     HostMap File excpetion
-    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
     """
     
     pass
@@ -62,15 +70,29 @@ class hmFileException(hmException):
 class hmPluginException(hmException):
     """
     HostMap Plugin excpetion
-    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
     """
     
     pass
 
 class hmParserException(hmException):
     """
-    HostMap Plugin excpetion
-    @author: Alessandro Tanasi <alessandro@tanasi.it>
+    HostMap parser excpetion
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
+    """
+    
+    pass
+
+class hmDupException(hmException):
+    """
+    HostMap duplicate exception
+    @license: Private licensing
+    @author: Alessandro Tanasi
+    @contact: alessandro@tanasi.it
     """
     
     pass
