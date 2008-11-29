@@ -44,3 +44,14 @@ def parseDomain(fqdn):
         raise hmParserException("Unable to parse domain name %s" % fqdn)
 
     return domain
+
+
+
+def sanitizeFqdn(fqdn):
+    """
+    Sanitize a fqdn name
+    @param fqdn: Value to sanitize
+    @return: Value sanitized
+    """
+
+    return str(fqdn).lower()

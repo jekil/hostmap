@@ -33,20 +33,25 @@ class testCommon(unittest.TestCase):
     def setUp(self):
         pass
     
-    def testOk(self):
+    def testParseDomain(self):
         """
-        Normal and not malformed hostnames
+        Test domain Parser
         """
+        # Normal use
         self.assertEqual(parseDomain("a.b.c"), "b.c")
         self.assertEqual(parseDomain("a.b.c.d"), "b.c.d")
         self.assertEqual(parseDomain("aaaaaaaaaaa-=-__.b.c.d"), "b.c.d")
-        
-    def testStrange(self):
-        """
-        Strange conditions
-        """
+        # Strange use
         self.assertEqual(parseDomain("b.c"), "b.c")
         self.assertRaises(hmParserException, parseDomain, "c")
+        
+    def testSanitizeFqnd(self):
+        """
+        Test fqdn sanitization
+        """
+        self.assertEqual(sanitizeFqdn("a.a.a"), "a.a.a")
+        self.assertEqual(sanitizeFqdn("A.a.A"), "a.a.a")
+        
         
         
 if __name__ == '__main__':
