@@ -20,6 +20,7 @@ import lib.core.controllers.reactorController as reactor
 import lib.core.controllers.pluginController as plugins
 import lib.core.controllers.jobController as jobs
 import lib.core.discovery.hostDiscovery as discovery
+from lib.output.reporter import Report
 from lib.singleton import *
 
 
@@ -92,7 +93,7 @@ class engine():
 
 
 
-    def stop(self):
+    def stop(self, results=None):
         """
         Stop engine and its jobs
         """
@@ -100,10 +101,14 @@ class engine():
         # Stop Twisted Reactor
         reactor.stop()
         
-        log.debug("Engine stopped",  time=True,  tag=self.tag)
+        if results: Report(results)
+        
+        log.debug("Engine stopped", time=True, tag=self.tag)
     
-    
-# TODO: Here we must exit
+        # TODO: Here we must exit
         import sys
         sys.exit
+        
+        
+        
 en = engine()
