@@ -71,9 +71,8 @@ class Host():
         
         fqdn = sanitizeFqdn(fqdn)
         self.infos.hostname = fqdn
-        
-        # Add new found virtual host
-        self.infos.vhosts.append(fqdn)
+
+
 
     def getHostname(self):
         """
@@ -147,3 +146,12 @@ class Host():
 
     host = property(None, setHost)
     
+    
+    
+    def results(self):
+        """
+        Retrive all data
+        @return: Host data
+        """
+        
+        return self.infos

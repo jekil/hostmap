@@ -74,7 +74,7 @@ class gethostbyaddress:
 
 
 
-    def __callSuccess(self, success, hd,  job):
+    def __callSuccess(self, success, hd, job):
         """
         If a hostbyaddress run success
         """
@@ -82,5 +82,5 @@ class gethostbyaddress:
         # Set fqdn
         fqdn = str(success[0][0].payload.name)
         log.debug("Plugin %s added result: %s" % (__name__, fqdn))
-        hd.notifyHost(fqdn)
+        hd.notifyHostname(fqdn)
         hd.job(job, "done")

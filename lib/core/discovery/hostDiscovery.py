@@ -117,7 +117,7 @@ class hostMap:
         if self.debug: log.debug("Host discovery stopped", time=True, tag=self.tag)
         
         # End callback
-        self.callback()
+        self.callback(self.host.results())
 
 
 
@@ -187,6 +187,23 @@ class hostMap:
 
 
     
+    def notifyHostname(self, fqdn):
+        """
+        The reverse lookup DNS name has been enumerated
+        """
+        
+        # Paranoid check
+        if conf.Paranoid:
+            try:
+                if gethostbyname(fqdn) != self.name: return
+            # This exception is raised when a fqdn doesn't exist. 
+            # socket.gaierror: (-5, 'No address associated with hostname')
+            except socket.gaierror:
+                return
+            
+        self.host.setHostname(fqdn)
+        
+        
     def notifyHost(self, fqdn):
         """
         A new virtual host has been enumerated
