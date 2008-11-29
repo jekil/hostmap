@@ -101,9 +101,10 @@ class engine():
         # Stop Twisted Reactor
         reactor.stop()
         
-        if results: Report(results)
-        
         log.debug("Engine stopped", time=True, tag=self.tag)
+
+        # Print results
+        if results: Report(results)
     
         # TODO: Here we must exit
         import sys
