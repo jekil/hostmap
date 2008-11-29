@@ -80,7 +80,7 @@ class robtexbyaddress:
         """
         
         # Regexp to catch fqdn
-        regexp = "<a href=\"/dns/.*?\">(.*?)</a>"
+        regexp = "\" >(.*?)</a> </td>"
         # Cast object, paranoid mode
         page = str(success)
         # Grep
