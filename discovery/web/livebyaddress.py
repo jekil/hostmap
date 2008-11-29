@@ -15,6 +15,7 @@
 
 
 import re
+from urlparse import urlparse
 from twisted.web import client
 from lib.core.outputDeflector import log
 
@@ -82,7 +83,7 @@ class livebyaddress:
         """
         
         # Regexp to catch fqdn
-        regexp = "class=\"dispUrl\">([^\s<>(),;/\'\"]+)"
+        regexp = "<li><h3><a href=\"(.*?)\" "
         # Cast object, paranoid mode
         page = str(success)
         # Grep
@@ -90,6 +91,7 @@ class livebyaddress:
         
        # Add new found hosts
         for host in set(results):
+            host = urlparse(host).hostname
             hd.notifyHost(host)
             log.debug("Plugin %s added result: %s" % (__name__, host))
         
