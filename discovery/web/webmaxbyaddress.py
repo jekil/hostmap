@@ -16,13 +16,17 @@
 
 import re
 from twisted.web import client
-
-import lib.core.outputDeflector as log
-import lib.core.configuration as configuration
+from lib.core.outputDeflector import log
 
 
 
 class webmaxbyaddress:
+    """ 
+    Check against webmax
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
+    """
 
 
 
@@ -40,12 +44,12 @@ class webmaxbyaddress:
 
 
 
-    def run(self, hd,  ip):
+    def run(self, hd, ip):
         """
         Query Webmax using dork ip: to ge a list of domains
         """
     
-        self.job = "%s-%s" % (__name__,  ip)
+        self.job = "%s-%s" % (__name__, ip)
         hd.job(self.job, "starting")
         
         # Compose url
@@ -85,5 +89,6 @@ class webmaxbyaddress:
         # Add new found hosts
         for domain in set(results):
             hd.notifyDomain(domain)
+            log.debug("Plugin %s added result: %s" % (__name__, domain))
         
         hd.job(self.job, "done")

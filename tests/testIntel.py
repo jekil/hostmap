@@ -17,8 +17,8 @@ import sys
 sys.path.append("../")
 
 import unittest
-from lib.common import *
 from lib.intel import *
+from lib.core.controllers.hmException import *
 
 
 
@@ -31,26 +31,33 @@ class testIntel(unittest.TestCase):
     """
 
     def setUp(self):
-        self.intel = Host("127.0.0.1")
+        self.ip = "127.0.0.1"
+        self.intel = Host(self.ip)
         
-    def testSetHostname(self):
+    def testIp(self):
+        self.assertEqual(self.intel.ip, self.ip)    
+        
+    def testHostname(self):
         host = "abc.antani.com"
         self.intel.hostname = host
         self.assertEqual(self.intel.hostname, host)
+        host = "antani.com"
+        self.intel.hostname = host
+        self.assertEqual(self.intel.hostname, host)
 
-    def testSetHost(self):
+    def testHost(self):
         # Add one
-        self.assertEqual(self.intel.setHost("a.a"), True)
+        self.intel.host = "a.a"
         # Add two
-        self.assertEqual(self.intel.setHost("b.a"), True)
-        self.assertEqual(self.intel.setHost("b.a"), False)
+        self.intel.setHost("b.a")
+        self.assertRaises(hmDupException, self.intel.setHost("b.a"))
         
-    def testSetDomain(self):
+    def testDomain(self):
         # Add one
-        self.assertEqual(self.intel.setDomain("a.a"), True)
+        self.intel.domain = "a.a"
         # Add two
-        self.assertEqual(self.intel.setDomain("b.a"), True)
-        self.assertEqual(self.intel.setDomain("b.a"), False)
+        self.intel.setDomain("b.a")
+        self.assertRaises(hmDupException, self.intel.setDomain("b.a"))
     
         
         

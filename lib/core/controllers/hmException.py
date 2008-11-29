@@ -77,6 +77,8 @@ class hmPluginException(hmException):
     
     pass
 
+
+
 class hmParserException(hmException):
     """
     HostMap parser excpetion
@@ -86,6 +88,8 @@ class hmParserException(hmException):
     """
     
     pass
+
+
 
 class hmDupException(hmException):
     """

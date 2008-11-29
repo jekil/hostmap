@@ -21,9 +21,9 @@ from lib.core.outputDeflector import *
 class jobs:
     """ 
     Job manager and controller
-    @author:       Alessandro Tanasi
-    @license:      Private software
-    @contact:      alessandro@tanasi.it
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
     """
     
     
@@ -31,7 +31,7 @@ class jobs:
     def __init__(self, debug = False):
         """
         Initialize job controller
-        @params debug: enable debug mode
+        @params debug: Enable debug mode
         """
         # It stores the status of each job, that can be:
         # - Starting
@@ -53,27 +53,24 @@ class jobs:
     def alter(self, job, status):
         """
         Store the change of status of jobs. Each job call this function when change its status.    
-        @params job: job's name
-        @params status: current status of the job
+        @params job: Job's name
+        @params status: Current status of the job
         """
         
         self.jobs[job] = status
         log.debug("Job %s changed status to %s" % (job, status), time=True, tag=self.tag)
         
         # If i debug mode print job status at every call
-        if self.debug:
-            log.debug("DEBUG MODE: printing job tree at every job change", time=True, tag=self.tag)
-            #self.status()
-            
-        # Check if all jobs are doneself.engine.alter
-        #self.__jobIsDone()
+        #if self.debug:
+        #    log.debug("DEBUG MODE: printing job tree at every job change", time=True, tag=self.tag)
+        #    self.status()
 
 
 
     def check(self):
         """
         Check if all jobs are done
-        @returns: boolean that say if all jobs are done
+        @returns: Boolean that say if all jobs are done
         """
         
         # The work is done when all jobs are in done or failure state

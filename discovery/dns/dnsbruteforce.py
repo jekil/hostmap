@@ -15,14 +15,19 @@
 
 
 from twisted.names import client
-
-import lib.core.outputDeflector as log
-import lib.core.configuration as configuration
+from lib.core.outputDeflector import log
+from lib.core.configuration import conf
 import lib.settings as settings
 
 
 
 class dnsbruteforce:
+    """ 
+    DNS bruteforce check
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
+    """
 
 
 
@@ -40,20 +45,20 @@ class dnsbruteforce:
 
 
 
-    def run(self, hd,  domain):
+    def run(self, hd, domain):
         """
         Start DNS hostnames brute forcing
         """
         
         # Configuration check
-        if not configuration.conf.DNSBruteforce:
-            log.out.debug("Skipping DNS bruteforce because it is disabled from command line")
+        if not conf.DNSBruteforce:
+            log.debug("Skipping DNS bruteforce because it is disabled from command line")
             return
-        if  configuration.conf.OnlyPassive: 
-            log.out.debug("Skipping DNS bruteforce because it is enabled only passive checks")
+        if  conf.OnlyPassive: onfiguration.
+            log.debug("Skipping DNS bruteforce because it is enabled only passive checks")
             return
         
-        self.job = "%s-%s" % (__name__,  domain)
+        self.job = "%s-%s" % (__name__, domain)
         hd.job(self.job, "starting")
         
         # Load brute force names list
@@ -107,10 +112,10 @@ class dnsbruteforce:
         """
         
         # Check if we found a new virtual host if ip address of brute forced host is the same of target host
-        if self.target.getIp() == str(success):
+        if conf.Target == str(success):
             # Add found virtual host
             hd.notifyHost(fqdn)
-            log.out.debug("Plugin %s added result: %s" % (__name__,  fqdn))
+            log.debug("Plugin %s added result: %s" % (__name__, fqdn))
         
         # Remove host form todo host list
         self.hosts.remove(fqdn)

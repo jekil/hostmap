@@ -16,13 +16,17 @@
 
 import re
 from twisted.web import client
-
-import lib.core.outputDeflector as log
-import lib.core.configuration as configuration
+from lib.core.outputDeflector import log
 
 
 
 class tomsdnsbyaddress:
+    """ 
+    Check against tomsdns
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
+    """
 
 
 
@@ -40,12 +44,12 @@ class tomsdnsbyaddress:
 
 
 
-    def run(self, hd,  ip):
+    def run(self, hd, ip):
         """
         Query Tomdns using dork ip: to ge a list of domains
         """
     
-        self.job = "%s-%s" % (__name__,  ip)
+        self.job = "%s-%s" % (__name__, ip)
         hd.job(self.job, "starting")
         
         # Compose url
@@ -87,6 +91,6 @@ class tomsdnsbyaddress:
         # Add new found hosts
         for host in set(results):
             hd.notifyHost(host)
-            log.out.debug("Plugin %s added result: %s" % (__name__,  host))
+            log.debug("Plugin %s added result: %s" % (__name__, host))
         
         hd.job(self.job, "done")

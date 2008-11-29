@@ -18,7 +18,7 @@ import traceback
 from lib.settings import *
 from lib.core.controllers.hmException import *
 import lib.core.optionParser as options
-import lib.core.outputDeflector as log
+from lib.core.outputDeflector import log
 import lib.core.dependences as deps
 import lib.core.controllers.engineController as engine
 
@@ -68,9 +68,9 @@ def showCredits():
     Show banner and credits
     """
     
-    log.out.info("hostmap version %s codename %s" % (VERSION, CODENAME))
-    log.out.info("Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>")
-    log.out.info("")
+    log.info("hostmap version %s codename %s" % (VERSION, CODENAME))
+    log.info("Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>")
+    log.info("")
     
 
 

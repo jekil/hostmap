@@ -20,15 +20,17 @@ import lib.core.controllers.reactorController as reactor
 import lib.core.controllers.pluginController as plugins
 import lib.core.controllers.jobController as jobs
 import lib.core.discovery.hostDiscovery as discovery
+from lib.singleton import *
 
 
 
-class engine:
+class engine():
     """ 
     Hostmap engine that handle an event based host discovery
-    @author:       Alessandro Tanasi
-    @license:      Private software
-    @contact:      alessandro@tanasi.it
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
+    @todo: Add singleton
     """
 
     
@@ -83,7 +85,7 @@ class engine:
         #TODO: dict for track status
         #for target in configuration.conf.Target:
         hostDiscovery = discovery.hostMap(conf.Target, pluginControl, debug=True)
-        hostDiscovery.start()
+        hostDiscovery.start(self.stop)
         
         # Start Twisted Reactor - let's go!
         reactor.start()
@@ -101,5 +103,7 @@ class engine:
         log.debug("Engine stopped",  time=True,  tag=self.tag)
     
     
-# This class must be a Singleton. There is only one engine.
+# TODO: Here we must exit
+        import sys
+        sys.exit
 en = engine()

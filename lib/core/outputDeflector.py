@@ -16,16 +16,17 @@
 
 from time import strftime
 from lib.core.configuration import conf
-from lib.singletom import *
+from lib.singleton import *
 
 
 
-class outputDirector(Singleton):
+class outputDirector():
     """
     Manage output and logging
-    @author:       Alessandro Tanasi
-    @license:      Private software
-    @contact:      alessandro@tanasi.it
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
+    @todo: Use singleton
     """
     
     

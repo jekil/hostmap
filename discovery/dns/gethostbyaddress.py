@@ -15,10 +15,16 @@
 
 
 from twisted.names import client
-import lib.core.outputDeflector as log
+from lib.core.outputDeflector import log
 
 
 class gethostbyaddress:
+    """ 
+    Check with reverse dns query
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
+    """
 
 
     def require(self):
@@ -35,15 +41,14 @@ class gethostbyaddress:
 
 
 
-    def run(self, hd,  ip):
+    def run(self, hd, ip):
         """
         Get a fqdn from a ipv4 address
-        
-        @params hd: host discovery controller
+        @params hd: Host discovery controller
         @params ip: ipv4 address 
         """
         
-        job = "%s-%s" % (__name__,  ip)
+        job = "%s-%s" % (__name__, ip)
         hd.job(job, "starting")
         
         # Create hostname in-addr.arpa
@@ -51,8 +56,8 @@ class gethostbyaddress:
 
         # Query dns
         query = client.lookupPointer(host)
-        query.addCallback(self.__callSuccess, hd,  job)
-        query.addErrback(self.__callFailure, hd,  job)
+        query.addCallback(self.__callSuccess, hd, job)
+        query.addErrback(self.__callFailure, hd, job)
         
         hd.job(job, "waiting")
 
@@ -76,6 +81,6 @@ class gethostbyaddress:
         
         # Set fqdn
         fqdn = str(success[0][0].payload.name)
-        log.out.debug("Plugin %s added result: %s" % (__name__,  fqdn))
+        log.debug("Plugin %s added result: %s" % (__name__, fqdn))
         hd.notifyHost(fqdn)
         hd.job(job, "done")

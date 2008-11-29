@@ -16,14 +16,18 @@
 
 import re
 from twisted.web import client
-
-import lib.core.outputDeflector as log
-import lib.core.configuration as configuration
+from lib.core.outputDeflector import log
 
 
 
 class webhostingbyaddress:
-
+    """ 
+    Check against drobtex
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
+    """
+    
 
 
     def require(self):
@@ -40,12 +44,12 @@ class webhostingbyaddress:
 
 
 
-    def run(self, hd,  ip):
+    def run(self, hd, ip):
         """
         Query Webhosting using dork ip: to ge a list of domains
         """
     
-        self.job = "%s-%s" % (__name__,  ip)
+        self.job = "%s-%s" % (__name__, ip)
         hd.job(self.job, "starting")
         
         # Compose urltomdns
@@ -85,5 +89,6 @@ class webhostingbyaddress:
         # Add new found hosts
         for domain in set(results):
             hd.notifyDomain(domain)
+            log.debug("Plugin %s added result: %s" % (__name__, domain))
         
         hd.job(self.job, "done")

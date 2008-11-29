@@ -17,14 +17,16 @@
 import os
 import sys
 from lib.settings import *
-import lib.core.outputDeflector as log
+from lib.core.outputDeflector import log
 
 
 
 class plugin:
     """ 
     Plugins engine that handle an event based host discovery
-    @author: Alessandro Tanasi
+    @author:       Alessandro Tanasi
+    @license:      Private software
+    @contact:      alessandro@tanasi.it
     """
 
 
@@ -60,13 +62,13 @@ class plugin:
     def precheck(self):
         """
         Preventive check for plugin directory existance
-        @raise hmFileException: if plugin directory is not found
+        @raise hmFileException: If plugin directory is not found
         """
         
         if os.path.exists(self.pluginDir):
-            if self.debug: log.out.debug("Plugin directory exist",  time=True,  tag=self.tag)
+            if self.debug: log.debug("Plugin directory exist", time=True, tag=self.tag)
         else:
-            if self.debug: log.out.debug("Plugin directory not exist",  time=True,  tag=self.tag)
+            if self.debug: log.debug("Plugin directory not exist", time=True, tag=self.tag)
             raise hmFileException("Plugin directory %s not found", self.pluginDir)
         
         
@@ -74,8 +76,8 @@ class plugin:
     def getPlugins(self):
         """
         Scan plugins directory and make a list of available plugins
-        @returns: array with list of plugins
-        @raise hmFileException: if cannot found any plugin
+        @returns: Array with list of plugins
+        @raise hmFileException: If cannot found any plugin
         """
         
         # List of plugins in category.plugin syntax, useful for importing
@@ -103,7 +105,7 @@ class plugin:
                 if os.path.splitext(file)[1] == ".py":
                     plugin = self.pluginDir + "." + dir + "." + os.path.splitext(file)[0]
                     plugins.append(plugin)
-                    if self.debug: log.out.debug("Found plugin: %s" % plugin,  time=True,  tag=self.tag)
+                    if self.debug: log.debug("Found plugin: %s" % plugin, time=True, tag=self.tag)
         
         if plugins is None: raise hmFileException("No plugins found")
         return plugins
@@ -113,6 +115,7 @@ class plugin:
     def factory(self, ModuleName, *args):
         """
         Plugin factory, istantiate a plugin and return the handler
+        @todo: Add docstring
         """
         
         __import__(ModuleName)
@@ -143,19 +146,19 @@ class plugin:
             # Trivial case..
             if deps == "ip":  
                 self.pluginsByIp.append(plugin)
-                if self.debug: log.out.debug("Plugin %s added to ip queue" % plugin,  time=True,  tag=self.tag)
+                if self.debug: log.debug("Plugin %s added to ip queue" % plugin, time=True, tag=self.tag)
                 
             if deps == "domain":  
                 self.pluginsByDomain.append(plugin)
-                if self.debug: log.out.debug("Plugin %s added to domain queue" % plugin,  time=True,  tag=self.tag)
+                if self.debug: log.debug("Plugin %s added to domain queue" % plugin, time=True, tag=self.tag)
                 
             if deps == "nameserver":  
                 self.pluginsByNameserver.append(plugin)
-                if self.debug: log.out.debug("Plugin %s added to nameserver queue" % plugin,  time=True,  tag=self.tag)
+                if self.debug: log.debug("Plugin %s added to nameserver queue" % plugin, time=True, tag=self.tag)
                 
             if deps == "hostname":  
                 self.pluginsByHostname.append(plugin)
-                if self.debug: log.out.debug("Plugin %s added to hostname queue" % plugin,  time=True,  tag=self.tag)
+                if self.debug: log.debug("Plugin %s added to hostname queue" % plugin, time=True,  tag=self.tag)
 
 
 
@@ -172,7 +175,7 @@ class plugin:
                 # Run
                 pl.run(hd,  ip)
             except Exception, e:
-                log.out.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin,  e),  time=True,  tag=self.tag)
+                log.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
 
 
 
@@ -187,9 +190,9 @@ class plugin:
                 pl = self.factory(plugin)
                     
                 # Run
-                pl.run(hd,  domain)
+                pl.run(hd, domain)
             except Exception,  e:
-                log.out.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin,  e),  time=True,  tag=self.tag)
+                log.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
 
 
 
@@ -204,9 +207,9 @@ class plugin:
                 pl = self.factory(plugin)
                     
                 # Run
-                pl.run(hd,  ip)
-            except Exception,  e:
-                log.out.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin,  e),  time=True,  tag=self.tag)
+                pl.run(hd, ip)
+            except Exception, e:
+                log.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
 
 
 
@@ -221,6 +224,6 @@ class plugin:
                 pl = self.factory(plugin)
                     
                 # Run
-                pl.run(hd,  ip)
+                pl.run(hd, ip)
             except Exception,  e:
-                log.out.error("Plugin %s get an error. Unhandled exception: %s" % (plugin,  e),  time=True,  tag=self.tag)
+                log.error("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)

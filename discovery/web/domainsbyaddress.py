@@ -16,13 +16,17 @@
 
 import re
 from twisted.web import client
-
-import lib.core.outputDeflector as log
-import lib.core.configuration as configuration
+from lib.core.outputDeflector import log
 
 
 
 class domainsbyaddress:
+    """ 
+    Check against domains by address
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
+    """
 
 
 
@@ -45,7 +49,7 @@ class domainsbyaddress:
         Query Domains DB using to get a list of domains
         """
         
-        self.job = "%s-%s" % (__name__,  ip)
+        self.job = "%s-%s" % (__name__, ip)
         hd.job(self.job, "starting")
         
         # Compose url
@@ -54,7 +58,7 @@ class domainsbyaddress:
         # Search
         query = client.getPage(url)
         query.addCallback(self.__callSuccess, hd)
-        query.addErrback(self.__callFailure,hd)
+        query.addErrback(self.__callFailure, hd)
         
         hd.job(self.job, "waiting")
     
@@ -85,5 +89,6 @@ class domainsbyaddress:
        # Add new found hosts
         for domain in set(results):
             hd.notifyDomain(domain)
+            log.debug("Plugin %s added result: %s" % (__name__, domain))
         
         hd.job(self.job, "done")

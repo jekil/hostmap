@@ -16,16 +16,17 @@
 
 from common import *
 from lib.supadict import supaDict
+from lib.core.controllers.hmException import *
 
 
 
-class Host:
+class Host():
     """
     This class correlate and aggregate informations that comes from different modules.
     @license: Private licensing
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
-    @todo: Refactor and change return with raise, add getter and setters
+    @bug: Cannot use property, if you access via property error exception aren't raised. Investigate in the use of none in property
     """
     
     
@@ -33,6 +34,7 @@ class Host:
     def __init__(self, ip):
         """
         Initialize host intelligence
+        @param ip: Host ip address
         """
         
         # Create intelligence dict
@@ -55,7 +57,7 @@ class Host:
         Getter for target IP address
         """
         
-        return self.intel.target
+        return self.infos.target
 
     ip = property(getIp, None)
     
@@ -64,11 +66,11 @@ class Host:
     def setHostname(self, fqdn):
         """
         Set the hostname of target ip address, set via reverse dns lookup
-        @param fqdn: full qualified hostname
+        @param fqdn: Full qualified hostname
         """
-        # Sanitize
-        fqdn = fqdn.lower()
-        self.__hostname = fqdn
+        
+        fqdn = sanitizeFqdn(fqdn)
+        self.infos.hostname = fqdn
         
         # Add new found virtual host
         self.infos.vhosts.append(fqdn)
@@ -76,7 +78,7 @@ class Host:
     def getHostname(self):
         """
         Return target's hostname due reverse dns lookup
-        @return: target hostname
+        @return: Target hostname
         """
         return self.infos.hostname       
 
@@ -87,121 +89,61 @@ class Host:
     def setDomain(self, domain):
         """
         Add a new domain from a enumeration plugin        
-        @params domain: domain name
+        @params domain: Domain name
+        @raise hmDupException: If try to add a duplicate
         """
         
-        # Check if domain is already been enumerated
-        if domain in self.infos.domains: return False
+        domain = sanitizeFqdn(domain)
         
-        # Sanitize
-        domain = domain.lower()
+        # Check if domain is already been enumerated
+        if domain in self.infos.domains: raise hmDupException("Duplicated domain")
         
         # Add a new domain
         self.infos.domains.append(domain)
-        return True
+        
+    domain = property(None, setDomain)
     
 
     
     def setNameserver(self, nameserver):
         """
         Add a new NS from a enumeration plugin    
-        @params nameserver: nameserver
+        @params nameserver: Set nameserver
+        @raise hmDupException: If try to add a duplicate
         """
         
+        nameserver = sanitizeFqdn(nameserver)
+        
         # Check if NS is already been enumerated
-        for nameserver in self.infos.nameservers: return False
+        for nameserver in self.infos.nameservers: raise hmDupException("Duplicated nameserver")
                 
         # Check if domain is null of empty
-        if ns is None or ns == "": return False
-    
-        # Sanitize
-        nameserver = nameserver.lower()
+        if ns is None or ns == "": raise hmDupException("Null nameserver")
         
         # Add new NS
-        self.infos.nameservers.append(str(nameserver))
-        return True   
+        self.infos.nameservers.append(str(nameserver)) 
+        
+    nameserver = property(None, setNameserver)
 
     
 
     def setHost(self, fqdn):
         """
         Add a new host from a enumeration plugin
-        @params fqdn: fully qualified domain name of enumerated virtual host
+        @params fqdn: Fully qualified domain name of enumerated virtual host
+        @raise hmDupException: If try to add a duplicate
         """
+        
+        fqdn = sanitizeFqdn(fqdn)
         
         # Check if host is already in enumerated host list
-        if fqdn in self.infos.vhosts: return False
+        if fqdn in self.infos.vhosts: raise hmDupException("Duplicated host")
         
         # Check if host is null of empty
-        if fqdn is None or fqdn == "": return False
-            
-        # Sanitize
-        fqdn = fqdn.lower()
-        
-        self.infos.vhosts.append(fqdn)
-        return True
-
-    
-    
-
+        if fqdn is None or fqdn == "": raise hmDupException("Null host")
         
         # Add found host
-        self.__hosts.append(str(fqdn))
-        # Add found domain
-        self.setDomain(parseDomain(fqdn))
-        
-        
-    # TODO:
-#===============================================================================
-#    def setWebserver(self, fqdn):
-#        """
-#        A web server has been found
-#        """
-#        
-#        # Check if host is already in enumerated web host list
-#        for host in self.__webservers:
-#            if fqdn == host:
-#                return
-#        
-#        # Sanitize
-#        fqdn = fqdn.lower()
-#        
-#        # Add found web server
-#        self.__webservers.append(str(fqdn))
-#        
-#        
-#    # TODO:
-#    def setIpHomePage(self,  page):
-#        """
-#        Setter for home page of a web server by ip address
-#        """
-#        
-#        self.intel['Web Server.IP Page'] = page
-#        
-#        
-#    # TODO:
-#    def getIpHomePage(self):
-#        """
-#        Getter for home page of a web server by ip address
-#        """
-#        
-#        return self.intel['Web Server.IP Page']
-#        
-#        
-#        
-#===============================================================================
-    def status(self):
-        """
-        """
-        
-        print self.infos
-        return
-        
-        print "Target ip: %s" % self.intel['Target IP']
-        print "Target domain: %s" % self.__domains
-        
-        print "Hostname: %s" % self.__hostname
+        self.infos.vhosts.append(fqdn)
 
-        print "NS: %s" % self.__nameservers
-        print "RESULTS: %s"  % self.__hosts
-        print "Web server: %s" % self.__webservers
+    host = property(None, setHost)
+    

@@ -16,8 +16,9 @@
 
 import lib.intel as intel
 from socket import gethostbyname
-from lib.core.outputDeflector import *
-from lib.core.configuration import *
+from lib.core.outputDeflector import log
+from lib.core.configuration import conf
+from lib.core.controllers.hmException import *
 import lib.core.controllers.jobController as jobController
 from lib.common import *
 
@@ -26,6 +27,7 @@ from lib.common import *
 class hostMap:
     """ 
     Host Discovery
+    @todo: Write unit tests
     @author:       Alessandro Tanasi
     @license:      Private software
     @contact:      alessandro@tanasi.it
@@ -33,12 +35,12 @@ class hostMap:
     
     
     
-    def __init__(self, target, pluginController, debug = False):
+    def __init__(self, target, pluginController, debug=False):
         """
         Initialize target host details
-        @params target: target ip address for host discovery
-        @params pluginController: an instance of class pluginController
-        @params debug: enable debug mode
+        @params target: Target ip address for host discovery
+        @params pluginController: An instance of class pluginController
+        @params debug: Enable debug mode
         """
         
         # The name of the istance is the target ip address
@@ -59,14 +61,14 @@ class hostMap:
         # Create a host intelligence model 
         self.host = intel.Host(target)
         
-        if self.debug:
-            log.debug("Created new HostDiscovery for %s" % self.name, time=True,tag=self.tag)
+        if self.debug: log.debug("Created new HostDiscovery for %s" % self.name, time=True, tag=self.tag)
 
 
 
     def getName(self):
         """
         Get instance name
+        @return: Istance name
         """
         
         return self.name
@@ -77,8 +79,8 @@ class hostMap:
     def job(self, job, status):
         """
         Get the status of each plugin
-        @param job: name of plugin
-        @param status: status of the plugin
+        @param job: Name of plugin
+        @param status: Status of the plugin
         """
         
         self.jobControl.alter(job, status)
@@ -90,10 +92,13 @@ class hostMap:
 
 
 
-    def start(self):
+    def start(self, callback):
         """
         Starts Host Discovery
+        @param callback: Function to call when the host discovery is done 
         """
+        
+        self.callback = callback
         
         if self.debug: log.debug("Host discovery started", time=True, tag=self.tag)
          
@@ -109,7 +114,9 @@ class hostMap:
         """
         
         if self.debug: log.debug("Host discovery stopped", time=True, tag=self.tag)
-        self.host.status()
+        
+        # End callback
+        self.callback()
 
 
 
@@ -118,7 +125,7 @@ class hostMap:
         A new ip address has been detected, run all needed plugins.
         Steps:
         * Run all checks that get a ip as input
-        @params ip: ip address
+        @params ip: Ip address
         """
         
         self.pluginControl.runByIp(self, ip)
@@ -132,16 +139,18 @@ class hostMap:
         * Check if the domain ip address is the target ip
         * Run all checks that get a domain as input
         * Get the nameserver for that domain
-        @params domain: name of found domain
+        @params domain: Name of found domain
         """
         
-        # Check if this domain has been already discovered
-        if self.host.setDomain(domain):
+        try:
+            self.host.setDomain(domain)
             log.info("Found new domain: %s" % domain, time=True, tag=self.tag)
             self.pluginControl.runByDomain(self, domain)
             
             # The enumerated domain can be a valid virtual host
             self.notifyHost(domain)
+        except hmDupException:
+            return
         
         # Get nameservers
         #if not self.conf.OnlyPassive:
@@ -156,13 +165,17 @@ class hostMap:
         * Check if the nameserver ip address is the target ip
         * Run all checks that get a nameserver as input
         * Try a zone transfer
-        @params nameserver: nameserver found
+        @bug: Fix docstring, this is an ip or a fqdn???
+        @params nameserver: Nameserver found
         """
         
-        # Check if this domain has been already discovered
-        if self.host.setNameserver(domain):
-            log.info("Found new nameserver: %s" % domain, time=True, tag=self.tag)
+        try:
+            self.host.setNameserver(nameserver)
+            log.info("Found new nameserver: %s" % nameserver, time=True, tag=self.tag)
             self.pluginControl.runByNameserver(self, nameserver)
+        except hmDupException:
+            return
+        
         # Check if a name server is the target
         #if not self.conf.OnlyPassive:
         #    self.d.getHostbyName(nameserver)
@@ -180,7 +193,7 @@ class hostMap:
         * Check if the host ip address is the target ip
         * Run all checks that get a hostname as input
         * Parse the domain name and notify a new domain (the hostname is also a domain name)
-        @params fqdn: fully qualified domain name of enumerated virtual host
+        @params fqdn: Fully qualified domain name of enumerated virtual host
         """
         
         # Paranoid check
@@ -188,8 +201,8 @@ class hostMap:
             if gethostbyname(fqdn) != self.name:
                 return
             
-        # Check if this virtual host has been already discovered
-        if self.host.setHost(fqdn):
+        try:
+            self.host.setHost(fqdn)
             # TODO: host or virtual host?
             log.info("Found new host: %s" % fqdn, time=True,tag=self.tag)
             self.pluginControl.runByHostname(self, fqdn)
@@ -198,6 +211,8 @@ class hostMap:
             # todo 3 *
             domain = parseDomain(fqdn)
             self.notifyDomain(domain)
+        except hmDupException:
+            return
         
         
         
