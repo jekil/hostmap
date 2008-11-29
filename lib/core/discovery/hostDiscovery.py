@@ -14,6 +14,7 @@
 
 
 
+import socket
 import lib.intel as intel
 from socket import gethostbyname
 from lib.core.outputDeflector import log
@@ -198,7 +199,11 @@ class hostMap:
         
         # Paranoid check
         if conf.Paranoid:
-            if gethostbyname(fqdn) != self.name:
+            try:
+                if gethostbyname(fqdn) != self.name: return
+            # This exception is raised when a fqdn doesn't exist. 
+            # socket.gaierror: (-5, 'No address associated with hostname')
+            except socket.gaierror:
                 return
             
         try:
