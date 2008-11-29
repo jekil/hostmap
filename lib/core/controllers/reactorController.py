@@ -15,7 +15,6 @@
 
 
 from twisted.internet import reactor
-
 from lib.core.outputDeflector import *
 
 
