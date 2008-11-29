@@ -26,6 +26,7 @@ class webhostingbyaddress:
     @author: Alessandro Tanasi
     @license: Private software
     @contact: alessandro@tanasi.it
+    @bug: At 29/11/2008 this website has a captcha
     """
     
 
