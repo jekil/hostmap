@@ -15,8 +15,11 @@
 
 
 from lib.supadict import supaDict
+from lib.singleton import *
 
-class configuration(supaDict):
+
+
+class configuration(supaDict, Singleton):
     """
     User configuration / options
     @author:       Alessandro Tanasi
@@ -28,5 +31,4 @@ class configuration(supaDict):
 
 
 
-# This class must be a Singleton. There is only one set of options.
 conf = configuration()
