@@ -3,3 +3,6 @@ Andres Riancho <andres.riancho@gmail.com>
     
 Bernardo Damele <bernardo.damele@gmail.com>
 	for his SQL injection tool, sqlmap, http://sqlmap.sourceforge.net
+
+Sebastian Rittau <srittau@jroger.in-berlin.de>
+    for his unit test library that add compatibility with JUnit XML results
