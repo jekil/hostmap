@@ -15,6 +15,7 @@
 
 
 import sys
+import xmlrunner
 sys.path.append("../")
 
 import unittest
@@ -29,10 +30,18 @@ from testSupadict import *
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
-    
+
     suite.addTest(unittest.makeSuite(testCommon))
     suite.addTest(unittest.makeSuite(testOptionParser))
     suite.addTest(unittest.makeSuite(testIntel))
     suite.addTest(unittest.makeSuite(testSupadict))
     
-    unittest.TextTestRunner(verbosity=4).run(suite)
+    runner = unittest.TextTestRunner(verbosity=4)
+
+    for argstr in sys.argv:
+        #if (argstr == "html"):
+        #    runner = HTMLTestRunner.HTMLTestRunner(verbosity=0)
+        if (argstr == "xml"):
+            runner = xmlrunner.XmlTestRunner(sys.stdout)
+
+    runner.run(suite)
