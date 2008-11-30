@@ -15,6 +15,7 @@
 
 
 from lib.core.outputDeflector import log
+from lib.core.configuration import conf
 
 
 
@@ -41,10 +42,14 @@ class Report():
         log.info("")
         log.info("Results for %s" % self.res.target)
         log.info("Hostname: %s" % self.res.hostname)
-        log.info("Served by nameservers: %s" % " ".join(self.res.nameservers))
-        log.info("Belongs to domains: %s" % " ".join(self.res.domains))
+        log.info("Served by nameservers (probable): %s" % " ".join(self.res.nameservers))
+        log.info("Belongs to domains (probable): %s" % " ".join(self.res.domains))
         if self.res.vhosts:
-            log.info("Aliases enumerated:")
+            if conf.Paranoid:
+                log.info("Aliases enumerated (confirmed):")
+            else:
+                log.info("Aliases enumerated (probable):")
+                
             for h in self.res.vhosts:
                 log.info("%s" % h)
         else:
