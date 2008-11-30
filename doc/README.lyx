@@ -37,36 +37,104 @@
 
 \begin_body
 
-\begin_layout Standard
-hostmap
+\begin_layout Title
+hostmap user guide
 \end_layout
 
-\begin_layout Standard
-versione xxx
+\begin_layout Date
+release 0.1 private, 11/30/2008
 \end_layout
 
-\begin_layout Standard
-Coded by Alessandro `jekil` Tanasi
+\begin_layout Author
+by Alessandro `jekil` Tanasi 
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Abstract
+This paper is the hostmap user guide.
+ Get the latest version in the project homepage.
+\end_layout
+
+\begin_layout Section
 Introduction
 \end_layout
 
-\begin_layout Enumerate
-Quick start
+\begin_layout Subsection
+Requirements
 \end_layout
 
-\begin_layout Enumerate
-Features
+\begin_layout Standard
+hostmap is fully implemente using Python, an onbject oriented programming
+ language.
+ The Python interpreter is freely downloadable from its offficial site.
+ It's installable in GNU/Linux, Apple OSX and Microsoft Windows.
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
+To achieve great network performances hostmap uses the Twisted Matrix network
+ framework.
+ Twisted is an event driven engine written in Python and licensed under
+ the MIT license.
+\end_layout
+
+\begin_layout Standard
+The Twisted library is freely downloadable from its official site.
+ It's installable in GNU/Linux, Apple OSX and Microsoft Windows.
+\end_layout
+
+\begin_layout Subsection
+Use case
+\end_layout
+
+\begin_layout Subsection
+How to get hostmap
+\end_layout
+
+\begin_layout Section
+Quick start guide
+\end_layout
+
+\begin_layout Section
+Features and techniques
+\end_layout
+
+\begin_layout Standard
+Featurs: - Multithread engine
+\end_layout
+
+\begin_layout Standard
+Enumeration tech: - Name server enumeration - Enumeration via the following
+ search engines - Domains DB - Gigablast - Microsoft Live! - Robtex - RUS
+ CERT-DB - TomDns - Webhosting.info - WebMax - Virtual host brute forcing
+\end_layout
+
+\begin_layout Standard
+Paranoid check , puo` far sparire domini di cui e` stato tolto il dns ma
+ l'apache e` ancora configurato.
+\end_layout
+
+\begin_layout Section
+Usage
+\end_layout
+
+\begin_layout Section
+Developing
+\end_layout
+
+\begin_layout Section
 Feedback and bug reports
 \end_layout
 
-\begin_layout Enumerate
-Copyright
+\begin_layout Section
+Copyright and license
+\end_layout
+
+\begin_layout Standard
+hostmap is copyrighted by Alessandro Tanasi and is a private software.
+ You can read the full software license in the LICENSE.txt file.
+\end_layout
+
+\begin_layout Section
+Disclaimer
 \end_layout
 
 \end_body
