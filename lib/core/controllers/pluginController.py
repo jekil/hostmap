@@ -196,7 +196,7 @@ class plugin:
 
 
 
-    def runByNamserver(self, hd, nameserver):
+    def runByNameserver(self, hd, nameserver):
         """
         Run all plugins that depends from ip nameserver
         """
