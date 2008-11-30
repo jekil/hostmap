@@ -81,12 +81,13 @@ class tomsdnsbyaddress:
         
         # TODO: test this and redo the parsing regexp
         # Regexp to catch fqdn
-        regexp = "\076(.*)\n\074"
+        regexp = "-->([\d\w\.-_\r\n]+)<"
         # Cast object, paranoid mode
         page = str(success)
 
         # Grep
-        results = re.findall(regexp, page, re.I | re.M)
+        results = re.findall(regexp, page, re.M)[0]
+        results = re.split("\n", results)[1:-2]
         
         # Add new found hosts
         for host in set(results):
