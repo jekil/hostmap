@@ -15,6 +15,7 @@
 
 
 import re
+from urlparse import urlparse
 from twisted.web import client
 from lib.core.outputDeflector import log
 
@@ -80,7 +81,7 @@ class gigablastbyaddress:
         """
         
         # Regexp to catch fqdn
-        regexp = "<span class=\"url\">([^\s<>(),;/\'\"]+).*</span>"
+        regexp = "<span class=\"url\">(.*)</span>"
         # Cast object, paranoid mode
         page = str(success)
         # Grep
@@ -88,6 +89,7 @@ class gigablastbyaddress:
 
        # Add new found hosts
         for host in set(results):
+            host = urlparse(host).hostname
             hd.notifyHost(host)
             log.debug("Plugin %s added result: %s" % (__name__, host))
         
