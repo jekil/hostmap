@@ -29,15 +29,16 @@ class Report():
     
     def __init__(self, results):
         self.res = results
-        self.show()
+        self.report()
         
         
     
-    def show(self):
+    def report(self):
         """
         Show results
         """
         
+        log.info("")
         log.info("Results for %s" % self.res.target)
         log.info("Hostname: %s" % self.res.hostname)
         if self.res.vhosts:
