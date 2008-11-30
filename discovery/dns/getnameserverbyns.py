@@ -18,13 +18,9 @@ from twisted.names import client
 from lib.core.outputDeflector import log
 
 
-class gethostbyaddress:
-    """ 
-    Check with reverse dns query
-    @author: Alessandro Tanasi
-    @license: Private software
-    @contact: alessandro@tanasi.it
-    """
+
+class getnameserverbyns:
+
 
 
     def require(self):
@@ -37,27 +33,23 @@ class gethostbyaddress:
         # domain
         # nameserver
         # hostname
-        return "ip"
+        return "domain"
 
 
 
-    def run(self, hd, ip):
+    def run(self, hd,  domain):
         """
-        Get a fqdn from a ipv4 address
-        @params hd: Host discovery controller
-        @params ip: ipv4 address 
+        Get the nameservers of a domain by dns NS lookup
+        @paramas domain: domain name
         """
         
-        job = "%s-%s" % (__name__, ip)
+        job = "%s-%s" % (__name__, domain)
         hd.job(job, "starting")
         
-        # Create hostname in-addr.arpa
-        host = '.'.join(ip.split('.')[::-1]) + '.in-addr.arpa'
-
         # Query dns
-        query = client.lookupPointer(host)
+        query = client.lookupNameservers(domain)
         query.addCallback(self.__callSuccess, hd, job)
-        query.addErrback(self.__callFailure, hd, job)
+        query.addErrback(self.__callFailure, hd, job)       
         
         hd.job(job, "waiting")
 
@@ -65,10 +57,10 @@ class gethostbyaddress:
 
     def __callFailure(self, failure, hd, job):
         """
-        If a hostbyaddress run fails
+        If a nameservers run fails
         """
         
-        #failure.printTraceback()
+        failure.printTraceback()
         
         hd.job(job, "failure")
 
@@ -76,11 +68,13 @@ class gethostbyaddress:
 
     def __callSuccess(self, success, hd, job):
         """
-        If a hostbyaddress run success
+        If a nameservers run success
         """
         
-        # Set fqdn
-        fqdn = str(success[0][0].payload.name)
-        log.debug("Plugin %s added result: %s" % (__name__, fqdn))
-        hd.notifyHostname(fqdn)
+        # Extract nameservers fqdn from response
+        for values in success:
+            for ns in values:
+                log.debug("Plugin %s added result: %s" % (__name__, str(ns.payload.name)))
+                hd.notifyNameserver(str(ns.payload.name))
+        
         hd.job(job, "done")

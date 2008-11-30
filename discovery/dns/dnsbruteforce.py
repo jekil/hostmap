@@ -54,7 +54,7 @@ class dnsbruteforce:
         if not conf.DNSBruteforce:
             log.debug("Skipping DNS bruteforce because it is disabled from command line")
             return
-        if  conf.OnlyPassive: onfiguration.
+        if conf.OnlyPassive: 
             log.debug("Skipping DNS bruteforce because it is enabled only passive checks")
             return
         
@@ -94,7 +94,7 @@ class dnsbruteforce:
         If a brute force run fails
         """
         
-        failure.printTraceback()
+        #failure.printTraceback()
         
         # Remove host form todo host list
         self.hosts.remove(fqdn)
