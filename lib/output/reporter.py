@@ -38,18 +38,21 @@ class Report():
         """
         Show results
         """
-        
+
+        # Set output vars
+        if conf.Paranoid:
+            prob = "(confirmed)"
+        else:
+            prob = "(probable)"
+
+        # Print out report
         log.info("")
         log.info("Results for %s" % self.res.target)
         log.info("Hostname: %s" % self.res.hostname)
         log.info("Served by nameservers (probable): %s" % " ".join(self.res.nameservers))
-        log.info("Belongs to domains (probable): %s" % " ".join(self.res.domains))
+        log.info("Belongs to domains %s: %s" % (prob, " ".join(self.res.domains)))
         if self.res.vhosts:
-            if conf.Paranoid:
-                log.info("Aliases enumerated (confirmed):")
-            else:
-                log.info("Aliases enumerated (probable):")
-                
+            log.info("Aliases enumerated %s:" % prob)
             for h in self.res.vhosts:
                 log.info("%s" % h)
         else:
