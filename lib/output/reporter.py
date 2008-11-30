@@ -41,6 +41,8 @@ class Report():
         log.info("")
         log.info("Results for %s" % self.res.target)
         log.info("Hostname: %s" % self.res.hostname)
+        log.info("Served by nameservers: %s" % " ".join(self.res.nameservers))
+        log.info("Belongs to domains: %s" % " ".join(self.res.domains))
         if self.res.vhosts:
             log.info("Aliases enumerated:")
             for h in self.res.vhosts:
