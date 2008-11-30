@@ -53,7 +53,7 @@ class ruscertbyaddress:
         hd.job(self.job, "starting")
         
         # Compose url
-        url = "http://cert.uni-stuttgart.de/stats/dns-replication.php?query=%s" % ip
+        url = "http://www.bfk.de/bfk_dnslogger.html?query=%s" % ip
         
         # Search
         query = client.getPage(url)
@@ -80,11 +80,11 @@ class ruscertbyaddress:
         """
         
         # Regexp to catch fqdn
-        regexp = "query=.*?\">(.*?)</A></TT></TD><TD><TT>&nbsp;A&nbsp;</TT></TD><TD><TT><A HREF=\"dns-replication.php\?query=.*?\">"
+        regexp = "\">([\d\w\.-_]+)</a></tt></td><td><tt>"
         # Cast object, paranoid mode
         page = str(success)
         # Grep
-        results = re.findall(regexp, page, re.I | re.M)
+        results = re.findall(regexp, page)
        # Add new found hosts
         for host in set(results):
             hd.notifyHost(host)
