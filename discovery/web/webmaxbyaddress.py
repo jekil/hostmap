@@ -69,7 +69,7 @@ class webmaxbyaddress:
         If a Webmax search run fails
         """
         
-        failure.printTraceback()
+        # failure.printTraceback()
         
         hd.job(self.job, "failure")
 

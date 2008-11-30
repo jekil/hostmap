@@ -70,7 +70,7 @@ class gigablastbyaddress:
         If a gigablast search run fails
         """
         
-        failure.printTraceback()
+        # failure.printTraceback()
         
         hd.job(self.job, "failure")
 

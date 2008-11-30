@@ -69,7 +69,7 @@ class tomsdnsbyaddress:
         If a Tomdns search run fails
         """
         
-        failure.printTraceback()
+        # failure.printTraceback()
         
         hd.job(self.job, "failure")
 

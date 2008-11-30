@@ -69,7 +69,7 @@ class ruscertbyaddress:
         If a live search run fails
         """
         
-        failure.printTraceback()
+        # failure.printTraceback()
         
         hd.job(self.job, "failure")
 

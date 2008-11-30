@@ -70,7 +70,7 @@ class domainsbyaddress:
         If a domains db search run fails
         """
         
-        failure.printTraceback()
+        # failure.printTraceback()
         
         hd.job(self.job, "failure")
 
