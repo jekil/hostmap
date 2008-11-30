@@ -81,7 +81,7 @@ class gigablastbyaddress:
         """
         
         # Regexp to catch fqdn
-        regexp = "<span class=\"url\">(.*)</span>"
+        regexp = "<a href=(.*)><font"
         # Cast object, paranoid mode
         page = str(success)
         # Grep
