@@ -114,7 +114,7 @@ class Host():
         nameserver = sanitizeFqdn(nameserver)
         
         # Check if NS is already been enumerated
-        for nameserver in self.infos.nameservers: raise hmDupException("Duplicated nameserver")
+        if nameserver in self.infos.nameservers: raise hmDupException("Duplicated nameserver")
                 
         # Check if domain is null of empty
         if nameserver is None or nameserver == "": raise hmDupException("Null nameserver")
