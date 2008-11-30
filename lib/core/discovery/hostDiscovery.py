@@ -169,14 +169,17 @@ class hostMap:
         @bug: Fix docstring, this is an ip or a fqdn???
         @params nameserver: Nameserver found
         """
-        
+
         try:
             self.host.setNameserver(nameserver)
             log.info("Found new nameserver: %s" % nameserver, time=True, tag=self.tag)
             self.pluginControl.runByNameserver(self, nameserver)
         except hmDupException:
             return
-        
+
+        # Check if the nameserver is runned by the target ip address
+        self.notifyHost(nameserver)
+
         # Check if a name server is the target
         #if not self.conf.OnlyPassive:
         #    self.d.getHostbyName(nameserver)
