@@ -94,7 +94,7 @@ class dnsbruteforce:
         If a brute force run fails
         """
         
-        #failure.printTraceback()
+        # failure.printTraceback()
         
         # Remove host form todo host list
         self.hosts.remove(fqdn)

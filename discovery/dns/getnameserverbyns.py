@@ -60,7 +60,7 @@ class getnameserverbyns:
         If a nameservers run fails
         """
         
-        failure.printTraceback()
+        # failure.printTraceback()
         
         hd.job(job, "failure")
 

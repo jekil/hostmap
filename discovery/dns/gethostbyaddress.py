@@ -68,7 +68,7 @@ class gethostbyaddress:
         If a hostbyaddress run fails
         """
         
-        #failure.printTraceback()
+        # failure.printTraceback()
         
         hd.job(job, "failure")
 
