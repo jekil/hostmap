@@ -216,6 +216,9 @@ class hostMap:
         
         # Paranoid check
         if conf.Paranoid:
+            # Preventive check
+            if fqdn is None: return
+            # Paranoid DNS check
             try:
                 if gethostbyname(fqdn) != self.name: return
             # This exception is raised when a fqdn doesn't exist. 
