@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -66,8 +66,14 @@
   different modules.</p>
 
 <hr />
-<div class="fields">      <p><strong>Author:</strong>
+<div class="fields">      <p><strong>License:</strong>
+        Private licensing
+      </p>
+      <p><strong>Author:</strong>
         Alessandro Tanasi
+      </p>
+      <p><strong>Contact:</strong>
+        alessandro@tanasi.it
       </p>
 </div><!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -92,8 +98,7 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">engine</span>,
+          <td><span class="summary-sig"><a href="lib.intel.Host-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">ip</span>)</span><br />
       Initialize host intelligence</td>
           <td align="right" valign="top">
@@ -128,8 +133,9 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="setHostname"></a><span class="summary-sig-name">setHostname</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">fqdn</span>)</span></td>
+          <td><span class="summary-sig"><a href="lib.intel.Host-class.html#setHostname" class="summary-sig-name">setHostname</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fqdn</span>)</span><br />
+      Set the hostname of target ip address, set via reverse dns lookup</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lib.intel-pysrc.html#Host.setHostname">source&nbsp;code</a></span>
             
@@ -145,7 +151,8 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="getHostname"></a><span class="summary-sig-name">getHostname</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="lib.intel.Host-class.html#getHostname" class="summary-sig-name">getHostname</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return target's hostname due reverse dns lookup</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lib.intel-pysrc.html#Host.getHostname">source&nbsp;code</a></span>
             
@@ -161,11 +168,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="addDomain"></a><span class="summary-sig-name">addDomain</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="lib.intel.Host-class.html#setDomain" class="summary-sig-name">setDomain</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">domain</span>)</span><br />
       Add a new domain from a enumeration plugin</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lib.intel-pysrc.html#Host.addDomain">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lib.intel-pysrc.html#Host.setDomain">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -179,11 +186,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="addNameserver"></a><span class="summary-sig-name">addNameserver</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="lib.intel.Host-class.html#setNameserver" class="summary-sig-name">setNameserver</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">nameserver</span>)</span><br />
       Add a new NS from a enumeration plugin</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lib.intel-pysrc.html#Host.addNameserver">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lib.intel-pysrc.html#Host.setNameserver">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -197,117 +204,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="addHost"></a><span class="summary-sig-name">addHost</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="lib.intel.Host-class.html#setHost" class="summary-sig-name">setHost</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">fqdn</span>)</span><br />
       Add a new host from a enumeration plugin</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lib.intel-pysrc.html#Host.addHost">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="setFoundHostbyIp"></a><span class="summary-sig-name">setFoundHostbyIp</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">fqdn</span>,
-        <span class="summary-sig-arg">ip</span>)</span><br />
-      Add a result from a enumeration plugin</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lib.intel-pysrc.html#Host.setFoundHostbyIp">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="setResult"></a><span class="summary-sig-name">setResult</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">fqdn</span>)</span><br />
-      Add new enumerated hostname</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lib.intel-pysrc.html#Host.setResult">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="setWebserver"></a><span class="summary-sig-name">setWebserver</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">fqdn</span>)</span><br />
-      A web server has been found</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lib.intel-pysrc.html#Host.setWebserver">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="setIpHomePage"></a><span class="summary-sig-name">setIpHomePage</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">page</span>)</span><br />
-      Setter for home page of a web server by ip address</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lib.intel-pysrc.html#Host.setIpHomePage">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="getIpHomePage"></a><span class="summary-sig-name">getIpHomePage</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Getter for home page of a web server by ip address</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lib.intel-pysrc.html#Host.getIpHomePage">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="status"></a><span class="summary-sig-name">status</span>(<span class="summary-sig-arg">self</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lib.intel-pysrc.html#Host.status">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lib.intel-pysrc.html#Host.setHost">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -316,6 +217,220 @@
     </td>
   </tr>
 </table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ip"></a><span class="summary-name">ip</span> = <code title="property(getIp, None)">property(getIp, None)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="hostname"></a><span class="summary-name">hostname</span> = <code title="property(getHostname, setHostname)">property(getHostname, setHostname)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="domain"></a><span class="summary-name">domain</span> = <code title="property(None, setDomain)">property(None, setDomain)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="nameserver"></a><span class="summary-name">nameserver</span> = <code title="property(None, setNameserver)">property(None, setNameserver)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="host"></a><span class="summary-name">host</span> = <code title="property(None, setHost)">property(None, setHost)</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ip</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.intel-pysrc.html#Host.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Initialize host intelligence</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ip</code></strong> - Host ip address</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setHostname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setHostname</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fqdn</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.intel-pysrc.html#Host.setHostname">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set the hostname of target ip address, set via reverse dns lookup</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>fqdn</code></strong> - Full qualified hostname</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getHostname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getHostname</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.intel-pysrc.html#Host.getHostname">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return target's hostname due reverse dns lookup</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Target hostname</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setDomain"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setDomain</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">domain</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.intel-pysrc.html#Host.setDomain">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add a new domain from a enumeration plugin</p>
+  <dl class="fields">
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lib.core.controllers.hmException.hmDupException-class.html">hmDupException</a></strong></code> - If try to add a duplicate</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setNameserver"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setNameserver</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">nameserver</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.intel-pysrc.html#Host.setNameserver">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add a new NS from a enumeration plugin</p>
+  <dl class="fields">
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lib.core.controllers.hmException.hmDupException-class.html">hmDupException</a></strong></code> - If try to add a duplicate</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setHost"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setHost</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fqdn</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.intel-pysrc.html#Host.setHost">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add a new host from a enumeration plugin</p>
+  <dl class="fields">
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lib.core.controllers.hmException.hmDupException-class.html">hmDupException</a></strong></code> - If try to add a duplicate</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
@@ -340,14 +455,14 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Nov 15 01:29:44 2008
+    Generated by Epydoc 3.0.1 on Sat Nov 29 01:39:04 2008
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

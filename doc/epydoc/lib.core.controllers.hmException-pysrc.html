@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -63,90 +63,117 @@
 </table>
 <h1 class="epydoc">Source Code for <a href="lib.core.controllers.hmException-module.html">Module lib.core.controllers.hmException</a></h1>
 <pre class="py-src">
-<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
-<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
-<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#   hostmap</tt> </tt>
-<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
-<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#   Author:</tt> </tt>
-<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    Alessandro `jekil` Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
-<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#   License:</tt> </tt>
-<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    This program is private software; you can't redistribute it and/or modify</tt> </tt>
-<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    it. All copies, included printed copies, are unauthorized.</tt> </tt>
-<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    </tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    If you need a copy of this software you must ask for it writing an</tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    email to Alessandro `jekil` Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
-<a name="hmException"></a><div id="hmException-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="hmException-toggle" onclick="return toggle('hmException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmException-class.html">hmException</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="hmException-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="hmException-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    Generic HostMap excpetion</tt> </tt>
-<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
-<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">     </tt>
-<a name="hmException.__init__"></a><div id="hmException.__init__-def"><a name="L23"></a><tt class="py-lineno">23</tt> <a class="py-toggle" href="#" id="hmException.__init__-toggle" onclick="return toggle('hmException.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmException-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="hmException.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="hmException.__init__-expanded"><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">Exception</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Method lib.core.controllers.engineController.engine.__init__()=lib.core.controllers.engineController.engine-class.html#__init__,Method lib.core.controllers.hmException.hmException.__init__()=lib.core.controllers.hmException.hmException-class.html#__init__,Method lib.core.controllers.jobController.jobs.__init__()=lib.core.controllers.jobController.jobs-class.html#__init__,Method lib.core.controllers.pluginController.plugin.__init__()=lib.core.controllers.pluginController.plugin-class.html#__init__,Method lib.core.discovery.hostDiscovery.hostMap.__init__()=lib.core.discovery.hostDiscovery.hostMap-class.html#__init__,Method lib.core.outputDeflector.outputDirector.__init__()=lib.core.outputDeflector.outputDirector-class.html#__init__,Method lib.intel.Host.__init__()=lib.intel.Host-class.html#__init__,Method lib.supadict.supaDict.__init__()=lib.supadict.supaDict-class.html#__init__"><a title="lib.core.controllers.engineController.engine.__init__
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#   hostmap</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#   Author:</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    Alessandro `jekil` Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#   License:</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    This program is private software; you can't redistribute it and/or modify</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    it. All copies, included printed copies, are unauthorized.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    </tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    If you need a copy of this software you must ask for it writing an</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment">#    email to Alessandro `jekil` Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="hmException"></a><div id="hmException-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="hmException-toggle" onclick="return toggle('hmException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmException-class.html">hmException</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hmException-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="hmException-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">    Generic HostMap excpetion</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    @license: Private licensing</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: alessandro@tanasi.it</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">     </tt>
+<a name="hmException.__init__"></a><div id="hmException.__init__-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="hmException.__init__-toggle" onclick="return toggle('hmException.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmException-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hmException.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="hmException.__init__-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-name">Exception</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Method lib.core.controllers.engineController.engine.__init__()=lib.core.controllers.engineController.engine-class.html#__init__,Method lib.core.controllers.hmException.hmException.__init__()=lib.core.controllers.hmException.hmException-class.html#__init__,Method lib.core.controllers.jobController.jobs.__init__()=lib.core.controllers.jobController.jobs-class.html#__init__,Method lib.core.controllers.pluginController.plugin.__init__()=lib.core.controllers.pluginController.plugin-class.html#__init__,Method lib.core.discovery.hostDiscovery.hostMap.__init__()=lib.core.discovery.hostDiscovery.hostMap-class.html#__init__,Method lib.core.outputDeflector.outputDirector.__init__()=lib.core.outputDeflector.outputDirector-class.html#__init__,Method lib.intel.Host.__init__()=lib.intel.Host-class.html#__init__,Method lib.singleton.Singleton.__init__()=lib.singleton.Singleton-class.html#__init__,Method lib.supadict.supaDict.__init__()=lib.supadict.supaDict-class.html#__init__"><a title="lib.core.controllers.engineController.engine.__init__
 lib.core.controllers.hmException.hmException.__init__
 lib.core.controllers.jobController.jobs.__init__
 lib.core.controllers.pluginController.plugin.__init__
 lib.core.discovery.hostDiscovery.hostMap.__init__
 lib.core.outputDeflector.outputDirector.__init__
 lib.intel.Host.__init__
+lib.singleton.Singleton.__init__
 lib.supadict.supaDict.__init__" class="py-name" href="#" onclick="return doclink('link-0', '__init__', 'link-0');">__init__</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt> <tt class="py-op">)</tt> </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
-</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">     </tt>
-<a name="hmException.__str__"></a><div id="hmException.__str__-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="hmException.__str__-toggle" onclick="return toggle('hmException.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmException-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="hmException.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="hmException.__str__-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> </tt>
-</div></div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">     </tt>
-<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
-<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
-<a name="hmImportException"></a><div id="hmImportException-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="hmImportException-toggle" onclick="return toggle('hmImportException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmImportException-class.html">hmImportException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="hmImportException-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="hmImportException-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap Import excpetion</tt> </tt>
-<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
-<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">     </tt>
-<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
-<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
-<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
-<a name="hmOptionException"></a><div id="hmOptionException-def"><a name="L42"></a><tt class="py-lineno">42</tt> <a class="py-toggle" href="#" id="hmOptionException-toggle" onclick="return toggle('hmOptionException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmOptionException-class.html">hmOptionException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="hmOptionException-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="hmOptionException-expanded"><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap Option excpetion</tt> </tt>
-<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
-<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">     </tt>
-<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
-<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
-<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
-<a name="hmFileException"></a><div id="hmFileException-def"><a name="L52"></a><tt class="py-lineno">52</tt> <a class="py-toggle" href="#" id="hmFileException-toggle" onclick="return toggle('hmFileException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmFileException-class.html">hmFileException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="hmFileException-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="hmFileException-expanded"><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap File excpetion</tt> </tt>
-<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
-<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">     </tt>
-<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"> </tt>
-<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"> </tt>
-<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
-<a name="hmPluginException"></a><div id="hmPluginException-def"><a name="L62"></a><tt class="py-lineno">62</tt> <a class="py-toggle" href="#" id="hmPluginException-toggle" onclick="return toggle('hmPluginException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmPluginException-class.html">hmPluginException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="hmPluginException-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="hmPluginException-expanded"><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap Plugin excpetion</tt> </tt>
-<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
-<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">     </tt>
-<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"> </tt>
-<a name="hmParserException"></a><div id="hmParserException-def"><a name="L70"></a><tt class="py-lineno">70</tt> <a class="py-toggle" href="#" id="hmParserException-toggle" onclick="return toggle('hmParserException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmParserException-class.html">hmParserException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="hmParserException-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="hmParserException-expanded"><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap Plugin excpetion</tt> </tt>
-<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
-<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">     </tt>
-<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">     </tt>
+<a name="hmException.__str__"></a><div id="hmException.__str__-def"><a name="L29"></a><tt class="py-lineno"> 29</tt> <a class="py-toggle" href="#" id="hmException.__str__-toggle" onclick="return toggle('hmException.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmException-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hmException.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="hmException.__str__-expanded"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> </tt>
+</div></div><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">     </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="hmImportException"></a><div id="hmImportException-def"><a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="hmImportException-toggle" onclick="return toggle('hmImportException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmImportException-class.html">hmImportException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hmImportException-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="hmImportException-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap Import excpetion</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">    @license: Private licensing</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: alessandro@tanasi.it</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">     </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="hmOptionException"></a><div id="hmOptionException-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="hmOptionException-toggle" onclick="return toggle('hmOptionException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmOptionException-class.html">hmOptionException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hmOptionException-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="hmOptionException-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap Option excpetion</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">    @license: Private licensing</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: alessandro@tanasi.it</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">     </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="hmFileException"></a><div id="hmFileException-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="hmFileException-toggle" onclick="return toggle('hmFileException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmFileException-class.html">hmFileException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hmFileException-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="hmFileException-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap File excpetion</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    @license: Private licensing</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: alessandro@tanasi.it</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">     </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="hmPluginException"></a><div id="hmPluginException-def"><a name="L70"></a><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="hmPluginException-toggle" onclick="return toggle('hmPluginException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmPluginException-class.html">hmPluginException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hmPluginException-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="hmPluginException-expanded"><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap Plugin excpetion</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">    @license: Private licensing</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: alessandro@tanasi.it</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">     </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="hmParserException"></a><div id="hmParserException-def"><a name="L82"></a><tt class="py-lineno"> 82</tt> <a class="py-toggle" href="#" id="hmParserException-toggle" onclick="return toggle('hmParserException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmParserException-class.html">hmParserException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hmParserException-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="hmParserException-expanded"><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap parser excpetion</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">    @license: Private licensing</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: alessandro@tanasi.it</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">     </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="hmDupException"></a><div id="hmDupException-def"><a name="L94"></a><tt class="py-lineno"> 94</tt> <a class="py-toggle" href="#" id="hmDupException-toggle" onclick="return toggle('hmDupException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.controllers.hmException.hmDupException-class.html">hmDupException</a><tt class="py-op">(</tt><tt class="py-base-class">hmException</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="hmDupException-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="hmDupException-expanded"><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">    HostMap duplicate exception</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">    @license: Private licensing</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: alessandro@tanasi.it</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">     </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -177,14 +204,14 @@ expandto(location.href);
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Nov 15 01:29:44 2008
+    Generated by Epydoc 3.0.1 on Sat Nov 29 01:39:04 2008
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -80,15 +80,15 @@
 <a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
 <a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
 <a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">twisted</tt><tt class="py-op">.</tt><tt class="py-name">internet</tt> <tt class="py-keyword">import</tt> <tt class="py-name">reactor</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.core=lib.core-module.html"><a title="lib.core" class="py-name" href="#" onclick="return doclink('link-1', 'core', 'link-1');">core</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lib.core.outputDeflector=lib.core.outputDeflector-module.html"><a title="lib.core.outputDeflector" class="py-name" href="#" onclick="return doclink('link-2', 'outputDeflector', 'link-2');">outputDeflector</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">log</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.core=lib.core-module.html"><a title="lib.core" class="py-name" href="#" onclick="return doclink('link-1', 'core', 'link-1');">core</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lib.core.outputDeflector=lib.core.outputDeflector-module.html"><a title="lib.core.outputDeflector" class="py-name" href="#" onclick="return doclink('link-2', 'outputDeflector', 'link-2');">outputDeflector</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
 <a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
 <a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
-<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
-<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-string">Manage Twisted reactor</tt> </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
-<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-string">@author: Alessandro Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-string">Manage Twisted reactor</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-string">@author:       Alessandro Tanasi</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-string">@license:      Private software</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-string">@contact:      alessandro@tanasi.it</tt> </tt>
 <a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
 <a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
 <a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
@@ -98,7 +98,7 @@
 <a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring">    Start Twisted reactor</tt> </tt>
 <a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
 <a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">     </tt>
-<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-name">log</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Variable lib.core.outputDeflector.out=lib.core.outputDeflector-module.html#out"><a title="lib.core.outputDeflector.out" class="py-name" href="#" onclick="return doclink('link-3', 'out', 'link-3');">out</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method lib.core.outputDeflector.outputDirector.debug()=lib.core.outputDeflector.outputDirector-class.html#debug"><a title="lib.core.outputDeflector.outputDirector.debug" class="py-name" href="#" onclick="return doclink('link-4', 'debug', 'link-4');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Reactor started"</tt><tt class="py-op">,</tt>  <tt class="py-name">time</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">tag</tt><tt class="py-op">=</tt><tt class="py-string">"REACTOR"</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt id="link-3" class="py-name" targets="Variable lib.core.outputDeflector.log=lib.core.outputDeflector-module.html#log"><a title="lib.core.outputDeflector.log" class="py-name" href="#" onclick="return doclink('link-3', 'log', 'link-3');">log</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method lib.core.outputDeflector.outputDirector.debug()=lib.core.outputDeflector.outputDirector-class.html#debug"><a title="lib.core.outputDeflector.outputDirector.debug" class="py-name" href="#" onclick="return doclink('link-4', 'debug', 'link-4');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Reactor started"</tt><tt class="py-op">,</tt> <tt class="py-name">time</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">tag</tt><tt class="py-op">=</tt><tt class="py-string">"REACTOR"</tt><tt class="py-op">)</tt> </tt>
 <a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-name">reactor</tt><tt class="py-op">.</tt><tt class="py-name">run</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
 </div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
 <a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
@@ -108,7 +108,7 @@
 <a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-docstring">    Stop Twisted reactor</tt> </tt>
 <a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
 <a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">     </tt>
-<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt class="py-name">log</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="lib.core.outputDeflector.out" class="py-name" href="#" onclick="return doclink('link-5', 'out', 'link-3');">out</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.core.outputDeflector.outputDirector.debug" class="py-name" href="#" onclick="return doclink('link-6', 'debug', 'link-4');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Reactor stopped"</tt><tt class="py-op">,</tt>  <tt class="py-name">time</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">tag</tt><tt class="py-op">=</tt><tt class="py-string">"REACTOR"</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt id="link-5" class="py-name"><a title="lib.core.outputDeflector.log" class="py-name" href="#" onclick="return doclink('link-5', 'log', 'link-3');">log</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.core.outputDeflector.outputDirector.debug" class="py-name" href="#" onclick="return doclink('link-6', 'debug', 'link-4');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Reactor stopped"</tt><tt class="py-op">,</tt> <tt class="py-name">time</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">tag</tt><tt class="py-op">=</tt><tt class="py-string">"REACTOR"</tt><tt class="py-op">)</tt> </tt>
 <a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt class="py-name">reactor</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method lib.core.controllers.engineController.engine.stop()=lib.core.controllers.engineController.engine-class.html#stop,Function lib.core.controllers.reactorController.stop()=lib.core.controllers.reactorController-module.html#stop,Method lib.core.discovery.hostDiscovery.hostMap.stop()=lib.core.discovery.hostDiscovery.hostMap-class.html#stop"><a title="lib.core.controllers.engineController.engine.stop
 lib.core.controllers.reactorController.stop
 lib.core.discovery.hostDiscovery.hostMap.stop" class="py-name" href="#" onclick="return doclink('link-7', 'stop', 'link-7');">stop</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
@@ -143,14 +143,14 @@ expandto(location.href);
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Nov 15 01:29:44 2008
+    Generated by Epydoc 3.0.1 on Sat Nov 29 01:39:04 2008
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -79,19 +79,25 @@
 <a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
 <a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
 <a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module lib.supadict=lib.supadict-module.html"><a title="lib.supadict" class="py-name" href="#" onclick="return doclink('link-1', 'supadict', 'link-1');">supadict</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class lib.supadict.supaDict=lib.supadict.supaDict-class.html"><a title="lib.supadict.supaDict" class="py-name" href="#" onclick="return doclink('link-2', 'supaDict', 'link-2');">supaDict</a></tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
-<a name="configuration"></a><div id="configuration-def"><a name="L19"></a><tt class="py-lineno">19</tt> <a class="py-toggle" href="#" id="configuration-toggle" onclick="return toggle('configuration');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.configuration.configuration-class.html">configuration</a><tt class="py-op">(</tt><tt class="py-base-class">supaDict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="configuration-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="configuration-expanded"><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">    User configuration / options</tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Alessandro Tanasi &lt;alessandro@tanasi.it&gt;</tt> </tt>
-<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">     </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
-<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
-<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-comment"># This class must be a Singleton. There is only one set of options.</tt> </tt>
-<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-3" class="py-name" targets="Variable lib.core.configuration.conf=lib.core.configuration-module.html#conf"><a title="lib.core.configuration.conf" class="py-name" href="#" onclick="return doclink('link-3', 'conf', 'link-3');">conf</a></tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name" targets="Module lib.core.configuration=lib.core.configuration-module.html,Class lib.core.configuration.configuration=lib.core.configuration.configuration-class.html"><a title="lib.core.configuration
-lib.core.configuration.configuration" class="py-name" href="#" onclick="return doclink('link-4', 'configuration', 'link-4');">configuration</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-3', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module lib.singleton=lib.singleton-module.html"><a title="lib.singleton" class="py-name" href="#" onclick="return doclink('link-4', 'singleton', 'link-4');">singleton</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="configuration"></a><div id="configuration-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="configuration-toggle" onclick="return toggle('configuration');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.configuration.configuration-class.html">configuration</a><tt class="py-op">(</tt><tt class="py-base-class">supaDict</tt><tt class="py-op">,</tt> <tt class="py-base-class">Singleton</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="configuration-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="configuration-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">    User configuration / options</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">    @author:       Alessandro Tanasi</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">    @license:      Private software</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">    @contact:      alessandro@tanasi.it</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">     </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable lib.core.configuration.conf=lib.core.configuration-module.html#conf"><a title="lib.core.configuration.conf" class="py-name" href="#" onclick="return doclink('link-5', 'conf', 'link-5');">conf</a></tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name" targets="Module lib.core.configuration=lib.core.configuration-module.html,Class lib.core.configuration.configuration=lib.core.configuration.configuration-class.html"><a title="lib.core.configuration
+lib.core.configuration.configuration" class="py-name" href="#" onclick="return doclink('link-6', 'configuration', 'link-6');">configuration</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -122,14 +128,14 @@ expandto(location.href);
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Nov 15 01:29:44 2008
+    Generated by Epydoc 3.0.1 on Sat Nov 29 01:39:04 2008
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

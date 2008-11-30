@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -67,8 +67,17 @@
 <p>Host Discovery</p>
 
 <hr />
-<div class="fields">      <p><strong>Author:</strong>
+<div class="fields">      <p><strong>To Do:</strong>
+        Write unit tests
+      </p>
+      <p><strong>Author:</strong>
         Alessandro Tanasi
+      </p>
+      <p><strong>License:</strong>
+        Private software
+      </p>
+      <p><strong>Contact:</strong>
+        alessandro@tanasi.it
       </p>
 </div><!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -113,7 +122,7 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="getName"></a><span class="summary-sig-name">getName</span>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="lib.core.discovery.hostDiscovery.hostMap-class.html#getName" class="summary-sig-name">getName</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Get instance name</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.getName">source&nbsp;code</a></span>
@@ -149,7 +158,8 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="start"></a><span class="summary-sig-name">start</span>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="lib.core.discovery.hostDiscovery.hostMap-class.html#start" class="summary-sig-name">start</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">callback</span>)</span><br />
       Starts Host Discovery</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.start">source&nbsp;code</a></span>
@@ -183,9 +193,9 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="notifyIp"></a><span class="summary-sig-name">notifyIp</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="lib.core.discovery.hostDiscovery.hostMap-class.html#notifyIp" class="summary-sig-name">notifyIp</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">ip</span>)</span><br />
-      A new ip address has been detected, run all needed plugins</td>
+      A new ip address has been detected, run all needed plugins.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.notifyIp">source&nbsp;code</a></span>
             
@@ -203,7 +213,9 @@
         <tr>
           <td><span class="summary-sig"><a name="notifyDomain"></a><span class="summary-sig-name">notifyDomain</span>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">domain</span>)</span><br />
-      A new domain is detected, run all needed plugins</td>
+      A new domain is detected, run all needed plugins Steps: * Check if 
+      the domain ip address is the target ip * Run all checks that get a 
+      domain as input * Get the nameserver for that domain</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.notifyDomain">source&nbsp;code</a></span>
             
@@ -219,9 +231,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="notifyNameserver"></a><span class="summary-sig-name">notifyNameserver</span>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="lib.core.discovery.hostDiscovery.hostMap-class.html#notifyNameserver" class="summary-sig-name">notifyNameserver</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">nameserver</span>)</span><br />
-      A new nameserver is detected, run all needed plugins</td>
+      A new nameserver is detected, run all needed pluginsdomain Steps: * 
+      Check if the nameserver ip address is the target ip * Run all checks 
+      that get a nameserver as input * Try a zone transfer</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.notifyNameserver">source&nbsp;code</a></span>
             
@@ -239,7 +253,10 @@
         <tr>
           <td><span class="summary-sig"><a name="notifyHost"></a><span class="summary-sig-name">notifyHost</span>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">fqdn</span>)</span><br />
-      A new virtual host has been enumerated</td>
+      A new virtual host has been enumerated Steps: * Check if the host ip 
+      address is the target ip * Run all checks that get a hostname as 
+      input * Parse the domain name and notify a new domain (the hostname 
+      is also a domain name)</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.notifyHost">source&nbsp;code</a></span>
             
@@ -247,6 +264,31 @@
         </tr>
       </table>
       
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="name"></a><span class="summary-name">name</span> = <code title="property(getName, None)">property(getName, None)</code>
     </td>
   </tr>
 </table>
@@ -268,6 +310,27 @@
   </td>
 </tr>
 </table>
+<a name="getName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getName</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.getName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get instance name</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>Istance name</dd>
+  </dl>
+</td></tr></table>
+</div>
 <a name="job"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -288,11 +351,81 @@
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>job</code></strong> - name of plugin</li>
-        <li><strong class="pname"><code>status</code></strong> - status of the plugin</li>
+        <li><strong class="pname"><code>job</code></strong> - Name of plugin</li>
+        <li><strong class="pname"><code>status</code></strong> - Status of the plugin</li>
     </ul></dd>
   </dl>
 </td></tr></table>
+</div>
+<a name="start"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">start</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">callback</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.start">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Starts Host Discovery</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>callback</code></strong> - Function to call when the host discovery is done</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="notifyIp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">notifyIp</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ip</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.notifyIp">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A new ip address has been detected, run all needed plugins. Steps: * 
+  Run all checks that get a ip as input</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="notifyNameserver"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">notifyNameserver</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">nameserver</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.core.discovery.hostDiscovery-pysrc.html#hostMap.notifyNameserver">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A new nameserver is detected, run all needed pluginsdomain Steps: * 
+  Check if the nameserver ip address is the target ip * Run all checks that
+  get a nameserver as input * Try a zone transfer</p>
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Bug:</strong>
+        Fix docstring, this is an ip or a fqdn???
+      </p>
+</div></td></tr></table>
 </div>
 <br />
 <!-- ==================== NAVIGATION BAR ==================== -->
@@ -319,14 +452,14 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >hostmap</th>
+            ><a class="navbar" target="_top" href="http://hostmap.sourceforge.net">hostmap</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Nov 15 01:29:44 2008
+    Generated by Epydoc 3.0.1 on Sat Nov 29 01:39:04 2008
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
