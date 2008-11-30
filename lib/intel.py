@@ -117,7 +117,7 @@ class Host():
         for nameserver in self.infos.nameservers: raise hmDupException("Duplicated nameserver")
                 
         # Check if domain is null of empty
-        if ns is None or ns == "": raise hmDupException("Null nameserver")
+        if nameserver is None or nameserver == "": raise hmDupException("Null nameserver")
         
         # Add new NS
         self.infos.nameservers.append(str(nameserver)) 
