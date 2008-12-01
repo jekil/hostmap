@@ -3,9 +3,9 @@ XML Test Runner for PyUnit
 """
 
 # Written by Sebastian Rittau <srittau@jroger.in-berlin.de> and placed in
-# the Public Domain.
+# the Public Domain. With contributions by Paolo Borelli.
 
-__revision__ = "$Id: /mirror/jroger/python/stdlib/xmlrunner.py 3506 2006-07-27T09:12:39.629878Z srittau  $"
+__revision__ = "$Id: /private/python/stdlib/xmlrunner.py 16654 2007-11-12T12:46:35.368945Z srittau  $"
 
 import os.path
 import re
@@ -18,11 +18,46 @@ from xml.sax.saxutils import escape
 
 from StringIO import StringIO
 
+def strip_ml_tags(in_text):
+    """Description: Removes all HTML/XML-like tags from the input text.
+    Inputs: s --> string of text
+    Outputs: text string without the tags
+
+    # doctest unit testing framework
+
+    >>> test_text = "Keep this Text <remove><me /> KEEP </remove> 123"
+    >>> strip_ml_tags(test_text)
+    'Keep this Text  KEEP  123'
+    """
+    # convert in_text to a mutable object (e.g. list)
+    s_list = list(in_text)
+    i,j = 0,0
+
+    while i < len(s_list):
+        # iterate until a left-angle bracket is found
+        if s_list[i] == '<':
+            while s_list[i] != '>':
+                # pop everything from the the left-angle bracket until the right-angle bracket
+                s_list.pop(i)
+
+            # pops the right-angle bracket, too
+            s_list.pop(i)
+        else:
+            i=i+1
+
+    # convert the list back into text
+    join_char=''
+    return join_char.join(s_list)
+
 
 class _TestInfo(object):
+
     """Information about a particular test.
-    
-    Used by _XmlTestResult."""
+
+    Used by _XMLTestResult.
+
+    """
+
     def __init__(self, test, time):
         (self._class, self._method) = test.id().rsplit(".", 1)
         self._time = time
@@ -51,6 +86,7 @@ class _TestInfo(object):
     def print_report(self, stream):
         """Print information about this test case in XML format to the
         supplied stream.
+
         """
         stream.write('  <testcase classname="%(class)s" name="%(method)s" time="%(time).4f">' % \
             {
@@ -69,7 +105,7 @@ class _TestInfo(object):
         text = escape(str(error[1]))
         stream.write('\n')
         stream.write('    <%s type="%s">%s\n' \
-            % (tagname, str(error[0]), text))
+            % (tagname, str(error[0]).strip("<>"), strip_ml_tags(text)))
         tb_stream = StringIO()
         traceback.print_tb(error[2], None, tb_stream)
         stream.write(escape(tb_stream.getvalue()))
@@ -77,11 +113,14 @@ class _TestInfo(object):
         stream.write('  ')
 
 
-class _XmlTestResult(unittest.TestResult):
+class _XMLTestResult(unittest.TestResult):
+
     """A test result class that stores result as XML.
 
-    Used by XmlTestRunner.
+    Used by XMLTestRunner.
+
     """
+
     def __init__(self, classname):
         unittest.TestResult.__init__(self)
         self._test_name = classname
@@ -117,9 +156,10 @@ class _XmlTestResult(unittest.TestResult):
 
     def print_report(self, stream, time_taken, out, err):
         """Prints the XML report to the supplied stream.
-        
+
         The time the tests took to perform as well as the captured standard
-        output and standard error streams must be passed in.
+        output and standard error streams must be passed in.a
+
         """
         stream.write('<testsuite errors="%(e)d" failures="%(f)d" ' % \
             { "e": len(self.errors), "f": len(self.failures) })
@@ -136,16 +176,19 @@ class _XmlTestResult(unittest.TestResult):
         stream.write('</testsuite>\n')
 
 
-class XmlTestRunner(object):
+class XMLTestRunner(object):
+
     """A test runner that stores results in XML format compatible with JUnit.
 
-    XmlTestRunner(stream=None) -> XML test runner
+    XMLTestRunner(stream=None) -> XML test runner
 
     The XML file is written to the supplied stream. If stream is None, the
     results are stored in a file called TEST-<module>.<class>.xml in the
     current working directory (if not overridden with the path property),
     where <module> and <class> are the module and class name of the test class.
+
     """
+
     def __init__(self, stream=None):
         self._stream = stream
         self._path = "."
@@ -161,7 +204,7 @@ class XmlTestRunner(object):
         else:
             stream = self._stream
 
-        result = _XmlTestResult(classname)
+        result = _XMLTestResult(classname)
         start_time = time.time()
 
         # TODO: Python 2.5: Use the with statement
@@ -196,23 +239,26 @@ class XmlTestRunner(object):
 
     path = property(lambda self: self._path, _set_path, None,
             """The path where the XML files are stored.
-            
+
             This property is ignored when the XML file is written to a file
             stream.""")
 
 
-class XmlTestRunnerTest(unittest.TestCase):
+class XMLTestRunnerTest(unittest.TestCase):
     def setUp(self):
         self._stream = StringIO()
 
     def _try_test_run(self, test_class, expected):
+
         """Run the test suite against the supplied test class and compare the
         XML result against the expected XML string. Fail if the expected
         string doesn't match the actual string. All time attribute in the
         expected string should have the value "0.000". All error and failure
         messages are reduced to "Foobar".
+
         """
-        runner = XmlTestRunner(self._stream)
+
+        runner = XMLTestRunner(self._stream)
         runner.run(unittest.makeSuite(test_class))
 
         got = self._stream.getvalue()
@@ -228,7 +274,9 @@ class XmlTestRunnerTest(unittest.TestCase):
 
     def test_no_tests(self):
         """Regression test: Check whether a test run without any tests
-        matches a previous run."""
+        matches a previous run.
+
+        """
         class TestTest(unittest.TestCase):
             pass
         self._try_test_run(TestTest, """<testsuite errors="0" failures="0" name="unittest.TestSuite" tests="0" time="0.000">
@@ -239,7 +287,9 @@ class XmlTestRunnerTest(unittest.TestCase):
 
     def test_success(self):
         """Regression test: Check whether a test run with a successful test
-        matches a previous run."""
+        matches a previous run.
+
+        """
         class TestTest(unittest.TestCase):
             def test_foo(self):
                 pass
@@ -252,7 +302,9 @@ class XmlTestRunnerTest(unittest.TestCase):
 
     def test_failure(self):
         """Regression test: Check whether a test run with a failing test
-        matches a previous run."""
+        matches a previous run.
+
+        """
         class TestTest(unittest.TestCase):
             def test_foo(self):
                 self.assert_(False)
@@ -267,7 +319,9 @@ class XmlTestRunnerTest(unittest.TestCase):
 
     def test_error(self):
         """Regression test: Check whether a test run with a erroneous test
-        matches a previous run."""
+        matches a previous run.
+
+        """
         class TestTest(unittest.TestCase):
             def test_foo(self):
                 raise IndexError()
@@ -282,7 +336,9 @@ class XmlTestRunnerTest(unittest.TestCase):
 
     def test_stdout_capture(self):
         """Regression test: Check whether a test run with output to stdout
-        matches a previous run."""
+        matches a previous run.
+
+        """
         class TestTest(unittest.TestCase):
             def test_foo(self):
                 print "Test"
@@ -296,7 +352,9 @@ class XmlTestRunnerTest(unittest.TestCase):
 
     def test_stderr_capture(self):
         """Regression test: Check whether a test run with output to stderr
-        matches a previous run."""
+        matches a previous run.
+
+        """
         class TestTest(unittest.TestCase):
             def test_foo(self):
                 print >>sys.stderr, "Test"
@@ -314,28 +372,38 @@ class XmlTestRunnerTest(unittest.TestCase):
             pass
 
     def test_unittests_changing_stdout(self):
-        """Check whether the XmlTestRunner recovers gracefully from unit tests
+        """Check whether the XMLTestRunner recovers gracefully from unit tests
         that change stdout, but don't change it back properly.
+
         """
         class TestTest(unittest.TestCase):
             def test_foo(self):
-                sys.stdout = XmlTestRunnerTest.NullStream()
+                sys.stdout = XMLTestRunnerTest.NullStream()
 
-        runner = XmlTestRunner(self._stream)
+        runner = XMLTestRunner(self._stream)
         runner.run(unittest.makeSuite(TestTest))
 
     def test_unittests_changing_stderr(self):
-        """Check whether the XmlTestRunner recovers gracefully from unit tests
+        """Check whether the XMLTestRunner recovers gracefully from unit tests
         that change stderr, but don't change it back properly.
+
         """
         class TestTest(unittest.TestCase):
             def test_foo(self):
-                sys.stderr = XmlTestRunnerTest.NullStream()
+                sys.stderr = XMLTestRunnerTest.NullStream()
 
-        runner = XmlTestRunner(self._stream)
+        runner = XMLTestRunner(self._stream)
         runner.run(unittest.makeSuite(TestTest))
 
 
+class XMLTestProgram(unittest.TestProgram):
+    def runTests(self):
+        if self.testRunner is None:
+            self.testRunner = XMLTestRunner()
+        unittest.TestProgram.runTests(self)
+
+main = XMLTestProgram
+
+
 if __name__ == "__main__":
-    suite = unittest.makeSuite(XmlTestRunnerTest)
-    unittest.TextTestRunner().run(suite)
+    main(module=None)

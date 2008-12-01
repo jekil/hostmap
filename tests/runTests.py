@@ -42,6 +42,6 @@ if __name__ == '__main__':
         #if (argstr == "html"):
         #    runner = HTMLTestRunner.HTMLTestRunner(verbosity=0)
         if (argstr == "xml"):
-            runner = xmlrunner.XmlTestRunner(sys.stdout)
+            runner = xmlrunner.XMLTestRunner(sys.stdout)
 
     runner.run(suite)
