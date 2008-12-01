@@ -5,4 +5,7 @@ Bernardo Damele <bernardo.damele@gmail.com>
 	for his SQL injection tool, sqlmap, http://sqlmap.sourceforge.net
 
 Sebastian Rittau <srittau@jroger.in-berlin.de>
-    for his unit test library that add compatibility with JUnit XML results
+    for his xmlrunner.py unit test library that add compatibility with JUnit XML results
+
+Paolo Borelli
+    for his patch to Sebastian Rittau xmlrunner.py
