@@ -3,6 +3,7 @@ Andres Riancho <andres.riancho@gmail.com>
     
 Bernardo Damele <bernardo.damele@gmail.com>
 	for his SQL injection tool, sqlmap, http://sqlmap.sourceforge.net
+    for beta testing hostmap
 
 Sebastian Rittau <srittau@jroger.in-berlin.de>
     for his xmlrunner.py unit test library that add compatibility with JUnit XML results
