@@ -58,7 +58,8 @@ def main():
         print e
         
     except:
-        # TODO: unhandled excp
+        print
+        print "Unhandled exception. Please report this bug sending an email to alessandro@tanasi.it attaching the following text:"
         traceback.print_exc()
 
 
