@@ -117,6 +117,71 @@ Paranoid check , puo` far sparire domini di cui e` stato tolto il dns ma
 Usage
 \end_layout
 
+\begin_layout Standard
+You can use hostmap from command line interface with following:
+\end_layout
+
+\begin_layout Quotation
+python hostmap.py OPTIONS -t TARGET
+\end_layout
+
+\begin_layout Standard
+Where TARGET is the ip address of the host against you want a host discovery
+ and OPTIONS is a list of hostmap's options.
+\end_layout
+
+\begin_layout Standard
+Available options are exaplained here.
+\end_layout
+
+\begin_layout Subsection
+Show help
+\end_layout
+
+\begin_layout Description
+Option: -h
+\end_layout
+
+\begin_layout Subsection
+Target
+\end_layout
+
+\begin_layout Description
+Option: -t
+\end_layout
+
+\begin_layout Standard
+A target must be always set.
+\end_layout
+
+\begin_layout Subsection
+Show debug messagges
+\end_layout
+
+\begin_layout Description
+Option: -v
+\end_layout
+
+\begin_layout Standard
+hhhhhhhhh
+\end_layout
+
+\begin_layout Subsection
+Only passive discovery
+\end_layout
+
+\begin_layout Description
+Option: --only-passive
+\end_layout
+
+\begin_layout Subsection
+Only active discovery
+\end_layout
+
+\begin_layout Description
+Option: --only-active
+\end_layout
+
 \begin_layout Section
 Developing
 \end_layout
