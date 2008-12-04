@@ -17,7 +17,7 @@ import sys
 sys.path.append("../")
 
 import unittest
-from lib.discovery.hostIntel import *
+from lib.core.discovery.hostIntel import *
 from lib.core.controllers.hmException import *
 
 
