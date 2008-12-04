@@ -15,7 +15,7 @@
 
 
 import socket
-import lib.intel as intel
+import lib.discovery.hostIntel as intel
 from socket import gethostbyname
 from lib.output.outputDeflector import log
 from lib.core.configuration import conf
