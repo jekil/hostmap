@@ -16,7 +16,7 @@
 
 import re
 from twisted.web import client
-from lib.core.outputDeflector import log
+from lib.output.outputDeflector import log
 
 
 

@@ -17,7 +17,7 @@
 import os
 import sys
 from lib.settings import *
-from lib.core.outputDeflector import log
+from lib.output.outputDeflector import log
 
 
 

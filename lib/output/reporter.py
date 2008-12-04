@@ -14,7 +14,7 @@
 
 
 
-from lib.core.outputDeflector import log
+from lib.output.outputDeflector import log
 from lib.core.configuration import conf
 
 

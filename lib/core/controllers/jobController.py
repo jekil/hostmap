@@ -14,7 +14,7 @@
 
 
 
-from lib.core.outputDeflector import *
+from lib.output.outputDeflector import *
 
 
 

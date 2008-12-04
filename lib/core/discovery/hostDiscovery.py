@@ -17,7 +17,7 @@
 import socket
 import lib.intel as intel
 from socket import gethostbyname
-from lib.core.outputDeflector import log
+from lib.output.outputDeflector import log
 from lib.core.configuration import conf
 from lib.core.controllers.hmException import *
 import lib.core.controllers.jobController as jobController

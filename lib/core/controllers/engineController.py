@@ -15,7 +15,7 @@
 
 
 from lib.core.configuration import *
-from lib.core.outputDeflector import *
+from lib.output.outputDeflector import *
 import lib.core.controllers.reactorController as reactor
 import lib.core.controllers.pluginController as plugins
 import lib.core.controllers.jobController as jobs
