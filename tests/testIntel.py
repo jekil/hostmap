@@ -50,14 +50,14 @@ class testIntel(unittest.TestCase):
         self.intel.host = "a.a"
         # Add two
         self.intel.setHost("b.a")
-        self.assertRaises(hmDupException, self.intel.setHost("b.a"))
+        self.assertRaises(hmDupException, self.intel.setHost, "b.a")
         
     def testDomain(self):
         # Add one
         self.intel.domain = "a.a"
         # Add two
         self.intel.setDomain("b.a")
-        self.assertRaises(hmDupException, self.intel.setDomain("b.a"))
+        self.assertRaises(hmDupException, self.intel.setDomain, "b.a")
     
         
         
