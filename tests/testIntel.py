@@ -58,7 +58,14 @@ class testIntel(unittest.TestCase):
         # Add two
         self.intel.setDomain("b.a")
         self.assertRaises(hmDupException, self.intel.setDomain, "b.a")
-    
+
+    def testNameserver(self):
+        # Add one
+        self.intel.nameserver = "a.a"
+        # Add two
+        self.intel.setNameserver("b.a")
+        self.assertRaises(hmDupException, self.intel.setNameserver, "b.a")
+
         
         
 if __name__ == '__main__':
