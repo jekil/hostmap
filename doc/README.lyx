@@ -142,6 +142,10 @@ Show help
 Option: -h
 \end_layout
 
+\begin_layout Standard
+Show the help
+\end_layout
+
 \begin_layout Subsection
 Target
 \end_layout
@@ -180,6 +184,24 @@ Only active discovery
 
 \begin_layout Description
 Option: --only-active
+\end_layout
+
+\begin_layout Subsection
+Without paranoid check
+\end_layout
+
+\begin_layout Description
+Option: --without-be-paranoid
+\end_layout
+
+\begin_layout Standard
+By defaults for each enumerated alias hostmap do a paranoid check to assure
+ that DNS name resolves with the target ip address.
+ 
+\end_layout
+
+\begin_layout Standard
+Every time the engine get a new enumerated alias ...
 \end_layout
 
 \begin_layout Section
@@ -222,6 +244,10 @@ Can i redistribute hostmap?
 
 \begin_layout Subsubsection
 Can i include hostmap in my commercial product?
+\end_layout
+
+\begin_layout Subsubsection
+Some alias and virtual hosts weren't enumerated
 \end_layout
 
 \begin_layout Subsection
