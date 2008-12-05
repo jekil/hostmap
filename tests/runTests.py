@@ -25,6 +25,7 @@ from testCommon import *
 from testOptionParser import *
 from testIntel import *
 from testSupadict import *
+from testJobController import *
 
 
 
@@ -35,6 +36,7 @@ if __name__ == '__main__':
     suite.addTest(unittest.makeSuite(testOptionParser))
     suite.addTest(unittest.makeSuite(testIntel))
     suite.addTest(unittest.makeSuite(testSupadict))
+    suite.addTest(unittest.makeSuite(testJobController))
     
     runner = unittest.TextTestRunner(verbosity=4)
 
