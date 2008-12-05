@@ -15,7 +15,7 @@
 
 
 import socket
-import lib.discovery.hostIntel as intel
+import lib.core.discovery.hostIntel as intel
 from lib.output.outputDeflector import log
 from lib.core.configuration import conf
 from lib.core.controllers.hmException import *
