@@ -55,6 +55,7 @@ class Host():
     def getIp(self):
         """
         Getter for target IP address
+        @return: Target ip address
         """
         
         return self.infos.target
