@@ -78,17 +78,15 @@ class hostMap:
 
     def job(self, job, status):
         """
-        Get the status of each plugin
+        Alter the status of a job (running plugin)
         @param job: Name of plugin
         @param status: Status of the plugin
         """
         
         self.jobControl.alter(job, status)
         
-        # TODO: move this
         # Check if all jobs are done, so Host Discovery is finished
-        if self.jobControl.check():
-            self.stop()
+        if self.jobControl.check(): self.stop()
 
 
 
