@@ -19,7 +19,7 @@ sys.path.append("../")
 
 import unittest
 from lib.core.optionParser import *
-from lib.core.controllers.hmException import *
+from lib.core.hmException import *
 
 
 

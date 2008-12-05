@@ -16,7 +16,7 @@
 
 from lib.common import *
 from lib.supadict import supaDict
-from lib.core.controllers.hmException import *
+from lib.core.hmException import *
 
 
 

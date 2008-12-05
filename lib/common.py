@@ -23,7 +23,7 @@ Common methods
 
 
 
-from lib.core.controllers.hmException import *
+from lib.core.hmException import *
 
 
 

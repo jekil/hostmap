@@ -18,7 +18,7 @@ sys.path.append("../")
 
 import unittest
 from lib.supadict import *
-from lib.core.controllers.hmException import *
+from lib.core.hmException import *
 
 
 

@@ -15,7 +15,7 @@
 
 
 from lib.output.outputDeflector import *
-from lib.core.controllers.hmException import *
+from lib.core.hmException import *
 
 
 
