@@ -15,6 +15,7 @@
 
 
 from lib.output.outputDeflector import *
+from lib.core.controllers.hmException import *
 
 
 
@@ -38,6 +39,8 @@ class jobs:
         # - Waiting
         # - Done
         # - Failed
+        self.states = ["starting", "waiting", "done", "failed"]
+        
         # Syntax is: 
         # {jobname: status}
         self.jobs = {}
@@ -55,8 +58,12 @@ class jobs:
         Store the change of status of jobs. Each job call this function when change its status.    
         @params job: Job's name
         @params status: Current status of the job
+        @raise hmParserException: If the submitted args are wrong
         """
-        
+
+        # Check if status can be accepted
+        if not status in self.states: raise hmParserException("Not valid status specified")
+
         self.jobs[job] = status
         log.debug("Job %s changed status to %s" % (job, status), time=True, tag=self.tag)
         
