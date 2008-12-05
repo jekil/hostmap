@@ -23,8 +23,8 @@ Checks if required libraries are installed
 
 
 
-from outputDeflector import log
-from controllers.hmException import *
+from lib.output.outputDeflector import log
+from lib.core.controllers.hmException import *
 
 
 
