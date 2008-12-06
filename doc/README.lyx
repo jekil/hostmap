@@ -98,19 +98,90 @@ Quick start guide
 Features and techniques
 \end_layout
 
-\begin_layout Standard
-Featurs: - Multithread engine
+\begin_layout Subsection
+Features
 \end_layout
 
-\begin_layout Standard
-Enumeration tech: - Name server enumeration - Enumeration via the following
- search engines - Domains DB - Gigablast - Microsoft Live! - Robtex - RUS
- CERT-DB - TomDns - Webhosting.info - WebMax - Virtual host brute forcing
+\begin_layout Itemize
+Multithread engine
+\end_layout
+
+\begin_layout Itemize
+Correlation, aggregation and normalization
+\end_layout
+
+\begin_layout Itemize
+Platform independent
 \end_layout
 
 \begin_layout Standard
 Paranoid check , puo` far sparire domini di cui e` stato tolto il dns ma
  l'apache e` ancora configurato.
+\end_layout
+
+\begin_layout Subsection
+Techniques
+\end_layout
+
+\begin_layout Subsubsection
+DNS enumeration techniques
+\end_layout
+
+\begin_layout Itemize
+Reverse lookup: get hostname from ip address.
+\end_layout
+
+\begin_layout Itemize
+Nameservers lookup: get the autoritative nameserver for the target host.
+\end_layout
+
+\begin_layout Itemize
+Mail exchange lookup: get the MX records for the target host domain.
+\end_layout
+
+\begin_layout Itemize
+Hostname bruteforcing: try to guess an hostname on the enumerated domains
+ the meets the target ip address.
+\end_layout
+
+\begin_layout Subsubsection
+Passive web enumaration
+\end_layout
+
+\begin_layout Itemize
+Domainsdb: http://www.domainsdb.net/
+\end_layout
+
+\begin_layout Itemize
+Fbk.de: http://www.bfk.de/
+\end_layout
+
+\begin_layout Itemize
+Gigablast: http://www.gigablast.com
+\end_layout
+
+\begin_layout Itemize
+Microsoft Live: http://search.msn.com
+\end_layout
+
+\begin_layout Itemize
+MIT gpg keyserver: http://pgp.mit.edu:11371
+\end_layout
+
+\begin_layout Itemize
+Robtex: http://www.robtex.com
+\end_layout
+
+\begin_layout Itemize
+Tomdns: http://www.tomdns.net
+\end_layout
+
+\begin_layout Itemize
+Web hosting: http://whois.webhosting.info/
+\end_layout
+
+\begin_layout Itemize
+Web-max: http://www.web-max.ca
 \end_layout
 
 \begin_layout Section
@@ -187,6 +258,11 @@ Option: --only-active
 \end_layout
 
 \begin_layout Subsection
+\begin_inset LatexCommand label
+name "sub:Without-paranoid-check"
+
+\end_inset
+
 Without paranoid check
 \end_layout
 
@@ -195,13 +271,42 @@ Option: --without-be-paranoid
 \end_layout
 
 \begin_layout Standard
-By defaults for each enumerated alias hostmap do a paranoid check to assure
- that DNS name resolves with the target ip address.
+By defaults for each enumerated alias hostmap performs a paranoid check
+ to assure that the enumerated DNS name resolves with the target ip address.
  
 \end_layout
 
 \begin_layout Standard
-Every time the engine get a new enumerated alias ...
+With this check hostmap confirms the enumerated alias and assure the quality
+ of his results.
+\end_layout
+
+\begin_layout Standard
+In same cases, this can be prone to false positives, because an alias can
+ be discarded if it doesn't resolve with the target ip address but some
+ services on the targer host are still configured to serve that alias.
+\end_layout
+
+\begin_layout Standard
+An example can be a web server, that is configured for virtual hosting,
+ and is configured to serve antani.gov website.
+ After an year of activity antani.gov is moved to another hosting company,
+ so the DNS records are changed to point to the new company web servers,
+ but the system administrator of the old hosting company miss to delete
+ the virtual host from the web server configuration.
+ So we have a virtual host that is alive in a service (HTTP) but his DNS
+ record point to a ip address that isn't the target ip address.
+\end_layout
+
+\begin_layout Standard
+This strange behaviour can't be detected by hostmap, but using the --without-be-
+paranoid option you can skip the paranoid check and get the list of all
+ enumerated alias for your target.
+\end_layout
+
+\begin_layout Standard
+The use of --without-be-paranoid slows hostmap execution and is usefull
+ only when the hostmap results are postprocessed by user.
 \end_layout
 
 \begin_layout Section
@@ -246,10 +351,6 @@ Can i redistribute hostmap?
 Can i include hostmap in my commercial product?
 \end_layout
 
-\begin_layout Subsubsection
-Some alias and virtual hosts weren't enumerated
-\end_layout
-
 \begin_layout Subsection
 Usage questions
 \end_layout
@@ -262,6 +363,36 @@ How can i improve hostmap performances?
 hostmap try to get the best performances availeble with your connection
  speed, if you want to speed up hostmap you can try to run it without DNS
  bruteforce using the option --without-bruteforce
+\end_layout
+
+\begin_layout Subsubsection
+Some alias and virtual hosts weren't enumerated
+\end_layout
+
+\begin_layout Standard
+Some alias cannot be enumerated for one or more of the following reasons:
+\end_layout
+
+\begin_layout Itemize
+Network connectivity issue: DNS traffic use the UDP protocol that is a best
+ effort not reliable protocol
+\end_layout
+
+\begin_layout Itemize
+Plugin traceback: 
+\end_layout
+
+\begin_layout Itemize
+Application level virtual hosts that have a wrong DNS record: if hostmap
+ detect an alias or virtual host that doesn't resolve with the target ip
+ address drops this result.
+ To read more about this see 
+\begin_inset LatexCommand prettyref
+reference "sub:Without-paranoid-check"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
