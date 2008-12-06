@@ -18,6 +18,7 @@ import os
 import sys
 from lib.settings import *
 from lib.output.outputDeflector import log
+from lib.core.hmException import *
 
 
 
@@ -173,7 +174,7 @@ class plugin:
                 pl = self.factory(plugin)
                     
                 # Run
-                pl.run(hd,  ip)
+                pl.run(hd, ip)
             except Exception, e:
                 log.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
 
@@ -198,7 +199,7 @@ class plugin:
 
     def runByNameserver(self, hd, nameserver):
         """
-        Run all plugins that depends from ip nameserver
+        Run all plugins that depends from nameserver
         """
         
         for plugin in self.pluginsByNameserver:
@@ -207,7 +208,7 @@ class plugin:
                 pl = self.factory(plugin)
                     
                 # Run
-                pl.run(hd, ip)
+                pl.run(hd, nameserver)
             except Exception, e:
                 log.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
 
@@ -224,6 +225,6 @@ class plugin:
                 pl = self.factory(plugin)
                     
                 # Run
-                pl.run(hd, ip)
+                pl.run(hd, hostname)
             except Exception,  e:
                 log.error("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
