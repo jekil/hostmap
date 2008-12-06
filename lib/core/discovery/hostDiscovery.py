@@ -229,7 +229,7 @@ class hostMap:
         try:
             self.host.setHost(fqdn)
             # TODO: host or virtual host?
-            log.info("Found new host: %s" % fqdn, time=True,tag=self.tag)
+            log.info("Found new host: %s" % fqdn, time=True, tag=self.tag)
             self.pluginControl.runByHostname(self, fqdn)
             
             # Grep domain and notify it
