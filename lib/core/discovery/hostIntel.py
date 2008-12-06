@@ -96,7 +96,8 @@ class Host():
         domain = sanitizeFqdn(domain)
         
         # Check if domain is already been enumerated
-        if domain in self.infos.domains: raise hmDupException("Duplicated domain")
+        if domain in self.infos.domains:
+            raise hmDupException("Duplicated domain")
         
         # Add a new domain
         self.infos.domains.append(domain)
@@ -115,10 +116,12 @@ class Host():
         nameserver = sanitizeFqdn(nameserver)
         
         # Check if NS is already been enumerated
-        if nameserver in self.infos.nameservers: raise hmDupException("Duplicated nameserver")
+        if nameserver in self.infos.nameservers:
+            raise hmDupException("Duplicated nameserver")
                 
         # Check if domain is null of empty
-        if nameserver is None or nameserver == "": raise hmDupException("Null nameserver")
+        if nameserver is None or nameserver == "":
+            raise hmDupException("Null nameserver")
         
         # Add new NS
         self.infos.nameservers.append(str(nameserver)) 
@@ -137,10 +140,12 @@ class Host():
         fqdn = sanitizeFqdn(fqdn)
         
         # Check if host is already in enumerated host list
-        if fqdn in self.infos.vhosts: raise hmDupException("Duplicated host")
+        if fqdn in self.infos.vhosts: 
+            raise hmDupException("Duplicated host")
         
         # Check if host is null of empty
-        if fqdn is None or fqdn == "": raise hmDupException("Null host")
+        if fqdn is None or fqdn == "": 
+            raise hmDupException("Null host")
         
         # Add found host
         self.infos.vhosts.append(fqdn)
