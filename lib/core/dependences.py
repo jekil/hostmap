@@ -40,7 +40,7 @@ def check():
     log.debug("Importing Twisted framework")
     try:
         import twisted
-    except Exception, e:
+    except Exception:
         raise hmImportException("Twisted library not found. Install Twisted library (http://twistedmatrix.com). In Debian like systems you can type apt-get install python-twisted")
     
     log.debug("All dependencies ok!")
