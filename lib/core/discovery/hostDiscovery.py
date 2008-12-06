@@ -220,7 +220,7 @@ class hostMap:
             if fqdn is None: return
             # Paranoid DNS check
             try:
-                if gethostbyname(fqdn) != self.name: return
+                if socket.gethostbyname(fqdn) != self.name: return
             # This exception is raised when a fqdn doesn't exist. 
             # socket.gaierror: (-5, 'No address associated with hostname')
             except socket.gaierror:
