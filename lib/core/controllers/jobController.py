@@ -39,7 +39,7 @@ class jobs:
         # - Waiting
         # - Done
         # - Failed
-        self.states = ["starting", "waiting", "done", "failed"]
+        self.states = ["starting", "waiting", "done", "failure"]
         
         # Syntax is: 
         # {jobname: status}
@@ -62,7 +62,7 @@ class jobs:
         """
 
         # Check if status can be accepted
-        if not status in self.states: raise hmParserException("Not valid status specified")
+        if not status in self.states: raise hmParserException("Not valid status specified: %s" % status)
 
         self.jobs[job] = status
         log.debug("Job %s changed status to %s" % (job, status), time=True, tag=self.tag)
