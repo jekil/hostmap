@@ -16,23 +16,23 @@
 
 import os
 import sys
-from lib.settings import *
+from lib.settings import PLUGINDIR
 from lib.output.outputDeflector import log
-from lib.core.hmException import *
+from lib.core.hmException import hmFileException
 
 
 
 class plugin:
     """ 
     Plugins engine that handle an event based host discovery
-    @author:       Alessandro Tanasi
-    @license:      Private software
-    @contact:      alessandro@tanasi.it
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
     """
 
 
 
-    def __init__(self,  debug = False):
+    def __init__(self, debug=False):
         """
         Initializes variables and does preventive checks
         """
@@ -106,9 +106,12 @@ class plugin:
                 if os.path.splitext(file)[1] == ".py":
                     plugin = self.pluginDir + "." + dir + "." + os.path.splitext(file)[0]
                     plugins.append(plugin)
-                    if self.debug: log.debug("Found plugin: %s" % plugin, time=True, tag=self.tag)
+                    if self.debug: 
+                        log.debug("Found plugin: %s" % plugin, time=True, tag=self.tag)
         
-        if plugins is None: raise hmFileException("No plugins found")
+        if plugins is None: 
+            raise hmFileException("No plugins found")
+        
         return plugins
 
 
@@ -121,8 +124,8 @@ class plugin:
         
         __import__(ModuleName)
         aModule = sys.modules[ModuleName]
-        className = ModuleName.split('.')[len(ModuleName.split('.'))-1]
-        aClass = getattr( aModule , className )
+        className = ModuleName.split(".")[len(ModuleName.split("."))-1]
+        aClass = getattr(aModule , className)
         return apply(aClass, args)
 
 
@@ -147,20 +150,26 @@ class plugin:
             # Trivial case..
             if deps == "ip":  
                 self.pluginsByIp.append(plugin)
-                if self.debug: log.debug("Plugin %s added to ip queue" % plugin, time=True, tag=self.tag)
+                if self.debug: 
+                    log.debug("Plugin %s added to ip queue" % plugin, time=True, tag=self.tag)
                 
-            if deps == "domain":  
+            elif deps == "domain":  
                 self.pluginsByDomain.append(plugin)
-                if self.debug: log.debug("Plugin %s added to domain queue" % plugin, time=True, tag=self.tag)
+                if self.debug: 
+                    log.debug("Plugin %s added to domain queue" % plugin, time=True, tag=self.tag)
                 
-            if deps == "nameserver":  
+            elif deps == "nameserver":  
                 self.pluginsByNameserver.append(plugin)
-                if self.debug: log.debug("Plugin %s added to nameserver queue" % plugin, time=True, tag=self.tag)
+                if self.debug: 
+                    log.debug("Plugin %s added to nameserver queue" % plugin, time=True, tag=self.tag)
                 
-            if deps == "hostname":  
+            elif deps == "hostname":  
                 self.pluginsByHostname.append(plugin)
-                if self.debug: log.debug("Plugin %s added to hostname queue" % plugin, time=True,  tag=self.tag)
+                if self.debug: 
+                    log.debug("Plugin %s added to hostname queue" % plugin, time=True,  tag=self.tag)
 
+            else:
+                raise hmFileException("Plugin %s misses a right dependency" % plugin)
 
 
     def runByIp(self, hd, ip):
@@ -168,16 +177,8 @@ class plugin:
         Run all plugins that depends from ip addresses
         """
         
-        for plugin in self.pluginsByIp:
-            try:
-                # Istantiate a the plugin
-                pl = self.factory(plugin)
-                    
-                # Run
-                pl.run(hd, ip)
-            except Exception, e:
-                log.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
-
+        self.__runPlugin(hd, ip, self.pluginsByIp)
+        
 
 
     def runByDomain(self, hd, domain):
@@ -185,16 +186,8 @@ class plugin:
         Run all plugins that depends from domain
         """
         
-        for plugin in self.pluginsByDomain:
-            try:
-                # Istantiate a the plugin
-                pl = self.factory(plugin)
-                    
-                # Run
-                pl.run(hd, domain)
-            except Exception,  e:
-                log.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
-
+        self.__runPlugin(hd, domain, self.pluginsByDomain)
+        
 
 
     def runByNameserver(self, hd, nameserver):
@@ -202,16 +195,8 @@ class plugin:
         Run all plugins that depends from nameserver
         """
         
-        for plugin in self.pluginsByNameserver:
-            try:
-                # Istantiate a the plugin
-                pl = self.factory(plugin)
-                    
-                # Run
-                pl.run(hd, nameserver)
-            except Exception, e:
-                log.fatal("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
-
+        self.__runPlugin(hd, nameserver, self.pluginsByNameserver)
+        
 
 
     def runByHostname(self, hd, hostname):
@@ -219,12 +204,24 @@ class plugin:
         Run all plugins that depends from ip hostname
         """
         
-        for plugin in self.pluginsByHostname:
+        self.__runPlugin(hd, hostname, self.pluginsByHostname)
+        
+        
+        
+    def __runPlugin(self, hd, param, plugins):
+        """
+        Run all plugins in a given list
+        @param hd: Host discovery istance
+        @param param: Parameter to pass to plugin
+        @param plugins: List of plugins to run
+        """
+        
+        for plugin in plugins:
             try:
                 # Istantiate a the plugin
                 pl = self.factory(plugin)
                     
                 # Run
-                pl.run(hd, hostname)
-            except Exception,  e:
+                pl.run(hd, param)
+            except Exception, e:
                 log.error("Plugin %s get an error. Unhandled exception: %s" % (plugin, e), time=True, tag=self.tag)
