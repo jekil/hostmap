@@ -16,7 +16,7 @@
 
 from lib.common import *
 from lib.supadict import supaDict
-from lib.core.hmException import *
+from lib.core.hmException import hmDupException
 
 
 
