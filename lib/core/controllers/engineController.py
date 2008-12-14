@@ -14,6 +14,7 @@
 
 
 
+import sys
 from lib.core.configuration import *
 from lib.output.outputDeflector import *
 import lib.core.controllers.reactorController as reactor
@@ -36,7 +37,7 @@ class engine():
 
     
     
-    def __init__(self,  debug = False):
+    def __init__(self, debug=False):
         """
         Initialize engine variables
         """
@@ -47,29 +48,6 @@ class engine():
         # Host discovery debug mode
         self.debug = debug
 
-        
-        # TODO: remove this
-        # Start jobs without dependences
-        #import dns
-        #self.d = dns.dns(self, self.target)
-        #self.d.getHostbyaddress(self.target.getIp())
-
-        #import web
-        #self.w = web.web(self, self.target,  self.conf)
-        #self.w.searchLiveByAddress(self.target.getIp())
-        #self.w.searchRusCertByAddress(self.target.getIp())
-        #self.w.searchDomainsdbByAddress(self.target.getIp())
-        #self.w.searchGigablastByAddress(self.target.getIp())
-        #self.w.searchRobtexByAddress(self.target.getIp())
-        #self.w.searchTomdnsByAddress(self.target.getIp())
-        #self.w.searchWebhostingByAddress(self.target.getIp())
-        #self.w.searchWebmaxByAddress(self.target.getIp())
-
-
-
-    
-    
-    
   
     
     def start(self):
@@ -80,12 +58,10 @@ class engine():
         log.debug("Engine started", time=True, tag=self.tag)
         
         # Load plugins
-        pluginControl = plugins.plugin(debug=True)
+        pluginControl = plugins.plugin()
         
         # For each target spawn a host discovery controller
-        #TODO: dict for track status
-        #for target in configuration.conf.Target:
-        hostDiscovery = discovery.hostMap(conf.Target, pluginControl, debug=True)
+        hostDiscovery = discovery.hostMap(conf.Target, pluginControl)
         hostDiscovery.start(self.stop)
         
         # Start Twisted Reactor - let's go!
@@ -104,10 +80,10 @@ class engine():
         log.debug("Engine stopped", time=True, tag=self.tag)
 
         # Print results
-        if results: Report(results)
+        if results: 
+            Report(results)
     
-        # TODO: Here we must exit
-        import sys
+        # Here we must exit
         sys.exit
         
         

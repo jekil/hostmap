@@ -15,7 +15,7 @@
 
 
 import traceback
-from lib.settings import *
+from lib.settings import VERSION, CODENAME
 from lib.core.hmException import *
 import lib.core.optionParser as options
 from lib.output.outputDeflector import log

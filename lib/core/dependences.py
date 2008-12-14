@@ -16,15 +16,15 @@
 
 """
 Checks if required libraries are installed
-@author:       Alessandro Tanasi
-@license:      Private software
-@contact:      alessandro@tanasi.it
+@author: Alessandro Tanasi
+@license: Private software
+@contact: alessandro@tanasi.it
 """
 
 
 
 from lib.output.outputDeflector import log
-from lib.core.hmException import *
+from lib.core.hmException import hmImportException
 
 
 

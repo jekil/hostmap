@@ -16,7 +16,7 @@
 
 from optparse import OptionParser
 from optparse import OptionError
-from lib.core.hmException import *
+from lib.core.hmException import hmOptionException
 from lib.core.configuration import conf
 
 

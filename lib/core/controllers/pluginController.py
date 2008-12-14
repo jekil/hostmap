@@ -67,9 +67,11 @@ class plugin:
         """
         
         if os.path.exists(self.pluginDir):
-            if self.debug: log.debug("Plugin directory exist", time=True, tag=self.tag)
+            if self.debug: 
+                log.debug("Plugin directory exist", time=True, tag=self.tag)
         else:
-            if self.debug: log.debug("Plugin directory not exist", time=True, tag=self.tag)
+            if self.debug: 
+                log.debug("Plugin directory not exist", time=True, tag=self.tag)
             raise hmFileException("Plugin directory %s not found", self.pluginDir)
         
         
