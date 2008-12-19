@@ -79,16 +79,12 @@ class jobs:
         # The work is done when all jobs are in done or failure state
         for key, value in self.jobs.items():
             if value == "done" or value == "failure":
-                done = True
+                # Work done
+                log.debug("All jobs done", time=True, tag=self.tag)
+                return True
             else:
-                done = False
                 return False
-
-        # Work done
-        if done:
-            # All jobs are now done
-            log.debug("All jobs done", time=True, tag=self.tag)
-            return True
+            
 
 
 
