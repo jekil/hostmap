@@ -114,8 +114,20 @@ How to get hostmap
 You can get hostmap in his official website http://hostmap.sourceforge.net
 \end_layout
 
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
 \begin_layout Section
 Quick start guide
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
 \end_layout
 
 \begin_layout Section
@@ -224,6 +236,12 @@ Web hosting: http://whois.webhosting.info/
 
 \begin_layout Itemize
 Web-max: http://www.web-max.ca
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
 \end_layout
 
 \begin_layout Section
@@ -393,8 +411,20 @@ The use of --without-be-paranoid slows hostmap execution and is usefull
  only when the hostmap results are postprocessed by user.
 \end_layout
 
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
 \begin_layout Section
 Developing
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
 \end_layout
 
 \begin_layout Section
@@ -406,6 +436,12 @@ name "sec:Feedback-and-bug"
 Feedback and bug reports
 \end_layout
 
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
 \begin_layout Section
 Copyright and license
 \end_layout
@@ -415,6 +451,12 @@ hostmap is copyrighted by Alessandro Tanasi and is a private software.
  You can read the full software license in the LICENSE.txt file.
 \end_layout
 
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
 \begin_layout Section
 Disclaimer
 \end_layout
@@ -422,6 +464,12 @@ Disclaimer
 \begin_layout Standard
 hostmap is a PoC (Proof of Concept) it's not written to real use because
  if you use it you can violate the policy of same search engines ;)
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
 \end_layout
 
 \begin_layout Section
