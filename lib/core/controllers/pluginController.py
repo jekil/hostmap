@@ -168,7 +168,7 @@ class plugin:
             elif deps == "hostname":  
                 self.pluginsByHostname.append(plugin)
                 if self.debug: 
-                    log.debug("Plugin %s added to hostname queue" % plugin, time=True,  tag=self.tag)
+                    log.debug("Plugin %s added to hostname queue" % plugin, time=True, tag=self.tag)
 
             else:
                 raise hmFileException("Plugin %s misses a right dependency" % plugin)
