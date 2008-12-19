@@ -31,9 +31,11 @@ class outputDirector():
     
     
     
-    def __init__(self):
+    def __init__(self, verbosity=False):
         # List of output handlers
         self.outputPlugins = {}
+        # Debug level
+        self.verbosity = verbosity
 
 
 
@@ -47,9 +49,9 @@ class outputDirector():
         """
     
         # Add a tag (example [ENGINE] yadda yadda)
-        if tag: text = "[%s] %s" % (tag,  text)
+        if tag: text = "[%s] %s" % (tag, text)
         # Add timestamp
-        if time: text = "[%s] %s" % (strftime("%X"),  text)
+        if time: text = "[%s] %s" % (strftime("%X"), text)
         
         # Encode message in unicode
         text = unicode(text, errors='replace')
@@ -81,7 +83,8 @@ class outputDirector():
         @params tag: Type
         """
         
-        if conf.Verbose: self.__message(text, cr, time, tag)
+        if self.verbosity:
+            self.__message(text, cr, time, tag)
 
 
 
@@ -113,4 +116,4 @@ class outputDirector():
 
 
 
-log = outputDirector()
+log = outputDirector(conf.Verbose)
