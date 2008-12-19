@@ -50,6 +50,12 @@ def parseArgs():
                                 action="store_false",
                                 dest="dnsbruteforce",
                                 default=True)
+    parser.add_option("--bruteforce-level",
+                                help="set bruteforce aggressivity, values are lite, custom or full (default full)",
+                                action="store",
+                                type="string",
+                                default="LITE",
+                                dest="dnsbruteforcelevel")
     # TODO: function not implemented now
     #parser.add_option( "--without-webservercheck",
     #                            help="disable web server check",
@@ -104,6 +110,7 @@ def parseArgs():
     # DNS module options
     conf.DNSZoneTransfer = options.dnszonetransfer
     conf.DNSBruteforce = options.dnsbruteforce
+    conf.DNSBruteforceLevel = options.dnsbruteforcelevel
     #conf.DNS = options.dns
     # Web module
     #conf.WebServerCheck = options.webservercheck

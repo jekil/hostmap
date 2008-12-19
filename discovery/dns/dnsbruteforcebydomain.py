@@ -62,7 +62,12 @@ class dnsbruteforce:
         hd.job(self.job, "starting")
         
         # Load brute force names list
-        hostsPath = settings.HOSTLIST
+        if conf.DNSBruteforceLevel == "lite":
+            hostsPath = settings.HOSTLISTLITE
+        elif conf.DNSBruteforceLevel == "custom":
+            hostsPath = settings.HOSTLISTCUSTOM
+        elif conf.DNSBruteforceLevel == "full":
+            hostsPath = settings.HOSTLISTFULL
         
         # Local variables
         self.hostDict = {}

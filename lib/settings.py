@@ -24,7 +24,8 @@ VERSION = "0.1 private"
 CODENAME = "ghironda"
 
 # Dictionaries settings
-HOSTLIST = "dictionaries/hostnames-lite.txt"
+HOSTLISTLITE = "dictionaries/hostnames-lite.txt"
+HOSTLISTCUSTOM = "dictionaries/hostnames-custom.txt"
 HOSTLISTFULL = "dictionaries/hostnames-full.txt"
 
 # Plugins settings
