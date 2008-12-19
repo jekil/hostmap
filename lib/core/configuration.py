@@ -15,7 +15,7 @@
 
 
 from lib.supadict import supaDict
-from lib.singleton import *
+from lib.singleton import Singleton
 
 
 
