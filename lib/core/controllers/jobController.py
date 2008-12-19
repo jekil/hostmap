@@ -29,7 +29,7 @@ class jobs:
     
     
     
-    def __init__(self, debug = False):
+    def __init__(self, debug=False):
         """
         Initialize job controller
         @params debug: Enable debug mode
@@ -66,11 +66,7 @@ class jobs:
 
         self.jobs[job] = status
         log.debug("Job %s changed status to %s" % (job, status), time=True, tag=self.tag)
-        
-        # If i debug mode print job status at every call
-        #if self.debug:
-        #    log.debug("DEBUG MODE: printing job tree at every job change", time=True, tag=self.tag)
-        #    self.status()
+
 
 
 
