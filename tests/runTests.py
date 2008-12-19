@@ -43,8 +43,6 @@ if __name__ == '__main__':
     runner = unittest.TextTestRunner(verbosity=4)
 
     for argstr in sys.argv:
-        #if (argstr == "html"):
-        #    runner = HTMLTestRunner.HTMLTestRunner(verbosity=0)
         if (argstr == "xml"):
             runner = xmlrunner.XMLTestRunner(sys.stdout)
 
