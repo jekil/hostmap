@@ -21,9 +21,9 @@ from lib.output.outputDeflector import *
 
 """
 Manage Twisted reactor
-@author:       Alessandro Tanasi
-@license:      Private software
-@contact:      alessandro@tanasi.it
+@author: Alessandro Tanasi
+@license: Private software
+@contact: alessandro@tanasi.it
 """
 
 
