@@ -45,7 +45,7 @@ class domainsbyaddress:
 
 
 
-    def run(self, hd,  ip):
+    def run(self, hd, ip):
         """
         Query Domains DB using to get a list of domains
         """
