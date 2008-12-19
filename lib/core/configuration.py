@@ -27,7 +27,19 @@ class configuration(supaDict, Singleton):
     @contact: alessandro@tanasi.it
     """
 
-    pass
+
+
+    def __getattr__(self, value):
+        """
+        Override supaDict to return None if a option isn't setted
+        @param value: Key to get the value
+        @return: The value of requested key
+        """
+        
+        try:
+            return supaDict.__getattr__(self, value)
+        except KeyError:
+            return None
 
 
 
