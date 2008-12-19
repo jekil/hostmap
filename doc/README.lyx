@@ -52,7 +52,27 @@ by Alessandro `jekil` Tanasi
 
 \begin_layout Abstract
 This paper is the hostmap user guide.
- Get the latest version in the project homepage.
+ Get the latest version in the project homepage: 
+\begin_inset LatexCommand url
+target "http://hostmap.sourceforge.net"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+
+\newpage
+
 \end_layout
 
 \begin_layout Section
@@ -64,7 +84,7 @@ Requirements
 \end_layout
 
 \begin_layout Standard
-hostmap is fully implemente using Python, an onbject oriented programming
+hostmap is fully implemented using Python, an onbject oriented programming
  language.
  The Python interpreter is freely downloadable from its offficial site.
  It's installable in GNU/Linux, Apple OSX and Microsoft Windows.
@@ -90,6 +110,10 @@ Use case
 How to get hostmap
 \end_layout
 
+\begin_layout Standard
+You can get hostmap in his official website http://hostmap.sourceforge.net
+\end_layout
+
 \begin_layout Section
 Quick start guide
 \end_layout
@@ -111,7 +135,9 @@ Correlation, aggregation and normalization
 \end_layout
 
 \begin_layout Itemize
-Platform independent
+Platform independent: hostmap can run on GNU/Linux, Microsoft Windows, Apple
+ OSX and in each system where Python and Twisted Matrix network library
+ works.
 \end_layout
 
 \begin_layout Standard
@@ -145,6 +171,18 @@ Hostname bruteforcing: try to guess an hostname on the enumerated domains
 \end_layout
 
 \begin_layout Subsubsection
+HTTP Protocol
+\end_layout
+
+\begin_layout Itemize
+SSL Certficate: get the hostname from CO field
+\end_layout
+
+\begin_layout Itemize
+Location Header:
+\end_layout
+
+\begin_layout Subsubsection
 Passive web enumaration
 \end_layout
 
@@ -166,6 +204,10 @@ Microsoft Live: http://search.msn.com
 
 \begin_layout Itemize
 MIT gpg keyserver: http://pgp.mit.edu:11371
+\end_layout
+
+\begin_layout Itemize
+Netcraft: http://searchdns.netcraft.com
 \end_layout
 
 \begin_layout Itemize
@@ -230,6 +272,11 @@ A target must be always set.
 \end_layout
 
 \begin_layout Subsection
+\begin_inset LatexCommand label
+name "sub:Show-debug-messagges"
+
+\end_inset
+
 Show debug messagges
 \end_layout
 
@@ -242,6 +289,38 @@ hhhhhhhhh
 \end_layout
 
 \begin_layout Subsection
+\begin_inset LatexCommand label
+name "sub:Without-hostname-bruteforcing"
+
+\end_inset
+
+Without hostname bruteforcing
+\end_layout
+
+\begin_layout Description
+Option: --without-bruteforce
+\end_layout
+
+\begin_layout Subsection
+Bruteforce aggressivity
+\end_layout
+
+\begin_layout Description
+Option: --bruteforce-level
+\end_layout
+
+\begin_layout Standard
+With this option you can choose the aggressivity of the DNS hostname bruteforcin
+g.
+ Accepted values are lite, custom or full.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand label
+name "sub:Only-passive-discovery"
+
+\end_inset
+
 Only passive discovery
 \end_layout
 
@@ -250,6 +329,11 @@ Option: --only-passive
 \end_layout
 
 \begin_layout Subsection
+\begin_inset LatexCommand label
+name "sub:Only-active-discovery"
+
+\end_inset
+
 Only active discovery
 \end_layout
 
@@ -335,6 +419,11 @@ hostmap is copyrighted by Alessandro Tanasi and is a private software.
 Disclaimer
 \end_layout
 
+\begin_layout Standard
+hostmap is a PoC (Proof of Concept) it's not written to real use because
+ if you use it you can violate the policy of same search engines ;)
+\end_layout
+
 \begin_layout Section
 FAQ
 \end_layout
@@ -362,24 +451,52 @@ How can i improve hostmap performances?
 \begin_layout Standard
 hostmap try to get the best performances availeble with your connection
  speed, if you want to speed up hostmap you can try to run it without DNS
- bruteforce using the option --without-bruteforce
-\end_layout
+ bruteforce using the option --without-bruteforce documented in 
+\begin_inset LatexCommand prettyref
+reference "sub:Without-hostname-bruteforcing"
 
-\begin_layout Subsubsection
-Some alias and virtual hosts weren't enumerated
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Some alias cannot be enumerated for one or more of the following reasons:
+If this is not enough for you, try to use only active checks and skip all
+ requests to web services with --only-active documented in 
+\begin_inset LatexCommand prettyref
+reference "sub:Only-active-discovery"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Remember that this restrict the number on analysis and you can get less
+ results.
+\end_layout
+
+\begin_layout Subsubsection
+Some alias and virtual hosts weren't enumerated or there was a difference
+ between two hostmap runs
+\end_layout
+
+\begin_layout Standard
+Some alias or virtual hosts cannot be enumerated for one or more times for
+ the following reasons:
 \end_layout
 
 \begin_layout Itemize
 Network connectivity issue: DNS traffic use the UDP protocol that is a best
- effort not reliable protocol
+ effort not reliable protocol, so sometimes if there is a network issue
+ packets can be lost.
 \end_layout
 
 \begin_layout Itemize
-Plugin traceback: 
+Plugin traceback: A plugin can get a traceback if there is a bug or in most
+ cases if the service used (like a remote web site) is offline.
+ hostmap use third party services as data mining sources so hostmap results
+ depends on the data sources availability.
 \end_layout
 
 \begin_layout Itemize
@@ -392,7 +509,13 @@ reference "sub:Without-paranoid-check"
 
 \end_inset
 
+.
+\end_layout
 
+\begin_layout Standard
+hostmap try to do the best to limit this strange behaviour but sometimes
+ there is situations (like network congestion) that can be influenced by
+ hostmap.
 \end_layout
 
 \begin_layout Subsection
@@ -413,6 +536,16 @@ reference "sec:Feedback-and-bug"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsubsection
+This software is shit and you are an idiot
+\end_layout
+
+\begin_layout Standard
+Yeah, can be true.
+ Write an e-mail to Alessandro Tanasi at alessandro@tanasi.it if you need
+ to talk about idiots, we can have fun toghever.
 \end_layout
 
 \end_body
