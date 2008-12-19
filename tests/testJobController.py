@@ -34,11 +34,44 @@ class testJobController(unittest.TestCase):
         self.j = jobs()
         pass
     
-    def testJobLife(self):
+    def testLifeDone(self):
         """
-        Test domain Parser
+        Test a good plugin life
         """
-        pass
+        self.j.alter("a", "starting")
+        self.assertEqual(self.j.check(), False)
+        self.j.alter("a", "waiting")
+        self.assertEqual(self.j.check(), False)
+        self.j.alter("a", "done")
+        self.assertEqual(self.j.check(), True)
+    
+    def testLifeFailed(self):
+        """
+        Test a failed plugin life
+        """
+        self.j.alter("a", "starting")
+        self.assertEqual(self.j.check(), False)
+        self.j.alter("a", "waiting")
+        self.assertEqual(self.j.check(), False)
+        self.j.alter("a", "failure")
+        self.assertEqual(self.j.check(), True)
+        
+    def testCombinedLife(self):
+        """
+        Test a multi plugin life
+        """
+        self.j.alter("a", "starting")
+        self.assertEqual(self.j.check(), False)
+        self.j.alter("a", "waiting")
+        self.assertEqual(self.j.check(), False)
+        self.j.alter("b", "starting")
+        self.assertEqual(self.j.check(), False)
+        self.j.alter("a", "failure")
+        self.assertEqual(self.j.check(), False)
+        self.j.alter("b", "waiting")
+        self.assertEqual(self.j.check(), False)
+        self.j.alter("b", "done")
+        self.assertEqual(self.j.check(), True)
 
     def testWrongUse(self):
         """
