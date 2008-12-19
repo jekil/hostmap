@@ -22,12 +22,14 @@ from lib.singleton import *
 class configuration(supaDict, Singleton):
     """
     User configuration / options
-    @author:       Alessandro Tanasi
-    @license:      Private software
-    @contact:      alessandro@tanasi.it
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
     """
     
-    pass
+    
+    def __init__(self):
+        pass
 
 
 
