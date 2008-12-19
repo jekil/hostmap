@@ -19,7 +19,7 @@ from lib.singleton import Singleton
 
 
 
-class configuration(supaDict, Singleton):
+class Configuration(supaDict, Singleton):
     """
     User configuration / options
     @author: Alessandro Tanasi
@@ -43,4 +43,4 @@ class configuration(supaDict, Singleton):
 
 
 
-conf = configuration()
+conf = Configuration()
