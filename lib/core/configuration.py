@@ -26,10 +26,8 @@ class configuration(supaDict, Singleton):
     @license: Private software
     @contact: alessandro@tanasi.it
     """
-    
-    
-    def __init__(self):
-        pass
+
+    pass
 
 
 
