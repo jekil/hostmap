@@ -1,0 +1,10 @@
+#
+# Custom hostname dictionary
+#
+# If you want to build a custom dictionary used by DNS bruteforce check add below a list, 
+# one for line, of hostnames. The character # is used to comment out a line.
+#
+# Now we have only one hostname, that is example.
+#
+
+example

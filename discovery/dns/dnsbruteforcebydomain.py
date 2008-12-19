@@ -74,6 +74,9 @@ class dnsbruteforce:
         self.hosts = []
         
         for host in file(hostsPath):
+            # Skip comments
+            if host.startswith("#"):
+                continue
             # Sanitize
             host = host.replace("\n","").replace("\r","")
             # Compose fqdn
