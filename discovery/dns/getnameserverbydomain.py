@@ -19,8 +19,13 @@ from lib.output.outputDeflector import log
 
 
 
-class getnameserverbyns:
-
+class getnameserverbydomain:
+    """ 
+    Get the nameservers for a domain
+    @author: Alessandro Tanasi
+    @license: Private software
+    @contact: alessandro@tanasi.it
+    """
 
 
     def require(self):
@@ -70,7 +75,8 @@ class getnameserverbyns:
         """
         If a nameservers run success
         """
-        
+        print "!!!!!!!!!!!!!!!!!!!!!"
+        print success
         # Extract nameservers fqdn from response
         for values in success:
             for ns in values:

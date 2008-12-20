@@ -21,7 +21,7 @@ import lib.settings as settings
 
 
 
-class dnsbruteforce:
+class dnsbruteforcebydomain:
     """ 
     DNS bruteforce check
     @author: Alessandro Tanasi
