@@ -30,3 +30,6 @@ HOSTLISTFULL = "dictionaries/hostnames-full.txt"
 
 # Plugins settings
 PLUGINDIR = "discovery"
+
+# HTTP ports
+HTTP_PORTS = [80, 443, 8080]
