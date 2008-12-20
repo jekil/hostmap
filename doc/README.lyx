@@ -307,6 +307,19 @@ hhhhhhhhh
 \end_layout
 
 \begin_layout Subsection
+DNS Zone Transfer check
+\end_layout
+
+\begin_layout Description
+Option: --with-zonetransfer
+\end_layout
+
+\begin_layout Standard
+Performs a DNS AXFR zone transfer check against nameservers that handle
+ the target host.
+\end_layout
+
+\begin_layout Subsection
 \begin_inset LatexCommand label
 name "sub:Without-hostname-bruteforcing"
 

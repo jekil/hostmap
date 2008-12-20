@@ -40,11 +40,11 @@ def parseArgs():
     
     # Create menu and parser
     parser = OptionParser(usage)
-    parser.add_option( "--without-zonetransfer",
-                                help="disable DNS zone transfer",
-                                action="store_false",
+    parser.add_option( "--with-zonetransfer",
+                                help="enable DNS zone transfer check",
+                                action="store_true",
                                 dest="dnszonetransfer",
-                                default=True)
+                                default=False)
     parser.add_option( "--without-bruteforce",
                                 help="disable DNS bruteforcing",
                                 action="store_false",
