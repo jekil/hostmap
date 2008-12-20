@@ -31,11 +31,9 @@ class outputDirector():
     
     
     
-    def __init__(self, verbosity=False):
+    def __init__(self):
         # List of output handlers
         self.outputPlugins = {}
-        # Debug level
-        self.verbosity = verbosity
 
 
 
@@ -83,7 +81,7 @@ class outputDirector():
         @params tag: Type
         """
         
-        if self.verbosity:
+        if conf.Verbose:
             self.__message(text, cr, time, tag)
 
 
@@ -116,4 +114,4 @@ class outputDirector():
 
 
 
-log = outputDirector(conf.Verbose)
+log = outputDirector()
