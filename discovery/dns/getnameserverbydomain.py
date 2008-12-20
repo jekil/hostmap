@@ -75,8 +75,7 @@ class getnameserverbydomain:
         """
         If a nameservers run success
         """
-        print "!!!!!!!!!!!!!!!!!!!!!"
-        print success
+
         # Extract nameservers fqdn from response
         for values in success:
             for ns in values:
