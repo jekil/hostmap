@@ -57,7 +57,7 @@ def main():
         print "Execution aborted, file or directory not found!"
         print e
         
-    except:
+    except Exception:
         print
         print "Unhandled exception. Please report this bug sending an email to alessandro@tanasi.it attaching the following text:"
         traceback.print_exc()
