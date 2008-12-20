@@ -50,7 +50,7 @@ class dnsaxfrzonetransfer:
         """
         
         # Configuration check
-        if conf.DNSZoneTransfer:
+        if not conf.DNSZoneTransfer:
             log.debug("Skipping DNS Zone transfer because it is disabled from command line")
             return
         if conf.OnlyPassive: 
