@@ -88,7 +88,7 @@ class dnsbruteforcebydomain:
             # Resolve
             query = client.getHostByName(fqdn)
             query.addCallback(self.__callSuccess, hd, fqdn)
-            query.addErrback(self.__callFailure,hd, fqdn)
+            query.addErrback(self.__callFailure, hd, fqdn)
             
         hd.job(self.job, "waiting")
         
