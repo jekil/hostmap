@@ -156,6 +156,36 @@ Platform independent: hostmap can run on GNU/Linux, Microsoft Windows, Apple
 Techniques
 \end_layout
 
+\begin_layout Standard
+To enumerate all the alias of a target machine hostmap uses a lot of techniques
+ based on protocols, exposed services, target weakness, target vulnerabilities,
+ bruteforcing, public databases and search engines that can reveal a target's
+ alias.
+\end_layout
+
+\begin_layout Standard
+The data are fetched at runtime from this data sources using multi thread
+ engine to speed up the fetching phase.
+ 
+\end_layout
+
+\begin_layout Standard
+All data fetched being aggregated, normalized, correlated and the results
+ are checked at runtime to avoid false positives.
+\end_layout
+
+\begin_layout Standard
+The hostmap engine is based on the knowledge of event, each enumeration
+ action can get results, based on type of enumeration action and the type
+ of the results hostmap dynamically choose the next action to take and the
+ next enumeration check to launch.
+ hostmap uses an adaptive engine written to get much more results possible.
+\end_layout
+
+\begin_layout Standard
+The techniques used by hostmap are the following.
+\end_layout
+
 \begin_layout Subsubsection
 DNS enumeration techniques
 \end_layout
@@ -193,10 +223,16 @@ The name server that serve the target machine's domain zone can be prone
 
 \end_deeper
 \begin_layout Itemize
-Hostname bruteforcing: try to guess an hostname on the enumerated domains
- the meets the target ip address.
+Hostname bruteforcing
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Using a bruteforcing tries to guess an host name on the enumerated domain
+ that resolve as the target ip address.
+\end_layout
+
+\end_deeper
 \begin_layout Subsubsection
 SSL/TLS Protocol enumeration 
 \end_layout
