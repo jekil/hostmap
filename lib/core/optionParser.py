@@ -14,10 +14,12 @@
 
 
 
+import sys
 from optparse import OptionParser
 from optparse import OptionError
 from lib.core.hmException import hmOptionException
 from lib.core.configuration import conf
+from lib.settings import VERSION
 
 
 
@@ -36,10 +38,10 @@ def parseArgs():
     """
     
     # Menu default string
-    usage = "usage: %prog [options] -t target"
+    usage = "%s [options] -t target" % sys.argv[0]
     
     # Create menu and parser
-    parser = OptionParser(usage)
+    parser = OptionParser(usage=usage, version=VERSION)
     parser.add_option( "--with-zonetransfer",
                                 help="enable DNS zone transfer check",
                                 action="store_true",
@@ -94,7 +96,7 @@ def parseArgs():
                                 type="string",
                                 dest="target")
 
-    options, _ = parser.parse_args()
+    (options, _) = parser.parse_args()
     
     # No target selected
     if options.target is None:
