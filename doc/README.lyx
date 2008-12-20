@@ -152,11 +152,6 @@ Platform independent: hostmap can run on GNU/Linux, Microsoft Windows, Apple
  works.
 \end_layout
 
-\begin_layout Standard
-Paranoid check , puo` far sparire domini di cui e` stato tolto il dns ma
- l'apache e` ancora configurato.
-\end_layout
-
 \begin_layout Subsection
 Techniques
 \end_layout
@@ -166,9 +161,16 @@ DNS enumeration techniques
 \end_layout
 
 \begin_layout Itemize
-Reverse lookup: get hostname from ip address.
+Reverse DNS lookup
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Performs a PTR request to get the host name from ip address.
+ 
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 Nameservers lookup: get the autoritative nameserver for the target host.
 \end_layout
@@ -178,26 +180,69 @@ Mail exchange lookup: get the MX records for the target host domain.
 \end_layout
 
 \begin_layout Itemize
+DNS AXFR zone transfer
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The name server that serve the target machine's domain zone can be prone
+ to a zone transfer vulnerability.
+ This allow an attacker to perform a AXFR zone transfer and get a dump of
+ all DNS records served by this name server.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
 Hostname bruteforcing: try to guess an hostname on the enumerated domains
  the meets the target ip address.
 \end_layout
 
 \begin_layout Subsubsection
-HTTP Protocol
+SSL/TLS Protocol enumeration 
 \end_layout
 
 \begin_layout Itemize
-SSL Certficate: get the hostname from CO field
+X.509 Certificate
 \end_layout
 
-\begin_layout Itemize
-Location Header:
+\begin_deeper
+\begin_layout Standard
+Usually the target machine can publish some HTTP services.
+ A connection is tried to the common HTTP service ports and is tried to
+ negotiate an SSL/TLS connection, if the remote server supply a X.509 certificate
+ the host name is taken from the Common Name (CN) field.
 \end_layout
 
+\end_deeper
 \begin_layout Subsubsection
-Passive web enumaration
+Passive web enumeration techniques
 \end_layout
 
+\begin_layout Itemize
+Search engines
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Microsoft Live: http://search.msn.com
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+GPG/PGP key databases
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+MIT gpg keyserver: http://pgp.mit.edu:11371
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+DNS/WHOIS databases
+\end_layout
+
+\begin_deeper
 \begin_layout Itemize
 Domainsdb: http://www.domainsdb.net/
 \end_layout
@@ -208,14 +253,6 @@ Fbk.de: http://www.bfk.de/
 
 \begin_layout Itemize
 Gigablast: http://www.gigablast.com
-\end_layout
-
-\begin_layout Itemize
-Microsoft Live: http://search.msn.com
-\end_layout
-
-\begin_layout Itemize
-MIT gpg keyserver: http://pgp.mit.edu:11371
 \end_layout
 
 \begin_layout Itemize
@@ -238,6 +275,7 @@ Web hosting: http://whois.webhosting.info/
 Web-max: http://www.web-max.ca
 \end_layout
 
+\end_deeper
 \begin_layout Standard
 
 \newpage
@@ -317,6 +355,12 @@ Option: --with-zonetransfer
 \begin_layout Standard
 Performs a DNS AXFR zone transfer check against nameservers that handle
  the target host.
+\end_layout
+
+\begin_layout Standard
+Some system administrators can see this type of check as an attack against
+ his systems, so this option is disabled by default and use it carefully
+ at your own risk.
 \end_layout
 
 \begin_layout Subsection
