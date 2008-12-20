@@ -20,6 +20,7 @@ from twisted.protocols.basic import LineReceiver
 from twisted.internet import ssl, reactor
 from lib.output.outputDeflector import log
 from lib.settings import HTTP_PORTS
+from lib.core.configuration import conf
 try:
     from OpenSSL import SSL
 except:
@@ -55,6 +56,10 @@ class sslcertbyip:
         Check all ports to SSL enabled
         """
 
+        if conf.OnlyPassive: 
+            log.debug("Skipping SSL certificate check because it is enabled only passive checks")
+            return
+        
         # Negotiate SSL protocol
         for port in HTTP_PORTS:
             job = "%s-%s-%i" % (__name__, ip, port)
