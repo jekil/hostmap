@@ -16,7 +16,7 @@
 
 from time import strftime
 from lib.core.configuration import conf
-from lib.singleton import *
+from lib.singleton import Singleton
 
 
 
@@ -47,9 +47,11 @@ class outputDirector():
         """
     
         # Add a tag (example [ENGINE] yadda yadda)
-        if tag: text = "[%s] %s" % (tag, text)
+        if tag: 
+            text = "[%s] %s" % (tag, text)
         # Add timestamp
-        if time: text = "[%s] %s" % (strftime("%X"), text)
+        if time: 
+            text = "[%s] %s" % (strftime("%X"), text)
         
         # Encode message in unicode
         text = unicode(text, errors='replace')
