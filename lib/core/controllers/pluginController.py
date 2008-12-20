@@ -145,8 +145,8 @@ class plugin:
                 
                 # Build dependencies array
                 deps = pl.require()
-            except:
-                # TODO: remove plugin from list and log the error
+            except Exception, e:
+                log.error("Plugin %s not loaded because %s" % (plugin, e), time=True, tag=self.tag)
                 continue
             
             # Trivial case..
