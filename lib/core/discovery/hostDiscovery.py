@@ -149,10 +149,7 @@ class hostMap:
             self.notifyHost(domain)
         except hmDupException:
             return
-        
-        # Get nameservers
-        #if not self.conf.OnlyPassive:
-        #   self.d.getNameservers(domain)
+
 
 
 
@@ -177,13 +174,6 @@ class hostMap:
         # Check if the nameserver is runned by the target ip address
         self.notifyHost(nameserver)
 
-        # Check if a name server is the target
-        #if not self.conf.OnlyPassive:
-        #    self.d.getHostbyName(nameserver)
-        #    # TODO: remove
-        #    nameserser="casetta.lan"
-        #    if self.conf.DNSZoneTransfer:
-        #        self.d.getZoneAxfr(nameserver)
 
 
     
