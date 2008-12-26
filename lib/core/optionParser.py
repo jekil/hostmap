@@ -56,7 +56,7 @@ def parseArgs():
                                 help="set bruteforce aggressivity, values are lite, custom or full (default full)",
                                 action="store",
                                 type="string",
-                                default="LITE",
+                                default="lite",
                                 dest="dnsbruteforcelevel")
     # TODO: function not implemented now
     #parser.add_option( "--without-webservercheck",

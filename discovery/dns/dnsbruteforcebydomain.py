@@ -68,6 +68,9 @@ class dnsbruteforcebydomain:
             hostsPath = settings.HOSTLISTCUSTOM
         elif conf.DNSBruteforceLevel == "full":
             hostsPath = settings.HOSTLISTFULL
+        else:
+            # TODO: raise exception
+            hostsPath = settings.HOSTLISTLITE
         
         # Local variables
         self.hostDict = {}
