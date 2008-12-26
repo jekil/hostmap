@@ -56,7 +56,7 @@ class hostMap:
         self.debug = debug
         
         # Create a job controller
-        self.jobControl = jobController.jobs(debug=True)
+        self.jobControl = jobController.jobs()
         
         # Create a host intelligence model 
         self.host = intel.Host(target)
