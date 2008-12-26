@@ -20,7 +20,7 @@ Configuration file. Some environment variables can be changed here.
 """
 
 # Version specific
-VERSION = "0.1 private"
+VERSION = "0.1"
 CODENAME = "ghironda"
 
 # Dictionaries settings
