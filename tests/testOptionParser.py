@@ -44,19 +44,13 @@ class testOptionParser(unittest.TestCase):
         """
         Tests that if no args the help is printed
         """
-        # @todo: implement
-        pass
+        self.assertRaises(hmOptionException, parseArgs)
     
     def testHelp(self):
         """
         Test that help works
         """
         # @todo: implement
-        #argv = sys.argv[:]
-        #argv.insert(1, "-h")
-        #argv.insert(2, "-t 127.0.0.1")
-        #sys.argv = "python hostmap.py -h"
-        #parseArgs()
         pass
         
 
