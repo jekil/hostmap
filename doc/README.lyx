@@ -43,7 +43,7 @@ hostmap User Guide
 \end_layout
 
 \begin_layout Date
-release 0.1 private, 11/30/2008
+release 0.1
 \end_layout
 
 \begin_layout Author
@@ -109,7 +109,7 @@ target "http://hostmap.sourceforge.net"
 
 \begin_layout Standard
 The hostmap host name discovery tool is an utility to discover the host
- names related to a IP address.
+ names related to a given IP address.
 \end_layout
 
 \begin_layout Standard
@@ -122,9 +122,16 @@ Requirements
 \end_layout
 
 \begin_layout Standard
-hostmap is fully implemented using Python, an onbject oriented programming
+hostmap is fully implemented using Python, an object oriented programming
  language.
- The Python interpreter is freely downloadable from its offficial site.
+ The Python interpreter is freely downloadable from its offficial site:
+ 
+\begin_inset LatexCommand url
+target "http://www.python.org/"
+
+\end_inset
+
+.
  It's installable in GNU/Linux, Apple OSX and Microsoft Windows.
 \end_layout
 
@@ -136,12 +143,83 @@ To achieve great network performances hostmap uses the Twisted Matrix network
 \end_layout
 
 \begin_layout Standard
-The Twisted library is freely downloadable from its official site.
+The Twisted library is freely downloadable from its official site: 
+\begin_inset LatexCommand url
+target "http://twistedmatrix.com/"
+
+\end_inset
+
+.
  It's installable in GNU/Linux, Apple OSX and Microsoft Windows.
+\end_layout
+
+\begin_layout Standard
+Virtually hostmap is fully portable in GNU/Linux, Apple OSX and Microsoft
+ Windows.
 \end_layout
 
 \begin_layout Subsection
 Use case
+\end_layout
+
+\begin_layout Standard
+In the real world an IP address can be registered in a DNS server with multiple
+ hostnames, because it can have some aliases or it is hosting a bunch of
+ websites.
+\end_layout
+
+\begin_layout Standard
+For example the IP address 1.2.3.4 can have the following names registered,
+ as you can see from a piece of the BIND zone file:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Standard
+
+www.foo.com     CNAME foo.com
+\end_layout
+
+\begin_layout Standard
+
+foo.com         A     1.2.3.4
+\end_layout
+
+\begin_layout Standard
+
+mail.foo.com    A     1.2.3.4
+\end_layout
+
+\begin_layout Standard
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An user, or a penetration tester, that needs to test the security of the
+ 1.2.3.4 machine needs to known all his host names.
+\end_layout
+
+\begin_layout Standard
+The purporse of hostmap is to discover all this registered DNS names, also
+ called host names or virtual hosts, to provide a better knowledge of the
+ target and an extended attack surface to the user.
 \end_layout
 
 \begin_layout Subsection
@@ -149,7 +227,7 @@ How to get hostmap
 \end_layout
 
 \begin_layout Standard
-You can get hostmap in his official website 
+You can get the latest hostmap version from the official website 
 \begin_inset LatexCommand url
 target "http://hostmap.sourceforge.net"
 
@@ -210,6 +288,10 @@ Multithread engine
 \end_layout
 
 \begin_layout Itemize
+Multiple discover techniques
+\end_layout
+
+\begin_layout Itemize
 Correlation, aggregation and normalization
 \end_layout
 
@@ -257,6 +339,10 @@ The techniques used by hostmap are the following.
 DNS enumeration techniques
 \end_layout
 
+\begin_layout Standard
+The following enumeration techniques are based on the DNS protocol and are:
+\end_layout
+
 \begin_layout Itemize
 Reverse DNS lookup
 \end_layout
@@ -269,14 +355,25 @@ Performs a PTR request to get the host name from ip address.
 
 \end_deeper
 \begin_layout Itemize
-Nameservers record lookup: get the autoritative nameserver for the target
- host.
+Nameservers record lookup
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Get the autoritative nameserver for the target host.
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
-Mail exchange record lookup: get the MX records for the target host domain.
+Mail exchange record lookup
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Get the MX records for the target host domain.
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 DNS AXFR zone transfer
 \end_layout
@@ -305,6 +402,11 @@ Using a bruteforcing tries to guess an host name on the enumerated domain
 SSL/TLS Protocol enumeration techniques
 \end_layout
 
+\begin_layout Standard
+The following enumeration techniques are based on the SSL/TLS protocol and
+ are:
+\end_layout
+
 \begin_layout Itemize
 X.509 Certificate
 \end_layout
@@ -320,6 +422,11 @@ Usually the target machine can publish some HTTP services.
 \end_deeper
 \begin_layout Subsubsection
 Passive web enumeration techniques
+\end_layout
+
+\begin_layout Standard
+The following enumeration techniques are based on thirdh party web sites
+ and are:
 \end_layout
 
 \begin_layout Itemize
@@ -555,7 +662,8 @@ Option: -v
 \end_layout
 
 \begin_layout Standard
-hhhhhhhhh
+Show all debug messagges, this can give a more detailed view of hostmap
+ progress.
 \end_layout
 
 \begin_layout Subsection
@@ -714,16 +822,30 @@ Feedback and bug reports
 \end_layout
 
 \begin_layout Section
+\begin_inset LatexCommand label
+name "sec:Copyright-and-license"
+
+\end_inset
+
 Copyright and license
 \end_layout
 
 \begin_layout Standard
-hostmap is copyrighted by Alessandro Tanasi and is a private software.
+hostmap is copyrighted by Alessandro Tanasi and is licensed under GNU General
+ Public License version 3.
+\end_layout
+
+\begin_layout Standard
+hostmap is free software: you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation, either version 3 of the License, or (at your option) any later
+ version.
  
 \end_layout
 
 \begin_layout Standard
-You can read the full software license in the LICENSE.txt file.
+See the GNU General Public License for more details, the full software license
+ is available in the LICENSE.txt file.
 \end_layout
 
 \begin_layout Standard
@@ -734,6 +856,13 @@ You can read the full software license in the LICENSE.txt file.
 
 \begin_layout Section
 Disclaimer
+\end_layout
+
+\begin_layout Standard
+hostmap is distributed in the hope that it will be useful, but WITHOUT ANY
+ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -759,8 +888,32 @@ General questions
 Can i redistribute hostmap?
 \end_layout
 
+\begin_layout Standard
+Yes, you can.
+ hostmap is licensed under the GNU General Public License version 3.
+ See 
+\begin_inset LatexCommand prettyref
+reference "sec:Copyright-and-license"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsubsection
-Can i include hostmap in my commercial product?
+Can i include hostmap in my closed source commercial product?
+\end_layout
+
+\begin_layout Standard
+Generally no, you can't.
+ hostmap is licensed under the GNU General Public License version 3.
+ See 
+\begin_inset LatexCommand prettyref
+reference "sec:Copyright-and-license"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
