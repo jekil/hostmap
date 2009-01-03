@@ -35,7 +35,7 @@ from lib.settings import VERSION
 
 """
 Parse command line 
-@license: Private software
+@license: GNU Public License version 3
 @author: Alessandro Tanasi 
 @contact: alessandro@tanasi.it
 """

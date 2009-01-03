@@ -35,7 +35,7 @@ from lib.core.hmException import *
 class testJobController(unittest.TestCase):
     """
     Tests the job controller library
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

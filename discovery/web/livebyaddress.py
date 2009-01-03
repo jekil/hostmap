@@ -35,7 +35,7 @@ class livebyaddress:
     """ 
     Check against microsoft Live
     @author: Alessandro Tanasi
-    @license: Private software
+    @license: GNU Public License version 3
     @contact: alessandro@tanasi.it
     @bug: This get only the first page of search results
     """

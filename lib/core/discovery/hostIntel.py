@@ -33,7 +33,7 @@ from lib.core.hmException import hmDupException
 class Host():
     """
     This class correlate and aggregate informations that comes from different modules.
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     @bug: Cannot use property, if you access via property error exception aren't raised. Investigate in the use of none in property

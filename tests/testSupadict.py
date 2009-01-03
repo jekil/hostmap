@@ -34,7 +34,7 @@ from lib.supadict import *
 class testSupadict(unittest.TestCase):
     """
     Tests the supa dupa supa dict
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

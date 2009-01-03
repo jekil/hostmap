@@ -27,7 +27,7 @@
 """
 Checks if required libraries are installed
 @author: Alessandro Tanasi
-@license: Private software
+@license: GNU Public License version 3
 @contact: alessandro@tanasi.it
 """
 

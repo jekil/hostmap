@@ -35,7 +35,7 @@ from lib.core.hmException import *
 class testCommon(unittest.TestCase):
     """
     Tests the common functions library
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

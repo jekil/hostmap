@@ -32,7 +32,7 @@ from lib.core.configuration import conf
 class Report():
     """
     Report results
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

@@ -35,7 +35,7 @@ from lib.core.hmException import *
 class testIntel(unittest.TestCase):
     """
     Tests the host intelligence controller
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

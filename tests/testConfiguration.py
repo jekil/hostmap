@@ -34,7 +34,7 @@ from lib.core.configuration import *
 class testConfiguration(unittest.TestCase):
     """
     Tests the configuration
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

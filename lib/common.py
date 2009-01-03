@@ -26,7 +26,7 @@
 
 """
 Common methods
-@license: Private licensing
+@license: GNU Public License version 3
 @author: Alessandro Tanasi
 @contact: alessandro@tanasi.it
 """

@@ -32,7 +32,7 @@ from lib.output.outputDeflector import *
 """
 Manage Twisted reactor
 @author: Alessandro Tanasi
-@license: Private software
+@license: GNU Public License version 3
 @contact: alessandro@tanasi.it
 """
 

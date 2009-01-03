@@ -34,7 +34,7 @@ class domainsbyaddress:
     """ 
     Check against domains by address
     @author: Alessandro Tanasi
-    @license: Private software
+    @license: GNU Public License version 3
     @contact: alessandro@tanasi.it
     @bug: At 29/11/2008 the service seems temporary down
     """

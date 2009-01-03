@@ -41,7 +41,7 @@ class sslcertbyip:
     """ 
     Check if target ip runs a web server
     @author: Alessandro Tanasi
-    @license: Private software
+    @license: GNU Public License version 3
     @contact: alessandro@tanasi.it
     """
 		

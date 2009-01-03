@@ -34,7 +34,7 @@ class gpgbydomain:
     """ 
     Check against a keyserver to enumerate email accounts
     @author: Alessandro Tanasi
-    @license: Private software
+    @license: GNU Public License version 3
     @contact: alessandro@tanasi.it
     """
 

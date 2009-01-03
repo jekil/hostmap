@@ -29,7 +29,7 @@ class Singleton(object):
     A simple singleton pattern
     @see: http://code.activestate.com/recipes/52558/
     @todo: Write unit tests
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

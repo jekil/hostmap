@@ -27,7 +27,7 @@
 class supaDict(dict):
     """
     This class inherits from python dict and  create a Supa Dupa pointed dict. You can access keys and values using a pointed notation.
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

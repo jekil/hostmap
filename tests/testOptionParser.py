@@ -36,7 +36,7 @@ from lib.core.hmException import *
 class testOptionParser(unittest.TestCase):
     """
     Tests the option parser
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

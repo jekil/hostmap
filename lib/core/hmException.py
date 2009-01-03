@@ -27,7 +27,7 @@
 class hmException(Exception):
     """
     Generic HostMap excpetion
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
@@ -44,7 +44,7 @@ class hmException(Exception):
 class hmImportException(hmException):
     """
     HostMap Import excpetion
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
@@ -56,7 +56,7 @@ class hmImportException(hmException):
 class hmOptionException(hmException):
     """
     HostMap Option excpetion
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
@@ -68,7 +68,7 @@ class hmOptionException(hmException):
 class hmFileException(hmException):
     """
     HostMap File excpetion
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
@@ -80,7 +80,7 @@ class hmFileException(hmException):
 class hmPluginException(hmException):
     """
     HostMap Plugin excpetion
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
@@ -92,7 +92,7 @@ class hmPluginException(hmException):
 class hmParserException(hmException):
     """
     HostMap parser excpetion
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
@@ -104,7 +104,7 @@ class hmParserException(hmException):
 class hmDupException(hmException):
     """
     HostMap duplicate exception
-    @license: Private licensing
+    @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """

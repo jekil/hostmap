@@ -34,7 +34,7 @@ class webhostingbyaddress:
     """ 
     Check against drobtex
     @author: Alessandro Tanasi
-    @license: Private software
+    @license: GNU Public License version 3
     @contact: alessandro@tanasi.it
     @bug: At 29/11/2008 this website has a captcha
     """
