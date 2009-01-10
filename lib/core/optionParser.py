@@ -63,7 +63,7 @@ def parseArgs():
                                 dest="dnsbruteforce",
                                 default=True)
     parser.add_option("--bruteforce-level",
-                                help="set bruteforce aggressivity, values are lite, custom or full (default full)",
+                                help="set bruteforce aggressivity, values are lite, custom or full (default is full)",
                                 action="store",
                                 type="string",
                                 default="lite",
