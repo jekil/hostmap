@@ -36,7 +36,7 @@ from lib.singleton import *
 
 
 
-class engine():
+class Engine():
     """ 
     Hostmap engine that handle an event based host discovery
     @author: Alessandro Tanasi
@@ -98,4 +98,4 @@ class engine():
         
         
         
-en = engine()
+en = Engine()
