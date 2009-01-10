@@ -51,7 +51,26 @@ by Alessandro `jekil` Tanasi
 \end_layout
 
 \begin_layout Abstract
-TODO: inserire citazione!!!
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+It is said that if you know your enemies and know yourself, you will not
+ be imperiled in a hundred battles; if you do not know your enemies but
+ do know yourself, you will win one and lose one; if you do not know your
+ enemies nor yourself, you will be imperiled in every single battle.
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ -- Sun Tzu, The Art of War
+\end_layout
+
+\begin_layout Abstract
+\SpecialChar \textcompwordmark{}
+
 \end_layout
 
 \begin_layout Abstract
@@ -108,8 +127,8 @@ target "http://hostmap.sourceforge.net"
 \end_layout
 
 \begin_layout Standard
-The hostmap host name discovery tool is an utility to discover the host
- names related to a given IP address.
+The hostmap host name discovery tool is an utility designed to discover
+ the host names related to a given IP address.
 \end_layout
 
 \begin_layout Standard
@@ -169,8 +188,8 @@ In the real world an IP address can be registered in a DNS server with multiple
 \end_layout
 
 \begin_layout Standard
-For example the IP address 1.2.3.4 can have the following names registered,
- as you can see from a piece of the BIND zone file:
+For example the IP address 1.2.3.4 can has the following names registered,
+ as you can see from a piece of the BIND zone configuration file:
 \end_layout
 
 \begin_layout Standard
@@ -237,6 +256,10 @@ target "http://hostmap.sourceforge.net"
 \end_layout
 
 \begin_layout Standard
+hostmap is available in several packaging formats to fit your own requirements.
+\end_layout
+
+\begin_layout Standard
 
 \newpage
 
@@ -247,8 +270,73 @@ Installation
 \end_layout
 
 \begin_layout Standard
-To run hostmap you don't need to install it, simply download, unpack and
- run.
+There are several ways and package to use or install hostmap, choose one
+ of the following.
+\end_layout
+
+\begin_layout Standard
+If you don't know what you need, use the zip archive so you don't need to
+ install it, simply download, unpack and run.
+\end_layout
+
+\begin_layout Subsection
+Zip archive
+\end_layout
+
+\begin_layout Standard
+Operating system independent host compressed sources.
+\end_layout
+
+\begin_layout Standard
+You need only to unzip the archive and run hostmap as explained in the Quick
+ Start Guide.
+ 
+\begin_inset LatexCommand prettyref
+reference "sec:Quick-start-guide"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Deb package
+\end_layout
+
+\begin_layout Standard
+Architecture independent package for Debian, Ubuntu and any other Debian
+ based GNU/Linux distribuion.
+\end_layout
+
+\begin_layout Subsection
+RPM package
+\end_layout
+
+\begin_layout Standard
+Architecture independent package for Red Hat, Fedora, Mandriva and any other
+ RPM based GNU/Linux distribuion.
+\end_layout
+
+\begin_layout Subsection
+Windows executable
+\end_layout
+
+\begin_layout Standard
+This is a Windows portable executable that does not require the Python interpret
+er to run and to be installed on the operating system.
+\end_layout
+
+\begin_layout Standard
+WARNING: Remember that if you are running hostmap on Windows you must replace
+ 
+\emph on
+hostmap.exe
+\emph default
+ instead of 
+\emph on
+python hostmap.py
+\emph default
+ in all the examples of this user guide.
 \end_layout
 
 \begin_layout Standard
@@ -258,6 +346,11 @@ To run hostmap you don't need to install it, simply download, unpack and
 \end_layout
 
 \begin_layout Section
+\begin_inset LatexCommand label
+name "sec:Quick-start-guide"
+
+\end_inset
+
 Quick start guide
 \end_layout
 
@@ -279,20 +372,34 @@ Fast and furious
 Features and techniques
 \end_layout
 
+\begin_layout Standard
+The aim of hostmap is to enumerate all the virutal hosts and DNS names of
+ an IP address, and do this in the fastest and detailed way.
+\end_layout
+
+\begin_layout Standard
+To achieve this hostmap uses a lot of techniques, some unused by any other
+ tool, combined with some developmente strategy to get the best performances.
+\end_layout
+
 \begin_layout Subsection
 Features
 \end_layout
 
 \begin_layout Itemize
+DNS names and virtual host enumeration
+\end_layout
+
+\begin_layout Itemize
+Multiple discovery techniques
+\end_layout
+
+\begin_layout Itemize
+Results correlation, aggregation and normalization
+\end_layout
+
+\begin_layout Itemize
 Multithread engine
-\end_layout
-
-\begin_layout Itemize
-Multiple discover techniques
-\end_layout
-
-\begin_layout Itemize
-Correlation, aggregation and normalization
 \end_layout
 
 \begin_layout Itemize
@@ -523,6 +630,22 @@ python hostmap.py OPTIONS -t TARGET
 \end_layout
 
 \begin_layout Standard
+If you use a Windows operative system you must user 
+\emph on
+hostmap.exe
+\emph default
+ instead of 
+\emph on
+python hostmap.py
+\emph default
+:
+\end_layout
+
+\begin_layout Quotation
+hostmap.exe OPTIONS -t TARGET
+\end_layout
+
+\begin_layout Standard
 Where TARGET is the IP address of the host against you want a host discovery
  and OPTIONS is a list of hostmap's options.
 \end_layout
@@ -556,6 +679,98 @@ begin{verbatim}
 
 \begin_layout Standard
 
+$ python hostmap.py --help 
+\end_layout
+
+\begin_layout Standard
+
+hostmap 0.1 codename ghironda Coded by Alessandro `jekil` Tanasi <alessandro@tana
+si.it>
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+Usage: hostmap.py [options] -t target
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+Options:   
+\end_layout
+
+\begin_layout Standard
+
+  --version             show program's version number and exit   
+\end_layout
+
+\begin_layout Standard
+
+  -h, --help            show this help message and exit   
+\end_layout
+
+\begin_layout Standard
+
+  --with-zonetransfer   enable DNS zone transfer check   
+\end_layout
+
+\begin_layout Standard
+
+  --without-bruteforce  disable DNS bruteforcing   
+\end_layout
+
+\begin_layout Standard
+
+  --bruteforce-level=DNSBRUTEFORCELEVEL
+\end_layout
+
+\begin_layout Standard
+
+                        set bruteforce aggressivity, values are lite, custom
+ or full (default is lite)   
+\end_layout
+
+\begin_layout Standard
+
+  --without-be-paranoid 
+\end_layout
+
+\begin_layout Standard
+
+                        don't check the results consistency   
+\end_layout
+
+\begin_layout Standard
+
+  --only-passive        passive discovery, don't make network activity to
+ the target network   
+\end_layout
+
+\begin_layout Standard
+
+  --only-active         active discovery, skip passive discovery   
+\end_layout
+
+\begin_layout Standard
+
+  -v, --verbose         set verbose mode   
+\end_layout
+
+\begin_layout Standard
+
+  -t TARGET, --target=TARGET
+\end_layout
+
+\begin_layout Standard
+
+                        set target domain 
 \end_layout
 
 \begin_layout Standard
@@ -582,70 +797,20 @@ Option: --version
 Show the hostmap version.
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Standard
-
-
-\backslash
-begin{verbatim}
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
-
-
-\backslash
-end{verbatim}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 Target
 \end_layout
 
 \begin_layout Description
-Option: -t
+Option: -t or --target
+\end_layout
+
+\begin_layout Standard
+The host IP address that will be scanned for host names.
 \end_layout
 
 \begin_layout Standard
 A target must be always set.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Standard
-
-
-\backslash
-begin{verbatim}
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
-
-
-\backslash
-end{verbatim}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -658,12 +823,12 @@ Show debug messagges
 \end_layout
 
 \begin_layout Description
-Option: -v
+Option: -v or --verbose
 \end_layout
 
 \begin_layout Standard
 Show all debug messagges, this can give a more detailed view of hostmap
- progress.
+ work.
 \end_layout
 
 \begin_layout Subsection
@@ -680,6 +845,12 @@ Performs a DNS AXFR zone transfer check against nameservers that handle
 \end_layout
 
 \begin_layout Standard
+This option can discover a misconfigured DNS server that allow a full zone
+ transfer, an attacker that use this type of vulnerabilty can get the full
+ list of the names handled by the vulnerable DNS server.
+\end_layout
+
+\begin_layout Standard
 Some system administrators can see this type of check as an attack against
  his systems, so this option is disabled by default and use it carefully
  at your own risk.
@@ -691,11 +862,20 @@ name "sub:Without-hostname-bruteforcing"
 
 \end_inset
 
-Without hostname bruteforcing
+Without host name bruteforcing
 \end_layout
 
 \begin_layout Description
 Option: --without-bruteforce
+\end_layout
+
+\begin_layout Standard
+Disable the host name brute forcing check.
+\end_layout
+
+\begin_layout Standard
+Disabling brute forcing you get a fastest scan but you can miss same results
+ that are enumerated only with brute forcing.
 \end_layout
 
 \begin_layout Subsection
@@ -709,7 +889,22 @@ Option: --bruteforce-level
 \begin_layout Standard
 With this option you can choose the aggressivity of the DNS hostname bruteforcin
 g.
- Accepted values are lite, custom or full.
+ 
+\end_layout
+
+\begin_layout Standard
+Accepted values are lite, custom or full.
+ The default value is lite.
+\end_layout
+
+\begin_layout Standard
+You can see the dictionary used by each level in the dictionaries folder
+ of hostmap.
+\end_layout
+
+\begin_layout Standard
+If you need to edit default dictionries or edit you own we suggest to use
+ custom.txt under the dictionaries directory.
 \end_layout
 
 \begin_layout Subsection
@@ -797,22 +992,29 @@ The use of --without-be-paranoid slows hostmap execution and is usefull
 \end_layout
 
 \begin_layout Section
-Developing
-\end_layout
-
-\begin_layout Standard
-
-\newpage
-
-\end_layout
-
-\begin_layout Section
 \begin_inset LatexCommand label
 name "sec:Feedback-and-bug"
 
 \end_inset
 
 Feedback and bug reports
+\end_layout
+
+\begin_layout Standard
+Any kind of feedback i very appreciated!
+\end_layout
+
+\begin_layout Standard
+If you have feature requests, ideas, bug reports or simply you want to give
+ your feedback about hostmap write to 
+\begin_inset LatexCommand url
+name "alessandro@tanasi.it"
+target "mailto:alessandro@tanasi.it"
+
+\end_inset
+
+.
+ I am happy to read your opinion.
 \end_layout
 
 \begin_layout Standard
