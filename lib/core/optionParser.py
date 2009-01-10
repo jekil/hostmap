@@ -68,12 +68,6 @@ def parseArgs():
                                 type="string",
                                 default="lite",
                                 dest="dnsbruteforcelevel")
-    # TODO: function not implemented now
-    #parser.add_option( "--without-webservercheck",
-    #                            help="disable web server check",
-    #                            action="store_false",
-    #                            dest="webservercheck",
-    #                            default=True)
     parser.add_option( "--without-be-paranoid",
                                 help="don't check the results consistency",
                                 action="store_false",
@@ -89,12 +83,6 @@ def parseArgs():
                                 action="store_true",
                                 dest="onlyactive",
                                 default=False)
-    # TODO: not implemented yet
-    #parser.add_option("-d", "--target-dns",
-    #                            help="use this DNS server for queries",
-    #                            action="store",
-    #                            type="string",
-    #                            dest="dns")
     parser.add_option("-v", "--verbose",
                                 help="set verbose mode",
                                 action="store_true",
@@ -123,6 +111,3 @@ def parseArgs():
     conf.DNSZoneTransfer = options.dnszonetransfer
     conf.DNSBruteforce = options.dnsbruteforce
     conf.DNSBruteforceLevel = options.dnsbruteforcelevel
-    #conf.DNS = options.dns
-    # Web module
-    #conf.WebServerCheck = options.webservercheck
