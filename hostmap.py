@@ -79,7 +79,7 @@ def showCredits():
     Show banner and credits
     """
     
-    log.info("hostmap version %s codename %s" % (VERSION, CODENAME))
+    log.info("hostmap %s codename %s" % (VERSION, CODENAME))
     log.info("Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>")
     log.info("")
     
