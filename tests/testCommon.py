@@ -28,7 +28,7 @@ sys.path.append("../")
 
 import unittest
 from lib.common import *
-from lib.core.hmException import *
+from lib.core.hmException import hmParserException, hmResultException
 
 
 
@@ -61,6 +61,9 @@ class testCommon(unittest.TestCase):
         """
         self.assertEqual(sanitizeFqdn("a.a.a"), "a.a.a")
         self.assertEqual(sanitizeFqdn("A.a.A"), "a.a.a")
+        self.assertRaises(hmResultException, sanitizeFqdn, "1.1.1.1")
+        self.assertRaises(hmResultException, sanitizeFqdn, "192.168.1.111")
+        self.assertEqual(sanitizeFqdn("192.168.1.111.aaaa.com"), "192.168.1.111.aaaa.com")
         
         
         

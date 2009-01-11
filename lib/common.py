@@ -33,7 +33,8 @@ Common methods
 
 
 
-from lib.core.hmException import *
+import re
+from lib.core.hmException import hmParserException, hmResultException
 
 
 
@@ -62,6 +63,12 @@ def sanitizeFqdn(fqdn):
     Sanitize a fqdn name
     @param fqdn: Value to sanitize
     @return: Value sanitized
+    @raise hmResultExeption: If value to sanitize is an IP address 
     """
 
-    return str(fqdn).lower()
+    sane = str(fqdn).lower()
+    # Check if is an IP address
+    ip = re.compile(r"^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$")
+    if ip.match(fqdn):
+        raise hmResultException("The enumerated result is an IP address")
+    return sane
