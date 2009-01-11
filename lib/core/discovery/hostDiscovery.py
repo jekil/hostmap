@@ -159,7 +159,7 @@ class hostMap:
             
             # The enumerated domain can be a valid virtual host
             self.notifyHost(domain)
-        except hmDupException:
+        except hmResultException:
             return
 
 
@@ -180,7 +180,7 @@ class hostMap:
             self.host.setNameserver(nameserver)
             log.info("Found new nameserver: %s" % nameserver, time=True, tag=self.tag)
             self.pluginControl.runByNameserver(self, nameserver)
-        except hmDupException:
+        except hmResultException:
             return
 
         # Check if the nameserver is runned by the target ip address
@@ -241,7 +241,7 @@ class hostMap:
             # todo 3 *
             domain = parseDomain(fqdn)
             self.notifyDomain(domain)
-        except hmDupException:
+        except hmResultException:
             return
         
         

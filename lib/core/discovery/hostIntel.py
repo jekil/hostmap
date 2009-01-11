@@ -26,7 +26,7 @@
 
 from lib.common import *
 from lib.supadict import supaDict
-from lib.core.hmException import hmDupException
+from lib.core.hmException import hmResultException
 
 
 
@@ -100,14 +100,14 @@ class Host():
         """
         Add a new domain from a enumeration plugin        
         @params domain: Domain name
-        @raise hmDupException: If try to add a duplicate
+        @raise hmResultException: If try to add a duplicate
         """
         
         domain = sanitizeFqdn(domain)
         
         # Check if domain is already been enumerated
         if domain in self.infos.domains:
-            raise hmDupException("Duplicated domain")
+            raise hmResultException("Duplicated domain")
         
         # Add a new domain
         self.infos.domains.append(domain)
@@ -120,18 +120,18 @@ class Host():
         """
         Add a new NS from a enumeration plugin    
         @params nameserver: Set nameserver
-        @raise hmDupException: If try to add a duplicate
+        @raise hmResultException: If try to add a duplicate
         """
         
         nameserver = sanitizeFqdn(nameserver)
         
         # Check if NS is already been enumerated
         if nameserver in self.infos.nameservers:
-            raise hmDupException("Duplicated nameserver")
+            raise hmResultException("Duplicated nameserver")
                 
         # Check if domain is null of empty
         if nameserver is None or nameserver == "":
-            raise hmDupException("Null nameserver")
+            raise hmResultException("Null nameserver")
         
         # Add new NS
         self.infos.nameservers.append(str(nameserver)) 
@@ -144,18 +144,18 @@ class Host():
         """
         Add a new host from a enumeration plugin
         @params fqdn: Fully qualified domain name of enumerated virtual host
-        @raise hmDupException: If try to add a duplicate
+        @raise hmResultException: If try to add a duplicate
         """
         
         fqdn = sanitizeFqdn(fqdn)
         
         # Check if host is already in enumerated host list
         if fqdn in self.infos.vhosts: 
-            raise hmDupException("Duplicated host")
+            raise hmResultException("Duplicated host")
         
         # Check if host is null of empty
         if fqdn is None or fqdn == "": 
-            raise hmDupException("Null host")
+            raise hmResultException("Null host")
         
         # Add found host
         self.infos.vhosts.append(fqdn)

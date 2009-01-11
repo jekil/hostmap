@@ -60,21 +60,21 @@ class testIntel(unittest.TestCase):
         self.intel.host = "a.a"
         # Add two
         self.intel.setHost("b.a")
-        self.assertRaises(hmDupException, self.intel.setHost, "b.a")
+        self.assertRaises(hmResultException, self.intel.setHost, "b.a")
         
     def testDomain(self):
         # Add one
         self.intel.domain = "a.a"
         # Add two
         self.intel.setDomain("b.a")
-        self.assertRaises(hmDupException, self.intel.setDomain, "b.a")
+        self.assertRaises(hmResultException, self.intel.setDomain, "b.a")
 
     def testNameserver(self):
         # Add one
         self.intel.nameserver = "a.a"
         # Add two
         self.intel.setNameserver("b.a")
-        self.assertRaises(hmDupException, self.intel.setNameserver, "b.a")
+        self.assertRaises(hmResultException, self.intel.setNameserver, "b.a")
 
         
         

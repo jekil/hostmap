@@ -101,9 +101,9 @@ class hmParserException(hmException):
 
 
 
-class hmDupException(hmException):
+class hmResultException(hmException):
     """
-    HostMap duplicate exception
+    An exception in the enumerated result
     @license: GNU Public License version 3
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
