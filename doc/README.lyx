@@ -183,7 +183,7 @@ Use case
 
 \begin_layout Standard
 In the real world an IP address can be registered in a DNS server with multiple
- hostnames, because it can have some aliases or it is hosting a bunch of
+ host names, because it can have some aliases or it is hosting a bunch of
  websites.
 \end_layout
 
@@ -354,12 +354,420 @@ name "sec:Quick-start-guide"
 Quick start guide
 \end_layout
 
+\begin_layout Standard
+A ten seconds guide to use hostmap! Now the scenario is: you have an IP
+ address and you want to know all the host names related.
+ 
+\end_layout
+
 \begin_layout Subsection
 Your first discovery
 \end_layout
 
+\begin_layout Standard
+To start a discovery with hostamp using the default options you need only
+ to use the -t options followed by the target IP address, see an example:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Standard
+
+$ python hostmap.py -t 208.78.103.160 
+\end_layout
+
+\begin_layout Standard
+
+hostmap 0.1 codename ghironda 
+\end_layout
+
+\begin_layout Standard
+
+Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+[18:10:30] [HOSTDISCOVERY] Found new host: www.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[18:10:30] [HOSTDISCOVERY] Found new domain: lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[18:10:31] [HOSTDISCOVERY] Found new host: research.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[18:10:38] [HOSTDISCOVERY] Found new host: lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[18:10:39] [HOSTDISCOVERY] Found new host: www.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[18:10:39] [HOSTDISCOVERY] Found new domain: tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[18:10:49] [HOSTDISCOVERY] Found new host: lab.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[18:10:52] [HOSTDISCOVERY] Found new host: secrss.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[18:11:08] [HOSTDISCOVERY] Found new host: attila.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[18:11:09] [HOSTDISCOVERY] Found new host: smtp.tanasi.it
+\end_layout
+
+\begin_layout Standard
+
+[18:11:10] [HOSTDISCOVERY] Found new nameserver: ns2.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[18:11:12] [HOSTDISCOVERY] Found new nameserver: ns.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[18:11:14] [HOSTDISCOVERY] Found new host: ns2.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[18:11:14] [HOSTDISCOVERY] Found new host: ns.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[18:11:15] [HOSTDISCOVERY] Found new host: giovanni.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+Results for 208.78.103.160 
+\end_layout
+
+\begin_layout Standard
+
+Hostname: giovanni.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+Served by nameservers (probable): ns2.tanasi.it ns.tanasi.it
+\end_layout
+
+\begin_layout Standard
+
+Belongs to domains (confirmed): lonerunners.net tanasi.it
+\end_layout
+
+\begin_layout Standard
+
+Aliases enumerated (confirmed): 
+\end_layout
+
+\begin_layout Standard
+
+www.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+research.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+www.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+lab.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+secrss.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+attila.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+smtp.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+ns2.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+ns.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+giovanni.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Fast and furious
+\end_layout
+
+\begin_layout Standard
+To speed up your discovery you can disable the brute forcing enumeration
+ check, so you can miss some results but you can get the best performances.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Standard
+
+$ python hostmap.py --without-bruteforce -t 208.78.103.160 
+\end_layout
+
+\begin_layout Standard
+
+hostmap 0.1 codename ghironda 
+\end_layout
+
+\begin_layout Standard
+
+Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+[22:10:48] [HOSTDISCOVERY] Found new host: www.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:48] [HOSTDISCOVERY] Found new domain: lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:48] [HOSTDISCOVERY] Found new host: lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:48] [HOSTDISCOVERY] Found new host: www.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:48] [HOSTDISCOVERY] Found new domain: tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:48] [HOSTDISCOVERY] Found new host: lab.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:53] [HOSTDISCOVERY] Found new host: secrss.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:53] [HOSTDISCOVERY] Found new host: giovanni.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:53] [HOSTDISCOVERY] Found new host: smtp.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:53] [HOSTDISCOVERY] Found new nameserver: ns.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:53] [HOSTDISCOVERY] Found new host: ns.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:53] [HOSTDISCOVERY] Found new nameserver: ns2.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[22:10:53] [HOSTDISCOVERY] Found new host: ns2.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+[22:11:14] [HOSTDISCOVERY] Found new host: attila.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+Results for 208.78.103.160 
+\end_layout
+
+\begin_layout Standard
+
+Hostname: giovanni.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+Served by nameservers (probable): ns.tanasi.it ns2.tanasi.it
+\end_layout
+
+\begin_layout Standard
+
+Belongs to domains (confirmed): lonerunners.net tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+Aliases enumerated (confirmed): 
+\end_layout
+
+\begin_layout Standard
+
+www.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+www.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+lab.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+secrss.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+giovanni.lonerunners.net 
+\end_layout
+
+\begin_layout Standard
+
+smtp.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+ns.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+ns2.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+attila.tanasi.it 
+\end_layout
+
+\begin_layout Standard
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -399,7 +807,7 @@ Results correlation, aggregation and normalization
 \end_layout
 
 \begin_layout Itemize
-Multithread engine
+Multithread and event based engine
 \end_layout
 
 \begin_layout Itemize
@@ -546,7 +954,13 @@ The following search engines are used:
 \end_layout
 
 \begin_layout Itemize
-Microsoft Live: http://search.msn.com
+Microsoft Live: 
+\begin_inset LatexCommand url
+target "http://search.msn.com"
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -560,7 +974,13 @@ The following public databases are used:
 \end_layout
 
 \begin_layout Itemize
-MIT gpg keyserver: http://pgp.mit.edu:11371
+MIT gpg keyserver: 
+\begin_inset LatexCommand url
+target "http://pgp.mit.edu:11371"
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -579,35 +999,83 @@ The following public databases are used:
 \end_layout
 
 \begin_layout Itemize
-Domainsdb: http://www.domainsdb.net/
+Domainsdb: 
+\begin_inset LatexCommand url
+target "http://www.domainsdb.net/"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Fbk.de: http://www.bfk.de/
+Fbk.de: 
+\begin_inset LatexCommand url
+target "http://www.bfk.de/"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Gigablast: http://www.gigablast.com
+Gigablast: 
+\begin_inset LatexCommand url
+target "http://www.gigablast.com"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Netcraft: http://searchdns.netcraft.com
+Netcraft: 
+\begin_inset LatexCommand url
+target "http://searchdns.netcraft.com"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Robtex: http://www.robtex.com
+Robtex: 
+\begin_inset LatexCommand url
+target "http://www.robtex.com"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Tomdns: http://www.tomdns.net
+Tomdns: 
+\begin_inset LatexCommand url
+target "http://www.tomdns.net"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Web hosting: http://whois.webhosting.info/
+Web hosting: 
+\begin_inset LatexCommand url
+target "http://whois.webhosting.info/"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Web-max: http://www.web-max.ca
+Web-max: 
+\begin_inset LatexCommand url
+target "http://www.web-max.ca"
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -684,8 +1152,12 @@ $ python hostmap.py --help
 
 \begin_layout Standard
 
-hostmap 0.1 codename ghironda Coded by Alessandro `jekil` Tanasi <alessandro@tana
-si.it>
+hostmap 0.1 codename ghironda
+\end_layout
+
+\begin_layout Standard
+
+Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>
 \end_layout
 
 \begin_layout Standard
@@ -751,11 +1223,6 @@ Options:
 
   --only-passive        passive discovery, don't make network activity to
  the target network   
-\end_layout
-
-\begin_layout Standard
-
-  --only-active         active discovery, skip passive discovery   
 \end_layout
 
 \begin_layout Standard
@@ -903,7 +1370,7 @@ You can see the dictionary used by each level in the dictionaries folder
 \end_layout
 
 \begin_layout Standard
-If you need to edit default dictionries or edit you own we suggest to use
+If you need to edit default dictionaries or edit you own we suggest to use
  custom.txt under the dictionaries directory.
 \end_layout
 
@@ -920,17 +1387,13 @@ Only passive discovery
 Option: --only-passive
 \end_layout
 
-\begin_layout Subsection
-\begin_inset LatexCommand label
-name "sub:Only-active-discovery"
-
-\end_inset
-
-Only active discovery
+\begin_layout Standard
+Runs only the enumeration checks that don't performs any activity with the
+ target.
 \end_layout
 
-\begin_layout Description
-Option: --only-active
+\begin_layout Standard
+Use this if you want to run a stealth discovery.
 \end_layout
 
 \begin_layout Subsection
@@ -1073,6 +1536,10 @@ hostmap is a PoC (Proof of Concept) it's not written to real use because
 \end_layout
 
 \begin_layout Standard
+Whatever you do with this tool is uniquely your responsability.
+\end_layout
+
+\begin_layout Standard
 
 \newpage
 
@@ -1156,9 +1623,9 @@ reference "sub:Without-hostname-bruteforcing"
 
 \begin_layout Standard
 If this is not enough for you, try to use only active checks and skip all
- requests to web services with --only-active documented in 
+ requests to web services with --only-passive documented in 
 \begin_inset LatexCommand prettyref
-reference "sub:Only-active-discovery"
+reference "sub:Only-passive-discovery"
 
 \end_inset
 
