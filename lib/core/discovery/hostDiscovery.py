@@ -71,7 +71,8 @@ class hostMap:
         # Create a host intelligence model 
         self.host = intel.Host(target)
         
-        if self.debug: log.debug("Created new HostDiscovery for %s" % self.name, time=True, tag=self.tag)
+        if self.debug: 
+            log.debug("Created new HostDiscovery for %s" % self.name, time=True, tag=self.tag)
 
 
 
@@ -96,7 +97,8 @@ class hostMap:
         self.jobControl.alter(job, status)
         
         # Check if all jobs are done, so Host Discovery is finished
-        if self.jobControl.check(): self.stop()
+        if self.jobControl.check(): 
+            self.stop()
 
 
 
@@ -195,7 +197,8 @@ class hostMap:
         # Paranoid check
         if conf.Paranoid:
             try:
-                if socket.gethostbyname(fqdn) != self.name: return
+                if socket.gethostbyname(fqdn) != self.name: 
+                    return
             # This exception is raised when a fqdn doesn't exist. 
             # socket.gaierror: (-5, 'No address associated with hostname')
             except socket.gaierror:
@@ -217,10 +220,12 @@ class hostMap:
         # Paranoid check
         if conf.Paranoid:
             # Preventive check
-            if fqdn is None: return
+            if fqdn is None: 
+                return
             # Paranoid DNS check
             try:
-                if socket.gethostbyname(fqdn) != self.name: return
+                if socket.gethostbyname(fqdn) != self.name: 
+                    return
             # This exception is raised when a fqdn doesn't exist. 
             # socket.gaierror: (-5, 'No address associated with hostname')
             except socket.gaierror:
