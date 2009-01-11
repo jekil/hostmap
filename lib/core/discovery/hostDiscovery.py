@@ -38,9 +38,9 @@ class hostMap:
     """ 
     Host Discovery
     @todo: Write unit tests
-    @author:       Alessandro Tanasi
-    @license:      Private software
-    @contact:      alessandro@tanasi.it
+    @author: Alessandro Tanasi
+    @license: GNU Public License version 3
+    @contact: alessandro@tanasi.it
     """
     
     
