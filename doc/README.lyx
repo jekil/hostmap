@@ -252,7 +252,7 @@ target "http://hostmap.sourceforge.net"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -290,13 +290,13 @@ Operating system independent host compressed sources.
 \begin_layout Standard
 You need only to unzip the archive and run hostmap as explained in the Quick
  Start Guide.
- 
+ See 
 \begin_inset LatexCommand prettyref
 reference "sec:Quick-start-guide"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsection
