@@ -29,20 +29,18 @@ from lib.core.configuration import *
 from lib.output.outputDeflector import *
 import lib.core.controllers.reactorController as reactor
 import lib.core.controllers.pluginController as plugins
-import lib.core.controllers.jobController as jobs
 import lib.core.discovery.hostDiscovery as discovery
 from lib.output.reporter import Report
-from lib.singleton import *
+from lib.singleton import Singleton
 
 
 
-class Engine():
+class Engine(Singleton):
     """ 
     Hostmap engine that handle an event based host discovery
     @author: Alessandro Tanasi
     @license: GNU Public License version 3
     @contact: alessandro@tanasi.it
-    @todo: Add singleton
     """
 
     
@@ -51,10 +49,10 @@ class Engine():
         """
         Initialize engine variables
         """
-        
+
+        Singleton().__init__()
         # Tag used in all output messages
         self.tag = "ENGINE"
-        
         # Host discovery debug mode
         self.debug = debug
 
