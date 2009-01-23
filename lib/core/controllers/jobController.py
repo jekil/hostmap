@@ -111,4 +111,4 @@ class jobs:
         
         # Print the status of each job
         for job, status in self.jobs.items():
-            log.debug("> %s : %s" % (job, status),  time=True,  tag=self.tag)
+            log.debug("> %s : %s" % (job, status), time=True, tag=self.tag)
