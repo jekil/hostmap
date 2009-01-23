@@ -93,7 +93,3 @@ class Engine(Singleton):
     
         # Here we must exit
         sys.exit
-        
-        
-        
-en = Engine()

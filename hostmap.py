@@ -30,7 +30,7 @@ from lib.core.hmException import *
 import lib.core.optionParser as options
 from lib.output.outputDeflector import log
 import lib.core.dependences as deps
-import lib.core.controllers.engineController as engine
+from lib.core.controllers.engineController import Engine
 
 
 
@@ -60,7 +60,7 @@ class HostMap:
             deps.check()
             
             # Start hostmapping
-            engine.en.start()
+            Engine().start()
             
         except hmImportException, e:
             print
