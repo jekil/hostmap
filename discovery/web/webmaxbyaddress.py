@@ -88,14 +88,14 @@ class webmaxbyaddress:
         """
         If a Webmax run success
         """
-        # TODO: test this
+
         # Regexp to catch fqdn
-        regexp = "align=\"absmiddle\">&nbsp;<a href=\"http://(.*?)\" target=\"_blank\">"
+        regexp = "align=\"absmiddle\">&nbsp;<a href=\"http://(.*?)\" target=\""
         # Cast object, paranoid mode
         page = str(success)
         # Grep
         results = re.findall(regexp, page, re.I | re.M)
-        
+
         # Add new found hosts
         for domain in set(results):
             hd.notifyDomain(domain)
