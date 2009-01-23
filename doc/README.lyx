@@ -1360,8 +1360,24 @@ g.
 \end_layout
 
 \begin_layout Standard
-Accepted values are lite, custom or full.
- The default value is lite.
+Accepted values are 
+\emph on
+lite
+\emph default
+, 
+\emph on
+custom
+\emph default
+ or 
+\emph on
+full
+\emph default
+.
+ The default value is 
+\emph on
+lite
+\emph default
+.
 \end_layout
 
 \begin_layout Standard
@@ -1371,7 +1387,15 @@ You can see the dictionary used by each level in the dictionaries folder
 
 \begin_layout Standard
 If you need to edit default dictionaries or edit you own we suggest to use
- custom.txt under the dictionaries directory.
+ 
+\emph on
+custom.txt
+\emph default
+ under the 
+\emph on
+dictionaries
+\emph default
+ directory.
 \end_layout
 
 \begin_layout Subsection
