@@ -89,7 +89,6 @@ class tomsdnsbyaddress:
         If a Tomdns run success
         """
         
-        # TODO: test this and redo the parsing regexp
         # Regexp to catch fqdn
         regexp = "-->([\d\w\.-_\r\n]+)<"
         # Cast object, paranoid mode
