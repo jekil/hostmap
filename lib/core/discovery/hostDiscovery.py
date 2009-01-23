@@ -234,11 +234,10 @@ class hostMap:
         try:
             self.host.setHost(fqdn)
             # TODO: host or virtual host?
-            log.info("Found new host: %s" % fqdn, time=True, tag=self.tag)
+            log.info("Found new hostname: %s" % fqdn, time=True, tag=self.tag)
             self.pluginControl.runByHostname(self, fqdn)
             
             # Grep domain and notify it
-            # todo 3 *
             domain = parseDomain(fqdn)
             self.notifyDomain(domain)
         except hmResultException:
