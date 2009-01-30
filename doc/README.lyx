@@ -143,8 +143,7 @@ Requirements
 \begin_layout Standard
 hostmap is fully implemented using Python, an object oriented programming
  language.
- The Python interpreter is freely downloadable from its offficial site:
- 
+ The Python interpreter is freely downloadable from its official site: 
 \begin_inset LatexCommand url
 target "http://www.python.org/"
 
@@ -173,8 +172,7 @@ target "http://twistedmatrix.com/"
 \end_layout
 
 \begin_layout Standard
-Virtually hostmap is fully portable in GNU/Linux, Apple OSX and Microsoft
- Windows.
+hostmap is fully portable in GNU/Linux, Apple OSX and Microsoft Windows.
 \end_layout
 
 \begin_layout Subsection
@@ -236,7 +234,7 @@ An user, or a penetration tester, that needs to test the security of the
 \end_layout
 
 \begin_layout Standard
-The purporse of hostmap is to discover all this registered DNS names, also
+The purpose of hostmap is to discover all this registered DNS names, also
  called host names or virtual hosts, to provide a better knowledge of the
  target and an extended attack surface to the user.
 \end_layout
@@ -305,7 +303,7 @@ Deb package
 
 \begin_layout Standard
 Architecture independent package for Debian, Ubuntu and any other Debian
- based GNU/Linux distribuion.
+ based GNU/Linux distribution.
 \end_layout
 
 \begin_layout Subsection
@@ -314,7 +312,7 @@ RPM package
 
 \begin_layout Standard
 Architecture independent package for Red Hat, Fedora, Mandriva and any other
- RPM based GNU/Linux distribuion.
+ RPM based GNU/Linux distribution.
 \end_layout
 
 \begin_layout Subsection
@@ -365,7 +363,7 @@ Your first discovery
 \end_layout
 
 \begin_layout Standard
-To start a discovery with hostamp using the default options you need only
+To start a discovery with hostmap using the default options you need only
  to use the -t options followed by the target IP address, see an example:
 \end_layout
 
@@ -781,13 +779,13 @@ Features and techniques
 \end_layout
 
 \begin_layout Standard
-The aim of hostmap is to enumerate all the virutal hosts and DNS names of
+The aim of hostmap is to enumerate all the virtual hosts and DNS names of
  an IP address, and do this in the fastest and detailed way.
 \end_layout
 
 \begin_layout Standard
 To achieve this hostmap uses a lot of techniques, some unused by any other
- tool, combined with some developmente strategy to get the best performances.
+ tool, combined with some development strategy to get the best performances.
 \end_layout
 
 \begin_layout Subsection
@@ -823,19 +821,19 @@ Techniques
 \begin_layout Standard
 To enumerate all the alias of a target machine hostmap uses a lot of techniques
  based on protocols, exposed services, target weakness, target vulnerabilities,
- bruteforcing, public databases and search engines that can reveal a target's
+ brute-forcing, public databases and search engines that can reveal a target's
  alias.
 \end_layout
 
 \begin_layout Standard
-The data are fetched at runtime from this data sources using multi thread
+The data are fetched at run time from this data sources using multi thread
  engine to speed up the fetching phase.
  
 \end_layout
 
 \begin_layout Standard
 All data fetched being aggregated, normalized, correlated and the results
- are checked at runtime to avoid false positives.
+ are checked at run time to avoid false positives.
 \end_layout
 
 \begin_layout Standard
@@ -864,18 +862,18 @@ Reverse DNS lookup
 
 \begin_deeper
 \begin_layout Standard
-Performs a PTR request to get the host name from ip address.
+Performs a PTR request to get the host name from IP address.
  
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-Nameservers record lookup
+Name servers record lookup
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-Get the autoritative nameserver for the target host.
+Get the authoritative name server for the target host.
 \end_layout
 
 \end_deeper
@@ -903,13 +901,13 @@ The name server that serve the target machine's domain zone can be prone
 
 \end_deeper
 \begin_layout Itemize
-Hostname bruteforcing
+Host name brute-forcing
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-Using a bruteforcing tries to guess an host name on the enumerated domain
- that resolve as the target ip address.
+Using a brute-forcing tries to guess an host name on the enumerated domain
+ that resolve as the target IP address.
 \end_layout
 
 \end_deeper
@@ -940,7 +938,7 @@ Passive web enumeration techniques
 \end_layout
 
 \begin_layout Standard
-The following enumeration techniques are based on thirdh party web sites
+The following enumeration techniques are based on third party web sites
  and are:
 \end_layout
 
@@ -974,7 +972,7 @@ The following public databases are used:
 \end_layout
 
 \begin_layout Itemize
-MIT gpg keyserver: 
+MIT GPG key server: 
 \begin_inset LatexCommand url
 target "http://pgp.mit.edu:11371"
 
@@ -990,7 +988,7 @@ DNS/WHOIS databases
 
 \begin_deeper
 \begin_layout Standard
-Public whois information databaes, like RIPE, or DNS snapshot database are
+Public WHOIS information database, like RIPE, or DNS snapshot database are
  used to passively enumerate host name and track his history.
 \end_layout
 
@@ -1119,7 +1117,7 @@ Where TARGET is the IP address of the host against you want a host discovery
 \end_layout
 
 \begin_layout Standard
-Available options are exaplained here.
+Available options are explained here.
 \end_layout
 
 \begin_layout Subsection
@@ -1286,7 +1284,7 @@ name "sub:Show-debug-messagges"
 
 \end_inset
 
-Show debug messagges
+Show debug messages
 \end_layout
 
 \begin_layout Description
@@ -1294,8 +1292,7 @@ Option: -v or --verbose
 \end_layout
 
 \begin_layout Standard
-Show all debug messagges, this can give a more detailed view of hostmap
- work.
+Show all debug messages, this can give a more detailed view of hostmap work.
 \end_layout
 
 \begin_layout Subsection
@@ -1303,17 +1300,17 @@ DNS Zone Transfer check
 \end_layout
 
 \begin_layout Description
-Option: --with-zonetransfer
+Option: --with-zone transfer
 \end_layout
 
 \begin_layout Standard
-Performs a DNS AXFR zone transfer check against nameservers that handle
+Performs a DNS AXFR zone transfer check against name servers that handle
  the target host.
 \end_layout
 
 \begin_layout Standard
 This option can discover a misconfigured DNS server that allow a full zone
- transfer, an attacker that use this type of vulnerabilty can get the full
+ transfer, an attacker that use this type of vulnerability can get the full
  list of the names handled by the vulnerable DNS server.
 \end_layout
 
@@ -1329,11 +1326,11 @@ name "sub:Without-hostname-bruteforcing"
 
 \end_inset
 
-Without host name bruteforcing
+Without host name brute-forcing
 \end_layout
 
 \begin_layout Description
-Option: --without-bruteforce
+Option: --without-brute-force
 \end_layout
 
 \begin_layout Standard
@@ -1346,16 +1343,16 @@ Disabling brute forcing you get a fastest scan but you can miss same results
 \end_layout
 
 \begin_layout Subsection
-Bruteforce aggressivity
+Brute-force aggressivity
 \end_layout
 
 \begin_layout Description
-Option: --bruteforce-level
+Option: --brute-force-level
 \end_layout
 
 \begin_layout Standard
-With this option you can choose the aggressivity of the DNS hostname bruteforcin
-g.
+With this option you can choose the aggressivity of the DNS host name brute-forc
+ing.
  
 \end_layout
 
@@ -1435,7 +1432,7 @@ Option: --without-be-paranoid
 
 \begin_layout Standard
 By defaults for each enumerated alias hostmap performs a paranoid check
- to assure that the enumerated DNS name resolves with the target ip address.
+ to assure that the enumerated DNS name resolves with the target IP address.
  
 \end_layout
 
@@ -1446,8 +1443,8 @@ With this check hostmap confirms the enumerated alias and assure the quality
 
 \begin_layout Standard
 In same cases, this can be prone to false positives, because an alias can
- be discarded if it doesn't resolve with the target ip address but some
- services on the targer host are still configured to serve that alias.
+ be discarded if it doesn't resolve with the target IP address but some
+ services on the target host are still configured to serve that alias.
 \end_layout
 
 \begin_layout Standard
@@ -1458,18 +1455,18 @@ An example can be a web server, that is configured for virtual hosting,
  but the system administrator of the old hosting company miss to delete
  the virtual host from the web server configuration.
  So we have a virtual host that is alive in a service (HTTP) but his DNS
- record point to a ip address that isn't the target ip address.
+ record point to a IP address that isn't the target IP address.
 \end_layout
 
 \begin_layout Standard
-This strange behaviour can't be detected by hostmap, but using the --without-be-
-paranoid option you can skip the paranoid check and get the list of all
- enumerated alias for your target.
+This strange behavior can't be detected by hostmap, but using the --without-be-p
+aranoid option you can skip the paranoid check and get the list of all enumerate
+d alias for your target.
 \end_layout
 
 \begin_layout Standard
-The use of --without-be-paranoid slows hostmap execution and is usefull
- only when the hostmap results are postprocessed by user.
+The use of --without-be-paranoid slows hostmap execution and is useful only
+ when the hostmap results are post processed by user.
 \end_layout
 
 \begin_layout Standard
@@ -1634,9 +1631,9 @@ How can i improve hostmap performances?
 \end_layout
 
 \begin_layout Standard
-hostmap try to get the best performances availeble with your connection
+hostmap try to get the best performances available with your connection
  speed, if you want to speed up hostmap you can try to run it without DNS
- bruteforce using the option --without-bruteforce documented in 
+ brute-force using the option --without-brute-force documented in 
 \begin_inset LatexCommand prettyref
 reference "sub:Without-hostname-bruteforcing"
 
@@ -1678,15 +1675,15 @@ Network connectivity issue: DNS traffic use the UDP protocol that is a best
 \end_layout
 
 \begin_layout Itemize
-Plugin traceback: A plugin can get a traceback if there is a bug or in most
- cases if the service used (like a remote web site) is offline.
+Plugin trace back: A plugin can get a trace back if there is a bug or in
+ most cases if the service used (like a remote web site) is offline.
  hostmap use third party services as data mining sources so hostmap results
  depends on the data sources availability.
 \end_layout
 
 \begin_layout Itemize
 Application level virtual hosts that have a wrong DNS record: if hostmap
- detect an alias or virtual host that doesn't resolve with the target ip
+ detect an alias or virtual host that doesn't resolve with the target IP
  address drops this result.
  To read more about this see 
 \begin_inset LatexCommand prettyref
@@ -1698,7 +1695,7 @@ reference "sub:Without-paranoid-check"
 \end_layout
 
 \begin_layout Standard
-hostmap try to do the best to limit this strange behaviour but sometimes
+hostmap try to do the best to limit this strange behavior but sometimes
  there is situations (like network congestion) that can be influenced by
  hostmap.
 \end_layout
@@ -1736,7 +1733,7 @@ I want to help but i haven't time
 There are many ways to help hostmap: coding, testing, donating money, reviewing
  code and documentation or submitting bug reports and feedback.
  To do this you don't need to spend a lot of time.
- Simply reading this user guide and submitting bug reports related to english
+ Simply reading this user guide and submitting bug reports related to English
  errors is a great help.
 \end_layout
 
@@ -1747,7 +1744,7 @@ This software is shit and you are an idiot
 \begin_layout Standard
 Yeah, can be true.
  Write an e-mail to Alessandro Tanasi at alessandro@tanasi.it if you need
- to talk about idiots, we can have fun toghever.
+ to talk about idiots, we can have fun together.
 \end_layout
 
 \end_body
