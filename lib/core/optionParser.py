@@ -78,11 +78,6 @@ def parseArgs():
                                 action="store_true",
                                 dest="onlypassive",
                                 default=False)
-    parser.add_option( "--only-active",
-                                help="active discovery, skip passive discovery",
-                                action="store_true",
-                                dest="onlyactive",
-                                default=False)
     parser.add_option("-v", "--verbose",
                                 help="set verbose mode",
                                 action="store_true",
@@ -105,7 +100,6 @@ def parseArgs():
     conf.Target = options.target
     conf.Verbose = options.verbose
     conf.OnlyPassive = options.onlypassive
-    conf.OnlyActive = options.onlyactive
     conf.Paranoid = options.paranoid
     # DNS module options
     conf.DNSZoneTransfer = options.dnszonetransfer
