@@ -278,7 +278,7 @@ If you don't know what you need, use the zip archive so you don't need to
 \end_layout
 
 \begin_layout Subsection
-Zip archive
+Zip and tar.gz archive
 \end_layout
 
 \begin_layout Standard
@@ -295,46 +295,6 @@ reference "sec:Quick-start-guide"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Subsection
-Deb package
-\end_layout
-
-\begin_layout Standard
-Architecture independent package for Debian, Ubuntu and any other Debian
- based GNU/Linux distribution.
-\end_layout
-
-\begin_layout Subsection
-RPM package
-\end_layout
-
-\begin_layout Standard
-Architecture independent package for Red Hat, Fedora, Mandriva and any other
- RPM based GNU/Linux distribution.
-\end_layout
-
-\begin_layout Subsection
-Windows executable
-\end_layout
-
-\begin_layout Standard
-This is a Windows portable executable that does not require the Python interpret
-er to run and to be installed on the operating system.
-\end_layout
-
-\begin_layout Standard
-WARNING: Remember that if you are running hostmap on Windows you must replace
- 
-\emph on
-hostmap.exe
-\emph default
- instead of 
-\emph on
-python hostmap.py
-\emph default
- in all the examples of this user guide.
 \end_layout
 
 \begin_layout Standard
