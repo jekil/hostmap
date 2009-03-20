@@ -71,7 +71,13 @@ class sslcertbyip:
             return
         
         # Negotiate SSL protocol
-        for port in HTTP_PORTS:
+        # TODO: move this port if
+        if conf.HttpPorts:
+            ports = conf.HttpPorts
+        else:
+            ports = HTTP_PORTS
+        for port in ports:
+            port = int(port)
             job = "%s-%s-%i" % (__name__, ip, port)
             hd.job(job, "starting")
             reactor.connectSSL(ip, port, FakeClientFactory(hd, job), ClientContextFactory(hd, job))

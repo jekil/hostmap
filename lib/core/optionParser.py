@@ -73,6 +73,12 @@ def parseArgs():
                                 action="store_false",
                                 dest="paranoid",
                                 default=True)
+    parser.add_option("--http-ports",
+                                help="set a comma separated list of custom HTTP ports to check",
+                                action="store",
+                                type="string",
+                                default=None,
+                                dest="httpports")
     parser.add_option( "--only-passive",
                                 help="passive discovery, don't make network activity to the target network",
                                 action="store_true",
@@ -101,6 +107,8 @@ def parseArgs():
     conf.Verbose = options.verbose
     conf.OnlyPassive = options.onlypassive
     conf.Paranoid = options.paranoid
+    if options.httpports:
+        conf.HttpPorts = options.httpports.split(",")
     # DNS module options
     conf.DNSZoneTransfer = options.dnszonetransfer
     conf.DNSBruteforce = options.dnsbruteforce
