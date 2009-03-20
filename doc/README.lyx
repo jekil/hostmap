@@ -109,7 +109,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-This is the official user guide for version 0.1 of the hostmap host name
+This is the official user guide for version 0.2 of the hostmap host name
  discovery tool.
  This guide is designed to explain what hostmap is, how it works, and what
  you can do with it.
@@ -555,7 +555,7 @@ $ python hostmap.py --without-bruteforce -t 208.78.103.160
 
 \begin_layout Standard
 
-hostmap 0.1 codename ghironda 
+hostmap 0.2 codename tapioca 
 \end_layout
 
 \begin_layout Standard
@@ -1110,7 +1110,7 @@ $ python hostmap.py --help
 
 \begin_layout Standard
 
-hostmap 0.1 codename ghironda
+hostmap 0.2 codename tapioca
 \end_layout
 
 \begin_layout Standard
