@@ -29,7 +29,6 @@ from twisted.internet.protocol import ClientFactory
 from twisted.protocols.basic import LineReceiver
 from twisted.internet import ssl, reactor
 from lib.output.outputDeflector import log
-from lib.settings import HTTP_PORTS
 from lib.core.configuration import conf
 try:
     from OpenSSL import SSL
@@ -71,12 +70,7 @@ class sslcertbyip:
             return
         
         # Negotiate SSL protocol
-        # TODO: move this port if
-        if conf.HttpPorts:
-            ports = conf.HttpPorts
-        else:
-            ports = HTTP_PORTS
-        for port in ports:
+        for port in conf.HttpPorts:
             port = int(port)
             job = "%s-%s-%i" % (__name__, ip, port)
             hd.job(job, "starting")
