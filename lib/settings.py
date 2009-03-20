@@ -30,8 +30,8 @@ Configuration file. Some environment variables can be changed here.
 """
 
 # Version specific
-VERSION = "0.1"
-CODENAME = "ghironda"
+VERSION = "0.2"
+CODENAME = "tapioca"
 
 # Dictionaries settings
 HOSTLISTLITE = "dictionaries/hostnames-lite.txt"
