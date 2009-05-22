@@ -28,7 +28,7 @@ import re
 from twisted.internet.protocol import ClientFactory
 from twisted.protocols.basic import LineReceiver
 from twisted.internet import ssl, reactor
-from lib.output.outputDeflector import log
+from lib.output.logging import log
 from lib.core.configuration import conf
 try:
     from OpenSSL import SSL
@@ -91,7 +91,7 @@ class ClientContextFactory(ssl.ClientContextFactory):
     def _verify(self, connection, x509, errnum, errdepth, ok):
         host = str(x509.get_issuer().CN)
         
-        if host:
+        if host and not host.startswith("*."):
             self.hd.notifyHost(host)
             log.debug("Plugin %s added result: %s" % (__name__, host))
             

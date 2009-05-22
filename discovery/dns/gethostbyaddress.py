@@ -25,7 +25,7 @@
 
 
 from twisted.names import client
-from lib.output.outputDeflector import log
+from lib.output.logging import log
 
 
 class gethostbyaddress:

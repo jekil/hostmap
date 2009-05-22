@@ -28,7 +28,7 @@ import traceback
 from lib.settings import VERSION, CODENAME
 from lib.core.hmException import *
 import lib.core.optionParser as options
-from lib.output.outputDeflector import log
+from lib.output.logging import log
 import lib.core.dependences as deps
 from lib.core.controllers.engineController import Engine
 

@@ -26,7 +26,7 @@
 
 from twisted.names import client
 from lib.core.configuration import conf
-from lib.output.outputDeflector import log
+from lib.output.logging import log
 
 
 class dnsaxfrzonetransfer:

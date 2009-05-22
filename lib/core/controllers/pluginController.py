@@ -27,7 +27,7 @@
 import os
 import sys
 from lib.settings import PLUGINDIR
-from lib.output.outputDeflector import log
+from lib.output.logging import log
 from lib.core.hmException import hmFileException
 
 

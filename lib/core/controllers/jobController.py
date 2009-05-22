@@ -24,7 +24,7 @@
 
 
 
-from lib.output.outputDeflector import log
+from lib.output.logging import log
 from lib.core.hmException import hmParserException
 
 
