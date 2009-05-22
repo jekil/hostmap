@@ -41,7 +41,7 @@ class Logger():
         
     def __init__(self):
         # Add custom logging channels
-        ogging.addLevelName(15, "VERBOSE")
+        logging.addLevelName(15, "VERBOSE")
         logging.addLevelName(7, "TRAFFIC")
         # Create logger
         self.logger = logging.getLogger("hostmap")
