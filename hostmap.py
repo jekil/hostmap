@@ -23,15 +23,12 @@
 #    along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 
 
-
 import traceback
 from lib.settings import VERSION, CODENAME
 from lib.core.hmException import *
 import lib.core.optionParser as options
-from lib.output.logger import log
 import lib.core.dependences as deps
 from lib.core.controllers.engineController import Engine
-
 
 
 class HostMap:
@@ -41,7 +38,6 @@ class HostMap:
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
-
 
 
     def start(self):
@@ -86,17 +82,14 @@ class HostMap:
             traceback.print_exc()
 
 
-
     def credits(self):
         """
-        Show banner and credits
+        Print banner and credits
         """
-        
-        log.info("hostmap %s codename %s" % (VERSION, CODENAME))
-        log.info("Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>")
-        log.info("")
+        print "hostmap %s codename %s" % (VERSION, CODENAME)
+        print "Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>"
+        print
     
-
 
 # Main
 if __name__ == "__main__":
