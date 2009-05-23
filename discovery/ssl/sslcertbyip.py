@@ -89,15 +89,23 @@ class ClientContextFactory(ssl.ClientContextFactory):
         self.job = job
         
     def _verify(self, connection, x509, errnum, errdepth, ok):
-        host = str(x509.get_issuer().CN)
-        
-        if host:
+        # We get all the CN in the certificate, because the issuer can be an alias of the target machine 
+        hosts = []
+        hosts.append(str(x509.get_subject().CN))
+        hosts.append(str(x509.get_issuer().CN))
+
+        for host in hosts:
+            # Check for wildcard domain
             if host.startswith("*."):
                 log.warn("Detected a wildcard X.509 certificate for: %s" % host)
             else:    
-                self.hd.notifyHost(host)
-                log.debug("Plugin %s added result: %s" % (__name__, host))
-            
+                # Check for FQDN domain to exclude Company names like "Equifax antani"
+                try:
+                    host = re.match("^[a-zA-Z0-9._%-]+.[a-zA-Z]{2,7}$", host).group(0)
+                    self.hd.notifyHost(host)
+                    log.debug("Plugin %s added result: %s" % (__name__, host))
+                except AttributeError:
+                    continue
         return ok
 
     def getContext(self):
