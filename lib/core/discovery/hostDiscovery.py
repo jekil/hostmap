@@ -26,7 +26,7 @@
 
 import socket
 import lib.core.discovery.hostIntel as intel
-from lib.output.logging import log
+from lib.output.logger import log
 from lib.core.configuration import conf
 from lib.core.hmException import *
 import lib.core.controllers.jobController as jobController

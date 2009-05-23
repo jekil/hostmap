@@ -27,7 +27,7 @@
 import re
 from urlparse import urlparse
 from twisted.web import client
-from lib.output.logging import log
+from lib.output.logger import log
 
 
 

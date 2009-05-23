@@ -28,7 +28,7 @@ import re
 from twisted.internet.protocol import ClientFactory
 from twisted.protocols.basic import LineReceiver
 from twisted.internet import ssl, reactor
-from lib.output.logging import log
+from lib.output.logger import log
 from lib.core.configuration import conf
 try:
     from OpenSSL import SSL

@@ -26,7 +26,7 @@
 
 import sys
 from lib.core.configuration import *
-from lib.output.outputDeflector import *
+from lib.output.logger import log
 import lib.core.controllers.reactorController as reactor
 import lib.core.controllers.pluginController as plugins
 import lib.core.discovery.hostDiscovery as discovery

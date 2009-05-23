@@ -25,7 +25,7 @@
 
 
 from twisted.internet import reactor
-from lib.output.outputDeflector import *
+from lib.output.logger import log
 
 
 

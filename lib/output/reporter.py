@@ -24,7 +24,7 @@
 
 
 
-from lib.output.logging import log
+from lib.output.logger import log
 from lib.core.configuration import conf
 
 

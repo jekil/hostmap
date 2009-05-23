@@ -24,10 +24,12 @@ You should have received a copy of the GNU General Public License
 along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+
 import logging
 import sys
 from time import strftime
 from lib.core.configuration import conf
+
 
 class Logger():
     """
@@ -38,19 +40,23 @@ class Logger():
     @todo: Use singleton
     @todo: Save log to file
     """
+
         
     def __init__(self):
         # Add custom logging channels
         logging.addLevelName(15, "VERBOSE")
         logging.addLevelName(7, "TRAFFIC")
+
         # Create logger
         self.logger = logging.getLogger("hostmap")
         handler = logging.StreamHandler(sys.stdout)
         self.logger.addHandler(handler)
+        
         # Set logging level due to user logging options
         if conf.Verbose:
-            self.logger.setLevel(logging.VERBOSE)
-        self.logger.setLevel(logging.WARN)
+            self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(logging.INFO)
+
 
     def _message(self, text, cr=True, time=False, tag=None):
         """
@@ -70,6 +76,7 @@ class Logger():
         text = unicode(text, errors='replace')
         return text
 
+
     def info(self, text, cr=True, time=False, tag=None):
         """
         A info message
@@ -80,6 +87,7 @@ class Logger():
         """
         self.logger.info(self._message(text, cr, time, tag))
 
+
     def debug(self, text, cr=True, time=False, tag=None):
         """
         A debug message
@@ -89,6 +97,7 @@ class Logger():
         @params tag: Type
         """        
         self.logger.debug(self._message(text, cr, time, tag))
+
     
     def verbose(self, text, cr=True, time=False, tag=None):
         """
@@ -99,6 +108,7 @@ class Logger():
         @params tag: Type
         """        
         self.logger.verbose(self._message(text, cr, time, tag))
+
         
     def traffic(self, text, cr=True, time=False, tag=None):
         """
@@ -110,6 +120,7 @@ class Logger():
         """        
         self.logger.traffic(self._message(text, cr, time, tag))
 
+
     def warn(self, text, cr=True, time=False, tag=None):
         """
         A warning message
@@ -119,6 +130,7 @@ class Logger():
         @params tag: Type
         """
         self.logger.warn(self._message(text, cr, time, tag))
+
         
     def error(self, text, cr=True, time=False, tag=None):
         """
@@ -129,5 +141,6 @@ class Logger():
         @params tag: Type
         """
         self.logger.error(self._message(text, cr, time, tag))
+
 
 log = Logger()

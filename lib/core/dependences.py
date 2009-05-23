@@ -33,7 +33,7 @@ Checks if required libraries are installed
 
 
 
-from lib.output.logging import log
+from lib.output.logger import log
 from lib.core.hmException import hmImportException
 
 
