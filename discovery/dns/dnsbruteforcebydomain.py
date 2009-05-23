@@ -86,7 +86,12 @@ class dnsbruteforcebydomain:
         self.hostDict = {}
         self.hosts = []
         
-        for host in file(hostsPath):
+        # Load the brute force txt file only one time to prevent "too many open files" errors
+        if not conf.DNSBruteforceDict: 
+            conf.DNSBruteforceDict = file(hostsPath).read()
+            
+        # TODO: the split is not OSs safe
+        for host in conf.DNSBruteforceDict.split('\n'):
             # Skip comments
             if host.startswith("#"):
                 continue
