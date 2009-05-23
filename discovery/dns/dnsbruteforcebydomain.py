@@ -79,7 +79,7 @@ class dnsbruteforcebydomain:
             except socket.gaierror:
                 continue
             if conf.Target == ip:
-                log.warning("Detected a wildward domain: %s" % fqdn.split(".")[1:])
+                log.warn("Detected a wildward domain: %s" % fqdn.split(".")[1:])
                 hd.job(self.job, "done")
                 return
         
