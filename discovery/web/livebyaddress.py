@@ -23,12 +23,10 @@
 #    along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 
 
-
 import re
 from urlparse import urlparse
 from twisted.web import client
 from lib.output.logger import log
-
 
 
 class livebyaddress:
@@ -37,7 +35,7 @@ class livebyaddress:
     @author: Alessandro Tanasi
     @license: GNU Public License version 3
     @contact: alessandro@tanasi.it
-    @bug: This get only the first page of search results
+    @bug: This get only the first 10 pages of search results
     """
 
 
@@ -57,41 +55,42 @@ class livebyaddress:
 
     def run(self, hd, ip):
         """
-        Query Microsoft Live! using dork ip: to ge a list of domains
-        """
-        
+        Query Microsoft Live! using dork ip: to get a list of domains
+        """        
         self.job = "%s-%s" % (__name__, ip)
         hd.job(self.job, "starting")
         
-        # Compose url
-        # TODO: search more pages
-        url = "http://search.msn.com/results.aspx?q=ip:%s" % ip
-        
-        # Search
-        query = client.getPage(url)
-        query.addCallback(self.__callSuccess, hd)
-        query.addErrback(self.__callFailure, hd)
+        # Fetching only the first ten pages thanks to the strange behaviour of Live
+        # that prevent me to get the exact number of pages to fetch.
+        # Number of page, in ten to ten format (ex. 1, 11, 21...)
+        first = 1
+        self.runners = 10
+        while first < 102:
+            url = "http://search.msn.com/results.aspx?q=ip:%s&first=%s" % (ip, first)
+            
+            # Search
+            query = client.getPage(url)
+            query.addCallback(self.__callSuccess, hd)
+            query.addErrback(self.__callFailure, hd)
+            
+            first = first + 10
         
         hd.job(self.job, "waiting")
     
-
 
     def __callFailure(self, failure, hd):
         """
         If a live search run fails
         """
-        
-        # failure.printTraceback()
-        
-        hd.job(self.job, "failure")
-
+        self.runners = self.runners - 1
+        if self.runners == 0 :
+            hd.job(self.job, "failure")
 
 
     def __callSuccess(self, success, hd):
         """
         If a live search run success
         """
-        
         # Regexp to catch fqdn
         regexp = "<li><h3><a href=\"(.*?)\" "
         # Cast object, paranoid mode
@@ -105,4 +104,6 @@ class livebyaddress:
             hd.notifyHost(host)
             log.debug("Plugin %s added result: %s" % (__name__, host))
         
-        hd.job(self.job, "done")
+        self.runners = self.runners - 1
+        if self.runners == 0 :
+            hd.job(self.job, "done")
