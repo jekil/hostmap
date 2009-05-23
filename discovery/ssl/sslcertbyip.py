@@ -91,9 +91,12 @@ class ClientContextFactory(ssl.ClientContextFactory):
     def _verify(self, connection, x509, errnum, errdepth, ok):
         host = str(x509.get_issuer().CN)
         
-        if host and not host.startswith("*."):
-            self.hd.notifyHost(host)
-            log.debug("Plugin %s added result: %s" % (__name__, host))
+        if host:
+            if host.startswith("*."):
+                log.warn("Detected a wildcard X.509 certificate for: %s" % host)
+            else:    
+                self.hd.notifyHost(host)
+                log.debug("Plugin %s added result: %s" % (__name__, host))
             
         return ok
 
