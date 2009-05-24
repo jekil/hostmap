@@ -25,7 +25,7 @@ along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 
 
 import socket
-from twisted.names import client
+from lib.networking import dns
 from lib.output.logger import log
 from lib.core.configuration import conf
 import lib.settings as settings
@@ -116,7 +116,7 @@ class dnsbruteforcebydomain:
             # Add to dict
             self.hostDict[fqdn] = None
             # Resolve
-            query = client.getHostByName(fqdn)
+            query = dns.client.getHostByName(fqdn)
             query.addCallback(self.__callSuccess, hd, fqdn)
             query.addErrback(self.__callFailure, hd, fqdn)
             

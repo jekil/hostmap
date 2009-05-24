@@ -84,6 +84,12 @@ def parseArgs():
                                 action="store_true",
                                 dest="onlypassive",
                                 default=False)
+    parser.add_option("-d", "--dns",
+                                help="set a comma separated list of DNS servers IP addresses to use instead of system defaults",
+                                action="store",
+                                type="string",
+                                default=None,
+                                dest="dns")
     parser.add_option("-v", "--verbose",
                                 help="set verbose mode",
                                 action="store_true",
@@ -107,6 +113,7 @@ def parseArgs():
     conf.Verbose = options.verbose
     conf.OnlyPassive = options.onlypassive
     conf.Paranoid = options.paranoid
+    conf.DNS = options.dns
     if options.httpports:
         conf.HttpPorts = options.httpports.split(",")
     else:

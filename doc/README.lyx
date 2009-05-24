@@ -744,8 +744,8 @@ The aim of hostmap is to enumerate all the virtual hosts and DNS names of
 \end_layout
 
 \begin_layout Standard
-To achieve this hostmap uses a lot of techniques, some unused by any other
- tool, combined with some development strategy to get the best performances.
+To achieve this hostmap uses a lot of techniques, some never used by any
+ other tool, combined with development technologies to get the best performances.
 \end_layout
 
 \begin_layout Subsection
@@ -1256,11 +1256,25 @@ Show all debug messages, this can give a more detailed view of hostmap work.
 \end_layout
 
 \begin_layout Subsection
+Use a user defined DNS server
+\end_layout
+
+\begin_layout Description
+Option: -d or --dns
+\end_layout
+
+\begin_layout Standard
+Use a user specified DNS server for all DNS queries.
+ You use this option with a comma separated list of DNS server IP addresses
+ to as parameters.
+\end_layout
+
+\begin_layout Subsection
 DNS Zone Transfer check
 \end_layout
 
 \begin_layout Description
-Option: --with-zone transfer
+Option: --with-zone-transfer
 \end_layout
 
 \begin_layout Standard

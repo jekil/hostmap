@@ -24,7 +24,7 @@
 
 
 
-from twisted.names import client
+from lib.networking import dns
 from lib.output.logger import log
 
 
@@ -65,7 +65,7 @@ class gethostbyaddress:
         host = '.'.join(ip.split('.')[::-1]) + '.in-addr.arpa'
 
         # Query dns
-        query = client.lookupPointer(host)
+        query = dns.client.lookupPointer(host)
         query.addCallback(self.__callSuccess, hd, job)
         query.addErrback(self.__callFailure, hd, job)
         

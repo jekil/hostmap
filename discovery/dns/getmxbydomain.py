@@ -24,7 +24,7 @@
 
 
 
-from twisted.names import client
+from lib.networking import dns
 from lib.output.logger import log
 
 
@@ -62,7 +62,7 @@ class getmxbydomain:
         hd.job(job, "starting")
 
         # Query dns
-        query = client.lookupMailExchange(domain)
+        query = dns.client.lookupMailExchange(domain)
         query.addCallback(self.__callSuccess, hd, job)
         query.addErrback(self.__callFailure, hd, job)
         
