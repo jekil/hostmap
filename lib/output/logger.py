@@ -53,9 +53,13 @@ class Logger():
         self.logger.addHandler(handler)
         
         # Set logging level due to user logging options
+        self._setLevel()
+        
+    def _setLevel(self):
         if conf.Verbose:
             self.logger.setLevel(logging.DEBUG)
-        self.logger.setLevel(logging.INFO)
+        else:
+            self.logger.setLevel(logging.INFO)
 
 
     def _message(self, text, cr=True, time=False, tag=None):
@@ -66,6 +70,8 @@ class Logger():
         @params time: Print timestamp
         @params tag: Type
         """
+        # TODO: remove this
+        self._setLevel()
         # Add a tag (example [ENGINE] yadda yadda)
         if tag: 
             text = "[%s] %s" % (tag, text)
@@ -141,6 +147,5 @@ class Logger():
         @params tag: Type
         """
         self.logger.error(self._message(text, cr, time, tag))
-
 
 log = Logger()
