@@ -24,7 +24,6 @@ along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-
 class hmException(Exception):
     """
     Generic HostMap excpetion
@@ -41,7 +40,6 @@ class hmException(Exception):
         return self.value
     
 
-
 class hmImportException(hmException):
     """
     HostMap Import excpetion
@@ -49,9 +47,7 @@ class hmImportException(hmException):
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
-    
     pass
-
 
 
 class hmOptionException(hmException):
@@ -61,9 +57,7 @@ class hmOptionException(hmException):
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
-    
     pass
-
 
 
 class hmFileException(hmException):
@@ -73,9 +67,7 @@ class hmFileException(hmException):
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
-    
     pass
-
 
 
 class hmPluginException(hmException):
@@ -85,9 +77,7 @@ class hmPluginException(hmException):
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
-    
     pass
-
 
 
 class hmParserException(hmException):
@@ -97,9 +87,7 @@ class hmParserException(hmException):
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
-    
     pass
-
 
 
 class hmResultException(hmException):
@@ -109,5 +97,4 @@ class hmResultException(hmException):
     @author: Alessandro Tanasi
     @contact: alessandro@tanasi.it
     """
-    
     pass
