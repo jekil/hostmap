@@ -1,8 +1,9 @@
-#LyX 1.5.6 created this file. For more info see http://www.lyx.org/
-\lyxformat 276
+#LyX 1.6.4 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
 \begin_document
 \begin_header
 \textclass article
+\use_default_options false
 \language english
 \inputencoding auto
 \font_roman default
@@ -13,8 +14,10 @@
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \paperfontsize default
+\use_hyperref false
 \papersize default
 \use_geometry false
 \use_amsmath 1
@@ -76,8 +79,13 @@ It is said that if you know your enemies and know yourself, you will not
 \begin_layout Abstract
 This paper is the hostmap user guide.
  Get the latest version in the project homepage: 
-\begin_inset LatexCommand url
-target "http://hostmap.sourceforge.net"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://hostmap.sourceforge.net
+\end_layout
 
 \end_inset
 
@@ -85,13 +93,15 @@ target "http://hostmap.sourceforge.net"
 \end_layout
 
 \begin_layout Abstract
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
 \begin_layout Abstract
-\begin_inset LatexCommand tableofcontents
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
 
 \end_inset
 
@@ -99,8 +109,9 @@ target "http://hostmap.sourceforge.net"
 \end_layout
 
 \begin_layout Abstract
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
@@ -118,8 +129,13 @@ This is the official user guide for version 0.2 of the hostmap host name
 \begin_layout Standard
 The latetest version of this document can be found on the hostmap web site:
  
-\begin_inset LatexCommand url
-target "http://hostmap.sourceforge.net"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://hostmap.sourceforge.net
+\end_layout
 
 \end_inset
 
@@ -144,8 +160,13 @@ Requirements
 hostmap is fully implemented using Python, an object oriented programming
  language.
  The Python interpreter is freely downloadable from its official site: 
-\begin_inset LatexCommand url
-target "http://www.python.org/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.python.org/
+\end_layout
 
 \end_inset
 
@@ -162,8 +183,13 @@ To achieve great network performances hostmap uses the Twisted Matrix network
 
 \begin_layout Standard
 The Twisted library is freely downloadable from its official site: 
-\begin_inset LatexCommand url
-target "http://twistedmatrix.com/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://twistedmatrix.com/
+\end_layout
 
 \end_inset
 
@@ -194,29 +220,29 @@ For example the IP address 1.2.3.4 can has the following names registered,
 \begin_inset ERT
 status open
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
 begin{verbatim}
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 www.foo.com     CNAME foo.com
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 foo.com         A     1.2.3.4
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 mail.foo.com    A     1.2.3.4
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -245,8 +271,13 @@ How to get hostmap
 
 \begin_layout Standard
 You can get the latest hostmap version from the official website 
-\begin_inset LatexCommand url
-target "http://hostmap.sourceforge.net"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://hostmap.sourceforge.net
+\end_layout
 
 \end_inset
 
@@ -258,8 +289,9 @@ hostmap is available in several packaging formats to fit your own requirements.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
@@ -289,7 +321,8 @@ Operating system independent host compressed sources.
 You need only to unzip the archive and run hostmap as explained in the Quick
  Start Guide.
  See 
-\begin_inset LatexCommand prettyref
+\begin_inset CommandInset ref
+LatexCommand prettyref
 reference "sec:Quick-start-guide"
 
 \end_inset
@@ -298,13 +331,15 @@ reference "sec:Quick-start-guide"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
 \begin_layout Section
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sec:Quick-start-guide"
 
 \end_inset
@@ -331,192 +366,192 @@ To start a discovery with hostmap using the default options you need only
 \begin_inset ERT
 status open
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
 begin{verbatim}
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 $ python hostmap.py -t 208.78.103.160 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 hostmap 0.1 codename ghironda 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:10:30] [HOSTDISCOVERY] Found new host: www.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:10:30] [HOSTDISCOVERY] Found new domain: lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:10:31] [HOSTDISCOVERY] Found new host: research.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:10:38] [HOSTDISCOVERY] Found new host: lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:10:39] [HOSTDISCOVERY] Found new host: www.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:10:39] [HOSTDISCOVERY] Found new domain: tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:10:49] [HOSTDISCOVERY] Found new host: lab.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:10:52] [HOSTDISCOVERY] Found new host: secrss.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:11:08] [HOSTDISCOVERY] Found new host: attila.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:11:09] [HOSTDISCOVERY] Found new host: smtp.tanasi.it
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:11:10] [HOSTDISCOVERY] Found new nameserver: ns2.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:11:12] [HOSTDISCOVERY] Found new nameserver: ns.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:11:14] [HOSTDISCOVERY] Found new host: ns2.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:11:14] [HOSTDISCOVERY] Found new host: ns.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [18:11:15] [HOSTDISCOVERY] Found new host: giovanni.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Results for 208.78.103.160 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Hostname: giovanni.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Served by nameservers (probable): ns2.tanasi.it ns.tanasi.it
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Belongs to domains (confirmed): lonerunners.net tanasi.it
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Aliases enumerated (confirmed): 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 www.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 research.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 www.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 lab.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 secrss.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 attila.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 smtp.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ns2.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ns.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 giovanni.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -541,182 +576,182 @@ To speed up your discovery you can disable the brute forcing enumeration
 \begin_inset ERT
 status open
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
 begin{verbatim}
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 $ python hostmap.py --without-bruteforce -t 208.78.103.160 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 hostmap 0.2 codename tapioca 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:48] [HOSTDISCOVERY] Found new host: www.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:48] [HOSTDISCOVERY] Found new domain: lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:48] [HOSTDISCOVERY] Found new host: lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:48] [HOSTDISCOVERY] Found new host: www.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:48] [HOSTDISCOVERY] Found new domain: tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:48] [HOSTDISCOVERY] Found new host: lab.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:53] [HOSTDISCOVERY] Found new host: secrss.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:53] [HOSTDISCOVERY] Found new host: giovanni.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:53] [HOSTDISCOVERY] Found new host: smtp.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:53] [HOSTDISCOVERY] Found new nameserver: ns.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:53] [HOSTDISCOVERY] Found new host: ns.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:53] [HOSTDISCOVERY] Found new nameserver: ns2.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:10:53] [HOSTDISCOVERY] Found new host: ns2.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [22:11:14] [HOSTDISCOVERY] Found new host: attila.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Results for 208.78.103.160 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Hostname: giovanni.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Served by nameservers (probable): ns.tanasi.it ns2.tanasi.it
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Belongs to domains (confirmed): lonerunners.net tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Aliases enumerated (confirmed): 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 www.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 www.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 lab.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 secrss.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 giovanni.lonerunners.net 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 smtp.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ns.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ns2.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 attila.tanasi.it 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -729,8 +764,9 @@ end{verbatim}
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
@@ -912,9 +948,14 @@ The following search engines are used:
 \end_layout
 
 \begin_layout Itemize
-Microsoft Live: 
-\begin_inset LatexCommand url
-target "http://search.msn.com"
+Microsoft Bing: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://search.msn.com
+\end_layout
 
 \end_inset
 
@@ -933,8 +974,13 @@ The following public databases are used:
 
 \begin_layout Itemize
 MIT GPG key server: 
-\begin_inset LatexCommand url
-target "http://pgp.mit.edu:11371"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://pgp.mit.edu:11371
+\end_layout
 
 \end_inset
 
@@ -958,8 +1004,13 @@ The following public databases are used:
 
 \begin_layout Itemize
 Domainsdb: 
-\begin_inset LatexCommand url
-target "http://www.domainsdb.net/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.domainsdb.net/
+\end_layout
 
 \end_inset
 
@@ -968,8 +1019,13 @@ target "http://www.domainsdb.net/"
 
 \begin_layout Itemize
 Fbk.de: 
-\begin_inset LatexCommand url
-target "http://www.bfk.de/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.bfk.de/
+\end_layout
 
 \end_inset
 
@@ -978,8 +1034,13 @@ target "http://www.bfk.de/"
 
 \begin_layout Itemize
 Gigablast: 
-\begin_inset LatexCommand url
-target "http://www.gigablast.com"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.gigablast.com
+\end_layout
 
 \end_inset
 
@@ -988,8 +1049,13 @@ target "http://www.gigablast.com"
 
 \begin_layout Itemize
 Netcraft: 
-\begin_inset LatexCommand url
-target "http://searchdns.netcraft.com"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://searchdns.netcraft.com
+\end_layout
 
 \end_inset
 
@@ -998,8 +1064,13 @@ target "http://searchdns.netcraft.com"
 
 \begin_layout Itemize
 Robtex: 
-\begin_inset LatexCommand url
-target "http://www.robtex.com"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.robtex.com
+\end_layout
 
 \end_inset
 
@@ -1008,8 +1079,13 @@ target "http://www.robtex.com"
 
 \begin_layout Itemize
 Tomdns: 
-\begin_inset LatexCommand url
-target "http://www.tomdns.net"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.tomdns.net
+\end_layout
 
 \end_inset
 
@@ -1018,8 +1094,13 @@ target "http://www.tomdns.net"
 
 \begin_layout Itemize
 Web hosting: 
-\begin_inset LatexCommand url
-target "http://whois.webhosting.info/"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://whois.webhosting.info/
+\end_layout
 
 \end_inset
 
@@ -1028,8 +1109,13 @@ target "http://whois.webhosting.info/"
 
 \begin_layout Itemize
 Web-max: 
-\begin_inset LatexCommand url
-target "http://www.web-max.ca"
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.web-max.ca
+\end_layout
 
 \end_inset
 
@@ -1038,8 +1124,9 @@ target "http://www.web-max.ca"
 
 \end_deeper
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
@@ -1096,109 +1183,109 @@ Show the help screen with all options available.
 \begin_inset ERT
 status open
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
 begin{verbatim}
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 $ python hostmap.py --help 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 hostmap 0.2 codename tapioca
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Usage: hostmap.py [options] -t target
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 Options:   
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
   --version             show program's version number and exit   
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
   -h, --help            show this help message and exit   
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
   --with-zonetransfer   enable DNS zone transfer check   
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
   --without-bruteforce  disable DNS bruteforcing   
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
   --bruteforce-level=DNSBRUTEFORCELEVEL
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
                         set bruteforce aggressivity, values are lite, custom
  or full (default is lite)   
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
   --without-be-paranoid 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
                         don't check the results consistency   
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
   --only-passive        passive discovery, don't make network activity to
  the target network   
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
   -v, --verbose         set verbose mode   
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
   -t TARGET, --target=TARGET
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
                         set target domain 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -1239,7 +1326,8 @@ A target must be always set.
 \end_layout
 
 \begin_layout Subsection
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sub:Show-debug-messagges"
 
 \end_inset
@@ -1295,7 +1383,8 @@ Some system administrators can see this type of check as an attack against
 \end_layout
 
 \begin_layout Subsection
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sub:Without-hostname-bruteforcing"
 
 \end_inset
@@ -1370,7 +1459,8 @@ dictionaries
 \end_layout
 
 \begin_layout Subsection
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sub:Only-passive-discovery"
 
 \end_inset
@@ -1392,7 +1482,8 @@ Use this if you want to run a stealth discovery.
 \end_layout
 
 \begin_layout Subsection
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sub:Without-paranoid-check"
 
 \end_inset
@@ -1444,13 +1535,15 @@ The use of --without-be-paranoid slows hostmap execution and is useful only
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
 \begin_layout Section
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sec:Feedback-and-bug"
 
 \end_inset
@@ -1464,10 +1557,14 @@ Any kind of feedback is very appreciated!
 
 \begin_layout Standard
 If you have feature requests, ideas, bug reports or simply you want to give
- your feedback about hostmap write to 
-\begin_inset LatexCommand url
-name "alessandro@tanasi.it"
-target "mailto:alessandro@tanasi.it"
+ your feedback about hostmap write to alessandro@tanasi.it 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+mailto:alessandro@tanasi.it
+\end_layout
 
 \end_inset
 
@@ -1476,13 +1573,15 @@ target "mailto:alessandro@tanasi.it"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
 \begin_layout Section
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sec:Copyright-and-license"
 
 \end_inset
@@ -1509,8 +1608,9 @@ See the GNU General Public License for more details, the full software license
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
@@ -1535,8 +1635,9 @@ Whatever you do with this tool is uniquely your responsability.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
@@ -1556,7 +1657,8 @@ Can i redistribute hostmap?
 Yes, you can.
  hostmap is licensed under the GNU General Public License version 3.
  See 
-\begin_inset LatexCommand prettyref
+\begin_inset CommandInset ref
+LatexCommand prettyref
 reference "sec:Copyright-and-license"
 
 \end_inset
@@ -1572,7 +1674,8 @@ Can i include hostmap in my closed source commercial product?
 Generally no, you can't.
  hostmap is licensed under the GNU General Public License version 3.
  See 
-\begin_inset LatexCommand prettyref
+\begin_inset CommandInset ref
+LatexCommand prettyref
 reference "sec:Copyright-and-license"
 
 \end_inset
@@ -1588,7 +1691,8 @@ I want to help hostmap, what can i do?
 Your help is very appreciated, you can help hostmap in several ways, from
  coding to send bug reports.
  See 
-\begin_inset LatexCommand prettyref
+\begin_inset CommandInset ref
+LatexCommand prettyref
 reference "sub:Feedback-questions"
 
 \end_inset
@@ -1608,7 +1712,8 @@ How can i improve hostmap performances?
 hostmap try to get the best performances available with your connection
  speed, if you want to speed up hostmap you can try to run it without DNS
  brute-force using the option --without-brute-force documented in 
-\begin_inset LatexCommand prettyref
+\begin_inset CommandInset ref
+LatexCommand prettyref
 reference "sub:Without-hostname-bruteforcing"
 
 \end_inset
@@ -1619,7 +1724,8 @@ reference "sub:Without-hostname-bruteforcing"
 \begin_layout Standard
 If this is not enough for you, try to use only active checks and skip all
  requests to web services with --only-passive documented in 
-\begin_inset LatexCommand prettyref
+\begin_inset CommandInset ref
+LatexCommand prettyref
 reference "sub:Only-passive-discovery"
 
 \end_inset
@@ -1660,7 +1766,8 @@ Application level virtual hosts that have a wrong DNS record: if hostmap
  detect an alias or virtual host that doesn't resolve with the target IP
  address drops this result.
  To read more about this see 
-\begin_inset LatexCommand prettyref
+\begin_inset CommandInset ref
+LatexCommand prettyref
 reference "sub:Without-paranoid-check"
 
 \end_inset
@@ -1675,7 +1782,8 @@ hostmap try to do the best to limit this strange behavior but sometimes
 \end_layout
 
 \begin_layout Subsection
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sub:Feedback-questions"
 
 \end_inset
@@ -1691,7 +1799,8 @@ I found a bug or i want to suggest some features
 Any feedback is welcome, write an e-mail to Alessandro Tanasi at alessandro@tana
 si.it and you will get an answer to your questions.
  See the 
-\begin_inset LatexCommand prettyref
+\begin_inset CommandInset ref
+LatexCommand prettyref
 reference "sec:Feedback-and-bug"
 
 \end_inset

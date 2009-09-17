@@ -31,7 +31,7 @@ from lib.output.logger import log
 
 
 
-class livebyaddress:
+class bingbyaddress:
     """ 
     Check against microsoft Bing
     @author: Alessandro Tanasi
