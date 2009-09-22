@@ -1545,6 +1545,12 @@ The file hostmap.conf is used to store some common user settings.
 \end_layout
 
 \begin_layout Standard
+The options in the configuration file are overrided by the supplied command
+ line options.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
