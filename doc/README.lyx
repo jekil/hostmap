@@ -46,7 +46,7 @@ hostmap User Guide
 \end_layout
 
 \begin_layout Date
-release 0.2
+release 0.1.1
 \end_layout
 
 \begin_layout Author
@@ -1532,6 +1532,16 @@ d alias for your target.
 \begin_layout Standard
 The use of --without-be-paranoid slows hostmap execution and is useful only
  when the hostmap results are post processed by user.
+\end_layout
+
+\begin_layout Subsection
+Using the configuration file
+\end_layout
+
+\begin_layout Standard
+The file hostmap.conf is used to store some common user settings.
+ You need to simply edit and save it to change the settings automatically
+ loaded at each hostmap run.
 \end_layout
 
 \begin_layout Standard

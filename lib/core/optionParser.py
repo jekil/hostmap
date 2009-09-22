@@ -30,7 +30,7 @@ from optparse import OptionParser
 from optparse import OptionError
 from lib.core.hmException import hmOptionException
 from lib.core.configuration import conf
-from lib.settings import VERSION, HTTP_PORTS
+from lib.settings import VERSION, loadFromFile
 
 
 
@@ -47,6 +47,9 @@ def parseArgs():
     Command line parsing function. Parse command line and create a configuration dict.
     @raise hmOptionException: if target is not specified
     """
+
+    # Load by default configuration from file
+    loadFromFile()
     
     # Menu default string
     usage = "%s [options] -t target" % sys.argv[0]
@@ -117,9 +120,7 @@ def parseArgs():
     conf.DNS = options.dns
     if options.httpports:
         conf.HttpPorts = options.httpports.split(",")
-    else:
-        # Get defaults
-        conf.HttpPorts = HTTP_PORTS
+        
     # DNS module options
     conf.DNSZoneTransfer = options.dnszonetransfer
     conf.DNSBruteforce = options.dnsbruteforce

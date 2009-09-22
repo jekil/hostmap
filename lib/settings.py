@@ -26,23 +26,55 @@ along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 
 
 """
-Configuration file. Some environment variables can be changed here.
+Internal hostmap configuration file. Some environment variables can be changed here, but a normal user doesn't need to change this file.
 @license: GNU Public License version 3
 @author: Alessandro Tanasi
 @contact: alessandro@tanasi.it
 """
+
+import os
+from ConfigParser import NoSectionError
+from ConfigParser import ConfigParser
+from lib.core.hmException import hmOptionException
+from lib.core.configuration import conf
 
 # Version specific
 VERSION = "0.2"
 CODENAME = "tapioca"
 
 # Dictionaries settings
+# TODO: uniform the path separator
 HOSTLISTLITE = "dictionaries/hostnames-lite.txt"
 HOSTLISTCUSTOM = "dictionaries/hostnames-custom.txt"
 HOSTLISTFULL = "dictionaries/hostnames-full.txt"
 
 # Plugins settings
 PLUGINDIR = "discovery"
+    
 
-# HTTP ports
-HTTP_PORTS = [80, 443, 8080]
+def loadFromFile(file="hostmap.conf"):
+    """
+    Load setting from file.
+    @raise hmOptionException: If missing file or mandatory section.
+    """
+    
+    # Check for file
+    if not (os.path.exists(file) and os.path.isfile(file)):
+        raise hmOptionException, "File hostmap.conf not found."
+    
+    config = ConfigParser()
+    config.read(file)
+
+    # Check for mandatory settings section
+    if not config.has_section("Settings"):
+        raise hmOptionException, "Settings section in the configuration file is mandatory"
+
+    # Load ports
+    if not config.has_option("Settings", "ports"):
+        raise hmOptionException, "The option 'ports' is mandatory in the 'Settings' section."
+    else:
+        ports = config.get("Settings", "ports").replace(" ","").split(",")
+        if ports != [""]:
+            conf.HttpPorts = ports
+        else:
+            raise hmOptionException, "The option 'ports' is mandatory in the 'Settings' section."

@@ -1,5 +1,6 @@
-hostmap-0.2
+hostmap-0.1.1
     
+    * Added a configuration file (hostmap.conf) to keep user settings
     * Added option --http-ports to specify the ports to check for an HTTP/HTTPS service
     * Some code refactoring
     
