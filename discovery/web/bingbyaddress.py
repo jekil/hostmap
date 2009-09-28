@@ -28,6 +28,7 @@ import re
 from urlparse import urlparse
 from twisted.web import client
 from lib.output.logger import log
+from lib.core.configuration import conf
 
 
 
@@ -59,6 +60,10 @@ class bingbyaddress:
         """
         Query Bing using dork ip: to ge a list of domains
         """
+        
+        # If is defined a Bing API Key use another plugin
+        if conf.bingApiKey:
+            return
         
         self.job = "%s-%s" % (__name__, ip)
         hd.job(self.job, "starting")

@@ -78,3 +78,7 @@ def loadFromFile(file="hostmap.conf"):
             conf.HttpPorts = ports
         else:
             raise hmOptionException, "The option 'ports' is mandatory in the 'Settings' section."
+        
+    # Load Bing API
+    if config.has_option("Settings", "bingApiKey"):
+        conf.bingApiKey = config.get("Settings", "bingApiKey")
