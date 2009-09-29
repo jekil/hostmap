@@ -55,6 +55,9 @@ class testCommon(unittest.TestCase):
         # Strange use
         self.assertEqual(parseDomain("b.c"), "b.c")
         self.assertRaises(hmParserException, parseDomain, "c")
+        # Double TLD
+        self.assertEqual(parseDomain("a.b.co.uk"), "b.co.uk")
+        
         
     def testSanitizeFqnd(self):
         """

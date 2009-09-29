@@ -36,6 +36,7 @@ Common methods
 
 import re
 from lib.core.hmException import hmParserException, hmResultException
+from lib.core.configuration import conf
 
 
 
@@ -47,6 +48,15 @@ def parseDomain(fqdn):
     @raise: If unable to parse domain name
     """
 
+    # Load in cache TLD list
+    if not conf.TLDList:
+        conf.TLDList = file("%s/lib/tld.txt" % conf.root).read()
+
+    # Check if it's a particular TLD
+    for tld in conf.TLDList.split("\n"):
+        if fqdn.endswith(tld):
+            return ".".join(fqdn.split(tld)[0].split(".")[1:]) + tld
+        
     # Check if we already have the domain or we must parse it
     if len(fqdn.split(".")) > 2:
         domain = ".".join(fqdn.split(".")[1:])
