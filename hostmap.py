@@ -27,7 +27,7 @@ along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 import traceback
 from lib.settings import VERSION, CODENAME
 from lib.core.hmException import *
-import lib.core.optionParser as options
+import lib.core.options as options
 import lib.core.dependences as deps
 from lib.core.controllers.engineController import Engine
 
@@ -50,6 +50,8 @@ class HostMap:
         self.credits()
         
         try:       
+            options.initialize()
+            
             # Parse command line
             options.parseArgs()
             
