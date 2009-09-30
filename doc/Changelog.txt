@@ -1,5 +1,6 @@
 hostmap-0.1.1
     
+    * Added blacklist for second level TLD (for example co.uk) detection.
     * Fixed the Microsoft Live enumeration plugin to use Microsoft Bing.
     * Added an enumeration plugin to use Microsoft Bing via API. API key must be provided in configuration file.
     * Added a configuration file (hostmap.conf) to keep user settings.
