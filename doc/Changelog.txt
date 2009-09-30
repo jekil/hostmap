@@ -1,9 +1,11 @@
 hostmap-0.1.1
     
-    * Added a configuration file (hostmap.conf) to keep user settings
-    * Added option --http-ports to specify the ports to check for an HTTP/HTTPS service
-    * Some code refactoring
+    * Fixed the Microsoft Live enumeration plugin to use Microsoft Bing.
+    * Added an enumeration plugin to use Microsoft Bing via API. API key must be provided in configuration file.
+    * Added a configuration file (hostmap.conf) to keep user settings.
+    * Added option --http-ports to specify the ports to check for an HTTP/HTTPS service.
+    * Some code refactoring.
     
 hostmap-0.1
     
-    * Initial release 
+    * Initial release.
