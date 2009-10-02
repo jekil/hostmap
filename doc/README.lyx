@@ -120,7 +120,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-This is the official user guide for version 0.2 of the hostmap host name
+This is the official user guide for version 0.1.1 of the hostmap host name
  discovery tool.
  This guide is designed to explain what hostmap is, how it works, and what
  you can do with it.
@@ -380,7 +380,7 @@ $ python hostmap.py -t 208.78.103.160
 
 \begin_layout Plain Layout
 
-hostmap 0.1 codename ghironda 
+hostmap 0.1.1 codename tapioca 
 \end_layout
 
 \begin_layout Plain Layout
@@ -590,7 +590,7 @@ $ python hostmap.py --without-bruteforce -t 208.78.103.160
 
 \begin_layout Plain Layout
 
-hostmap 0.2 codename tapioca 
+hostmap 0.1.1 codename tapioca 
 \end_layout
 
 \begin_layout Plain Layout
@@ -1197,7 +1197,7 @@ $ python hostmap.py --help
 
 \begin_layout Plain Layout
 
-hostmap 0.2 codename tapioca
+hostmap 0.1.1 codename tapioca
 \end_layout
 
 \begin_layout Plain Layout
@@ -1261,13 +1261,35 @@ Options:
 
 \begin_layout Plain Layout
 
-                        don't check the results consistency   
+                        don't check the results consistency
+\end_layout
+
+\begin_layout Plain Layout
+
+  --http-ports=HTTPPORTS                         
+\end_layout
+
+\begin_layout Plain Layout
+
+                        set a comma separated list of custom HTTP ports
+ to check   
 \end_layout
 
 \begin_layout Plain Layout
 
   --only-passive        passive discovery, don't make network activity to
- the target network   
+ the target network 
+\end_layout
+
+\begin_layout Plain Layout
+
+  -d DNS, --dns=DNS     set a comma separated list of DNS servers IP addresses
+ to use instead 
+\end_layout
+
+\begin_layout Plain Layout
+
+                        of system defaults  
 \end_layout
 
 \begin_layout Plain Layout

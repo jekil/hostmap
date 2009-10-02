@@ -39,7 +39,7 @@ from lib.core.hmException import hmOptionException
 from lib.core.configuration import conf
 
 # Version specific
-VERSION = "0.2"
+VERSION = "0.1.1"
 CODENAME = "tapioca"
 
 # Dictionaries settings
