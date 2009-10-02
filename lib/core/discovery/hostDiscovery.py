@@ -163,6 +163,8 @@ class hostMap:
         except hmResultException:
             return
 
+        # Check if the domain is also an alias
+        self.notifyHost(domain)
 
 
 
@@ -206,6 +208,7 @@ class hostMap:
                 return
             
         self.host.setHostname(fqdn)
+        self.notifyHost(fqdn)
         
         
     def notifyHost(self, fqdn):
