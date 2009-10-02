@@ -30,6 +30,7 @@ import xmlrunner
 sys.path.append("../")
 
 import unittest
+from lib.core.configuration import conf
 
 # Importing tests
 from testCommon import *
@@ -42,6 +43,9 @@ from testConfiguration import *
 
 
 if __name__ == '__main__':
+    # Set paths
+    conf.root = os.path.dirname(os.path.realpath(__file__+"/.."))
+    
     suite = unittest.TestSuite()
 
     suite.addTest(unittest.makeSuite(testCommon))
