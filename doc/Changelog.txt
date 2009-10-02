@@ -1,10 +1,14 @@
 hostmap-0.1.1
-    
+
+    * Added wildcard domains detection.
+    * Added wildcard X.509 certificate detection.
+    * Added -d option to use a user supplied list of DNS servers    
     * Added blacklist for second level TLD (for example co.uk) detection.
     * Fixed the Microsoft Live enumeration plugin to use Microsoft Bing.
     * Added an enumeration plugin to use Microsoft Bing via API. API key must be provided in configuration file.
     * Added a configuration file (hostmap.conf) to keep user settings.
     * Added option --http-ports to specify the ports to check for an HTTP/HTTPS service.
+    * Fixed "too many open files" bug when opening dictionary files.
     * Some code refactoring.
     
 hostmap-0.1
