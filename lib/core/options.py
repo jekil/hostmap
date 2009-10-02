@@ -23,8 +23,6 @@ You should have received a copy of the GNU General Public License
 along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-
-import os
 import sys
 from optparse import OptionParser
 from optparse import OptionError
@@ -40,19 +38,6 @@ Parse command line
 @author: Alessandro Tanasi 
 @contact: alessandro@tanasi.it
 """
-
-
-def initialize():
-    """
-    Initialize hostmap configaration
-    """
-    
-    # Load paths, even if in py2exe
-    # Reference: http://www.py2exe.org/index.cgi/WhereAmI
-    if hasattr(sys, "frozen"):
-        conf.root = os.path.dirname(unicode(sys.executable, sys.getfilesystemencoding()))
-    else:
-        conf.root = os.path.dirname(os.path.realpath(__file__))
     
     
 def parseArgs():

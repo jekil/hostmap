@@ -23,13 +23,15 @@ You should have received a copy of the GNU General Public License
 along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-
+import os
+import sys
 import traceback
 from lib.settings import VERSION, CODENAME
 from lib.core.hmException import *
 import lib.core.options as options
 import lib.core.dependences as deps
 from lib.core.controllers.engineController import Engine
+from lib.core.configuration import conf
 
 
 class HostMap:
@@ -49,8 +51,14 @@ class HostMap:
         # Show banner, credits and stuff
         self.credits()
         
+        # Load paths, even if in py2exe
+        # Reference: http://www.py2exe.org/index.cgi/WhereAmI
+        if hasattr(sys, "frozen"):
+            conf.root = os.path.dirname(unicode(sys.executable, sys.getfilesystemencoding()))
+        else:
+            conf.root = os.path.dirname(os.path.realpath(__file__))
+        
         try:       
-            options.initialize()
             
             # Parse command line
             options.parseArgs()
