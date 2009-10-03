@@ -34,7 +34,7 @@ from lib.core.configuration import conf
 
 # Importing tests
 from testCommon import *
-from testOptionParser import *
+from testOptions import *
 from testIntel import *
 from testSupadict import *
 from testJobController import *
