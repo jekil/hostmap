@@ -24,10 +24,10 @@ along with hostmap.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-
+import os
 import sys
 import xmlrunner
-sys.path.append("../")
+sys.path.append("..")
 
 import unittest
 from lib.core.configuration import conf
