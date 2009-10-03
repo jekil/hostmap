@@ -49,7 +49,7 @@ if __name__ == '__main__':
     suite = unittest.TestSuite()
 
     suite.addTest(unittest.makeSuite(testCommon))
-    suite.addTest(unittest.makeSuite(testOptionParser))
+    suite.addTest(unittest.makeSuite(testOptions))
     suite.addTest(unittest.makeSuite(testIntel))
     suite.addTest(unittest.makeSuite(testSupadict))
     suite.addTest(unittest.makeSuite(testJobController))

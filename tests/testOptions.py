@@ -29,12 +29,12 @@ import sys
 sys.path.append("../")
 
 import unittest
-from lib.core.optionParser import *
+from lib.core.options import *
 from lib.core.hmException import *
 
 
 
-class testOptionParser(unittest.TestCase):
+class testOptions(unittest.TestCase):
     """
     Tests the option parser
     @license: GNU Public License version 3
