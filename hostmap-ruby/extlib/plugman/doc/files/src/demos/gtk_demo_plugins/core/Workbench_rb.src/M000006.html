@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>update (src/demos/gtk_demo_plugins/core/Workbench.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/demos/gtk_demo_plugins/core/Workbench.rb, line 67</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">state</span>, <span class="ruby-identifier">plugin</span>)
+    <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@notebook</span>.<span class="ruby-identifier">destroyed?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">requires</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">:workbench</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">extends</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">extends</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>)))
+
+      <span class="ruby-comment cmt"># remove any trace of the plugin from the workbench</span>
+      <span class="ruby-identifier">page_num</span> = <span class="ruby-ivar">@notebook</span>.<span class="ruby-identifier">page_num</span>(<span class="ruby-ivar">@plug_ui</span>[<span class="ruby-identifier">plugin</span>])
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">page_num</span> <span class="ruby-operator">!=</span> <span class="ruby-value">-1</span>
+        <span class="ruby-ivar">@notebook</span>.<span class="ruby-identifier">remove_page</span>(<span class="ruby-identifier">page_num</span>)
+        <span class="ruby-ivar">@plug_ui</span>[<span class="ruby-identifier">plugin</span>] = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;Workbench update event thrown, state #{state.inspect} for plugin #{plugin.name.to_s}&quot;</span> }
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">state</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:started</span>
+        <span class="ruby-identifier">ui</span> = <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">get_ui</span>
+        <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">add_observer</span>(<span class="ruby-keyword kw">self</span>)
+        <span class="ruby-ivar">@notebook</span>.<span class="ruby-identifier">append_page</span>(<span class="ruby-identifier">ui</span>, <span class="ruby-identifier">make_tab_widget</span>(<span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:ui_label</span>], <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:ui_image</span>]))
+        <span class="ruby-ivar">@plug_ui</span>[<span class="ruby-identifier">plugin</span>] = <span class="ruby-identifier">ui</span>
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">state</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:stopped</span>
+        <span class="ruby-comment cmt"># already removed UI from workbench...</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">error_label</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Bad state #{state.inspect} for plugin #{plugin.name.inspect}.&quot;</span>)
+        <span class="ruby-ivar">@plug_ui</span>[<span class="ruby-identifier">plugin</span>] = <span class="ruby-identifier">error_label</span>
+        <span class="ruby-ivar">@notebook</span>.<span class="ruby-identifier">append_page</span>(<span class="ruby-identifier">ui</span>, <span class="ruby-identifier">make_tab_widget</span>(<span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:ui_label</span>], <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:ui_image</span>]))
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@notebook</span>.<span class="ruby-identifier">show_all</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

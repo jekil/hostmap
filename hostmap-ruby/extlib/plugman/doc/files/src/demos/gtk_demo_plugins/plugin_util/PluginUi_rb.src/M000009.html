@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>display (src/demos/gtk_demo_plugins/plugin_util/PluginUi.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/demos/gtk_demo_plugins/plugin_util/PluginUi.rb, line 25</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">display</span>()    
+    <span class="ruby-identifier">data</span> = <span class="ruby-identifier">get_data</span>()
+    <span class="ruby-ivar">@box</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">child</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@box</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">child</span>)  <span class="ruby-comment cmt"># empty the box</span>
+    <span class="ruby-keyword kw">end</span>
+        
+    <span class="ruby-ivar">@table</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>.<span class="ruby-identifier">size</span>, <span class="ruby-value">7</span>, <span class="ruby-keyword kw">false</span>)
+    
+    <span class="ruby-comment cmt"># display a heading row</span>
+    <span class="ruby-identifier">ii</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">label</span> = <span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;&lt;b&gt;Name&lt;/b&gt;&quot;</span>)
+    <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">label</span>, <span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+    <span class="ruby-identifier">label</span> = <span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;&lt;b&gt;Version&lt;/b&gt;&quot;</span>)
+    <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">label</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+    <span class="ruby-identifier">label</span> = <span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;&lt;b&gt;State&lt;/b&gt;&quot;</span>)
+    <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">label</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+    <span class="ruby-identifier">label</span> = <span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;&lt;b&gt;Requires&lt;/b&gt;&quot;</span>)
+    <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">label</span>, <span class="ruby-value">4</span>, <span class="ruby-value">5</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+    <span class="ruby-identifier">label</span> = <span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;&lt;b&gt;Extension Points(Connected Plugins)&lt;/b&gt;&quot;</span>)
+    <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">label</span>, <span class="ruby-value">5</span>, <span class="ruby-value">6</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+
+    <span class="ruby-comment cmt"># now the data for each plugin</span>
+    <span class="ruby-identifier">ii</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">label</span> = <span class="ruby-identifier">make_label</span>(<span class="ruby-identifier">item</span>[<span class="ruby-identifier">:name</span>])
+      <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">label</span>, <span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+      <span class="ruby-identifier">label</span> = <span class="ruby-identifier">make_label</span>(<span class="ruby-identifier">item</span>[<span class="ruby-identifier">:version</span>])
+      <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">label</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+      
+      <span class="ruby-comment cmt"># Show the state, with a toggle for stopping/starting plugins</span>
+      <span class="ruby-comment cmt">#label = make_label(item[:state].to_s)</span>
+      <span class="ruby-comment cmt">#@table.attach(label, 2, 3, ii, ii+1)</span>
+      
+      <span class="ruby-identifier">image</span> = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">item</span>[<span class="ruby-identifier">:state</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:started</span>
+        <span class="ruby-identifier">image</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{dirname}/images/plugin.png&quot;</span>)
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">item</span>[<span class="ruby-identifier">:state</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:stopped</span>
+        <span class="ruby-identifier">image</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{dirname}/images/plugin_disabled.png&quot;</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">image</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{dirname}/images/plugin_error.png&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">image</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+
+      
+      <span class="ruby-identifier">check</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">CheckButton</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">check</span>.<span class="ruby-identifier">active</span> = <span class="ruby-identifier">item</span>[<span class="ruby-identifier">:state</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:started</span>
+      <span class="ruby-identifier">check</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-value str">&quot;toggled&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">check</span>.<span class="ruby-identifier">active?</span>
+            <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;User wants to start plugin #{item[:name].to_sym.inspect}&quot;</span> }
+            <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">start_plugin</span>(<span class="ruby-identifier">item</span>[<span class="ruby-identifier">:name</span>].<span class="ruby-identifier">to_sym</span>)
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;User wants to stop plugin #{item[:name].to_sym.inspect}&quot;</span> }
+            <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">stop_plugin</span>(<span class="ruby-identifier">item</span>[<span class="ruby-identifier">:name</span>].<span class="ruby-identifier">to_sym</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">PluginError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+          <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">error</span> { <span class="ruby-node">&quot;Plugin error occured for plugin #{item[:name].to_s}, type: #{err.error_type}.&quot;</span> }
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">display</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">check</span>, <span class="ruby-value">3</span>, <span class="ruby-value">4</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+      
+      <span class="ruby-identifier">label</span> = <span class="ruby-identifier">make_label</span>(<span class="ruby-identifier">item</span>[<span class="ruby-identifier">:requires</span>].<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;, &quot;</span>))
+      <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">label</span>, <span class="ruby-value">4</span>, <span class="ruby-value">5</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+
+      <span class="ruby-identifier">txt</span> = []
+      <span class="ruby-identifier">item</span>[<span class="ruby-identifier">:extension_points</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">txt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">ext</span>[<span class="ruby-identifier">:name</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ext</span>[<span class="ruby-identifier">:connections</span>].<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;, &quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">label</span> = <span class="ruby-identifier">make_label</span>(<span class="ruby-identifier">txt</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;, &quot;</span>))
+      <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">label</span>, <span class="ruby-value">5</span>, <span class="ruby-value">6</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+      
+      <span class="ruby-identifier">ii</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-ivar">@box</span>.<span class="ruby-identifier">pack_start</span>(<span class="ruby-ivar">@table</span>, <span class="ruby-keyword kw">true</span>, <span class="ruby-keyword kw">true</span>, <span class="ruby-value">0</span>)
+    <span class="ruby-ivar">@box</span>.<span class="ruby-identifier">show_all</span>
+    <span class="ruby-ivar">@box</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>data (src/demos/gtk_demo_plugins/plugin_util/PluginData.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/demos/gtk_demo_plugins/plugin_util/PluginData.rb, line 9</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">data</span>()
+    <span class="ruby-identifier">ret</span> = []
+    
+    <span class="ruby-comment cmt"># loop all the plugins and find info about them</span>
+    <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">registered_plugins</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">item</span> = { 
+        <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>,
+        <span class="ruby-identifier">:version</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">version</span>,
+        <span class="ruby-identifier">:state</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">state</span>,
+        <span class="ruby-identifier">:extension_points</span> =<span class="ruby-operator">&gt;</span> [],
+        <span class="ruby-identifier">:requires</span> =<span class="ruby-operator">&gt;</span> [] <span class="ruby-operator">+</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">requires</span>.<span class="ruby-identifier">flatten</span>
+      }
+      
+      <span class="ruby-comment cmt"># add the extensions offered by the plugin to the :requires list</span>
+      <span class="ruby-identifier">item</span>[<span class="ruby-identifier">:requires</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">extends</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">nm</span>, <span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
+        <span class="ruby-node">&quot;#{nm.to_s}(#{ext.join(', ')})&quot;</span>
+      <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">extends</span>
+      
+      <span class="ruby-comment cmt"># loop the plugin's extension points and find out what other plugins are</span>
+      <span class="ruby-comment cmt"># connected</span>
+      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">extension_points</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">extpt</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">conn</span> = []
+        <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">extensions</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">extpt</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pl</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">conn</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">pl</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment cmt">#if extpt == pl.extends</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">item</span>[<span class="ruby-identifier">:extension_points</span>] <span class="ruby-operator">&lt;&lt;</span> {
+          <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">extpt</span>.<span class="ruby-identifier">to_s</span>,
+          <span class="ruby-identifier">:connections</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">conn</span>
+        }
+      <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">extension_points</span> 
+      <span class="ruby-identifier">ret</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">item</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">ret</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>app_start (src/demos/gtk_demo_plugins/core/Workbench.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/demos/gtk_demo_plugins/core/Workbench.rb, line 19</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">app_start</span>()
+    <span class="ruby-identifier">construct_workbench</span>
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-value str">&quot;Adding workbench plugin as observer to plugman&quot;</span> }
+    <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">add_observer</span>(<span class="ruby-keyword kw">self</span>)
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-value str">&quot;Starting GUI.&quot;</span> }
+    <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">main</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

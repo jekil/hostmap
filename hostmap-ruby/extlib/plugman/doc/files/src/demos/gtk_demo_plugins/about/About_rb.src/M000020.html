@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>display (src/demos/gtk_demo_plugins/about/About.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/demos/gtk_demo_plugins/about/About.rb, line 14</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">display</span>()
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-value str">&quot;About displaying&quot;</span> }
+    <span class="ruby-identifier">box</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">HBox</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">label</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">label</span>.<span class="ruby-identifier">set_markup</span>(<span class="ruby-node">&quot;\n\n\n&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;b&gt;PlugMan v. #{PlugMan::PLUGMAN_VERSION}&lt;/b&gt;&lt;/big&gt;&lt;/big&gt;\n\n\nProject home: http://rubyforge.org/projects/plugman/&lt;/big&gt;\n\n\n\n\n\n\n\n\n\n\nIcons from http://www.famfamfam.com/lab/icons/silk/&quot;</span>)
+    <span class="ruby-identifier">label</span>.<span class="ruby-identifier">set_justify</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">JUSTIFY_CENTER</span>)
+    <span class="ruby-identifier">box</span>.<span class="ruby-identifier">pack_start</span>(<span class="ruby-identifier">label</span>, <span class="ruby-keyword kw">true</span>, <span class="ruby-keyword kw">true</span>, <span class="ruby-value">0</span>)
+    
+    <span class="ruby-identifier">box</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

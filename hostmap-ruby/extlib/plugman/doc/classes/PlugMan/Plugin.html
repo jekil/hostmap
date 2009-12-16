@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: PlugMan::Plugin</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">PlugMan::Plugin</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/src/PlugMan_rb.html">
+                src/PlugMan.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+A class to hold a plugin&#8216;s definition. Objects of this type should
+only be created using <a href="../PlugMan.html#M000033">PlugMan.define</a>.
+</p>
+<p>
+In fact, dealing directly with this class shouldn&#8216;t happen much at
+all and most dealins with the plugin framework will be through the <a
+href="../PlugMan.html">PlugMan</a> class and the plugins themselves.
+</p>
+<p>
+Each plugin has the following fields that are useful to programmers using
+the plugin framework in figuring out how plugins interact with eachother:
+</p>
+<pre>
+ * name - plugin name, set automagically by PlugMan.define param, will be a symbol.
+ * author - plugin author.
+ * version - plugin version.  Only latest version of a plugin can be active. &quot;1.2.3&quot;
+ * extends - extension points this plugin extends { :parent_plug =&gt; [:extpt1, :extpt2], parent_plug2 =&gt; [:extpt3] }
+ * requires - the plugin that contains the extension point this plugin extends
+ * extension_points - extension points defined by this plugin [:ext_a:, :ext_b]
+ * params - parameters to pass to the parent plugin { :param1 =&gt; &quot;abc&quot;, :param2 =&gt; 123 }
+ * state - :started, :stopped, :error
+</pre>
+<p>
+These can be set using methods magically provided by the PluginMeta module.
+e.g. to get the author, use (no arguments):
+</p>
+<pre>
+  Plugin.author
+</pre>
+<p>
+and to set the author, use (single argument):
+</p>
+<pre>
+  Plugin.author &quot;A. Uthor&quot;
+</pre>
+<p>
+An example of how trivial a plugin definition is is shown below, a
+make-believe preferences plugin for a GUI app is being defined (this should
+be in a file ./plugins/some_subdir/preferences.rb):
+</p>
+<pre>
+  PlugMan.define :preferences do
+
+    # define plugin metadata
+    author &quot;Aaron&quot;
+    version &quot;1.0.0&quot;
+    extends(:menu_bar =&gt; [:menu_item], :tool_bar =&gt; [:tool_item])
+    requires [:widget_factory]
+    extension_points [:preference_item, :preferences_open, :preferences_close]
+    params(:menu_tree =&gt; &quot;View&quot;, :menu_text =&gt; &quot;Preferences&quot;,
+      :tool_tip =&gt; &quot;Shows the preferences dialog.&quot;)
+
+    def do_menu_action
+      do_action
+    end
+
+    def do_tool_action
+      do_action
+    end
+
+    def do_action
+      ...
+    end
+  end
+</pre>
+<p>
+In the above example, the plugin will be discovered by the menu_bar and
+tool_bar plugins because this plugin is defined as extending those plugins
+at their extension points. It should be noted that the plugins being
+extended define the interface for each of those extension points (this is a
+soft contract and is not enforced in the plugin architecture.)
+</p>
+<p>
+This plugin also requires the widget_factory plugin, but it won&#8216;t be
+discovered by widget_factory in the same manner as the extensions. A
+&quot;requires&quot; plugin is a definite and known plugin that is required
+for this plugin to perform its tasks. In this case, the preferences plugin
+is relying on a service of the widget_factory plugin (presumably for
+obtaining widgets!) widget_factory can exist happily without the
+preferences plugin, but preferences will not work if widget_factory is not
+available.
+</p>
+<p>
+The preferences plugin also defines some extension points that other
+plugins can use. At runtime, the preferences plugin asks <a
+href="../PlugMan.html">PlugMan</a> for all the plugins that extend its
+extension points and invokes a contract method on each. This preferences
+plugin does not know anything about the connected plugins other than they
+implement a particular method. By having this extension point mechanism,
+the application can define various specialty preference plugins that suit
+particular needs in the system. e.g. a <a
+href="Plugin.html#M000042">new</a> product feature, implemented as plugins,
+may be an FTP client and this client will make use of the extension points
+defined in the preferences plugin to make use of the applications
+preferences interface.
+</p>
+<p>
+Parameters can also be passed from a plugin to its parent. The preferences
+plugin tells its parents application information about the plugin (i.e. not
+plugin metadata) that may be useful. Once again this is a soft contract and
+it is the responsibility of the plugin author to document the parameters
+required for extensions to define.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000047">define_meta_field</a>&nbsp;&nbsp;
+      <a href="#M000046">dirname</a>&nbsp;&nbsp;
+      <a href="#M000043">new</a>&nbsp;&nbsp;
+      <a href="#M000042">new</a>&nbsp;&nbsp;
+      <a href="#M000044">start</a>&nbsp;&nbsp;
+      <a href="#M000045">stop</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">state</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The state of the plugin. Values can be :started:, :stopped, :error
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+          <a href="Plugin.src/M000047.html" target="Code" class="method-signature"
+            onclick="popupCode('Plugin.src/M000047.html');return false;">
+          <span class="method-name">define_meta_field</span><span class="method-args">(*fields)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allow plugins to specify metadata fields w/ magic
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="Plugin.src/M000043.html" target="Code" class="method-signature"
+            onclick="popupCode('Plugin.src/M000043.html');return false;">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+          <a href="Plugin.src/M000042.html" target="Code" class="method-signature"
+            onclick="popupCode('Plugin.src/M000042.html');return false;">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Should not be called directly, use <a
+href="../PlugMan.html#M000033">PlugMan.define</a> instead.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
+
+        <div class="method-heading">
+          <a href="Plugin.src/M000046.html" target="Code" class="method-signature"
+            onclick="popupCode('Plugin.src/M000046.html');return false;">
+          <span class="method-name">dirname</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The base dir name that the plugin was loaded from
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="Plugin.src/M000044.html" target="Code" class="method-signature"
+            onclick="popupCode('Plugin.src/M000044.html');return false;">
+          <span class="method-name">obj.start            &rarr; boolean<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Plugin.html#M000044">start</a> the plugin. If a plugin needs to
+perform some specialised startup processing, it should override this
+method.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000045" class="method-detail">
+        <a name="M000045"></a>
+
+        <div class="method-heading">
+          <a href="Plugin.src/M000045.html" target="Code" class="method-signature"
+            onclick="popupCode('Plugin.src/M000045.html');return false;">
+          <span class="method-name">obj.stop            &rarr; boolean<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Plugin.html#M000045">stop</a> the plugin. If a plugin needs to
+perform some specialised <a href="Plugin.html#M000045">stop</a> processing,
+it should override this method.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

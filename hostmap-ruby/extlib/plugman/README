@@ -1,0 +1,33 @@
+=PlugMan: A simple but powerful Ruby plugin framework.
+
+ Author: Aaron P (mailto:ruby.plugman@gmail.com)
+ Copyright: Copyright (c)2008 Aaron P
+ License: Distributed under the same terms as Ruby.
+
+PlugMan is a simple and effective plugin framework for building dynamic and extensible Ruby applications. If you need plugins/addons/extensions in your application, PlugMan is for you. PlugMan also includes demos to make learning PlugMan very easy. 
+
+== Requirements
+Ruby!  That's all.  All the files that comprise PlugMan are in the ./src dir (yes, just those two .rb files.)  
+
+In ./src/demos are a couple of demo programmes to show PlugMan in action.  They aren't necessary for PlugMan actual (so you can safely delete them if you don't need a leg-up!)  To run them, from the ./src dir, execute 'ruby ./demos/GtkDemo.rb' or 'ruby ./demos/Texter.rb' Alternatively, the rake targets "gtk_demo" and "text_demo" can be used.
+
+The GtkDemo makes use of a few *nix type utilities such as df and fortune.  It also requires the libgtk2-ruby libraries to be available. The Texter demo is a console application that does not have any external dependencies; it still demonstrates the plugin dependency and extension point processing of PlugMan.
+
+== TODO:
+ - Gem
+ - More tests
+ - More doco
+ - File headers
+ - Namespace
+ - Hardening for real-world use cases (it works find for my needs, perhaps other developers will use it differently, causing breakages.)
+
+Future?  Handling cyclic plugin dependencies.  Perhaps a plugin query language to make finding plugins more powerful.
+
+== Version History
+
+0.0.1,  29-Feb-2008
+    - First release, a functional and easy to use plugin architecture that supports plugin dependencies and extension points.
+
+0.0.2,  04-Mar-2008
+    - Removed PluginMeta.rb and incorporated it into Plugin.rb. Fixed some doco. Added a Rakefile.
+
