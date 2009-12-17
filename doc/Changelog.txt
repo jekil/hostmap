@@ -1,3 +1,6 @@
+hostmap-0.2.1
+    * Fixed handling of Errno::ECONNRESET in SSL certificate plugin.
+
 hostmap-0.2
     * Fully refactored and rewritten in Ruby.
     * Removed whois.webhosting.info check due to captcha authentication.

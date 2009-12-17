@@ -62,6 +62,7 @@ PlugMan.define :sslcertbyaddress do
       rescue OpenSSL::SSL::SSLError
       rescue Errno::ETIMEDOUT
       rescue Errno::ECONNREFUSED
+      rescue Errno::ECONNRESET
         next
       end
      
