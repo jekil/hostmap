@@ -3,11 +3,9 @@ require 'rake/rdoctask'
 
 
 Rake::TestTask.new('test') do |t|
-
   t.pattern = 'lib/**/*test.rb'
   t.warning = true
 end
-
 
 Rake::RDocTask.new('rdoc') do |t|
   t.rdoc_dir = 'doc/api'
