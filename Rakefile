@@ -1,8 +1,10 @@
 require 'rake/testtask'
 require 'rake/rdoctask'
 
+
 Rake::TestTask.new('test') do |t|
-  t.pattern = '**/*test.rb'
+
+  t.pattern = 'lib/**/*test.rb'
   t.warning = true
 end
 
