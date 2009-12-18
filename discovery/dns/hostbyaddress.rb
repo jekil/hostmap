@@ -1,4 +1,6 @@
 require 'net/dns/resolver'
+require 'net/dns/packet'
+require 'net/dns/rr'
 require 'set'
 
 #
