@@ -4,7 +4,7 @@
 base = __FILE__
 $:.unshift(File.join(File.expand_path(File.dirname(base)), 'lib'))
 $:.unshift(File.join(File.expand_path(File.dirname(base)), 'extlib'))
-$:.unshift(File.join(File.expand_path(File.dirname(base)), 'extlib/net-dns-0.4/lib'))
+$:.unshift(File.join(File.expand_path(File.dirname(base)), 'extlib/net-dns/lib'))
 
 require 'core'
 require 'ui/cli/console'
