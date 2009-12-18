@@ -27,6 +27,6 @@ module HostMap
   HOSTLISTFULL = 'hostnames-full.txt'
   DICTFULL = DICTDIR + File::SEPARATOR + HOSTLISTFULL
   LIBDIR = ROOT + File::SEPARATOR + 'lib'
-  TLDFILE = LIBDIR + File::SEPARATOR + 'tld.txt'
+  MTLDFILE = LIBDIR + File::SEPARATOR + 'mtld.txt'
                       
 end

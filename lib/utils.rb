@@ -10,12 +10,12 @@ module HostMap
     #
     def self.parse_domain(fqdn)
       # Load in cache TLD list
-      if $TLD.nil?
-        $TLD = File.open(HostMap::TLDFILE, "r").read
+      if $TMLD.nil?
+        $MTLD = File.open(HostMap::MTLDFILE, "r").read
       end
 
       # Check if it's a particular TLD
-      $TLD.each("\n") do |tld|
+      $MTLD.each("\n") do |tld|
         # Skip comments
         if fqdn =~ /^#/
           next
