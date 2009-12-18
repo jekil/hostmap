@@ -10,7 +10,7 @@ module HostMap
     #
     def self.parse_domain(fqdn)
       # Load in cache TLD list
-      if $TMLD.nil?
+      if $MTLD.nil?
         $MTLD = File.open(HostMap::MTLDFILE, "r").read
       end
 
@@ -53,6 +53,31 @@ module HostMap
       else 
         return fqdn
       end
+    end
+
+    #
+    # Exclude a TLD from a fqdn
+    #
+    def self.exclude_tld(fqdn)
+      # Load in cache TLD list
+      if $MTLD.nil?
+        $MTLD = File.open(HostMap::MTLDFILE, "r").read
+      end
+
+      # Check if it's a particular TLD
+      $MTLD.each("\n") do |tld|
+        # Skip comments
+        if fqdn =~ /^#/
+          next
+        end
+        
+        if fqdn =~ /#{tld.chomp}$/
+          return fqdn.gsub(/\.#{tld.chomp}$/,'')
+        end
+      end
+      foo = fqdn.split('.')
+      foo.pop
+      return foo.join('.')
     end
   end
 end

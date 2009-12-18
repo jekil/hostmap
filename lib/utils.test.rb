@@ -31,6 +31,13 @@ module HostMap
         assert_raise(RuntimeError) {Utils.sanitize_fqdn("192.168.1.111")}
         assert_raise(RuntimeError) {Utils.sanitize_fqdn("1.1.1.1")}
       end
+
+      # Tests tld exclusion
+      def test_exclude_tld
+        assert_equal("a.a", Utils.exclude_tld("a.a.a"))
+        assert_equal("a", Utils.exclude_tld("a.a"))
+        assert_equal("a.a.a", Utils.exclude_tld("a.a.a.co.uk"))
+      end
     end
   end
 end
