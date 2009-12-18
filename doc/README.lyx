@@ -46,7 +46,7 @@ hostmap User Guide
 \end_layout
 
 \begin_layout Date
-release 0.2
+release 0.2.1
 \end_layout
 
 \begin_layout Author
@@ -84,7 +84,7 @@ status open
 
 \begin_layout Plain Layout
 
-http://hostmap.sourceforge.net
+http://hostmap.lonerunners.net
 \end_layout
 
 \end_inset
@@ -120,7 +120,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-This is the official user guide for version 0.2 of the hostmap host name
+This is the official user guide for version 0.2.1 of the hostmap host name
  discovery tool.
  This guide is designed to explain what hostmap is, how it works, and what
  you can do with it.
@@ -134,7 +134,7 @@ status open
 
 \begin_layout Plain Layout
 
-http://hostmap.sourceforge.net
+http://hostmap.lonerunners.net
 \end_layout
 
 \end_inset
@@ -253,7 +253,7 @@ status open
 
 \begin_layout Plain Layout
 
-http://hostmap.sourceforge.net
+http://hostmap.lonerunners.net
 \end_layout
 
 \end_inset
@@ -2101,7 +2101,7 @@ Any kind of feedback is very appreciated!
 If you have feature requests, ideas, bug reports or simply you want to give
  your feedback about hostmap write to alessandro@tanasi.it 
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
