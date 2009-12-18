@@ -31,7 +31,7 @@ PlugMan.define :tldexpansionbydomain do
       res = Net::DNS::Resolver.new
     end
     
-    # Load TLD  list
+    # Load TLD list
     if ! $TLD
       $TLD = File.open(HostMap::TLDFILE, "r").read
     end
