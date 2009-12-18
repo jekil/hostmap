@@ -23,6 +23,7 @@ module HostMap
       options = {}
       options['dnszonetransfer'] = false
       options['dnsbruteforce'] = true
+      options['dnsexpansion'] = true
       options['dnsbruteforcelevel'] = 'lite'
       options['paranoid'] = true
       return options
@@ -53,6 +54,10 @@ module HostMap
 
         opts.on("", "--without-bruteforce", "disable DNS bruteforcing") do
           options['dnsbruteforce'] = false
+        end
+        
+        opts.on("", "--without-dnsexpansion", "disable DNS TLD expansion") do
+          options['dnsexpansion'] = false
         end
 
         opts.on("", "--bruteforce-level [STRING]", "set bruteforce aggressivity, values are lite, custom or full (default is lite)") do |t|

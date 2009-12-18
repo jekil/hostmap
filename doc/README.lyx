@@ -1383,6 +1383,16 @@ Using a brute-forcing tries to guess an host name on the enumerated domain
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+DNS TLD expansion
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Use a brute forcing of top level domain part for already enumerated domain.
+\end_layout
+
+\end_deeper
 \begin_layout Subsubsection
 SSL/TLS Protocol enumeration techniques
 \end_layout
@@ -1929,6 +1939,22 @@ Disable the host name brute forcing check.
 \begin_layout Standard
 Disabling brute forcing you get a fastest scan but you can miss same results
  that are enumerated only with brute forcing.
+\end_layout
+
+\begin_layout Subsection
+Without DNS TLD expansion
+\end_layout
+
+\begin_layout Description
+Option: --without-dnsexpansion
+\end_layout
+
+\begin_layout Standard
+Disable the DNS TLD expansion check.
+\end_layout
+
+\begin_layout Standard
+Disabling his checkt you get a fastest scan but you can miss same results.
 \end_layout
 
 \begin_layout Subsection

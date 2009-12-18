@@ -2,6 +2,7 @@ hostmap-0.2.1
     * Fixed handling of Errno::ECONNRESET in SSL certificate plugin.
     * Upgraded net-dns to latest version from git repository.
     * Fixed traceback on Mac OSX due to net-dns bug.
+    * Added check to enumerate host names with DNS TLD expansion.
 
 hostmap-0.2
     * Fully refactored and rewritten in Ruby.
