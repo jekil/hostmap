@@ -7,7 +7,7 @@ require 'set'
 #
 PlugMan.define :bingbyaddress do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:ip] })
   requires []
   extension_points []
@@ -23,14 +23,14 @@ PlugMan.define :bingbyaddress do
 
     begin
       page = open("http://www.bing.com/search?q=ip:#{ip}").read
-    rescue OpenURI::HTTPError, Timeout::Error
+    rescue
       return hosts
     end
 
     page.scan(/<h3><a href=\"(.*?)\" /).each do |url|
       begin
         hosts << { :hostname => URI.parse(url.to_s).host }
-      rescue URI::InvalidURIError
+      rescue
         next
       end
     end

@@ -6,7 +6,7 @@ require 'set'
 #
 PlugMan.define :dnshistorybydomain do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -14,11 +14,13 @@ PlugMan.define :dnshistorybydomain do
 
   def run(domain, opts = {})
     hosts = Set.new
+
     begin
       page = open("http://dnshistory.org/browsedomains/#{domain}.").read
-    rescue OpenURI::HTTPError, Timeout::Error
+    rescue
       return hosts
     end
+    
     page.scan(/\.">(.*?)\.<\/a><br \/>/).each do |url|
       # NOTE: This check can enumerate ns, mx, cname, and other records, for the moment we report all as possible hostnames.
       hosts << { :hostname => url.to_s }

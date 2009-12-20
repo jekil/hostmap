@@ -7,7 +7,7 @@ require 'set'
 #
 PlugMan.define :bingapibyaddress do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:ip] })
   requires []
   extension_points []
@@ -33,9 +33,7 @@ PlugMan.define :bingapibyaddress do
             next
           end
         end
-      rescue NoMethodError
-        next
-      rescue OpenURI::HTTPError, Timeout::Error
+      rescue
         next
       end
     end

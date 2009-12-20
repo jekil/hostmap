@@ -8,7 +8,7 @@ require 'set'
 #
 PlugMan.define :mxbydomain do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -24,10 +24,14 @@ PlugMan.define :mxbydomain do
       res = Net::DNS::Resolver.new
     end
 
-    res.query(domain, Net::DNS::MX).answer.each do |rr|
-      if rr.class == Net::DNS::RR::MX
-        mx << { :mx => rr.exchange.gsub(/\.$/,'') }
+    begin
+      res.query(domain, Net::DNS::MX).answer.each do |rr|
+        if rr.class == Net::DNS::RR::MX
+          mx << { :mx => rr.exchange.gsub(/\.$/,'') }
+        end
       end
+    rescue
+      nil
     end
     
     return mx

@@ -6,7 +6,7 @@ require 'set'
 #
 PlugMan.define :robtexbyaddress do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:ip] })
   requires []
   extension_points []
@@ -17,7 +17,7 @@ PlugMan.define :robtexbyaddress do
 
     begin
       page = open("http://www.robtex.com/ip/#{ip}.html").read
-    rescue OpenURI::HTTPError, Timeout::Error
+    rescue
       return hosts
     end
 

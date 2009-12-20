@@ -80,10 +80,14 @@ module HostMap
             @queue.deq.each { |k,v|
               # Creating a thread, running the plugin inside
               job = Thread.new do
-                out = k.run(v, self.engine.opts)
-                # Reports the result
-                self.engine.host_discovery.report(out)
-                $LOG.debug "Plugin: #{k.name.inspect} Output: #{set2txt(out)}"
+                begin
+                  out = k.run(v, self.engine.opts)
+                  # Reports the result
+                  self.engine.host_discovery.report(out)
+                  $LOG.debug "Plugin: #{k.name.inspect} Output: #{set2txt(out)}"
+                rescue
+                  $LOG.debug "PLugin #{k.name.inspect} get a unhandled exception #{$!}"
+                end
               end
             @pool << job
             }

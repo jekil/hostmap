@@ -8,7 +8,7 @@ require 'set'
 #
 PlugMan.define :bruteforcebydomain do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -37,13 +37,17 @@ PlugMan.define :bruteforcebydomain do
     
     # False positives or wildcard domain preventive check with random query
     ["antani456", "t4p1occo", "evvivalafocaechilacosa"].each do |test|
-      res.query("#{test}.#{domain}").answer.each do |rr|
-        if rr.class == Net::DNS::RR::A
-          if rr.address==IPAddr.new(opts['target'])
-            $LOG.warn "Detected a wildward domain: #{domain}"
-            return hosts
+      begin
+        res.query("#{test}.#{domain}").answer.each do |rr|
+          if rr.class == Net::DNS::RR::A
+            if rr.address==IPAddr.new(opts['target'])
+              $LOG.warn "Detected a wildward domain: #{domain}"
+              return hosts
+            end
           end
         end
+      rescue
+        return hosts
       end
     end
     
@@ -75,13 +79,17 @@ PlugMan.define :bruteforcebydomain do
       # Resolve
       if counter < 10
         threads << Thread.new {
-          res.query("#{host}.#{domain}").answer.each do |rr|
-            # TODO: add this and report without check_host
-            if rr.class == Net::DNS::RR::A
-              if rr.address==IPAddr.new(opts['target'])
-                hosts << { :hostname => "#{host}.#{domain}" }
+          begin
+            res.query("#{host}.#{domain}").answer.each do |rr|
+              # TODO: add this and report without check_host
+              if rr.class == Net::DNS::RR::A
+                if rr.address==IPAddr.new(opts['target'])
+                  hosts << { :hostname => "#{host}.#{domain}" }
+                end
               end
             end
+          rescue
+            nil
           end
         }
         counter += 1

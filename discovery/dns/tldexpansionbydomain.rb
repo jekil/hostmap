@@ -64,10 +64,8 @@ PlugMan.define :tldexpansionbydomain do
                 end
               end
             end
-          rescue Net::DNS::Resolver::NoResponseError
-            nil
           rescue
-            $LOG.debug "PLugin #{__FILE__} get a unhandled exception #{$!}"
+            nil
           end
         }
         counter += 1

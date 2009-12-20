@@ -18,7 +18,7 @@ end
 #
 PlugMan.define :sslcertbyaddress do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:ip] })
   requires []
   extension_points []
@@ -59,10 +59,7 @@ PlugMan.define :sslcertbyaddress do
             end
           }
         end
-      rescue OpenSSL::SSL::SSLError
-      rescue Errno::ETIMEDOUT
-      rescue Errno::ECONNREFUSED
-      rescue Errno::ECONNRESET
+      rescue
         next
       end
      

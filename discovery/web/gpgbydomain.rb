@@ -6,7 +6,7 @@ require 'set'
 #
 PlugMan.define :gpgbydomain do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -14,11 +14,13 @@ PlugMan.define :gpgbydomain do
 
   def run(domain, opts = {})
     hosts = Set.new
+
     begin
       page = open("http://pgp.mit.edu:11371/pks/lookup?search=#{domain}&op=index").read
-    rescue OpenURI::HTTPError, Timeout::Error
+    rescue
       return hosts
     end
+
     page.scan(/&lt;.*@(.*?)&gt;<\/a>/).each do |url|
       hosts << { :hostname => url.to_s }
     end

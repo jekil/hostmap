@@ -9,7 +9,7 @@ require 'net/dns/rr'
 #
 PlugMan.define :axfrbydomain do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -35,8 +35,12 @@ PlugMan.define :axfrbydomain do
 
     # Get the name server for the domain
     res = Net::DNS::Resolver.new
-    res.query(domain, Net::DNS::NS).answer.each do |rr|
-      ns = rr.nsdname.gsub(/.$/, '')
+    begin
+      res.query(domain, Net::DNS::NS).answer.each do |rr|
+        ns = rr.nsdname.gsub(/.$/, '')
+      end
+    rescue
+      return hosts
     end
 
     return hosts if ns.nil?
@@ -63,7 +67,11 @@ PlugMan.define :axfrbydomain do
     @res.log_level = Net::DNS::ERROR
 
     # Perform transfer
-    zone = @res.axfr(domain)
+    begin
+      zone = @res.axfr(domain)
+    rescue
+      return hosts
+    end
 
     if (zone)
       $LOG.warn "Domain #{domain} server by name server #{ip} is vulnerable to zone transfer."

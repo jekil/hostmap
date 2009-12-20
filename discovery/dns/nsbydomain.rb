@@ -8,7 +8,7 @@ require 'set'
 #
 PlugMan.define :nsbydomain do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -24,10 +24,14 @@ PlugMan.define :nsbydomain do
       res = Net::DNS::Resolver.new
     end
 
-    res.query(domain, Net::DNS::NS).answer.each do |rr|
-      if rr.class == Net::DNS::RR::NS
-        ns << { :ns => rr.nsdname.gsub(/\.$/,'') }
+    begin
+      res.query(domain, Net::DNS::NS).answer.each do |rr|
+        if rr.class == Net::DNS::RR::NS
+          ns << { :ns => rr.nsdname.gsub(/\.$/,'') }
+        end
       end
+    rescue
+      nil
     end
 
     return ns

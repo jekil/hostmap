@@ -6,7 +6,7 @@ require 'set'
 #
 PlugMan.define :ruscertbyaddress do
   author "Alessandro Tanasi"
-  version "0.2.0"
+  version "0.2.1"
   extends({ :main => [:ip] })
   requires []
   extension_points []
@@ -17,7 +17,7 @@ PlugMan.define :ruscertbyaddress do
 
     begin
       page = open("http://www.bfk.de/bfk_dnslogger.html?query=#{ip}").read
-    rescue OpenURI::HTTPError, Timeout::Error
+    rescue
       return hosts
     end
 
