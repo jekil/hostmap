@@ -7,6 +7,7 @@ hostmap-0.2.1
     * Fixed the exception handling architecture, now unknown exceptions that can be raised on not supported system are handled.
     * Fixed traceback on FreeBSD due to raising of different exceptions.
     * Added Metasploit auxiliary module in extra folder.
+    * Added validation of -t option, if it isn't an IP address hostmap is stopped.
 
 hostmap-0.2
     * Fully refactored and rewritten in Ruby.
