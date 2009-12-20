@@ -1,6 +1,6 @@
 require 'thread'
 load 'core.rb' # NOTE: big fat note! Must use load, not require or you get a name error!
-load 'plugman/src/PlugMan.rb'
+require 'PlugMan'
 
 
 module HostMap
