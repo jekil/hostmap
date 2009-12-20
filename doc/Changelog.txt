@@ -6,6 +6,7 @@ hostmap-0.2.1
     * Added --print-maltego to get output in Maltego XML format.
     * Fixed the exception handling architecture, now unknown exceptions that can be raised on not supported system are handled.
     * Fixed traceback on FreeBSD due to raising of different exceptions.
+    * Added Metasploit auxiliary module in extra folder.
 
 hostmap-0.2
     * Fully refactored and rewritten in Ruby.
