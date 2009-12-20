@@ -13,18 +13,22 @@ PlugMan.define :ruscertbyaddress do
   params({ :description => "Check against RUS CERT-DB" })
 
   def run(ip, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     begin
       page = open("http://www.bfk.de/bfk_dnslogger.html?query=#{ip}").read
     rescue
-      return hosts
+      return @hosts
     end
 
     page.scan(/\">([\d\w\.-_]+)<\/a><\/tt><\/td><td><tt>/).each do |url|
-      hosts << { :hostname => url.to_s }
+      @hosts << { :hostname => url.to_s }
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

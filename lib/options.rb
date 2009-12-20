@@ -26,6 +26,7 @@ module HostMap
       options['dnsexpansion'] = true
       options['dnsbruteforcelevel'] = 'lite'
       options['paranoid'] = true
+      options['timeout'] = 600
       return options
     end
 
@@ -74,6 +75,10 @@ module HostMap
 
         opts.on("", "--only-passive", "passive discovery, don't make network activity to the target network") do
           options['onlypassive'] = true
+        end
+
+        opts.on('', "--timeout [STRING]", "set plugin timeout") do |t|
+          options['timeout'] = t
         end
 
         opts.separator ""

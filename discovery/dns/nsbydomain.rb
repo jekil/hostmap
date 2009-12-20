@@ -15,7 +15,7 @@ PlugMan.define :nsbydomain do
   params({ :description => "Return name servers for a domain." })
 
   def run(domain, opts = {})
-    ns = Set.new
+    @ns = Set.new
 
     if opts['dns']
       dns = opts['dns'].gsub(/\s/, '').split(',')
@@ -30,13 +30,17 @@ PlugMan.define :nsbydomain do
     begin
       res.query(domain, Net::DNS::NS).answer.each do |rr|
         if rr.class == Net::DNS::RR::NS
-          ns << { :ns => rr.nsdname.gsub(/\.$/,'') }
+          @ns << { :ns => rr.nsdname.gsub(/\.$/,'') }
         end
       end
     rescue
       nil
     end
 
+    return @ns
+  end
+
+  def timeout
     return ns
   end
 end

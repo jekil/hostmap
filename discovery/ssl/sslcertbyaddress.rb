@@ -25,12 +25,12 @@ PlugMan.define :sslcertbyaddress do
   params({ :description => "Check the X.509 certificate from the web server." })
 
   def run(ip, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     # Configuration check
     if opts['onlypassive']
       $LOG.warn "Skipping SSL because only passive checks are enabled"
-      return hosts
+      return @hosts
     end
 
     opts['httpports'].split(',').each do |port|
@@ -69,11 +69,15 @@ PlugMan.define :sslcertbyaddress do
           $LOG.warn "Detected a wildcard entry in X.509 certificate for: #{cn}"
           next
         else
-          hosts << { :hostname => cn } if !cn.nil?
+          @hosts << { :hostname => cn } if !cn.nil?
         end
       end
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

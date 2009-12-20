@@ -13,20 +13,24 @@ PlugMan.define :tomsdnsbyaddress do
   params({ :description => "Check against tomsdns" })
 
   def run(ip, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     begin
       page = open("http://www.tomdns.net/get_hostonip.php?target=#{ip}").read
     rescue
-      return hosts
+      return @hosts
     end
     
     page.scan(/-->([\d\w\.-_\r\n]+)</).each do |urls|
       urls.to_s.split("\n").each do |url|
-        hosts << { :hostname => url.to_s }
+        @hosts << { :hostname => url.to_s }
       end
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

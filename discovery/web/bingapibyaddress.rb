@@ -14,11 +14,11 @@ PlugMan.define :bingapibyaddress do
   params({ :description => "Check against Bing using API" })
 
   def run(ip, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     # Skip check if without API key
     if !opts['bingApiKey']
-      return hosts
+      return @hosts
     end
 
     # Go!
@@ -28,7 +28,7 @@ PlugMan.define :bingapibyaddress do
       begin
         page.scan(/<web:Url>(.*?)<\/web:Url>/).each do |url|
           begin
-            hosts << { :hostname => URI.parse(url.to_s).host }
+            @hosts << { :hostname => URI.parse(url.to_s).host }
           rescue URI::InvalidURIError
             next
           end
@@ -38,6 +38,10 @@ PlugMan.define :bingapibyaddress do
       end
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

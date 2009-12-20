@@ -15,16 +15,16 @@ PlugMan.define :bruteforcebydomain do
   params({ :description => "Check with DNS brute forcing." })
 
   def run(domain, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     # Configuration check
     if ! opts['dnsbruteforce']
       $LOG.warn "Skipping DNS bruteforce because it is disabled from command line"
-      return hosts
+      return @hosts
     end
     if opts['onlypassive']
       $LOG.warn "Skipping DNS bruteforce because it is enabled only passive checks"
-      return hosts
+      return @hosts
     end
 
     # Initialization
@@ -45,12 +45,12 @@ PlugMan.define :bruteforcebydomain do
           if rr.class == Net::DNS::RR::A
             if rr.address==IPAddr.new(opts['target'])
               $LOG.warn "Detected a wildward domain: #{domain}"
-              return hosts
+              return @hosts
             end
           end
         end
       rescue
-        return hosts
+        return @hosts
       end
     end
     
@@ -87,7 +87,7 @@ PlugMan.define :bruteforcebydomain do
               # TODO: add this and report without check_host
               if rr.class == Net::DNS::RR::A
                 if rr.address==IPAddr.new(opts['target'])
-                  hosts << { :hostname => "#{host}.#{domain}" }
+                  @hosts << { :hostname => "#{host}.#{domain}" }
                 end
               end
             end
@@ -104,6 +104,10 @@ PlugMan.define :bruteforcebydomain do
     end
 
     threads.delete_if {|thr| not thr.alive?} while not threads.empty?
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

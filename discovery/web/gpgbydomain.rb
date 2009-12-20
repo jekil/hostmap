@@ -13,18 +13,22 @@ PlugMan.define :gpgbydomain do
   params({ :description => "Check against GPG keyserver" })
 
   def run(domain, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     begin
       page = open("http://pgp.mit.edu:11371/pks/lookup?search=#{domain}&op=index").read
     rescue
-      return hosts
+      return @hosts
     end
 
     page.scan(/&lt;.*@(.*?)&gt;<\/a>/).each do |url|
-      hosts << { :hostname => url.to_s }
+      @hosts << { :hostname => url.to_s }
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

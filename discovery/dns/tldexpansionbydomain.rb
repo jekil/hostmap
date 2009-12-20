@@ -15,12 +15,12 @@ PlugMan.define :tldexpansionbydomain do
   params({ :description => "Check with DNS TLD expansion." })
 
   def run(domain, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     # Configuration check
     if ! opts['dnsexpansion']
       $LOG.warn "Skipping DNS TLD expansion because it is disabled from command line"
-      return hosts
+      return @hosts
     end
 
     # Initialization
@@ -63,7 +63,7 @@ PlugMan.define :tldexpansionbydomain do
               # TODO: add this and report without check_host
               if rr.class == Net::DNS::RR::A
                 if rr.address==IPAddr.new(opts['target'])
-                  hosts << { :domain => "#{domain}.#{tld}" }
+                  @hosts << { :domain => "#{domain}.#{tld}" }
                 end
               end
             end
@@ -80,6 +80,10 @@ PlugMan.define :tldexpansionbydomain do
     end
 
     threads.delete_if {|thr| not thr.alive?} while not threads.empty?
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

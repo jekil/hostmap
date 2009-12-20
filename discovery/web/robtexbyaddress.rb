@@ -13,18 +13,22 @@ PlugMan.define :robtexbyaddress do
   params({ :description => "Check against Robtex" })
 
   def run(ip, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     begin
       page = open("http://www.robtex.com/ip/#{ip}.html").read
     rescue
-      return hosts
+      return @hosts
     end
 
     page.scan(/\" >([\w\-\_\.]+)<\/a><\/td><td/).each do |url|
-      hosts << { :hostname => url.to_s }
+      @hosts << { :hostname => url.to_s }
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

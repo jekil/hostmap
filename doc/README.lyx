@@ -2011,6 +2011,20 @@ dictionaries
 \end_layout
 
 \begin_layout Subsection
+Enumeration plugin timeout
+\end_layout
+
+\begin_layout Description
+Option: --timeout
+\end_layout
+
+\begin_layout Standard
+If an enumeration plugin is running, by default after 10 minutes, it's killed
+ and the partial results produced are reported.
+ With this option you can change the default timeout.
+\end_layout
+
+\begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Only-passive-discovery"

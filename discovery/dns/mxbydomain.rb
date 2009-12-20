@@ -15,7 +15,7 @@ PlugMan.define :mxbydomain do
   params({ :description => "Return mail exchange servers for a domain." })
 
   def run(domain, opts = {})
-    mx = Set.new
+    @mx = Set.new
 
     if opts['dns']
       dns = opts['dns'].gsub(/\s/, '').split(',')
@@ -30,13 +30,17 @@ PlugMan.define :mxbydomain do
     begin
       res.query(domain, Net::DNS::MX).answer.each do |rr|
         if rr.class == Net::DNS::RR::MX
-          mx << { :mx => rr.exchange.gsub(/\.$/,'') }
+          @mx << { :mx => rr.exchange.gsub(/\.$/,'') }
         end
       end
     rescue
       nil
     end
     
-    return mx
+    return @mx
+  end
+
+  def timeout
+    return @mx
   end
 end

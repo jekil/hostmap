@@ -8,6 +8,7 @@ hostmap-0.2.1
     * Fixed traceback on FreeBSD due to raising of different exceptions.
     * Added Metasploit auxiliary module in extra folder.
     * Added validation of -t option, if it isn't an IP address hostmap is stopped.
+    * Added enumeration plugin timeout, by default at 10 minutes. Can be changed with user supplied --timeout option.
 
 hostmap-0.2
     * Fully refactored and rewritten in Ruby.

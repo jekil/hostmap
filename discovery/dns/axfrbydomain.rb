@@ -16,16 +16,16 @@ PlugMan.define :axfrbydomain do
   params({ :description => "Try to do an axfr zone transfer." })
 
   def run(domain, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     # Configuration check
     if opts['onlypassive']
       $LOG.warn "Skipping DNS Zone transfer because it is enabled only passive checks."
-      return hosts
+      return @hosts
     end
     if ! opts['dnszonetransfer']
       $LOG.warn "Skipping DNS Zone transfer because it is disabled by default, you must enable it from from command line."
-      return hosts
+      return @hosts
     end
 
     $LOG.debug "Zone transfer check enabled."
@@ -40,7 +40,7 @@ PlugMan.define :axfrbydomain do
         ns = rr.nsdname.gsub(/.$/, '')
       end
     rescue
-      return hosts
+      return @hosts
     end
 
     return hosts if ns.nil?
@@ -64,7 +64,7 @@ PlugMan.define :axfrbydomain do
       @res = Net::DNS::Resolver.new(:nameservers => ip.to_s)
     end
 
-    return hosts if ip.nil?
+    return @hosts if ip.nil?
     
     # Set logging level to avoid messages generated to the use of TCP AXFR request
     @res.log_level = Net::DNS::ERROR
@@ -73,7 +73,7 @@ PlugMan.define :axfrbydomain do
     begin
       zone = @res.axfr(domain)
     rescue
-      return hosts
+      return @hosts
     end
 
     if (zone)
@@ -82,18 +82,22 @@ PlugMan.define :axfrbydomain do
       zone.answer.each do | rr |
         # This is a really shitly if structure, but switch doesen't seem to work as expected
         if rr.class == Net::DNS::RR::A
-          hosts << { :hostname => rr.name.gsub(/.$/, '') }
+          @hosts << { :hostname => rr.name.gsub(/.$/, '') }
         end
         if rr.class == Net::DNS::RR::NS
-          hosts << { :ns => rr.nsdname.gsub(/.$/, '') }
+          @hosts << { :ns => rr.nsdname.gsub(/.$/, '') }
         end
         if rr.class == Net::DNS::RR::MX
-          hosts << { :mx => rr.exchange.gsub(/.$/, '') }
+          @hosts << { :mx => rr.exchange.gsub(/.$/, '') }
         end
         # TODO: add cname
       end
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

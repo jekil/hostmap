@@ -1,4 +1,5 @@
 require 'thread'
+require 'timeout'
 load 'core.rb' # NOTE: big fat note! Must use load, not require or you get a name error!
 require 'PlugMan'
 
@@ -81,12 +82,18 @@ module HostMap
               # Creating a thread, running the plugin inside
               job = Thread.new do
                 begin
-                  out = k.run(v, self.engine.opts)
-                  # Reports the result
+                  Timeout::timeout(self.engine.opts['timeout'].to_i) {
+                    out = k.run(v, self.engine.opts)
+                    # Reports the result
+                    self.engine.host_discovery.report(out)
+                    $LOG.debug "Plugin: #{k.name.inspect} Output: #{set2txt(out)}"
+                  }    
+                rescue Timeout::Error
+                  out = k.timeout
                   self.engine.host_discovery.report(out)
-                  $LOG.debug "Plugin: #{k.name.inspect} Output: #{set2txt(out)}"
+                  $LOG.warn "Plugin #{k.name.inspect} execution expired. Output: #{set2txt(out)}"
                 rescue
-                  $LOG.debug "Plugin #{k.name.inspect} get a unhandled exception #{$!}"
+                  $LOG.debug "Plugin #{k.name.inspect} got a unhandled exception #{$!}"
                 end
               end
             @pool << job

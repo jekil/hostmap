@@ -14,27 +14,31 @@ PlugMan.define :bingbyaddress do
   params({ :description => "Check against Bing." })
 
   def run(ip, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
     
     # Skip check if with API key
     if opts['bingApiKey']
-      return hosts
+      return @hosts
     end
 
     begin
       page = open("http://www.bing.com/search?q=ip:#{ip}").read
     rescue
-      return hosts
+      return @hosts
     end
 
     page.scan(/<h3><a href=\"(.*?)\" /).each do |url|
       begin
-        hosts << { :hostname => URI.parse(url.to_s).host }
+        @hosts << { :hostname => URI.parse(url.to_s).host }
       rescue
         next
       end
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

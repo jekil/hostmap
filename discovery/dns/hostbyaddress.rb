@@ -15,7 +15,7 @@ PlugMan.define :hostbyaddress do
   params({ :description => "Return hostname with reverse DNS (PTR) query." })
 
   def run(ip, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
     
     if opts['dns']
       dns = opts['dns'].gsub(/\s/, '').split(',')
@@ -32,13 +32,17 @@ PlugMan.define :hostbyaddress do
     begin
       res.query(addr).answer.each do |rr|
         if rr.class == Net::DNS::RR::PTR
-          hosts << { :hostname => rr.ptr.gsub(/\.$/,'') }
+          @hosts << { :hostname => rr.ptr.gsub(/\.$/,'') }
         end
       end
     rescue
       nil
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

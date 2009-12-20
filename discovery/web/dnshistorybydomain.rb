@@ -13,19 +13,19 @@ PlugMan.define :dnshistorybydomain do
   params({ :description => "Check against dnshistory.org" })
 
   def run(domain, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     begin
       page = open("http://dnshistory.org/browsedomains/#{domain}.").read
     rescue
-      return hosts
+      return @hosts
     end
     
     page.scan(/\.">(.*?)\.<\/a><br \/>/).each do |url|
       # NOTE: This check can enumerate ns, mx, cname, and other records, for the moment we report all as possible hostnames.
-      hosts << { :hostname => url.to_s }
+      @hosts << { :hostname => url.to_s }
     end
 
-    return hosts
+    return @hosts
   end
 end

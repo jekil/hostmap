@@ -13,18 +13,22 @@ PlugMan.define :netcraftbydomain do
   params({ :description => "Check against Netcraft" })
 
   def run(domain, opts = {})
-    hosts = Set.new
+    @hosts = Set.new
 
     begin
       page = open("http://searchdns.netcraft.com/?restriction=site+ends+with&host=#{domain}").read
     rescue
-      return hosts
+      return @hosts
     end
     
     page.scan(/uptime.netcraft.com\/up\/graph\/\?host=(.*?)\">/).each do |url|
-      hosts << { :hostname => url.to_s }
+      @hosts << { :hostname => url.to_s }
     end
 
-    return hosts
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end
