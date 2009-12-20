@@ -9,6 +9,9 @@ require 'plugin_manager'
 # Discovery
 require 'discovery/host'
 
+# Standard library
+require 'ipaddr'
+
 
 module HostMap
 
@@ -34,13 +37,21 @@ module HostMap
     def initialize(opts={})
       # Load logger
       HostMap::HMLogger.new(opts)
-      $LOG.debug "Initializing hostmap engine."
-      self.opts = opts
-      self.plugins = HostMap::Managers::PluginManager.new(self)
       # If maltego output is selected never show anything
       if opts['printmaltego']
         $LOG.level = Logger::ERROR
       end
+
+      $LOG.debug "Initializing hostmap engine."
+
+      # Validate options
+      begin
+        IPAddr.new(opts['target'])
+      rescue
+        raise HostMap::Exception::TargetError, "isn't an IP address."
+      end
+      self.opts = opts
+      self.plugins = HostMap::Managers::PluginManager.new(self)
     end
 
     #

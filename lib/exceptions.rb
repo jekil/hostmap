@@ -20,5 +20,20 @@ module HostMap
       end
     end
 
+    #
+    # The supplied target is not valid.
+    #
+    class TargetError < ArgumentError
+      include Exception
+
+      def initialize(args)
+        @args = args
+      end
+
+      def to_s
+        "The supplied target is not valid: #{@args}"
+      end
+    end
+
   end
 end

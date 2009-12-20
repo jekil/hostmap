@@ -15,7 +15,11 @@ module HostMap
       # Runs the CLI.
       #
       def run
-        HostMap::Engine.new(@opts).run
+        begin
+          HostMap::Engine.new(@opts).run
+        rescue HostMap::Exception::TargetError => ex
+          puts "\nError in target value. #{ex.to_s}"
+        end
       end
     end
 
