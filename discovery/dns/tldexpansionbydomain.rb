@@ -30,6 +30,9 @@ PlugMan.define :tldexpansionbydomain do
     else
       res = Net::DNS::Resolver.new
     end
+
+    # Silence net-dns logger
+    res.log_level = Net::DNS::UNKNOWN
     
     # Load TLD list
     if ! $TLD

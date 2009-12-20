@@ -34,6 +34,9 @@ PlugMan.define :bruteforcebydomain do
     else
       res = Net::DNS::Resolver.new
     end
+
+    # Silence net-dns logger
+    res.log_level = Net::DNS::UNKNOWN
     
     # False positives or wildcard domain preventive check with random query
     ["antani456", "t4p1occo", "evvivalafocaechilacosa"].each do |test|

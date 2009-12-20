@@ -24,8 +24,8 @@ PlugMan.define :hostbyaddress do
       res = Net::DNS::Resolver.new
     end
 
-    # Set logging level to avoid messages generated to the automatic use of PTR request
-    res.log_level = Net::DNS::ERROR
+    # Silence net-dns logger
+    res.log_level = Net::DNS::UNKNOWN
 
     addr = IPAddr.new(ip)
 

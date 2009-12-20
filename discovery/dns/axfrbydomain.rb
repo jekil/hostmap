@@ -53,6 +53,9 @@ PlugMan.define :axfrbydomain do
       @res = Net::DNS::Resolver.new
     end
 
+    # Silence net-dns logger
+    res.log_level = Net::DNS::UNKNOWN
+
     @res.query(ns).answer.each do |rr|
       if rr.class == Net::DNS::RR::A
         ip = rr.address

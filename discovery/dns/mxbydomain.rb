@@ -24,6 +24,9 @@ PlugMan.define :mxbydomain do
       res = Net::DNS::Resolver.new
     end
 
+    # Silence net-dns logger
+    res.log_level = Net::DNS::UNKNOWN
+
     begin
       res.query(domain, Net::DNS::MX).answer.each do |rr|
         if rr.class == Net::DNS::RR::MX
