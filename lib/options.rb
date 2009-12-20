@@ -77,10 +77,17 @@ module HostMap
         end
 
         opts.separator ""
-        opts.separator "Common options:"
+        opts.separator "Networking options:"
 
         opts.on("-d [STRING]", "--dns [STRING]", "set a comma separated list of DNS servers IP addresses to use instead of system defaults") do |t|
           options['dns'] = t
+        end
+
+        opts.separator ""
+        opts.separator "Output options:"
+
+        opts.on("", "--print-maltego", "set output formatted for Maltego") do
+          options['printmaltego'] = true
         end
 
         opts.on("-v", "--verbose", "set verbose mode") do

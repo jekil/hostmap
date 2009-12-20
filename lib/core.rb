@@ -37,6 +37,10 @@ module HostMap
       $LOG.debug "Initializing hostmap engine."
       self.opts = opts
       self.plugins = HostMap::Managers::PluginManager.new(self)
+      # If maltego output is selected never show anything
+      if opts['printmaltego']
+        $LOG.level = Logger::ERROR
+      end
     end
 
     #

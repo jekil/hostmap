@@ -3,6 +3,7 @@ hostmap-0.2.1
     * Upgraded net-dns to latest version from git repository.
     * Fixed traceback on Mac OSX due to net-dns bug.
     * Added check to enumerate host names with DNS TLD expansion.
+    * Added --print-maltego to get output in Maltego XML format.
 
 hostmap-0.2
     * Fully refactored and rewritten in Ruby.

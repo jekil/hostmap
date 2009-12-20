@@ -20,12 +20,15 @@ def banner
   puts
 end
 
-# Show banner
-banner
 # Load options
 options = HostMap::Options.defaults
 options = options.merge(HostMap::Options.load)
 options = options.merge(HostMap::Options.parse(ARGV))
+
+if ! options['printmaltego']
+  # Show banner
+  banner
+end
 
 if !options['target']
   puts 'No target selected. You must select a target with -t option.'

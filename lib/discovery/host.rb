@@ -52,7 +52,11 @@ module HostMap
         #
         def stop
           puts "\n"
-          puts @host.to_txt
+          if self.engine.opts['printmaltego']
+            puts @host.to_maltego
+          else
+            puts @host.to_txt
+          end
         end
 
         #
@@ -268,6 +272,48 @@ module HostMap
             out << "No results found."
           end
           out
+        end
+
+        #
+        # Returns host status in Maltego format.
+        #
+        def to_maltego(out = "")
+          out << "<MaltegoMessage>"
+          out << "<MaltegoTransformResponseMessage>"
+          out << "<Entities>"
+
+          if @ns.size > 0
+            @ns.each { |a|
+              out << "<Entity Type=\"NSrecord\">"
+              out << "<Value>#{a}</Value>"
+              out << "<Weight>100</Weight>"
+              out << "</Entity>"
+            }
+          end
+
+          if @mx.size > 0
+            @mx.each { |a|
+              out << "<Entity Type=\"MXrecord\">"
+              out << "<Value>#{a}</Value>"
+              out << "<Weight>100</Weight>"
+              out << "</Entity>"
+            }
+          end
+
+          if @alias.size > 0
+            @alias.each { |a|
+              out << "<Entity Type=\"DNSName\">"
+              out << "<Value>#{a}</Value>"
+              out << "<Weight>100</Weight>"
+              out << "</Entity>"
+            }
+          end
+
+          out << "</Entities>"
+          out << "<UIMessages>" 
+          out << "</UIMessages>"
+          out << "</MaltegoTransformResponseMessage>"
+          out << "</MaltegoMessage>"
         end
 
         #
