@@ -86,7 +86,7 @@ module HostMap
                   self.engine.host_discovery.report(out)
                   $LOG.debug "Plugin: #{k.name.inspect} Output: #{set2txt(out)}"
                 rescue
-                  $LOG.debug "PLugin #{k.name.inspect} get a unhandled exception #{$!}"
+                  $LOG.debug "Plugin #{k.name.inspect} get a unhandled exception #{$!}"
                 end
               end
             @pool << job
