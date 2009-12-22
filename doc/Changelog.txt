@@ -9,6 +9,7 @@ hostmap-0.2.1
     * Added Metasploit auxiliary module in extra folder.
     * Added validation of -t option, if it isn't an IP address hostmap is stopped.
     * Added enumeration plugin timeout, by default at 10 minutes. Can be changed with user supplied --timeout option.
+    * Moved website from http://hostmap.sourceforge.net to http://hostmap.lonerunners.net
 
 hostmap-0.2
     * Fully refactored and rewritten in Ruby.
