@@ -1,4 +1,5 @@
 hostmap-0.2.1
+
     * Fixed handling of Errno::ECONNRESET in SSL certificate plugin.
     * Upgraded net-dns to latest version from git repository.
     * Fixed traceback on Mac OSX due to net-dns bug.
@@ -13,6 +14,7 @@ hostmap-0.2.1
     * Added warning message to fix traceback if missing libopenssl-ruby.
 
 hostmap-0.2
+
     * Fully refactored and rewritten in Ruby.
     * Removed whois.webhosting.info check due to captcha authentication.
     * Removed domainsdb.net check because the website is down.
