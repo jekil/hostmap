@@ -1,15 +1,26 @@
-require 'net/https'
 require 'set'
+begin
+require 'net/https'
+rescue Exception
+  $LOG.warn "Missing library OpenSSL, please install libopenssl-ruby."
+end
+
 
 #
 # Simple work around to avoid messagges "warning: peer certificate won't be verified in this SSL session".
 #
 class Net::HTTP
+
   alias_method :old_initialize, :initialize
+
   def initialize(*args)
     old_initialize(*args)
-    @ssl_context = OpenSSL::SSL::SSLContext.new
-    @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    begin
+      @ssl_context = OpenSSL::SSL::SSLContext.new
+      @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    rescue
+      @ssl_context = nil
+    end
   end
 end
 
@@ -34,12 +45,12 @@ PlugMan.define :sslcertbyaddress do
     end
 
     opts['httpports'].split(',').each do |port|
-      http = Net::HTTP.new(ip, port.to_i)
-      http.use_ssl = true
-      
-      @cns = []
-      
       begin
+        http = Net::HTTP.new(ip, port.to_i)
+        http.use_ssl = true
+
+        @cns = []
+      
         http.start() do |conn|
           cert = OpenSSL::X509::Certificate.new conn.peer_cert
           # Get data from issuer CN field
@@ -59,7 +70,7 @@ PlugMan.define :sslcertbyaddress do
             end
           }
         end
-      rescue
+      rescue Exception
         next
       end
      
