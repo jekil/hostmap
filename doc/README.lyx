@@ -144,7 +144,9 @@ http://hostmap.lonerunners.net
 
 \begin_layout Standard
 The hostmap host name discovery tool is an utility designed to discover
- the host names related to a given IP address.
+ the host names related to a given IP address, generally speaking, all applicati
+on level host names related to a server (example: DNS names, HTTP virtual
+ hosts).
 \end_layout
 
 \begin_layout Standard
@@ -189,8 +191,8 @@ In the real world an IP address can be registered in a DNS server with multiple
 \end_layout
 
 \begin_layout Standard
-For example the IP address 1.2.3.4 can has the following names registered,
- as you can see from a piece of the BIND zone configuration file:
+For example the IP address 1.2.3.4 has the following names registered, as you
+ can see from a piece of the BIND zone configuration file:
 \end_layout
 
 \begin_layout Standard
@@ -234,6 +236,13 @@ end{verbatim}
 \begin_layout Standard
 An user, or a penetration tester, that needs to test the security of the
  1.2.3.4 machine needs to known all his host names.
+\end_layout
+
+\begin_layout Standard
+This is needed to achieve a complete test on system 1.2.3.4, because several
+ application, for example the web server, exposes different attacck points,
+ in that case virtual hosts, for each different host name requested so each
+ one must be fully tested.
 \end_layout
 
 \begin_layout Standard
@@ -291,7 +300,7 @@ Zip and tar.gz archive
 \end_layout
 
 \begin_layout Standard
-Operating system independent host compressed sources.
+Operating system independent compressed sources.
 \end_layout
 
 \begin_layout Standard
@@ -1278,7 +1287,7 @@ Results correlation, aggregation and normalization
 \end_layout
 
 \begin_layout Itemize
-Multithread and event based engine
+Multi thread and event based engine
 \end_layout
 
 \begin_layout Itemize
@@ -1293,8 +1302,8 @@ Techniques
 \begin_layout Standard
 To enumerate all the alias of a target machine hostmap uses a lot of techniques
  based on protocols, exposed services, target weakness, target vulnerabilities,
- brute-forcing, public databases and search engines that can reveal a target's
- alias.
+ brute forcing techniques, public databases and search engines that can
+ reveal a target's alias.
 \end_layout
 
 \begin_layout Standard
@@ -1345,7 +1354,8 @@ Name servers record lookup
 
 \begin_deeper
 \begin_layout Standard
-Get the authoritative name server for the target host.
+Get the authoritative name server for each domain enumerated on the target
+ host.
 \end_layout
 
 \end_deeper
@@ -1355,7 +1365,7 @@ Mail exchange record lookup
 
 \begin_deeper
 \begin_layout Standard
-Get the MX records for the target host domain.
+Get the MX records for each domain enumerated on the target host.
 \end_layout
 
 \end_deeper
@@ -1368,7 +1378,127 @@ DNS AXFR zone transfer
 The name server that serve the target machine's domain zone can be prone
  to a zone transfer vulnerability.
  This allow an attacker to perform a AXFR zone transfer and get a dump of
- all DNS records served by this name server.
+ the complete DNS zone, so all records, served by this name server.
+ The AXFR vulnerability can already simply be checked with dig utility.
+ For example if we want to check the DNS server 1.2.3.4, authoritative name
+ server for domain foo.com we can do it with the following syntax and if
+ you get an output like that the DNS server is vulnerable.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+$ dig -t axfr @1.2.3.4 foo.com
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+; <<>> DiG 9.6.1-P2 <<>> -t axfr @1.2.3.4 foo.com
+\end_layout
+
+\begin_layout Plain Layout
+
+; (1 server found)
+\end_layout
+
+\begin_layout Plain Layout
+
+;; global options: +cmd
+\end_layout
+
+\begin_layout Plain Layout
+
+foo.com.		38400	IN	SOA	ns1.foo.com.
+ admin.foo.com.
+ 2006081401 28800 3600 604800
+\end_layout
+
+\begin_layout Plain Layout
+
+38400
+\end_layout
+
+\begin_layout Plain Layout
+
+foo.com.		38400	IN	NS	127.0.0.1.foo.com.
+\end_layout
+
+\begin_layout Plain Layout
+
+foo.com.		38400	IN	MX	10 mta.foo.com.
+\end_layout
+
+\begin_layout Plain Layout
+
+mta.foo.com.	38400	IN	A	192.168.0.3
+\end_layout
+
+\begin_layout Plain Layout
+
+ns1.foo.com.	38400	IN	A	127.0.0.1
+\end_layout
+
+\begin_layout Plain Layout
+
+www.foo.com.	38400	IN	A	192.168.0.2
+\end_layout
+
+\begin_layout Plain Layout
+
+foo.com.		38400	IN	SOA	ns1.foo.com.
+ admin.foo.com.
+ 2006081401 28800 3600 604800
+\end_layout
+
+\begin_layout Plain Layout
+
+38400
+\end_layout
+
+\begin_layout Plain Layout
+
+;; Query time: 0 msec
+\end_layout
+
+\begin_layout Plain Layout
+
+;; SERVER: 1.2.3.4#53(1.2.3.4)
+\end_layout
+
+\begin_layout Plain Layout
+
+;; WHEN: Wed Dec 23 15:27:24 2009
+\end_layout
+
+\begin_layout Plain Layout
+
+;; XFR size: 7 records (messages 1, bytes 207)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -1380,6 +1510,9 @@ Host name brute-forcing
 \begin_layout Standard
 Using a brute-forcing tries to guess an host name on the enumerated domain
  that resolve as the target IP address.
+ For example if the domain foo.com has been enumerated the host name brute
+ forcer will check for third level names like: www.foo.com, www1.foo.com, db.foo.com
+ and whatever word listed in the dictionary used.
 \end_layout
 
 \end_deeper
@@ -1389,7 +1522,10 @@ DNS TLD expansion
 
 \begin_deeper
 \begin_layout Standard
-Use a brute forcing of top level domain part for already enumerated domain.
+Use a brute-forcing of top level domain part for already enumerated domain.
+ For example if the domain foo.com has been enumerated the TLD expansion
+ or TLD brute-forcing plugin will check for different TLD for the same domain
+ like: foo.org, foo.net, foo.it and whatever TLD listed in the TLD dictionary.
 \end_layout
 
 \end_deeper
@@ -1403,16 +1539,16 @@ The following enumeration techniques are based on the SSL/TLS protocol and
 \end_layout
 
 \begin_layout Itemize
-X.509 Certificate
+X.509 Certificate Parsing
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-Usually the target machine can publish some HTTP services.
- A connection is tried to the common HTTP service ports and is tried to
- negotiate an SSL/TLS connection, if the remote server supply a X.509 certificate
- the host name is taken from the issuer and subject Common Name (CN) field
- and from alternate subject extension field.
+Sometimes the target machine can publish some HTTPS services.
+ A connection is tried to the common HTTP and HTTPS service ports and is
+ tried to negotiate an SSL/TLS connection, if the remote server supply a
+ X.509 certificate the host name is taken from the issuer and subject Common
+ Name (CN) field and from alternate subject extension field.
 \end_layout
 
 \end_deeper
@@ -1422,7 +1558,7 @@ Passive web enumeration techniques
 
 \begin_layout Standard
 The following enumeration techniques are based on third party web sites
- and are:
+ and public databases.
 \end_layout
 
 \begin_layout Itemize
@@ -1446,7 +1582,8 @@ http://search.msn.com
 
 \end_inset
 
-
+ It's suggested to use this with API key which improves the amount of results
+ fetched and the plugin speed.
 \end_layout
 
 \end_deeper
@@ -1954,7 +2091,7 @@ Disable the DNS TLD expansion check.
 \end_layout
 
 \begin_layout Standard
-Disabling his checkt you get a fastest scan but you can miss same results.
+Disabling his check you get a fastest scan but you can miss same results.
 \end_layout
 
 \begin_layout Subsection
