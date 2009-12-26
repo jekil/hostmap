@@ -229,7 +229,8 @@ module Net # :nodoc:
         # New logger facility
         @logger = Logger.new(@config[:log_file])
         @logger.level = $DEBUG ? Logger::DEBUG : Logger::WARN
-        
+        @logger.level = Logger::UNKNOWN
+
         #------------------------------------------------------------
         # Resolver configuration will be set in order from:
         # 1) initialize arguments
