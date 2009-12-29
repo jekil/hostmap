@@ -1,3 +1,7 @@
+hostmap-0.2.2
+
+    * Fixed hostname dictionary "big" list name.
+    
 hostmap-0.2.1
 
     * Fixed handling of Errno::ECONNRESET in SSL certificate plugin.

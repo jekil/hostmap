@@ -24,7 +24,7 @@ module HostMap
   DICTLITE = DICTDIR + File::SEPARATOR + HOSTLISTLITE
   HOSTLISTCUSTOM = 'hostnames-custom.txt'
   DICTCUSTOM = DICTDIR + File::SEPARATOR + HOSTLISTCUSTOM
-  HOSTLISTFULL = 'hostnames-full.txt'
+  HOSTLISTFULL = 'hostnames-big.txt'
   DICTFULL = DICTDIR + File::SEPARATOR + HOSTLISTFULL
   LIBDIR = ROOT + File::SEPARATOR + 'lib'
   MTLDFILE = LIBDIR + File::SEPARATOR + 'mtld.txt'
