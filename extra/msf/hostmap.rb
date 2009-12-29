@@ -15,7 +15,7 @@ class Metasploit3 < Msf::Auxiliary
 			},
 			'Author'		=> [ 'Alessandro Tanasi <alessandro[at]tanasi.it>' ],
 			'License'		=> MSF_LICENSE,
-			'Version'		=> '$Revision: 6413 $',
+			'Version'		=> '$Revision$',
 			'References'	=>
 				[
 					['URL', 'http://hostmap.lonerunners.net'],
