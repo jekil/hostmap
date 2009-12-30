@@ -1,6 +1,7 @@
 require 'set'
 require 'net/dns/resolver'
 require 'net/dns/packet'
+require 'net/dns/header'
 require 'net/dns/rr'
 
 
@@ -56,11 +57,11 @@ PlugMan.define :axfrbydomain do
     # Silence net-dns logger
     res.log_level = Net::DNS::UNKNOWN
 
+    # Get nameserver for the domain
     @res.query(ns).answer.each do |rr|
       if rr.class == Net::DNS::RR::A
         ip = rr.address
       end
-
       @res = Net::DNS::Resolver.new(:nameservers => ip.to_s)
     end
 
@@ -68,7 +69,7 @@ PlugMan.define :axfrbydomain do
     
     # Set logging level to avoid messages generated to the use of TCP AXFR request
     @res.log_level = Net::DNS::ERROR
-
+    
     # Perform transfer
     begin
       zone = @res.axfr(domain)
@@ -76,8 +77,10 @@ PlugMan.define :axfrbydomain do
       return @hosts
     end
 
-    if (zone)
-      $LOG.warn "Domain #{domain} server by name server #{ip} is vulnerable to zone transfer."
+    # If the rcode is NOERROR
+    if zone.header.rCode.code == 0
+      
+      $LOG.warn "Domain #{domain} served by name server #{ip} is vulnerable to zone transfer."
 
       zone.answer.each do | rr |
         # This is a really shitly if structure, but switch doesen't seem to work as expected
