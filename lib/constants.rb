@@ -5,10 +5,10 @@ module HostMap
   # Versioning information
   #
   MAJOR    = 0
-  MINOR    = 2.1
+  MINOR    = 2.2
   RELEASE  = ""
   VERSION  = "#{MAJOR}.#{MINOR}#{RELEASE}"
-  CODENAME = "fissatina"
+  CODENAME = "truppola"
   
   #
   # Paths
