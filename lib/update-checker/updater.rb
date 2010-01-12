@@ -44,7 +44,7 @@ module Updates
 
     def getFeed
       begin
-        open("#{URL}/softwares/latest/#{@software}", 'User-Agent' => "#{@software}-#{@version}").read
+        open("#{URL}/software/latest/#{@software}", 'User-Agent' => "#{@software}-#{@version}").read
       rescue
         nil
       end
@@ -52,7 +52,7 @@ module Updates
 
     def parseFeed(data)
       doc = REXML::Document.new(data)
-      doc.elements.each('softwares/software') do |ele|
+      doc.elements.each('products/software') do |ele|
         # Checks the software we want to update
         if ele.attributes['name'] == @software
           ele.elements.each('release') do |rel|

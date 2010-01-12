@@ -23,7 +23,7 @@ module HostMap
         if !updates.empty? and @opts['updatecheck']
           puts "WARNING: A new version is available! You can download:"
           updates.each do |file, url|
-            puts "\t#{file} at #{url}"
+            puts "\t#{file} from #{url}"
           end
           puts "\n"
         end
