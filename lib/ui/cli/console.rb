@@ -1,3 +1,6 @@
+require 'update-checker/updater'
+
+
 module HostMap
   module Ui
 
@@ -15,6 +18,17 @@ module HostMap
       # Runs the CLI.
       #
       def run
+        # Check for new releases
+        updates = Updates::Checker.new("hostmap").check(HostMap::VERSION)
+        if !updates.empty? and @opts['updatecheck']
+          puts "WARNING: A new version is available! You can download:"
+          updates.each do |file, url|
+            puts "\t#{file} at #{url}"
+          end
+          puts "\n"
+        end
+
+        # Run
         begin
           HostMap::Engine.new(@opts).run
         rescue HostMap::Exception::TargetError => ex

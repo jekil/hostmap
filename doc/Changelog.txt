@@ -2,6 +2,7 @@ hostmap-0.2.2
 
     * Fixed hostname dictionary "big" list name.
     * Fixed DNS AXFR zone transfer check that was prone to false positives under some circumstances.
+    * Added automatic check for new updates. You can disable it in configuration file.
     
 hostmap-0.2.1
 
