@@ -199,16 +199,21 @@ module HostMap
         # Checks if an hostname match host ip via dns resolution.
         #
         def check_host(name)
-          @resolver.query(name).answer.each do |rr|
-            # TODO: add this and report without check_host
-            #if rr.type == Net::DNS::RR::CNAME
-            #  check_host(rr.cname.gsub(/.$/, ''))
-            #end
-            if rr.class == Net::DNS::RR::A
-              if rr.address==IPAddr.new(self.engine.opts['target'])
-                return true
+          begin
+            @resolver.query(name).answer.each do |rr|
+              # TODO: add this and report without check_host
+              #if rr.type == Net::DNS::RR::CNAME
+              #  check_host(rr.cname.gsub(/.$/, ''))
+              #end
+              if rr.class == Net::DNS::RR::A
+                if rr.address==IPAddr.new(self.engine.opts['target'])
+                  return true
+                end
               end
             end
+          rescue
+            $LOG.debug "Impossible to check hostname #{name} due to DNS server issue."
+            return false
           end
 
           return false
