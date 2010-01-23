@@ -6,7 +6,7 @@ require 'set'
 #
 PlugMan.define :dnshistorybydomain do
   author "Alessandro Tanasi"
-  version "0.2.1"
+  version "0.2.2"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -26,6 +26,10 @@ PlugMan.define :dnshistorybydomain do
       @hosts << { :hostname => url.to_s }
     end
 
+    return @hosts
+  end
+
+  def timeout
     return @hosts
   end
 end
