@@ -43,5 +43,6 @@ rescue Interrupt
 rescue Exception => e
   puts "Unhandled exception. Please report this bug sending an email to alessandro@tanasi.it attaching the following text:"
   puts "Message:\n #{e.message}"
+  puts "Inspection:\n #{e.inspect}"
   puts "Backtrace of the exception:\n #{e.backtrace.join("\n ")}"
 end
