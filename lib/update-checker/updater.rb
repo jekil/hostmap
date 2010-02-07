@@ -13,7 +13,7 @@ module Updates
   class Checker
 
     #
-    # URL where updates are located.
+    # UUpdate server URL.
     #
     URL = "http://update.lonerunners.net"
 
@@ -36,20 +36,29 @@ module Updates
 
     private
 
+    #
+    # Compare two version strings.
+    #
     def compare(version)
       this_ver = @version.split('.').map{|s|s.to_i}
       new_ver = version.to_s.split('.').map{|s|s.to_i}
       return true if (this_ver <=> new_ver) < 0
     end
 
+    #
+    # Get the last update XML feed.
+    #
     def getFeed
       begin
         open("#{URL}/software/latest/#{@software}", 'User-Agent' => "#{@software}-#{@version}").read
       rescue
-        nil
+        return
       end
     end
 
+    #
+    # Parse the XML feed.
+    #
     def parseFeed(data)
       doc = REXML::Document.new(data)
       doc.elements.each('products/software') do |ele|
