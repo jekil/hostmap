@@ -2583,6 +2583,38 @@ There are many ways to help hostmap: coding, testing, donating money, reviewing
 \end_layout
 
 \begin_layout Subsubsection
+I need help, best if it's live
+\end_layout
+
+\begin_layout Standard
+If writin an email to Alessandro Tanasi at alessandro@tanasi.it insn't enough,
+ you can get live help in our IRC channel.
+ You can interact with other members of the lonerunners community on the
+ official #lonerunners IRC channel.
+ 
+\end_layout
+
+\begin_layout Standard
+Server: irc.freenode.net 
+\end_layout
+
+\begin_layout Standard
+Channel: #lonerunners 
+\end_layout
+
+\begin_layout Standard
+For more information about freenode, visit 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://freenode.net/faq.shtml"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
 This software is shit and you are an idiot
 \end_layout
 
