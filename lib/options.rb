@@ -103,6 +103,13 @@ module HostMap
           puts opts
           exit
         end
+
+        opts.separator ""
+        opts.separator "Misc options:"
+
+        opts.on("", "--without-update", "skip update check") do
+          options['updatecheck'] = false
+        end
       end
 
       opts.parse!(args)

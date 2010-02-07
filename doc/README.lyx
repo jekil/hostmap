@@ -2261,6 +2261,26 @@ http://www.paterva.com/web4/index.php/maltego
 \end_layout
 
 \begin_layout Subsection
+Without update check
+\end_layout
+
+\begin_layout Description
+Option: --without-update
+\end_layout
+
+\begin_layout Standard
+By defaults at each run hostmap checks for new releases.
+ If a new release is available the download link is displayed, now hostmap
+ contiues it's run.
+\end_layout
+
+\begin_layout Standard
+This behaviour can be disabled with --without-update parameter supplied
+ by command line or disabling the automatic update check in the configuration
+ file.
+\end_layout
+
+\begin_layout Subsection
 Using the configuration file
 \end_layout
 
