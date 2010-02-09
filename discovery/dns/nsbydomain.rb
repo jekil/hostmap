@@ -8,7 +8,7 @@ require 'set'
 #
 PlugMan.define :nsbydomain do
   author "Alessandro Tanasi"
-  version "0.2.1"
+  version "0.2.2"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -41,6 +41,6 @@ PlugMan.define :nsbydomain do
   end
 
   def timeout
-    return ns
+    return @ns
   end
 end
