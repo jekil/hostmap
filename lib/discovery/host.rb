@@ -211,7 +211,12 @@ module HostMap
                 end
               end
             end
-          rescue
+          rescue Net::DNS::Resolver::NoResponseError
+            $LOG.debug "No response from DNS server for hostname #{name}."
+            return false
+          rescue Timeout::Error
+            return false
+          rescue Exception
             $LOG.debug "Impossible to check hostname #{name} due to DNS server issue."
             return false
           end
