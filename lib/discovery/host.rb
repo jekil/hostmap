@@ -265,13 +265,13 @@ module HostMap
           if @ns.size > 0
             @ns.each {|a| out << "\t#{a}\n" }
           else
-            out << "No results found."
+            out << "No results found.\n"
           end
           out << "Served by mail exchange (probably)\n"
           if @mx.size > 0
             @mx.each {|a| out << "\t#{a}\n" }
           else
-            out << "No results found."
+            out << "No results found.\n"
           end
           #out << "Part of domain (probably)\n"
           #@domains.each {|a| out << "\t#{a}\n" }
@@ -279,7 +279,7 @@ module HostMap
           if @alias.size > 0
             @alias.each {|a| out << "\t#{a}\n" }
           else
-            out << "No results found."
+            out << "No results found.\n"
           end
           out
         end
