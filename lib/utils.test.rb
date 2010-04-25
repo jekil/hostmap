@@ -30,6 +30,9 @@ module HostMap
         # IP
         assert_raise(RuntimeError) {Utils.sanitize_fqdn("192.168.1.111")}
         assert_raise(RuntimeError) {Utils.sanitize_fqdn("1.1.1.1")}
+        # Empty
+        assert_raise(RuntimeError) {Utils.sanitize_fqdn("")}
+        assert_raise(RuntimeError) {Utils.sanitize_fqdn(nil)}
       end
 
       # Tests tld exclusion

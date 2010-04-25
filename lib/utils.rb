@@ -48,7 +48,7 @@ module HostMap
     def self.sanitize_fqdn(fqdn)
       fqdn = fqdn.downcase
       # If is and IP address raise exception
-      if fqdn.match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/)
+      if fqdn.match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/) or fqdn.nil? or fqdn == ''
         raise HostMap::Exception::EnumerationError, fqdn
       else 
         return fqdn
