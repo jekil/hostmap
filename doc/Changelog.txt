@@ -6,6 +6,7 @@ hostmap-0.2.2
     * Fixed DNS History plugin that can raise SystemExit under some strange circumstances.
     * Changed the job scheduler. Now is more fast, robust and fine tuned.
     * Added a dynamic thread pool, now you can use --threads to choose the number of concurrent threads.
+    * Some minor fixes.
     
 hostmap-0.2.1
 
