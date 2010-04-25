@@ -2162,6 +2162,34 @@ If an enumeration plugin is running, by default after 10 minutes, it's killed
 \end_layout
 
 \begin_layout Subsection
+Concurrent threads number
+\end_layout
+
+\begin_layout Description
+Option: --threads
+\end_layout
+
+\begin_layout Standard
+A concurret thread system is used by hostmap to optimize performances, by
+ default hostmap uses 5 concurrent threads.
+ With this option you can change the default number of maximum threads used.
+ 
+\end_layout
+
+\begin_layout Standard
+This is the upper bound that hostmap will use during the event based discovery,
+ sometimes the number of real running threads can be lower because only
+ these are needed.
+\end_layout
+
+\begin_layout Standard
+Please note that if you set this options too high you can flood the DNS
+ server or overload your network and slow down hostmap or take down your
+ connection.
+ Use only with care.
+\end_layout
+
+\begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Only-passive-discovery"
@@ -2583,7 +2611,7 @@ There are many ways to help hostmap: coding, testing, donating money, reviewing
 \end_layout
 
 \begin_layout Subsubsection
-I need help, best if it's live
+Getting live help
 \end_layout
 
 \begin_layout Standard

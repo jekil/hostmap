@@ -27,6 +27,7 @@ module HostMap
       options['dnsbruteforcelevel'] = 'lite'
       options['paranoid'] = true
       options['timeout'] = 600
+      options['threads'] = 5
       return options
     end
 
@@ -79,6 +80,10 @@ module HostMap
 
         opts.on('', "--timeout [STRING]", "set plugin timeout") do |t|
           options['timeout'] = t
+        end
+
+        opts.on('', "--threads [STRING]", "set concurrent threads number") do |t|
+          options['threads'] = t
         end
 
         opts.separator ""

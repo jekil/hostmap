@@ -5,6 +5,7 @@ hostmap-0.2.2
     * Added automatic check for new updates. You can disable it in configuration file or using the option --without-update.
     * Fixed DNS History plugin that can raise SystemExit under some strange circumstances.
     * Changed the job scheduler. Now is more fast, robust and fine tuned.
+    * Added a dynamic thread pool, now you can use --threads to choose the number of concurrent threads.
     
 hostmap-0.2.1
 
