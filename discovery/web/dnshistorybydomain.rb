@@ -17,7 +17,7 @@ PlugMan.define :dnshistorybydomain do
 
     begin
       page = open("http://dnshistory.org/browsedomains/#{domain}.").read
-    rescue
+    rescue Exception
       return @hosts
     end
     
