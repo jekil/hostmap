@@ -8,7 +8,7 @@ require 'set'
 #
 PlugMan.define :bruteforcebydomain do
   author "Alessandro Tanasi"
-  version "0.2.1"
+  version "0.2.2"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -49,7 +49,7 @@ PlugMan.define :bruteforcebydomain do
             end
           end
         end
-      rescue
+      rescue Exception
         return @hosts
       end
     end
@@ -80,30 +80,20 @@ PlugMan.define :bruteforcebydomain do
       host = host.chomp
 
       # Resolve
-      if counter < 10
-        threads << Thread.new {
-          begin
-            res.query("#{host}.#{domain}").answer.each do |rr|
-              # TODO: add this and report without check_host
-              if rr.class == Net::DNS::RR::A
-                if rr.address==IPAddr.new(opts['target'])
-                  @hosts << { :hostname => "#{host}.#{domain}" }
-                end
-              end
+      begin
+        res.query("#{host}.#{domain}").answer.each do |rr|
+          # TODO: add this and report without check_host
+          if rr.class == Net::DNS::RR::A
+            if rr.address==IPAddr.new(opts['target'])
+              @hosts << { :hostname => "#{host}.#{domain}" }
             end
-          rescue
-            nil
           end
-        }
-        counter += 1
-      else
-        sleep(0.01) and threads.delete_if {|thr| not thr.alive? } while not threads.empty?
-        counter = 0
-     end
-
+        end
+      rescue Exception
+        nil
+      end
     end
-
-    threads.delete_if {|thr| not thr.alive?} while not threads.empty?
+    
     return @hosts
   end
 

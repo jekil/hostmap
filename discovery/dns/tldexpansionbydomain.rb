@@ -8,7 +8,7 @@ require 'set'
 #
 PlugMan.define :tldexpansionbydomain do
   author "Alessandro Tanasi"
-  version "0.2.1"
+  version "0.2.2"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -42,9 +42,6 @@ PlugMan.define :tldexpansionbydomain do
     # Get domain name
     domain = HostMap::Utils.exclude_tld(domain)
 
-    threads = []
-    counter = 0
-
     # Brute force
     $TLD.each("\n") do |tld|
       # Skip comments
@@ -56,30 +53,20 @@ PlugMan.define :tldexpansionbydomain do
       tld = tld.chomp
 
       # Resolve
-      if counter < 10
-        threads << Thread.new {
-          begin
-            res.query("#{domain}.#{tld}").answer.each do |rr|
-              # TODO: add this and report without check_host
-              if rr.class == Net::DNS::RR::A
-                if rr.address==IPAddr.new(opts['target'])
-                  @hosts << { :domain => "#{domain}.#{tld}" }
-                end
-              end
+      begin
+        res.query("#{domain}.#{tld}").answer.each do |rr|
+          # TODO: add this and report without check_host
+          if rr.class == Net::DNS::RR::A
+            if rr.address==IPAddr.new(opts['target'])
+              @hosts << { :domain => "#{domain}.#{tld}" }
             end
-          rescue
-            nil
           end
-        }
-        counter += 1
-      else
-        sleep(0.01) and threads.delete_if {|thr| not thr.alive? } while not threads.empty?
-        counter = 0
-     end
-
+        end
+      rescue Exception
+        nil
+      end
     end
 
-    threads.delete_if {|thr| not thr.alive?} while not threads.empty?
     return @hosts
   end
 
