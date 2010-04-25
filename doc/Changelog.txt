@@ -4,6 +4,7 @@ hostmap-0.2.2
     * Fixed DNS AXFR zone transfer check that was prone to false positives under some circumstances.
     * Added automatic check for new updates. You can disable it in configuration file or using the option --without-update.
     * Fixed DNS History plugin that can raise SystemExit under some strange circumstances.
+    * Changed the job scheduler. Now is more fast, robust and fine tuned.
     
 hostmap-0.2.1
 
