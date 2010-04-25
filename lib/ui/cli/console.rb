@@ -21,7 +21,11 @@ module HostMap
         # Check for new releases
         if @opts['updatecheck']
           puts "Checking for new releases..."
-          updates = Updates::Checker.new("hostmap").check(HostMap::VERSION)
+          begin
+            updates = Updates::Checker.new("hostmap").check(HostMap::VERSION)
+          rescue Exception
+            nil
+          end
           if !updates.empty?
             puts "WARNING: A new version is available! You can download:"
             updates.each do |file, url|
