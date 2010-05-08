@@ -120,7 +120,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-This is the official user guide for version 0.2.1 of the hostmap host name
+This is the official user guide for version 0.2.2 of the hostmap host name
  discovery tool.
  This guide is designed to explain what hostmap is, how it works, and what
  you can do with it.
@@ -2363,6 +2363,32 @@ mailto:alessandro@tanasi.it
 \end_layout
 
 \begin_layout Standard
+If you need live help you can interact with other members of the lonerunners
+ community on the official #lonerunners IRC channel.
+ 
+\end_layout
+
+\begin_layout Description
+Server: irc.freenode.net 
+\end_layout
+
+\begin_layout Description
+Channel: #lonerunners 
+\end_layout
+
+\begin_layout Standard
+For more information about freenode, visit 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://freenode.net/faq.shtml"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
@@ -2617,29 +2643,14 @@ Getting live help
 \begin_layout Standard
 If writin an email to Alessandro Tanasi at alessandro@tanasi.it insn't enough,
  you can get live help in our IRC channel.
- You can interact with other members of the lonerunners community on the
- official #lonerunners IRC channel.
- 
-\end_layout
-
-\begin_layout Standard
-Server: irc.freenode.net 
-\end_layout
-
-\begin_layout Standard
-Channel: #lonerunners 
-\end_layout
-
-\begin_layout Standard
-For more information about freenode, visit 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://freenode.net/faq.shtml"
+ See the 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sec:Feedback-and-bug"
 
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Subsubsection
