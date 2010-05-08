@@ -188,7 +188,7 @@ module HostMap
             begin
               block.call
             ensure
-              atimer.kill if timer.alive?
+              timer.kill if timer.alive?
               pool.stop_worker(self)
             end
           }
