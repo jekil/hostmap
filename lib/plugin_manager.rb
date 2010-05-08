@@ -1,5 +1,4 @@
 require 'thread'
-require 'monitor'
 require 'timeout'
 load 'core.rb' # NOTE: big fat note! Must use load, not require or you get a name error!
 require 'PlugMan'
@@ -28,8 +27,6 @@ module HostMap
         self.load
         # Store plugin queue
         @queue = Queue.new                                                        
-        # Throw exceptions in threads
-        Thread.abort_on_exception = true
         # Callback to call when execution is done
         @callback = nil
       end
@@ -89,7 +86,7 @@ module HostMap
                 # Reports the result
                 $LOG.debug "Plugin #{key.name.inspect} Output: #{set2txt(out)}"
                 self.engine.host_discovery.report(out)
-              rescue Timeout::Error
+              rescue SystemExit, Timeout::Error
                 begin
                   out = key.timeout
                   self.engine.host_discovery.report(out)
@@ -183,13 +180,15 @@ module HostMap
         def initialize(timeout, block, pool)
           Thread.new {
             main = Thread.current
-            timer = Thread.new { sleep timeout; main.raise(Timeout::Error) }
+            main.abort_on_exception=true
+            timer = Thread.new {
+              sleep timeout
+              main.raise(Timeout::Error, "Plugin timeouted") if main.alive?
+            }
             begin
               block.call
-            rescue Exception
-              nil
             ensure
-              timer.kill
+              atimer.kill if timer.alive?
               pool.stop_worker(self)
             end
           }
