@@ -47,12 +47,19 @@ module HostMap
     #
     def self.sanitize_fqdn(fqdn)
       fqdn = fqdn.downcase
-      # If is and IP address raise exception
-      if fqdn.match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/) or fqdn.nil? or fqdn == ''
-        raise HostMap::Exception::EnumerationError, fqdn
-      else 
-        return fqdn
+      # Empty case
+      if fqdn.nil? or fqdn == ''
+        raise HostMap::Exception::EnumerationError, "Trying to sanitize and empty string."
       end
+      # If is an IP address raise exception
+      if fqdn.match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/)
+        raise HostMap::Exception::EnumerationError, "Trying to sanitize an ip address: #{fqdn}"
+      end
+      # Check if is a FQDN
+      if !fqdn.match(/[a-zA-Z0-9\w\.-]+\.[a-zA-Z]+$/)
+        raise HostMap::Exception::EnumerationError, "Trying to sanitize a not valid FQDN string: #{fqdn}"
+      end
+      return fqdn
     end
 
     #
