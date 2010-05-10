@@ -274,6 +274,33 @@ http://hostmap.lonerunners.net
 hostmap is available in several packaging formats to fit your own requirements.
 \end_layout
 
+\begin_layout Subsection
+History
+\end_layout
+
+\begin_layout Standard
+The following is the hostmap development timeline and history of notable
+ events.
+\end_layout
+
+\begin_layout Description
+09-05-2010 Released hostmap 0.2.2 with a lot of bug fixes a some new features.
+\end_layout
+
+\begin_layout Description
+26-12-2009 Released hostmap 0.2.1 with a lot of bug fixes a some new features.
+\end_layout
+
+\begin_layout Description
+16-12-2009 Released hostmap 0.2 fully rewritten in Ruby with new cool features.
+\end_layout
+
+\begin_layout Description
+09-05-2009 Initial release.
+ A lot of time has passed after the born of the first private release, today
+ hostmap 0.1 is released to public.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
@@ -286,7 +313,7 @@ Installation
 \end_layout
 
 \begin_layout Standard
-There are several ways and package to use or install hostmap, choose one
+There are several ways and packages to use or install hostmap, choose one
  of the following.
 \end_layout
 
@@ -300,12 +327,24 @@ Zip and tar.gz archive
 \end_layout
 
 \begin_layout Standard
-Operating system independent compressed sources.
+The operating system independent compressed sources can be downloaded from
+ hostmap homepage 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://hostmap.lonerunners.net
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-You need only to unzip the archive and run hostmap as explained in the Quick
- Start Guide.
+You need only to decompress the archive and run hostmap as explained in
+ the Quick Start Guide.
  See 
 \begin_inset CommandInset ref
 LatexCommand prettyref
@@ -314,6 +353,104 @@ reference "sec:Quick-start-guide"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsection
+Development release
+\end_layout
+
+\begin_layout Standard
+The latest development release is available for users that want to run an
+ always update release.
+\end_layout
+
+\begin_layout Standard
+To download you need to install subversion, if you don't already have it,
+ and checkot the sources with: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+$ svn co http://svn.lonerunners.net/projects/hostmap/trunk hostmap
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This creates a folder called hostmap with updated sources inside.
+\end_layout
+
+\begin_layout Standard
+If you want to update the sources before their use simply enter in that
+ folder and type:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+$ svn update
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Windows users needs to install a subversion client.
+ I suggest TortoiseSVN, an easy and free client which can be downloaded
+ from 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://tortoisesvn.net/
+\end_layout
+
+\end_inset
+
+.
+ When installed you can checkout the hostmap sources in a graphical manner,
+ followin the wizard for svn checkout.
 \end_layout
 
 \begin_layout Standard
