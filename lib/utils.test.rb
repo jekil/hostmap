@@ -2,11 +2,12 @@
 
 require 'test/unit'
 require 'utils'
+require 'exceptions'
+require 'constants'
 
 module HostMap
   module Utils
     class UnitTest < Test::Unit::TestCase
-  
       # Tests the domain parsing
       def test_parse_domain
         # Usual cases
@@ -28,14 +29,14 @@ module HostMap
         assert_equal("a.a.a", Utils.sanitize_fqdn("A.a.A"))
         assert_equal("192.168.1.111.aaaa.com", Utils.sanitize_fqdn("192.168.1.111.aaaa.com"))
         # IP
-        assert_raise(RuntimeError) {Utils.sanitize_fqdn("192.168.1.111")}
-        assert_raise(RuntimeError) {Utils.sanitize_fqdn("1.1.1.1")}
+        assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn("192.168.1.111")}
+        assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn("1.1.1.1")}
         # Strange (caused bugs)
-        assert_raise(RuntimeError) {Utils.sanitize_fqdn("sss dddd sd.co.com")}
-        assert_raise(RuntimeError) {Utils.sanitize_fqdn("sss dddd")}
+        assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn("sss dddd sd.co.com")}
+        assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn("sss dddd")}
         # Empty
-        assert_raise(RuntimeError) {Utils.sanitize_fqdn("")}
-        assert_raise(RuntimeError) {Utils.sanitize_fqdn(nil)}
+        assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn("")}
+        assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn(nil)}
       end
 
       # Tests tld exclusion

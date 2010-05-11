@@ -11,12 +11,12 @@ module HostMap
     class EnumerationError < ArgumentError
       include Exception
 
-      def initialize(opts = [])
-        @opts = opts
+      def initialize(args)
+        @args = args
       end
 
       def to_s
-        "The found enumeration is a not valid result: #{@opts.join(', ')}"
+        "The found enumeration is a not valid result. #{@args}"
       end
     end
 
