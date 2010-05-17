@@ -40,7 +40,7 @@ PlugMan.define :axfrbydomain do
       res.query(domain, Net::DNS::NS).answer.each do |rr|
         ns = rr.nsdname.gsub(/.$/, '')
       end
-    rescue
+    rescue Exception
       return @hosts
     end
 
@@ -73,7 +73,7 @@ PlugMan.define :axfrbydomain do
     # Perform transfer
     begin
       zone = @res.axfr(domain)
-    rescue
+    rescue Exception
       return @hosts
     end
 
