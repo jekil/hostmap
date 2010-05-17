@@ -60,6 +60,10 @@ module HostMap
       if !fqdn.match(/^[a-zA-Z0-9\w\.-]+\.[a-zA-Z]+$/)
         raise HostMap::Exception::EnumerationError, "Trying to sanitize a not valid FQDN string: #{fqdn}."
       end
+      # Check nodes length
+      fqdn.split('.').each do |node|
+        raise HostMap::Exception::EnumerationError, "Length over 63 chars: #{fqdn}." if node.size >= 63
+      end
       return fqdn
     end
 

@@ -34,6 +34,10 @@ module HostMap
         # Strange (caused bugs)
         assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn("sss dddd sd.co.com")}
         assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn("sss dddd")}
+        # Lenght
+        assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn('s'*120)}
+        assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn('x'*164 + '.com')}
+        assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn('x'*63 + '.com')}
         # Empty
         assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn("")}
         assert_raise(HostMap::Exception::EnumerationError) {Utils.sanitize_fqdn(nil)}
