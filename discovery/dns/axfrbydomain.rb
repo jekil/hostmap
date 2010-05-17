@@ -44,7 +44,7 @@ PlugMan.define :axfrbydomain do
       return @hosts
     end
 
-    return hosts if ns.nil?
+    return @hosts if ns.nil?
 
     # Get name server ip
     if opts['dns']
