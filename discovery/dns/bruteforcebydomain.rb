@@ -8,7 +8,7 @@ require 'set'
 #
 PlugMan.define :bruteforcebydomain do
   author "Alessandro Tanasi"
-  version "0.2.2"
+  version "0.3"
   extends({ :main => [:domain] })
   requires []
   extension_points []
@@ -39,7 +39,8 @@ PlugMan.define :bruteforcebydomain do
     res.log_level = Net::DNS::UNKNOWN
     
     # False positives or wildcard domain preventive check with random query
-    ["antani456", "t4p1occo", "evvivalafocaechilacosa"].each do |test|
+    10.times do
+      test = (0...8).map{65.+(rand(25)).chr}.join 
       begin
         res.query("#{test}.#{domain}").answer.each do |rr|
           if rr.class == Net::DNS::RR::A
