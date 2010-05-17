@@ -5,10 +5,10 @@ module HostMap
   # Versioning information
   #
   MAJOR    = 0
-  MINOR    = 2.2
+  MINOR    = 3
   RELEASE  = ""
   VERSION  = "#{MAJOR}.#{MINOR}#{RELEASE}"
-  CODENAME = "truppola"
+  CODENAME = "development"
   
   #
   # Paths
