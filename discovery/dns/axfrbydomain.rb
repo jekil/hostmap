@@ -10,7 +10,7 @@ require 'net/dns/rr'
 #
 PlugMan.define :axfrbydomain do
   author "Alessandro Tanasi"
-  version "0.2.1"
+  version "0.3"
   extends({ :main => [:domain] })
   requires []
   extension_points []
