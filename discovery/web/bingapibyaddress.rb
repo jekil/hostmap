@@ -7,7 +7,7 @@ require 'set'
 #
 PlugMan.define :bingapibyaddress do
   author "Alessandro Tanasi"
-  version "0.2.1"
+  version "0.3"
   extends({ :main => [:ip] })
   requires []
   extension_points []
@@ -17,23 +17,16 @@ PlugMan.define :bingapibyaddress do
     @hosts = Set.new
 
     # Skip check if without API key
-    if !opts['bingApiKey']
-      return @hosts
-    end
+    return @hosts if !opts['bingApiKey']
 
     # Go!
     Range.new(0,1000).step(50) do |offset|
-      page = open("http://api.search.live.net/xml.aspx?Appid=#{opts['bingApiKey']}&query=ip:#{ip}&sources=web&web.count=50&web.offset=#{offset}").read
-
       begin
+        page = open("http://api.search.live.net/xml.aspx?Appid=#{opts['bingApiKey']}&query=ip:#{ip}&sources=web&web.count=50&web.offset=#{offset}").read
         page.scan(/<web:Url>(.*?)<\/web:Url>/).each do |url|
-          begin
-            @hosts << { :hostname => URI.parse(url.to_s).host }
-          rescue URI::InvalidURIError
-            next
-          end
+          @hosts << { :hostname => URI.parse(url.to_s).host }
         end
-      rescue
+      rescue Exception
         next
       end
     end
