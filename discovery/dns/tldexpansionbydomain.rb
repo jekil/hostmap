@@ -2,6 +2,7 @@ require 'net/dns/resolver'
 require 'net/dns/packet'
 require 'net/dns/rr'
 require 'set'
+require 'timeout'
 
 #
 # Check with DNS TLD expansion.
@@ -62,8 +63,10 @@ PlugMan.define :tldexpansionbydomain do
             end
           end
         end
-      rescue Exception
-        nil
+      rescue Timeout::Error
+        timeout()
+      rescue Exception => e
+        next
       end
     end
 
