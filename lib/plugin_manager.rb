@@ -3,7 +3,6 @@ require 'timeout'
 load 'core.rb' # NOTE: big fat note! Must use load, not require or you get a name error!
 require 'PlugMan'
 
-
 module HostMap
 
   #
@@ -75,6 +74,7 @@ module HostMap
         @pool = ThreadPool.new(self.engine.opts['timeout'].to_i, self.engine.opts['threads'].to_i)
         
         loop do
+          @res = []
           until @queue.empty?
             job = @queue.pop
             key = job.keys[0]
@@ -85,15 +85,10 @@ module HostMap
                 out = key.run(value, self.engine.opts)
                 # Reports the result
                 $LOG.debug "Plugin #{key.name.inspect} Output: #{set2txt(out)}"
-                self.engine.host_discovery.report(out)
-              rescue SystemExit, Timeout::Error
-                begin
-                  out = key.timeout
-                  self.engine.host_discovery.report(out)
-                  $LOG.warn "Plugin #{key.name.inspect} execution expired. Output: #{set2txt(out)}"
-                rescue Exception
-                  $LOG.debug "Plugin #{key.name.inspect} got a unhandled exception #{$!}"
-                end
+                @res << out
+              rescue Timeout::Error
+                @res << key.timeout
+                $LOG.warn "Plugin #{key.name.inspect} execution expired. Output: #{set2txt(out)}"
               rescue Exception
                 $LOG.debug "Plugin #{key.name.inspect} got a unhandled exception #{$!}"
               end
@@ -102,6 +97,8 @@ module HostMap
 
           # Time wait
           @pool.join
+          # Report
+          @res.each { |r| self.engine.host_discovery.report(r) }
 
           # Break loop if no more plugins
           break if @queue.empty?
@@ -150,16 +147,14 @@ module HostMap
       def set2txt(out)
         txt = ''
 
+        # If no results
+        return "None" if out.nil?
+
         out.each { |result|
           result.each { |key, val|
             txt << "#{val} "
           }
         }
-
-        # If no results
-        if out.length == 0
-          txt = "None"
-        end
 
         # Return text string
         txt
@@ -177,18 +172,20 @@ module HostMap
       # Thread consumer.
       #
       class Worker
-        def initialize(timeout, block, pool)
-          Thread.new {
-            main = Thread.current
-            main.abort_on_exception=true
-            timer = Thread.new {
+        def initialize(timeout, pool, block)
+          Thread.abort_on_exception=true
+          @main = Thread.new {
+            @timer = Thread.new {
               sleep timeout
-              main.raise(Timeout::Error, "Plugin timeouted") if main.alive?
+              while @main.alive?
+                @main.raise Timeout::Error
+                sleep 1
+              end
             }
             begin
               block.call
             ensure
-              timer.kill if timer.alive?
+              @timer.kill if @timer.alive?
               pool.stop_worker(self)
             end
           }
@@ -209,21 +206,23 @@ module HostMap
       # Return the size of the current pool.
       #
       def size
-        @mutex.synchronize {@workers.size}
+        @workers.size
       end
 
       #
       # If the pool is busy.
       #
       def busy?
-        @mutex.synchronize {!@workers.empty?}
+        !@workers.empty?
       end
 
       #
       # Wait to finish
       #
       def join
-        sleep 0.01 while busy?
+        while busy?
+          sleep 1
+        end
       end
 
       #
@@ -237,7 +236,7 @@ module HostMap
               return worker
             end
           end
-          sleep 0.01
+          sleep 1
         end
       end
 
@@ -246,7 +245,7 @@ module HostMap
       #
       def create_worker(block)
         return nil if @workers.size >= @max_size
-        worker = Worker.new(@timeout, block, self)
+        worker = Worker.new(@timeout, self, block)
         @workers << worker
         worker
       end
@@ -255,7 +254,7 @@ module HostMap
       # Stops a running worker.
       #
       def stop_worker(worker)
-        @mutex.synchronize {@workers.delete(worker)}
+        @workers.delete(worker)
       end
     end
   end
