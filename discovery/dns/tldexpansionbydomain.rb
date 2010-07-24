@@ -37,11 +37,11 @@ PlugMan.define :tldexpansionbydomain do
     
     # Load TLD list
     if ! $TLD
-      $TLD = File.open(HostMap::TLDFILE, "r").read
+      $TLD = File.open(Hostmap::TLDFILE, "r").read
     end
     
     # Get domain name
-    domain = HostMap::Utils.exclude_tld(domain)
+    domain = Hostmap::Utils.exclude_tld(domain)
 
     # Brute force
     $TLD.each("\n") do |tld|

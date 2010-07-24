@@ -22,7 +22,7 @@ module Hostmap
         if @opts['updatecheck']
           puts "Checking for new releases..."
           begin
-            updates = Updates::Checker.new("hostmap").check(HostMap::VERSION)
+            updates = Updates::Checker.new("hostmap").check(Hostmap::VERSION)
           rescue Exception
             nil
           end
@@ -39,8 +39,8 @@ module Hostmap
 
         # Run
         begin
-          HostMap::Engine.new(@opts).run
-        rescue HostMap::Exception::TargetError => ex
+          Hostmap::Engine.new(@opts).run
+        rescue Hostmap::Exception::TargetError => ex
           puts "\nError in target value. #{ex.to_s}"
         end
       end

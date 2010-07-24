@@ -10,7 +10,7 @@ require 'timeout'
 
 class PluginManagerTest < Test::Unit::TestCase
   def setup
-    @pool = HostMap::Managers::ThreadPool.new(10)
+    @pool = Hostmap::Managers::ThreadPool.new(10)
   end
 
   def test_size_empty
@@ -54,7 +54,7 @@ class PluginManagerTest < Test::Unit::TestCase
     assert_equal(@pool.size, 10)
     sleep 0.3
     assert_equal(@pool.size, 0)
-    @pool = HostMap::Managers::ThreadPool.new(10,20)
+    @pool = Hostmap::Managers::ThreadPool.new(10,20)
     100.times { @pool.process { sleep 0.2} }
     assert_equal(@pool.size, 20)
     sleep 0.3
@@ -74,7 +74,7 @@ class PluginManagerTest < Test::Unit::TestCase
   end
 
   def test_expire
-    @pool = HostMap::Managers::ThreadPool.new(0.1)
+    @pool = Hostmap::Managers::ThreadPool.new(0.1)
     assert_raise SystemExit do
       @pool.process { sleep 2 }
       @pool.join
@@ -87,7 +87,7 @@ class PluginManagerTest < Test::Unit::TestCase
   end
 
   def test_expire_many
-    @pool = HostMap::Managers::ThreadPool.new(0.1)
+    @pool = Hostmap::Managers::ThreadPool.new(0.1)
     count = 0
     100.times do
       begin
@@ -101,7 +101,7 @@ class PluginManagerTest < Test::Unit::TestCase
   end
 
   def test_real_case
-    @pool = HostMap::Managers::ThreadPool.new(0.5)
+    @pool = Hostmap::Managers::ThreadPool.new(0.5)
     count = 0
     100.times do
       begin

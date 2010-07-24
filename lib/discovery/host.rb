@@ -25,7 +25,7 @@ module Hostmap
       #
       class HostMapping
 
-        include HostMap::Engine::Shared
+        include Hostmap::Engine::Shared
 
         def initialize(engine)
           self.engine = engine
@@ -83,8 +83,8 @@ module Hostmap
         def report_hostname(name)
           # Sanitize
           begin
-            name = HostMap::Utils.sanitize_fqdn(name)
-          rescue HostMap::Exception::EnumerationError
+            name = Hostmap::Utils.sanitize_fqdn(name)
+          rescue Hostmap::Exception::EnumerationError
             return
           end
 
@@ -107,7 +107,7 @@ module Hostmap
           $LOG.info "Found new hostname #{name}"
 
           # Report the domain too
-          domain = HostMap::Utils.parse_domain(name)
+          domain = Hostmap::Utils.parse_domain(name)
           report_domain(domain)
 
           
@@ -121,8 +121,8 @@ module Hostmap
         def report_domain(name)
           # Sanitize
           begin
-            name = HostMap::Utils.sanitize_fqdn(name)
-          rescue HostMap::Exception::EnumerationError
+            name = Hostmap::Utils.sanitize_fqdn(name)
+          rescue Hostmap::Exception::EnumerationError
             return
           end
 
@@ -148,8 +148,8 @@ module Hostmap
         def report_ns(name)
           # Sanitize
           begin
-            name = HostMap::Utils.sanitize_fqdn(name)
-          rescue HostMap::Exception::EnumerationError
+            name = Hostmap::Utils.sanitize_fqdn(name)
+          rescue Hostmap::Exception::EnumerationError
             return
           end
 
@@ -175,8 +175,8 @@ module Hostmap
         def report_mx(name)
           # Sanitize
           begin
-            name = HostMap::Utils.sanitize_fqdn(name)
-          rescue HostMap::Exception::EnumerationError
+            name = Hostmap::Utils.sanitize_fqdn(name)
+          rescue Hostmap::Exception::EnumerationError
             return
           end
 

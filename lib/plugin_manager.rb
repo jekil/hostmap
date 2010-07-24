@@ -15,7 +15,7 @@ module Hostmap
     #
     class PluginManager 
   
-      include HostMap::Engine::Shared
+      include Hostmap::Engine::Shared
 
       #
       # Creates a new plugin manager.

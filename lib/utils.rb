@@ -11,7 +11,7 @@ module Hostmap
     def self.parse_domain(fqdn)
       # Load in cache TLD list
       if $MTLD.nil?
-        $MTLD = File.open(HostMap::MTLDFILE, "r").read
+        $MTLD = File.open(Hostmap::MTLDFILE, "r").read
       end
 
       # Check if it's a particular TLD
@@ -48,21 +48,21 @@ module Hostmap
     def self.sanitize_fqdn(fqdn)
       # Empty case
       if fqdn.nil? or fqdn == ''
-        raise HostMap::Exception::EnumerationError, "Trying to sanitize and empty string."
+        raise Hostmap::Exception::EnumerationError, "Trying to sanitize and empty string."
       end
       # Downcase
       fqdn = fqdn.downcase
       # If is an IP address raise exception
       if fqdn.match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/)
-        raise HostMap::Exception::EnumerationError, "Trying to sanitize an ip address: #{fqdn}."
+        raise Hostmap::Exception::EnumerationError, "Trying to sanitize an ip address: #{fqdn}."
       end
       # Check if is a FQDN
       if !fqdn.match(/^[a-zA-Z0-9\w\.-]+\.[a-zA-Z]+$/)
-        raise HostMap::Exception::EnumerationError, "Trying to sanitize a not valid FQDN string: #{fqdn}."
+        raise Hostmap::Exception::EnumerationError, "Trying to sanitize a not valid FQDN string: #{fqdn}."
       end
       # Check nodes length
       fqdn.split('.').each do |node|
-        raise HostMap::Exception::EnumerationError, "Length over 63 chars: #{fqdn}." if node.size >= 63
+        raise Hostmap::Exception::EnumerationError, "Length over 63 chars: #{fqdn}." if node.size >= 63
       end
       return fqdn
     end
@@ -73,7 +73,7 @@ module Hostmap
     def self.exclude_tld(fqdn)
       # Load in cache TLD list
       if $MTLD.nil?
-        $MTLD = File.open(HostMap::MTLDFILE, "r").read
+        $MTLD = File.open(Hostmap::MTLDFILE, "r").read
       end
 
       # Check if it's a particular TLD

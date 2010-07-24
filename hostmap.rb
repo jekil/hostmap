@@ -15,15 +15,15 @@ require 'options'
 # Prints hostmap banner and credits
 #
 def banner
-  puts "hostmap #{HostMap::VERSION} codename #{HostMap::CODENAME}"
+  puts "hostmap #{Hostmap::VERSION} codename #{Hostmap::CODENAME}"
   puts "Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>"
   puts
 end
 
 # Load options
-options = HostMap::Options.defaults
-options = options.merge(HostMap::Options.load)
-options = options.merge(HostMap::Options.parse(ARGV))
+options = Hostmap::Options.defaults
+options = options.merge(Hostmap::Options.load)
+options = options.merge(Hostmap::Options.parse(ARGV))
 
 if ! options['printmaltego']
   # Show banner
@@ -37,7 +37,7 @@ end
 
 # Start hostmap
 begin
-  HostMap::Ui::Cli.new(options).run
+  Hostmap::Ui::Cli.new(options).run
 rescue Interrupt
   puts "\nExecution aborted by user."
 rescue Exception => e

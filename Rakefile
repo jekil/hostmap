@@ -10,7 +10,7 @@ end
 Rake::RDocTask.new('rdoc') do |t|
   t.rdoc_dir = 'doc/api'
   t.rdoc_files.include('lib/**/*.rb')
-  t.title = "HostMap API documentation"
+  t.title = "Hostmap API documentation"
 end
 
 desc "Generate pdf readme"

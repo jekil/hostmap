@@ -36,7 +36,7 @@ module Hostmap
     #
     def initialize(opts={})
       # Load logger
-      HostMap::HMLogger.new(opts)
+      Hostmap::Logger.new(opts)
       # If maltego output is selected never show anything
       if opts['printmaltego']
         $LOG.level = Logger::ERROR
@@ -48,10 +48,10 @@ module Hostmap
       begin
         IPAddr.new(opts['target'])
       rescue
-        raise HostMap::Exception::TargetError, "isn't an IP address."
+        raise Hostmap::Exception::TargetError, "isn't an IP address."
       end
       self.opts = opts
-      self.plugins = HostMap::Managers::PluginManager.new(self)
+      self.plugins = Hostmap::Managers::PluginManager.new(self)
     end
 
     #
@@ -59,7 +59,7 @@ module Hostmap
     #
     def run
       $LOG.debug "Running discovery engine."
-      self.host_discovery = HostMap::Discovery::HostDiscovery::HostMapping.new(self)
+      self.host_discovery = Hostmap::Discovery::HostDiscovery::HostMapping.new(self)
       self.host_discovery.run
     end
 

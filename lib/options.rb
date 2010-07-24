@@ -13,7 +13,7 @@ module Hostmap
     # Load options from configuration file
     #
     def self.load
-      return YAML.load_file(HostMap::CONFFILE)
+      return YAML.load_file(Hostmap::CONFFILE)
     end
 
     #

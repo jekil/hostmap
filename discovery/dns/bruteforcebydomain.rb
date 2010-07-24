@@ -47,9 +47,9 @@ PlugMan.define :bruteforcebydomain do
     
     # Load brute force names list
     case opts['dnsbruteforcelevel']
-      when "lite" then file = HostMap::DICTLITE
-      when "full" then file = HostMap::DICTFULL
-      when "custom" then file = HostMap::DICTCUSTOM
+      when "lite" then file = Hostmap::DICTLITE
+      when "full" then file = Hostmap::DICTFULL
+      when "custom" then file = Hostmap::DICTCUSTOM
     end
     
     # Load dict
