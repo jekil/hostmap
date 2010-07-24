@@ -36,10 +36,10 @@ module Hostmap
     #
     def initialize(opts={})
       # Load logger
-      Hostmap::Logger.new(opts)
+      Hostmap::HLogger.new(opts)
       # If maltego output is selected never show anything
       if opts['printmaltego']
-        $LOG.level = Logger::ERROR
+        $LOG.level = HLogger::ERROR
       end
 
       $LOG.debug "Initializing hostmap engine."

@@ -3,11 +3,13 @@ require 'logger'
 module Hostmap
 
   #
-  # hostmap custom pretty logger.
+  # Hostmap formatter.
+  # Used to print fancy log strings.
   #
-  class MyLogger < Logger::Formatter
+  class Formatter < Logger::Formatter
 
     #
+    # Formats message.
     # Provide a call() method that returns the formatted message.
     #
     def call(severity, time, program_name, message)
@@ -18,23 +20,26 @@ module Hostmap
   end
 
   #
-  # hostmap global logger
+  # Hostmap logger.
+  # Used to have some custom behaviour like extra logging levels and custom formatting.
   #
-  class HMLogger
+  class HLogger
 
     #
-    # Iinitialize logging
+    # Iinitialize logging.
     #
     def initialize(opts)
+      # Destination.
       $LOG = Logger.new($stdout)
-      # Set logging level
+      # Set logging level from preferences.
       if opts['verbose']
         $LOG.level = Logger::DEBUG
       else
         $LOG.level = Logger::INFO
       end
+      # Fancy stuff.
       $LOG.datetime_format = "%H:%M:%S"
-      $LOG.formatter = MyLogger.new
+      $LOG.formatter = Formatter.new
     end
   end
 end
