@@ -1,6 +1,6 @@
 require 'logger'
 
-module HostMap
+module Hostmap
 
   #
   # hostmap custom pretty logger.

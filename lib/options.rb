@@ -2,7 +2,7 @@ require 'optparse'
 require 'yaml'
 
 
-module HostMap
+module Hostmap
 
   #
   # Provides options handling, loading and command line options parsing.

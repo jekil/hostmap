@@ -13,7 +13,7 @@ require 'discovery/host'
 require 'ipaddr'
 
 
-module HostMap
+module Hostmap
 
   #
   # Hostmap engine.

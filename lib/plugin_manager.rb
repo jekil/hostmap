@@ -3,7 +3,7 @@ require 'timeout'
 load 'core.rb' # NOTE: big fat note! Must use load, not require or you get a name error!
 require 'PlugMan'
 
-module HostMap
+module Hostmap
 
   #
   # Managers and handlers.

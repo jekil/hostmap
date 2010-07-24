@@ -5,7 +5,7 @@ require 'utils'
 require 'exceptions'
 require 'constants'
 
-module HostMap
+module Hostmap
   module Utils
     class UnitTest < Test::Unit::TestCase
       # Tests the domain parsing

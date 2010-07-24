@@ -8,7 +8,7 @@ require 'utils'
 load 'core.rb'
 
 
-module HostMap
+module Hostmap
 
   #
   # Provides discovery functionalities.

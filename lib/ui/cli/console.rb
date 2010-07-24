@@ -1,7 +1,7 @@
 require 'update-checker/updater'
 
 
-module HostMap
+module Hostmap
   module Ui
 
     #

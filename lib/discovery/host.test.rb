@@ -8,7 +8,7 @@ $:.unshift(File.join(File.expand_path(File.dirname(base)), '../../extlib/net-dns
 require 'test/unit'
 require 'discovery/host'
 
-module HostMap
+module Hostmap
   module Discovery
     module HostDiscovery
       class HostTest < Test::Unit::TestCase

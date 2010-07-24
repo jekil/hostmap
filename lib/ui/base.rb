@@ -1,4 +1,4 @@
-module HostMap
+module Hostmap
   
   #
   # Provides user interface support.
