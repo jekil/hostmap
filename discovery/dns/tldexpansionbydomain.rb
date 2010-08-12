@@ -44,7 +44,7 @@ PlugMan.define :tldexpansionbydomain do
     domain = Hostmap::Utils.exclude_tld(domain)
 
     # Brute force
-    $TLD.each("\n") do |tld|
+    $TLD.split("\n").each do |tld|
       # Skip comments
       if tld =~ /^#/
         next

@@ -58,7 +58,7 @@ PlugMan.define :bruteforcebydomain do
     end
     
     # Brute force
-    $HOSTDICT.each("\n") do |host|
+    $HOSTDICT.split("\n").each do |host|
       # Skip comments
       if host =~ /^#/
         next
