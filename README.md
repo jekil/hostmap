@@ -4,4 +4,4 @@ hostmap is a free, automatic, hostnames and virtual hosts discovery tool written
 
 ## Project Homepage
 
-Project home: [http://hostmap.lonerunners.net]http://hostmap.lonerunners.net
+Project home: http://hostmap.lonerunners.net
