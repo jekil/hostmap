@@ -15,7 +15,7 @@ module Hostmap
   #
   ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
   CONFFILENAME = 'hostmap.conf'
-  CONFFILE = ROOT + File::SEPARATOR + CONFFILENAME
+  CONFFILE = ROOT + File::SEPARATOR + '..' + File::SEPARATOR + CONFFILENAME
   PLUGINDIRNAME = 'discovery'
   PLUGINDIR = ROOT + File::SEPARATOR + PLUGINDIRNAME
   DICTIONARYDIRNAME = 'dictionaries'
