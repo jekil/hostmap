@@ -1,36 +1,34 @@
 require 'open-uri'
 require 'set'
+require 'plugins'
 
 #
 # Check against tomsdns.
 #
-PlugMan.define :tomsdnsbyaddress do
-  author "Alessandro Tanasi"
-  version "0.2.1"
-  extends({ :main => [:ip] })
-  requires []
-  extension_points []
-  params({ :description => "Check against tomsdns" })
+class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
-  def run(ip, opts = {})
-    @hosts = Set.new
+  def info
+    {
+      :author => "Alessandro Tanasi",
+      :version => "0.3",
+      :require => :ip,
+      :description => "Check against tomsdns."
+    }
+  end
 
+  def execute(ip, opts = {})
     begin
       page = open("http://www.tomdns.net/get_hostonip.php?target=#{ip}").read
     rescue
-      return @hosts
+      return @res
     end
     
     page.scan(/-->([\d\w\.-_\r\n]+)</).each do |urls|
       urls.to_s.split("\n").each do |url|
-        @hosts << { :hostname => url.to_s }
+        @res << { :hostname => url.to_s }
       end
     end
 
-    return @hosts
-  end
-
-  def timeout
-    return @hosts
+    return @res
   end
 end

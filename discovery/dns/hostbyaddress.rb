@@ -2,47 +2,38 @@ require 'net/dns/resolver'
 require 'net/dns/packet'
 require 'net/dns/rr'
 require 'set'
+require 'plugins'
+require 'network/dns'
 
 #
 # Check with reverse dns query.
 #
-PlugMan.define :hostbyaddress do
-  author "Alessandro Tanasi"
-  version "0.2.1"
-  extends({ :main => [:ip] })
-  requires []
-  extension_points []
-  params({ :description => "Return hostname with reverse DNS (PTR) query." })
+class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
-  def run(ip, opts = {})
-    @hosts = Set.new
-    
-    if opts['dns']
-      dns = opts['dns'].gsub(/\s/, '').split(',')
-      res = Net::DNS::Resolver.new(:nameserver => dns)
-    else
-      res = Net::DNS::Resolver.new
-    end
+  def info
+    {
+      :name => "HostByAddress",
+      :author => "Alessandro Tanasi",
+      :version => "0.3",
+      :require => :ip,
+      :description => "Return hostname with reverse DNS (PTR) query."
+    }
+  end
 
-    # Silence net-dns logger
-    res.log_level = Net::DNS::UNKNOWN
+  def execute(ip, opts = {})
 
     addr = IPAddr.new(ip)
 
     begin
-      res.query(addr).answer.each do |rr|
+      Hostmap::Network::Dns.query(addr).answer.each do |rr|
         if rr.class == Net::DNS::RR::PTR
-          @hosts << { :hostname => rr.ptr.gsub(/\.$/,'') }
+          @res << { :hostname => rr.ptr.gsub(/\.$/,'') }
         end
       end
     rescue
-      nil
+      return @res
     end
 
-    return @hosts
-  end
-
-  def timeout
-    return @hosts
+    return @res
   end
 end

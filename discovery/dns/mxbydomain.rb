@@ -2,45 +2,35 @@ require 'net/dns/resolver'
 require 'net/dns/packet'
 require 'net/dns/rr'
 require 'set'
+require 'network/dns'
+require 'plugins'
 
 #
 # Check with MX dns query.
 #
-PlugMan.define :mxbydomain do
-  author "Alessandro Tanasi"
-  version "0.2.1"
-  extends({ :main => [:domain] })
-  requires []
-  extension_points []
-  params({ :description => "Return mail exchange servers for a domain." })
+class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
-  def run(domain, opts = {})
-    @mx = Set.new
+  def info
+    {
+      :name => "MXByDomain",
+      :author => "Alessandro Tanasi",
+      :version => "0.3",
+      :require => :domain,
+      :description => "Return mail exchange servers for a domain."
+    }
+  end
 
-    if opts['dns']
-      dns = opts['dns'].gsub(/\s/, '').split(',')
-      res = Net::DNS::Resolver.new(:nameserver => dns)
-    else
-      res = Net::DNS::Resolver.new
-    end
-
-    # Silence net-dns logger
-    res.log_level = Net::DNS::UNKNOWN
-
+  def execute(domain, opts = {})
     begin
-      res.query(domain, Net::DNS::MX).answer.each do |rr|
+      Hostmap::Network::Dns.query(domain, Net::DNS::MX).answer.each do |rr|
         if rr.class == Net::DNS::RR::MX
-          @mx << { :mx => rr.exchange.gsub(/\.$/,'') }
+          @res << { :mx => rr.exchange.gsub(/\.$/,'') }
         end
       end
     rescue
-      nil
+      return @res
     end
     
-    return @mx
-  end
-
-  def timeout
-    return @mx
+    return @res
   end
 end

@@ -1,34 +1,32 @@
 require 'net/http'
 require 'set'
+require 'plugins'
 
 #
 # Check against webmax.
 #
-PlugMan.define :webmaxbyaddress do
-  author "Alessandro Tanasi"
-  version "0.2.0"
-  extends({ :main => [:ip] })
-  requires []
-  extension_points []
-  params({ :description => "Check against webmax website" })
+class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
-  def run(ip, opts = {})
-    @hosts = Set.new
+  def info
+    {
+      :author => "Alessandro Tanasi",
+      :version => "0.3",
+      :require => :ip,
+      :description => "Check against webmax website."
+    }
+  end
 
+  def execute(ip, opts = {})
     begin
       page = Net::HTTP.post_form(URI.parse('http://tools.web-max.ca/websitesonip.php'), {'ip' => ip, 'byip'=>'Search+by+specific+IP'})
     rescue
-      return @hosts
+      return @res
     end
     
     page.body.scan(/\" target=\"_blank\">(.*?)<\/a>/).each do |domain|
-      @hosts << { :domain => domain.to_s }
+      @res << { :domain => domain.to_s }
     end
 
-    return @hosts
-  end
-
-  def timeout
-    return @hosts
+    return @res
   end
 end

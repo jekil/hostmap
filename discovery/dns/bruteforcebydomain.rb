@@ -3,46 +3,50 @@ require 'net/dns/packet'
 require 'net/dns/rr'
 require 'set'
 require 'timeout'
+require 'plugins'
 
 #
 # Check with DNS brute forcing.
 #
-PlugMan.define :bruteforcebydomain do
-  author "Alessandro Tanasi"
-  version "0.3"
-  extends({ :main => [:domain] })
-  requires []
-  extension_points []
-  params({ :description => "Check with DNS brute forcing." })
+class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
-  def run(domain, opts = {})
-    @hosts = Set.new
-    @counter = 0
+  def info
+    {
+      :name => "BruteForceByDomain",
+      :author => "Alessandro Tanasi",
+      :version => "0.3",
+      :require => :domain,
+      :description => "Check with DNS brute forcing."
+    }
+  end
+
+  def execute(domain, opts = {})
 
     # Configuration check
     if ! opts['dnsbruteforce']
       $LOG.warn "Skipping DNS bruteforce because it is disabled from command line"
-      return @hosts
+      return @res
     end
     if opts['onlypassive']
       $LOG.warn "Skipping DNS bruteforce because it is enabled only passive checks"
-      return @hosts
+      return @res
     end
 
     # Initialization
     if opts['dns']
       dns = opts['dns'].gsub(/\s/, '').split(',')
-      @res = Net::DNS::Resolver.new(:nameserver => dns)
+      @resolver = Net::DNS::Resolver.new(:nameserver => dns)
     else
-      @res = Net::DNS::Resolver.new
+      @resolver = Net::DNS::Resolver.new
     end
+    @counter = 0
 
     # Silence net-dns logger
-    @res.log_level = Net::DNS::UNKNOWN
+    @resolver.log_level = Net::DNS::UNKNOWN
     
     # False positives or wildcard domain preventive check with random query
     3.times do
-      return @hosts if prev_check(domain)
+      return @res if prev_check(domain)
     end
     
     # Load brute force names list
@@ -56,7 +60,7 @@ PlugMan.define :bruteforcebydomain do
     if ! $HOSTDICT
       $HOSTDICT = File.open(file, "r").read
     end
-    
+
     # Brute force
     $HOSTDICT.split("\n").each do |host|
       # Skip comments
@@ -69,11 +73,11 @@ PlugMan.define :bruteforcebydomain do
 
       # Resolve
       begin
-        @res.query("#{host}.#{domain}").answer.each do |rr|
+        @resolver.query("#{host}.#{domain}").answer.each do |rr|
           # TODO: add this and report without check_host
           if rr.class == Net::DNS::RR::A
             if rr.address==IPAddr.new(opts['target'])
-              @hosts << { :hostname => "#{host}.#{domain}" }
+              @res << { :hostname => "#{host}.#{domain}" }
               return Set.new if count(domain, true)
             else
               count(domain, false)
@@ -81,17 +85,13 @@ PlugMan.define :bruteforcebydomain do
           end
         end
       rescue Timeout::Error
-        timeout()
+        raise Timeout::Error
       rescue Exception => e
         next
       end
     end
     
-    return @hosts
-  end
-
-  def timeout
-    return @hosts
+    return @res
   end
 
   #
@@ -100,7 +100,7 @@ PlugMan.define :bruteforcebydomain do
   def prev_check(domain)
     test = (0...8).map{65.+(rand(25)).chr}.join
     begin
-      @res.query("#{test}.#{domain}").answer.each do |rr|
+      @resolver.query("#{test}.#{domain}").answer.each do |rr|
         if rr.class == Net::DNS::RR::A
           if rr.address==IPAddr.new(opts['target'])
             $LOG.warn "Detected a wildcard domain: #{domain}"

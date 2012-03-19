@@ -1,4 +1,5 @@
 require 'set'
+require 'plugins'
 begin
 require 'net/https'
 rescue Exception
@@ -27,21 +28,23 @@ end
 #
 # Check the X.509 certificate from the web server.
 #
-PlugMan.define :sslcertbyaddress do
-  author "Alessandro Tanasi"
-  version "0.2.1"
-  extends({ :main => [:ip] })
-  requires []
-  extension_points []
-  params({ :description => "Check the X.509 certificate from the web server." })
+class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
-  def run(ip, opts = {})
-    @hosts = Set.new
+  def info
+    {
+      :name => "SSLCertByAddress",
+      :author => "Alessandro Tanasi",
+      :version => "0.3",
+      :require => :ip,
+      :description => "Check the X.509 certificate from the web server."
+    }
+  end
 
+  def execute(ip, opts = {})
     # Configuration check
     if opts['onlypassive']
       $LOG.warn "Skipping SSL because only passive checks are enabled"
-      return @hosts
+      return @res
     end
 
     opts['httpports'].split(',').each do |port|
@@ -80,15 +83,11 @@ PlugMan.define :sslcertbyaddress do
           $LOG.warn "Detected a wildcard entry in X.509 certificate for: #{cn}"
           next
         else
-          @hosts << { :hostname => cn } if !cn.nil?
+          @res << { :hostname => cn } if !cn.nil?
         end
       end
     end
 
-    return @hosts
-  end
-
-  def timeout
-    return @hosts
+    return @res
   end
 end

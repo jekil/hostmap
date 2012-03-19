@@ -3,37 +3,31 @@ require 'net/dns/packet'
 require 'net/dns/rr'
 require 'set'
 require 'timeout'
+require 'network/dns'
+require 'plugins'
 
 #
 # Check with DNS TLD expansion.
 #
-PlugMan.define :tldexpansionbydomain do
-  author "Alessandro Tanasi"
-  version "0.2.2"
-  extends({ :main => [:domain] })
-  requires []
-  extension_points []
-  params({ :description => "Check with DNS TLD expansion." })
+class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
-  def run(domain, opts = {})
-    @hosts = Set.new
+  def info
+    {
+      :name => "TLDExpansionByDomain",
+      :author => "Alessandro Tanasi",
+      :version => "0.3",
+      :require => :domain,
+      :description => "Check with DNS TLD expansion."
+    }
+  end
 
+  def execute(domain, opts = {})
+    
     # Configuration check
     if ! opts['dnsexpansion']
       $LOG.warn "Skipping DNS TLD expansion because it is disabled from command line"
-      return @hosts
+      return @res
     end
-
-    # Initialization
-    if opts['dns']
-      dns = opts['dns'].gsub(/\s/, '').split(',')
-      res = Net::DNS::Resolver.new(:nameserver => dns)
-    else
-      res = Net::DNS::Resolver.new
-    end
-
-    # Silence net-dns logger
-    res.log_level = Net::DNS::UNKNOWN
     
     # Load TLD list
     if ! $TLD
@@ -55,25 +49,21 @@ PlugMan.define :tldexpansionbydomain do
 
       # Resolve
       begin
-        res.query("#{domain}.#{tld}").answer.each do |rr|
+        Hostmap::Network::Dns.query("#{domain}.#{tld}").answer.each do |rr|
           # TODO: add this and report without check_host
           if rr.class == Net::DNS::RR::A
             if rr.address==IPAddr.new(opts['target'])
-              @hosts << { :domain => "#{domain}.#{tld}" }
+              @res << { :domain => "#{domain}.#{tld}" }
             end
           end
         end
       rescue Timeout::Error
-        timeout()
+        raise Timeout::Error
       rescue Exception => e
         next
       end
     end
 
-    return @hosts
-  end
-
-  def timeout
-    return @hosts
+    return @res
   end
 end

@@ -23,39 +23,80 @@ module Hostmap
       def initialize(engine)
         self.engine = engine
         # Load plugins.
+        @loaded_plugins = {}
         self.load
         # Store plugin queue
-        @queue = Queue.new                                                        
+        @queue = Queue.new
         # Callback to call when execution is done
         @callback = nil
       end
 
       #
+      # List all plugins that depends by ip.
+      #
+      def plugins_by_ip
+        return list_plugin(:ip)
+      end
+
+      #
+      # List all plugins that depends by domain.
+      #
+      def plugins_by_domain
+        return list_plugin(:domain)
+      end
+
+      #
+      # List all plugins that depends by name server.
+      #
+      def plugins_by_ns
+        return list_plugin(:ns)
+      end
+
+      #
+      # List all plugins that depends by host name.
+      #
+      def plugins_by_hostname
+        return list_plugin(:hostname)
+      end
+      
+      #
       # Runs all plugins that depends from an enumerated ip.
       #
       def run_ip(ip)
-        PlugMan.registered_plugins[:main].do_group(:ip, ip, self)
+        plugins_by_ip.each do |file, plugin|
+          enq(plugin, ip)
+        end
       end
 
       #
       # Runs all plugins that depends from an enumerated domain.
       #
       def run_domain(name)
-        PlugMan.registered_plugins[:main].do_group(:domain, name, self)
+        plugins_by_domain.each do |file, plugin|
+          enq(plugin, name)
+        end
       end
 
       #
       # Runs all plugins that depends from an enumerated nameserver.
       #
       def run_ns(name)
-        PlugMan.registered_plugins[:main].do_group(:ns, name, self)
+        plugins_by_ns.each do |file, plugin|
+          enq(plugin, name)
+        end
       end
 
       #
       # Runs all plugins that depends from an enumerated hostname.
       #
       def run_hostname(name)
-        PlugMan.registered_plugins[:main].do_group(:hostname, name, self)
+        plugins_by_hostname.each do |file, plugin|
+          enq(plugin, name)
+        end
+      end
+      
+      def enq(plugin, input)
+        @queue << {plugin => input}
       end
 
       #
@@ -81,16 +122,16 @@ module Hostmap
             value = job.values[0]
             @pool.process {
               begin
-                $LOG.debug "Plugin #{key.name.inspect} started"
-                out = key.run(value, self.engine.opts)
+                $LOG.debug "Plugin #{key.info[:name]} started"
+                out = key.execute(value, self.engine.opts)
                 # Reports the result
-                $LOG.debug "Plugin #{key.name.inspect} Output: #{set2txt(out)}"
+                $LOG.debug "Plugin #{key.info[:name]} Output: #{set2txt(out)}"
                 @res << out
               rescue Timeout::Error
                 @res << key.timeout
-                $LOG.warn "Plugin #{key.name.inspect} execution expired. Output: #{set2txt(out)}"
+                $LOG.warn "Plugin #{key.info[:name]} execution expired. Output: #{set2txt(out)}"
               rescue Exception
-                $LOG.debug "Plugin #{key.name.inspect} got a unhandled exception #{$!}"
+                $LOG.debug "Plugin #{key.info[:name]} got a unhandled exception #{$!}"
               end
             }
           end
@@ -133,14 +174,36 @@ module Hostmap
       #
       def load
         $LOG.debug "Loading plugins."
-
-        # Load all the plugins
-        PlugMan.load_plugins PLUGINDIR
-
-        # Start all the pluins
-        PlugMan.start_all_plugins
+        puts PLUGINDIR
+        Dir.glob("#{PLUGINDIR}/**/*.rb").each do |f|
+          puts f
+          require f
+          if defined?(HostmapPlugin)
+            $LOG.debug "Parsing plugin: #{f}"
+            @loaded_plugins[f] = HostmapPlugin.new
+            Object.send(:remove_const, 'HostmapPlugin')
+          end
+        end
+        $LOG.debug "Loaded #{plugins_by_ip.size + plugins_by_ns.size + plugins_by_domain.size + plugins_by_hostname.size} plugins" 
+        $LOG.debug "Loaded #{plugins_by_ip.size} plugins depending from ip"
+        $LOG.debug "Loaded #{plugins_by_domain.size} plugins depending from domain"
+        $LOG.debug "Loaded #{plugins_by_ns.size} plugins depending from name server"
+        $LOG.debug "Loaded #{plugins_by_hostname.size} plugins depending from hostname"
       end
 
+      #
+      # Lists plugins by type.
+      #
+      def list_plugin(type)
+        list = {}
+        @loaded_plugins.each do |file, instance|
+          if instance.info[:require] == type
+            list[file] = instance          
+          end
+        end
+        return list
+      end
+      
       #
       #  Converts a results Set to a printable string
       #

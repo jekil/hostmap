@@ -1,34 +1,32 @@
 require 'open-uri'
 require 'set'
+require 'plugins'
 
 #
 # Check against netcraft.
 #
-PlugMan.define :netcraftbydomain do
-  author "Alessandro Tanasi"
-  version "0.2.1"
-  extends({ :main => [:domain] })
-  requires []
-  extension_points []
-  params({ :description => "Check against Netcraft" })
+class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
-  def run(domain, opts = {})
-    @hosts = Set.new
+  def info
+    {
+      :author => "Alessandro Tanasi",
+      :version => "0.3",
+      :require => :domain,
+      :description => "Check against Netcraft."
+    }
+  end
 
+  def execute(domain, opts = {})
     begin
       page = open("http://searchdns.netcraft.com/?restriction=site+ends+with&host=#{domain}").read
     rescue
-      return @hosts
+      return @res
     end
     
     page.scan(/uptime.netcraft.com\/up\/graph\/\?host=(.*?)\">/).each do |url|
-      @hosts << { :hostname => url.to_s }
+      @res << { :hostname => url.to_s }
     end
 
-    return @hosts
-  end
-
-  def timeout
-    return @hosts
+    return @res
   end
 end
