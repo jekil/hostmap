@@ -28,6 +28,7 @@ module Hostmap
       options['paranoid'] = true
       options['timeout'] = 600
       options['threads'] = 5
+      options['updatecheck'] = false
       return options
     end
 
@@ -112,8 +113,8 @@ module Hostmap
         opts.separator ""
         opts.separator "Misc options:"
 
-        opts.on("", "--without-update", "skip update check") do
-          options['updatecheck'] = false
+        opts.on("", "--with-update", "checks for updates") do
+          options['updatecheck'] = true
         end
       end
 
