@@ -3,7 +3,6 @@
 # Add hostmap library folder to path
 base = __FILE__
 $:.unshift(File.join(File.expand_path(File.dirname(base)), File.join('lib', 'hostmap')))
-$:.unshift(File.join(File.expand_path(File.dirname(base)), 'extlib/plugman/src'))
 $:.unshift(File.join(File.expand_path(File.dirname(base)), 'lib/net-dns/lib'))
 
 require 'core'
