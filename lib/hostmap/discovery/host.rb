@@ -353,13 +353,5 @@ module Hostmap
       end
 
     end
-
-    #
-    # Discovery based on more than one host.
-    #
-    module NetDiscovery
-      # TODO: Future development.
-    end
-
   end
 end
