@@ -10,6 +10,7 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
   def info
     {
+      :name => "GigablastByAddress",
       :author => "Alessandro Tanasi",
       :version => "0.3",
       :require => :ip,

@@ -9,6 +9,7 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
   def info
     {
+      :name => "NetcraftByDomain",
       :author => "Alessandro Tanasi",
       :version => "0.3",
       :require => :domain,
