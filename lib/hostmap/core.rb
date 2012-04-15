@@ -59,7 +59,7 @@ module Hostmap
     #
     def run
       $LOG.debug "Running discovery engine."
-      self.host_discovery = Hostmap::Discovery::HostDiscovery::HostMapping.new(self)
+      self.host_discovery = Hostmap::Discovery::HostMapping.new(self)
       self.host_discovery.run
     end
 
