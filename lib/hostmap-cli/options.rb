@@ -107,7 +107,6 @@ module Hostmap
       end
 
       opts.parse!(args)
-      puts options.inspect
       
       # Check arguments
       self.check(options)
