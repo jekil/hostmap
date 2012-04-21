@@ -43,21 +43,37 @@ module Hostmap
       end
 
       $LOG.debug "Initializing hostmap engine."
-
-      # Validate options
-      begin
-        IPAddr.new(opts['target'])
-      rescue
-        raise Hostmap::Exception::TargetError, "isn't an IP address."
-      end
       self.opts = opts
-      self.plugins = Hostmap::Managers::PluginManager.new(self)
     end
 
     #
     # Runs a  discovery as configured via options.
     #
     def run
+      if self.opts['list']
+        self.plugins = Hostmap::Managers::PluginManager.new(self)
+        puts "Plugins by IP (gets an IP addess as input)"
+        plugins.plugins_by_ip().each {|k,v| puts "\t#{v.info[:name]}"}
+        puts "Plugins by domain (gets a domain as input)"
+        plugins.plugins_by_domain().each {|k,v| puts "\t#{v.info[:name]}"}
+        puts "Plugins by NS (gets a name server as input)"
+        plugins.plugins_by_ns().each {|k,v| puts "\t#{v.info[:name]}"}
+        puts "Plugins by hostname (gets an hostname addess as input)"
+        plugins.plugins_by_hostname().each {|k,v| puts "\t#{v.info[:name]}"}
+        return
+      end
+      if self.opts['plugin']
+        return
+      end
+      # else
+      # Validate options
+      begin
+        IPAddr.new(opts['target'])
+      rescue
+        raise Hostmap::Exception::TargetError, "isn't an IP address."
+      end
+      
+      self.plugins = Hostmap::Managers::PluginManager.new(self)
       $LOG.debug "Running discovery engine."
       self.host_discovery = Hostmap::Discovery::HostMapping.new(self)
       self.host_discovery.run
