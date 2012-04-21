@@ -1,5 +1,6 @@
 require 'optparse'
 require 'yaml'
+require 'exceptions'
 
 
 module Hostmap
@@ -10,33 +11,12 @@ module Hostmap
   class Options
 
     #
-    # Load options from configuration file
-    #
-    def self.load
-      return YAML.load_file(Hostmap::CONFFILE)
-    end
-
-    #
-    # Defaults options
-    #
-    def self.defaults
-      options = {}
-      options['dnszonetransfer'] = false
-      options['dnsbruteforce'] = true
-      options['dnsexpansion'] = true
-      options['dnsbruteforcelevel'] = 'lite'
-      options['paranoid'] = true
-      options['timeout'] = 600
-      options['threads'] = 5
-      options['updatecheck'] = false
-      return options
-    end
-
-    #
     # Return a hash describing the options.
     #
     def self.parse(args)
-      options = {}
+      # Add defaults and config file options
+      options = defaults
+      options = options.merge(load)
 
       opts = OptionParser.new do |opts|
         opts.banner = "Usage: #$0 [options] -t [target]"
@@ -46,6 +26,13 @@ module Hostmap
 
         opts.on("-t [STRING]", "--target [STRING]", "set target domain") do |t|
           options['target'] = t
+        end
+
+        opts.separator ""
+        opts.separator "Plugin options:"
+
+        opts.on("-l", "--list-plugins", "lists available plugin") do
+          options['list'] = true
         end
 
         opts.separator ""
@@ -79,11 +66,11 @@ module Hostmap
           options['onlypassive'] = true
         end
 
-        opts.on('', "--timeout [STRING]", "set plugin timeout") do |t|
+        opts.on("", "--timeout [STRING]", "set plugin timeout") do |t|
           options['timeout'] = t
         end
 
-        opts.on('', "--threads [STRING]", "set concurrent threads number") do |t|
+        opts.on("", "--threads [STRING]", "set concurrent threads number") do |t|
           options['threads'] = t
         end
 
@@ -116,11 +103,57 @@ module Hostmap
         opts.on("", "--with-update", "checks for updates") do
           options['updatecheck'] = true
         end
+
       end
 
       opts.parse!(args)
+      puts options.inspect
+      
+      # Check arguments
+      self.check(options)
 
-      options
+      return options
     end
+
+    private
+
+    #
+    # Checks options coerence due to hostmap logic.
+    #
+    def self.check(args)
+      if args.length == 0
+        raise Hostmap::Exception::OptionError, "Please provide a valid option. Use -h to print available options."
+      end
+      if !(args['target'] or args['list'])
+        raise Hostmap::Exception::OptionError, 'No target selected. You must select a target with -t option.'
+      end
+      if args['target'] and args['list']
+        raise Hostmap::Exception::OptionError, 'You cannot use -t and -l options together.'
+      end
+    end
+
+    #
+    # Load options from configuration file
+    #
+    def self.load
+      return YAML.load_file(Hostmap::CONFFILE)
+    end
+
+    #
+    # Defaults options
+    #
+    def self.defaults
+      options = {}
+      options['dnszonetransfer'] = false
+      options['dnsbruteforce'] = true
+      options['dnsexpansion'] = true
+      options['dnsbruteforcelevel'] = 'lite'
+      options['paranoid'] = true
+      options['timeout'] = 600
+      options['threads'] = 5
+      options['updatecheck'] = false
+      return options
+    end
+
   end
 end

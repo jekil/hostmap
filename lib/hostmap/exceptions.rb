@@ -35,5 +35,20 @@ module Hostmap
       end
     end
 
+    #
+    # The supplied options are not valid.
+    #
+    class OptionError < ArgumentError
+      include Exception
+
+      def initialize(args)
+        @args = args
+      end
+
+      def to_s
+        "The supplied options aren't valid: #{@args}"
+      end
+    end
+
   end
 end

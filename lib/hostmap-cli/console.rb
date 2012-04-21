@@ -1,4 +1,6 @@
 require 'update-checker/updater'
+require 'options'
+require 'exceptions'
 
 
 module Hostmap
@@ -9,9 +11,14 @@ module Hostmap
     #
     class Cli
 
-      def initialize(opts = {})
-        # Self reference options for later use
-        @opts = opts
+      def initialize(opts=nil)
+        begin
+          @opts = Options.parse(opts)
+        rescue Hostmap::Exception::OptionError => e
+          puts 'Wrong options!'
+          puts e
+          exit
+        end
       end
 
       #
