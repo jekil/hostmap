@@ -35,6 +35,10 @@ module Hostmap
           options['list'] = true
         end
 
+        opts.on("-p [STRING]", "--plugin [STRING]", "run only selected discovery plugin") do |t|
+          options['plugin'] = t
+        end
+
         opts.separator ""
         opts.separator "Discovery options:"
 

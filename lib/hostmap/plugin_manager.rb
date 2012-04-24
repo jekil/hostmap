@@ -60,6 +60,13 @@ module Hostmap
       end
       
       #
+      # List all plugins
+      #
+      def plugins_all
+        return list_plugin(:all)
+      end
+      
+      #
       # Runs all plugins that depends from an enumerated ip.
       #
       def run_ip(ip)
@@ -119,6 +126,7 @@ module Hostmap
           until @queue.empty?
             job = @queue.pop
             key = job.keys[0]
+            puts key.info[:name]
             value = job.values[0]
             @pool.process {
               begin
@@ -148,6 +156,28 @@ module Hostmap
         # Stop plugin manager
         stop_all
       end
+      
+      def start_once(plugin, input)
+        $LOG.info "Single plugin run mode."
+        begin
+          @res = []
+          Timeout::timeout(self.engine.opts['timeout'].to_i) {
+            begin
+              $LOG.debug "Plugin #{plugin.info[:name]} started"
+              out = plugin.execute(input, self.engine.opts)
+              # Reports the result
+              $LOG.info "Plugin #{plugin.info[:name]} Output: #{set2txt(out)}"
+              @res << out
+            rescue Exception
+              $LOG.debug "Plugin #{plugin.info[:name]} got a unhandled exception #{$!}"
+            end
+          }
+        rescue Timeout::Error
+          @res << plugin.timeout
+          $LOG.warn "Plugin #{plugin.info[:name]} execution expired. Output: #{set2txt(out)}"
+        end
+        return @res
+      end
 
       #
       # Enqueue a plugin to be runned.
@@ -174,9 +204,7 @@ module Hostmap
       #
       def load
         $LOG.debug "Loading plugins."
-        puts PLUGINDIR
         Dir.glob("#{PLUGINDIR}/**/*.rb").each do |f|
-          puts f
           require f
           if defined?(HostmapPlugin)
             $LOG.debug "Parsing plugin: #{f}"
@@ -198,12 +226,15 @@ module Hostmap
         list = {}
         @loaded_plugins.each do |file, instance|
           if instance.info[:require] == type
-            list[file] = instance          
+            list[file] = instance
+          end
+          if type == :all
+            list[file] = instance
           end
         end
         return list
       end
-      
+
       #
       #  Converts a results Set to a printable string
       #
@@ -222,7 +253,6 @@ module Hostmap
         # Return text string
         txt
       end
-
     end
 
 
