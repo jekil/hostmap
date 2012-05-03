@@ -19,7 +19,7 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
   def execute(ip, opts = {})
     begin
-      page = Net::HTTP.post_form(URI.parse('http://tools.web-max.ca/websitesonip.php'), {'ip' => ip, 'byip'=>'Search+by+specific+IP'})
+      page = Net::HTTP.post_form(URI.parse('http://ip2web.web-max.ca/index.php'), {'ip' => ip, 'byip'=>'Search+by+specific+IP'})
     rescue
       return @res
     end
