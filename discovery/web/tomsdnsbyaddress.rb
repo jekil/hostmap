@@ -4,6 +4,7 @@ require 'plugins'
 
 #
 # Check against tomsdns.
+# TODO: website probalby down, marked as to be removed.
 #
 class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
