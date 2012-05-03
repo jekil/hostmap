@@ -174,7 +174,7 @@ module Hostmap
           }
         rescue Timeout::Error
           @res << plugin.timeout
-          $LOG.warn "Plugin #{plugin.info[:name]} execution expired. Output: #{set2txt(out)}"
+          $LOG.warn "Plugin #{plugin.info[:name]} execution expired. Output: #{set2txt(@res)}"
         end
         return @res
       end
