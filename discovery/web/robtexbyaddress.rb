@@ -24,7 +24,7 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
       return @res
     end
 
-    page.scan(/\" >([\w\-\_\.]+)<\/a><\/td><td/).each do |url|
+    page.scan(/\">([\w\-\_\.]+)<\/a><\/span><\/td><td/).each do |url|
       @res << { :hostname => url.to_s }
     end
 
