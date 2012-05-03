@@ -19,8 +19,7 @@ module Hostmap
   LIBDIR = File.join(ROOT, 'lib', 'hostmap')
   PLUGINDIRNAME = 'discovery'
   PLUGINDIR = ROOT + File::SEPARATOR + PLUGINDIRNAME
-  DICTIONARYDIRNAME = 'dictionaries'
-  DICTDIR = LIBDIR + File::SEPARATOR + DICTIONARYDIRNAME
+  DICTDIR = 'dictionaries'
   HOSTLISTLITE = 'hostnames-lite.txt'
   DICTLITE = DICTDIR + File::SEPARATOR + HOSTLISTLITE
   HOSTLISTCUSTOM = 'hostnames-custom.txt'
