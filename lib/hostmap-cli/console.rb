@@ -1,6 +1,7 @@
 require 'update-checker/updater'
 require 'options'
 require 'exceptions'
+require 'core'
 
 
 module Hostmap

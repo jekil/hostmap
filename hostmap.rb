@@ -6,7 +6,6 @@ $:.unshift(File.join(File.expand_path(File.dirname(base)), File.join('lib', 'hos
 $:.unshift(File.join(File.expand_path(File.dirname(base)), File.join('lib', 'hostmap-cli')))
 $:.unshift(File.join(File.expand_path(File.dirname(base)), 'lib/net-dns/lib')) # TODO: move this import to library
 
-require 'core'
 require 'console'
 
 
