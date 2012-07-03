@@ -39,6 +39,10 @@ module Hostmap
           options['plugin'] = t
         end
 
+        opts.on("-i [STRING]", "--plugin-input [STRING]", "input for selected plugin") do |t|
+          options['input'] = t
+        end
+
         opts.separator ""
         opts.separator "Discovery options:"
 
@@ -132,6 +136,11 @@ module Hostmap
       end
       if args['target'] and args['list']
         raise Hostmap::Exception::OptionError, 'You cannot use -t and -l options together.'
+      end
+      if args['input']
+        if not args['plugin']
+          raise Hostmap::Exception::OptionError, 'You must use -p and -i options together.'
+        end
       end
     end
 

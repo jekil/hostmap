@@ -88,7 +88,7 @@ module Hostmap
             plugin = v
           end
          }
-        self.plugins.start_once(plugin, self.opts['target'])
+        self.plugins.start_once(plugin)
         return
       else
         # Validate options

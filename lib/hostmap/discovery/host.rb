@@ -39,7 +39,7 @@ module Hostmap
       # Runs the hostmapping.
       #
       def run
-        self.engine.plugins.start(:ip, @host.ip, proc {stop})
+        self.engine.plugins.start_all(:ip, @host.ip, proc {stop})
       end
 
       #

@@ -109,7 +109,7 @@ module Hostmap
       #
       # Start the engine suppling the parameters to start the first plugin.
       #
-      def start(type, value, callback)
+      def start_all(type, value, callback)
         # Set callback to later user
         @callback = callback
 
@@ -119,7 +119,9 @@ module Hostmap
         end
         
         # Plugins pool
-        @pool = ThreadPool.new(self.engine.opts['timeout'].to_i, self.engine.opts['threads'].to_i)
+        @pool = ThreadPool.new(self.engine.opts['threads'].to_i,
+                               self.engine.opts['threads'].to_i
+                              )
         
         loop do
           @res = []
@@ -129,54 +131,30 @@ module Hostmap
             puts key.info[:name]
             value = job.values[0]
             @pool.process {
-              begin
-                $LOG.debug "Plugin #{key.info[:name]} started"
-                out = key.execute(value, self.engine.opts)
-                # Reports the result
-                $LOG.debug "Plugin #{key.info[:name]} Output: #{set2txt(out)}"
-                @res << out
-              rescue Timeout::Error
-                @res << key.timeout
-                $LOG.warn "Plugin #{key.info[:name]} execution expired. Output: #{set2txt(out)}"
-              rescue Exception
-                $LOG.debug "Plugin #{key.info[:name]} got a unhandled exception #{$!}"
-              end
+              res = start(key, value)
+              res.each { |r| self.engine.host_discovery.report(r) }
+              sleep 60
             }
           end
 
           # Time wait
-          @pool.join
-          # Report
-          @res.each { |r| self.engine.host_discovery.report(r) }
+          #unless @pool.spawned == 0 
+            #puts "Spawn " + @pool.spawned.to_s
+            #puts "Backlog " + @pool.backlog.to_s
+          #end
 
           # Break loop if no more plugins
-          break if @queue.empty?
+          #puts @queue.length
+          break if @queue.empty? and @pool.spawned == 0
         end
         
         # Stop plugin manager
-        stop_all
+        #stop_all
       end
       
-      def start_once(plugin, input)
+      def start_once(plugin)
         $LOG.info "Single plugin run mode."
-        begin
-          @res = []
-          Timeout::timeout(self.engine.opts['timeout'].to_i) {
-            begin
-              $LOG.debug "Plugin #{plugin.info[:name]} started"
-              out = plugin.execute(input, self.engine.opts)
-              # Reports the result
-              $LOG.info "Plugin #{plugin.info[:name]} Output: #{set2txt(out)}"
-              @res << out
-            rescue Exception
-              $LOG.debug "Plugin #{plugin.info[:name]} got a unhandled exception #{$!}"
-            end
-          }
-        rescue Timeout::Error
-          @res << plugin.timeout
-          $LOG.warn "Plugin #{plugin.info[:name]} execution expired. Output: #{set2txt(@res)}"
-        end
-        return @res
+        return start(plugin, self.engine.opts['input'])
       end
 
       #
@@ -234,6 +212,27 @@ module Hostmap
         end
         return list
       end
+      
+      def start(plugin, input)
+        begin
+          @res = []
+          Timeout::timeout(self.engine.opts['timeout'].to_i) {
+            begin
+              $LOG.debug "Plugin #{plugin.info[:name]} started with input #{input}"
+              out = plugin.execute(input, self.engine.opts)
+              # Reports the result
+              $LOG.info "Plugin #{plugin.info[:name]} Output: #{set2txt(out)}"
+              @res << out
+            rescue Exception
+              $LOG.debug "Plugin #{plugin.info[:name]} got a unhandled exception #{$!}"
+            end
+          }
+        rescue Timeout::Error
+          @res << plugin.timeout
+          $LOG.warn "Plugin #{plugin.info[:name]} execution expired. Output: #{set2txt(@res)}"
+        end
+        return @res
+      end
 
       #
       #  Converts a results Set to a printable string
@@ -259,95 +258,147 @@ module Hostmap
     #
     # Handles a basic thread pool.
     #
+    
     class ThreadPool
-
-      #
-      # Thread consumer.
-      #
-      class Worker
-        def initialize(timeout, pool, block)
-          Thread.abort_on_exception=true
-          @main = Thread.new {
-            @timer = Thread.new {
-              sleep timeout
-              while @main.alive?
-                @main.raise Timeout::Error
-                sleep 1
-              end
-            }
-            begin
-              block.call
-            ensure
-              @timer.kill if @timer.alive?
-              pool.stop_worker(self)
-            end
-          }
-        end
-      end
-
-      attr_accessor :max_size
-      attr_reader :workers
-
-      def initialize(timeout, max_size = 10)
-        @max_size = max_size
-        @timeout = timeout
-        @workers = []
+      attr_reader :min, :max, :spawned
+    
+      def initialize (min, max = nil, &block)
+        @min   = min
+        @max   = max || min
+        @block = block
+    
+        @cond  = ConditionVariable.new
         @mutex = Mutex.new
+    
+        @todo    = []
+        @workers = []
+    
+        @spawned       = 0
+        @waiting       = 0
+        @shutdown      = false
+        @trim_requests = 0
+        @auto_trim     = false
+    
+        @mutex.synchronize {
+          min.times {
+            spawn_thread
+          }
+        }
       end
-
-      #
-      # Return the size of the current pool.
-      #
-      def size
-        @workers.size
+    
+      def auto_trim?;    @auto_trim;         end
+      def auto_trim!;    @auto_trim = true;  end
+      def no_auto_trim!; @auto_trim = false; end
+    
+      def resize (min, max = nil)
+        @min = min
+        @max = max || min
+    
+        trim!
       end
-
-      #
-      # If the pool is busy.
-      #
-      def busy?
-        !@workers.empty?
+    
+      def backlog
+        @mutex.synchronize {
+          @todo.length
+        }
       end
-
-      #
-      # Wait to finish
-      #
-      def join
-        while busy?
-          sleep 1
+    
+      def process (*args, &block)
+        unless block || @block
+          raise ArgumentError, 'you must pass a block'
         end
-      end
-
-      #
-      # Runs a block
-      #
-      def process(&block)
-        while true
-          @mutex.synchronize do
-            worker = create_worker(block)
-            if worker
-              return worker
-            end
+    
+        @mutex.synchronize {
+          raise 'unable to add work while shutting down' if @shutdown
+    
+          @todo << [args, block]
+    
+          if @waiting == 0 && @spawned < @max
+            spawn_thread
           end
-          sleep 1
-        end
+    
+          @cond.signal
+        }
       end
-
-      #
-      # Create a worker
-      #
-      def create_worker(block)
-        return nil if @workers.size >= @max_size
-        worker = Worker.new(@timeout, self, block)
-        @workers << worker
-        worker
+    
+      alias << process
+    
+      def trim (force = false)
+        @mutex.synchronize {
+          if (force || @waiting > 0) && @spawned - @trim_requests > @min
+            @trim_requests -= 1
+            @cond.signal
+          end
+        }
       end
-
-      #
-      # Stops a running worker.
-      #
-      def stop_worker(worker)
-        @workers.delete(worker)
+    
+      def trim!
+        trim true
+      end
+    
+      def shutdown
+        @mutex.synchronize {
+          @shutdown = true
+          @cond.broadcast
+        }
+    
+        @workers.first.join until @workers.empty?
+      end
+    
+    private
+      def spawn_thread
+        @spawned += 1
+    
+        thread = Thread.new {
+          loop do
+            work     = nil
+            continue = true
+    
+            @mutex.synchronize {
+              while @todo.empty?
+                if @trim_requests > 0
+                  @trim_requests -= 1
+                  continue = false
+    
+                  break
+                end
+    
+                if @shutdown
+                  continue = false
+    
+                  break
+                end
+    
+                @waiting += 1
+                @cond.wait @mutex
+                @waiting -= 1
+    
+                if @shutdown
+                  continue = false
+    
+                  break
+                end
+              end
+    
+              work = @todo.shift if continue
+            }
+    
+            break unless continue
+    
+            (work.last || @block).call(*work.first)
+    
+            trim if auto_trim? && @spawned > @min
+          end
+    
+          @mutex.synchronize {
+            @spawned -= 1
+            @workers.delete thread
+          }
+        }
+    
+        @workers << thread
+    
+        thread
       end
     end
   end
