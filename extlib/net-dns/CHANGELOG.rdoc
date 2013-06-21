@@ -1,0 +1,43 @@
+= Changelog
+
+
+== master
+
+* ADDED: Net::DNS::Packet#to_s method (alias of #inspect)
+
+* FIXED: typo in lib/net/dns/rr/ptr.rb [Thanks to Chris Lundquist]
+* FIXED: warning: method redefined; discarding old inspect [Thanks to Kevin Baker] (closes #3)
+
+
+== Release 0.6.0
+
+*WARNING:* If you are upgrading from a previous minor release, check out the Compatibility issue list below.
+
+* FIXED: Added missing #to_s method to Net::DNS::Question.
+
+* FIXED: Compatibility with Ruby 1.9
+
+* FIXED: Types regexp order issue
+
+* CHANGED: Refactoring unit test to follow most used Ruby conventions
+
+* CHANGED: default timeout is now 5 seconds for both UDP and TCP
+
+* CHANGED: Moved main dns.rb file to lib/net folder as default for GEMs. In this way it can be autoloaded when the gem is required.
+
+=== Compatibility issues
+
+* CHANGED: RR#set_stype scope is now private to prevent invalid usage.
+
+* CHANGED: DnsTimeout#timeout now raises LocalJumpError instead of DnsTimeoutArgumentError when block is missing.
+
+* CHANGED: Renamed Net::DNS::RR::Types::Types to Net::DNS::RR::Types::TYPES to follow Ruby coding standards.
+
+
+== Release 0.4
+
+* many bug fixes (thanks guys!)
+* a whole new class Net::DNS::Header::RCode
+* new methods in Net::DNS::Resolver class to do AXFR queries
+* a new SRV resource record written by Dan Janowski
+* more documentation written and corrected

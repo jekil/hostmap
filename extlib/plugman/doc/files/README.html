@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Mar 04 10:14:39 +1000 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="../classes/PlugMan.html">PlugMan</a>: A simple but powerful Ruby plugin framework.</h1>
+<pre>
+ Author: Aaron P (mailto:ruby.plugman@gmail.com)
+ Copyright: Copyright (c)2008 Aaron P
+ License: Distributed under the same terms as Ruby.
+</pre>
+<p>
+<a href="../classes/PlugMan.html">PlugMan</a> is a simple and effective
+plugin framework for building dynamic and extensible Ruby applications. If
+you need plugins/addons/extensions in your application, <a
+href="../classes/PlugMan.html">PlugMan</a> is for you. <a
+href="../classes/PlugMan.html">PlugMan</a> also includes demos to make
+learning <a href="../classes/PlugMan.html">PlugMan</a> very easy.
+</p>
+<h2>Requirements</h2>
+<p>
+Ruby! That&#8216;s all. All the files that comprise <a
+href="../classes/PlugMan.html">PlugMan</a> are in the ./src dir (yes, just
+those two .rb files.)
+</p>
+<p>
+In ./src/demos are a couple of demo programmes to show <a
+href="../classes/PlugMan.html">PlugMan</a> in action. They aren&#8216;t
+necessary for <a href="../classes/PlugMan.html">PlugMan</a> actual (so you
+can safely delete them if you don&#8216;t need a leg-up!) To run them, from
+the ./src dir, execute &#8216;ruby ./demos/GtkDemo.rb&#8217; or &#8216;ruby
+./demos/Texter.rb&#8217; Alternatively, the rake targets
+&quot;gtk_demo&quot; and &quot;text_demo&quot; can be used.
+</p>
+<p>
+The <a href="../classes/GtkDemo.html">GtkDemo</a> makes use of a few *nix
+type utilities such as df and fortune. It also requires the libgtk2-ruby
+libraries to be available. The <a href="../classes/Texter.html">Texter</a>
+demo is a console application that does not have any external dependencies;
+it still demonstrates the plugin dependency and extension point processing
+of <a href="../classes/PlugMan.html">PlugMan</a>.
+</p>
+<h2>TODO:</h2>
+<pre>
+ - Gem
+ - More tests
+ - More doco
+ - File headers
+ - Namespace
+ - Hardening for real-world use cases (it works find for my needs, perhaps other developers will use it differently, causing breakages.)
+</pre>
+<p>
+Future? Handling cyclic plugin dependencies. Perhaps a plugin query
+language to make finding plugins more powerful.
+</p>
+<h2>Version History</h2>
+<p>
+0.0.1, 29-Feb-2008
+</p>
+<pre>
+    - First release, a functional and easy to use plugin architecture that supports plugin dependencies and extension points.
+</pre>
+<p>
+0.0.2, 04-Mar-2008
+</p>
+<pre>
+    - Removed PluginMeta.rb and incorporated it into Plugin.rb. Fixed some doco. Added a Rakefile.
+</pre>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

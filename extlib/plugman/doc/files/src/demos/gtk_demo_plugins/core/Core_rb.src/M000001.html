@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>launch (src/demos/gtk_demo_plugins/core/Core.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/demos/gtk_demo_plugins/core/Core.rb, line 9</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">launch</span>()
+    
+    <span class="ruby-comment cmt"># run the init plugins</span>
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-value str">&quot;About to do app_init processing&quot;</span> }
+    <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">extensions</span>(<span class="ruby-identifier">:core</span>, <span class="ruby-identifier">:app_init</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">plugin</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">app_init</span>()
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-comment cmt"># run the start plugins</span>
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-value str">&quot;About to do app_start processing&quot;</span> }
+    <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">extensions</span>(<span class="ruby-identifier">:core</span>, <span class="ruby-identifier">:app_start</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">plugin</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">app_start</span>()
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-comment cmt"># run the run plugins</span>
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-value str">&quot;About to do app_run processing&quot;</span> }
+    <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">extensions</span>(<span class="ruby-identifier">:core</span>, <span class="ruby-identifier">:app_run</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">plugin</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">app_run</span>()
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-comment cmt"># run the stop plugins</span>
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-value str">&quot;About to do app_stop processing&quot;</span> }
+    <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">extensions</span>(<span class="ruby-identifier">:core</span>, <span class="ruby-identifier">:app_stop</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">plugin</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">app_stop</span>()
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-comment cmt"># run the exitplugins</span>
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-value str">&quot;About to do app_exit processing&quot;</span> }
+    <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">extensions</span>(<span class="ruby-identifier">:core</span>, <span class="ruby-identifier">:app_exit</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">plugin</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">app_exit</span>()
+    <span class="ruby-keyword kw">end</span>
+
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

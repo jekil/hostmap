@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>display (src/demos/gtk_demo_plugins/diskfree/DfUi.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/demos/gtk_demo_plugins/diskfree/DfUi.rb, line 19</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">display</span>()
+    <span class="ruby-identifier">data</span> = <span class="ruby-identifier">get_data</span>()
+    <span class="ruby-identifier">table</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>.<span class="ruby-identifier">size</span>, <span class="ruby-value">6</span>, <span class="ruby-keyword kw">false</span>)
+    <span class="ruby-identifier">ii</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;Device&quot;</span>, <span class="ruby-value str">&quot;&lt;b&gt;&quot;</span>, <span class="ruby-value str">&quot;&lt;/b&gt;&quot;</span>), <span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+    <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;Mount Point&quot;</span>, <span class="ruby-value str">&quot;&lt;b&gt;&quot;</span>, <span class="ruby-value str">&quot;&lt;/b&gt;&quot;</span>), <span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+    <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;Usage&quot;</span>, <span class="ruby-value str">&quot;&lt;b&gt;&quot;</span>, <span class="ruby-value str">&quot;&lt;/b&gt;&quot;</span>), <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+    <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;Free&quot;</span>, <span class="ruby-value str">&quot;&lt;b&gt;&quot;</span>, <span class="ruby-value str">&quot;&lt;/b&gt;&quot;</span>), <span class="ruby-value">3</span>, <span class="ruby-value">4</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+    <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">make_label</span>(<span class="ruby-value str">&quot;%&quot;</span>, <span class="ruby-value str">&quot;&lt;b&gt;&quot;</span>, <span class="ruby-value str">&quot;&lt;/b&gt;&quot;</span>), <span class="ruby-value">4</span>, <span class="ruby-value">5</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+
+    <span class="ruby-identifier">ii</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+      
+      <span class="ruby-comment cmt"># low value warning in red.</span>
+      <span class="ruby-identifier">perc</span> = <span class="ruby-identifier">item</span>[<span class="ruby-identifier">:perc</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/%/</span>, <span class="ruby-value str">&quot;&quot;</span>).<span class="ruby-identifier">to_i</span>
+      <span class="ruby-identifier">op</span> = <span class="ruby-identifier">cl</span> = <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">perc</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">90</span>
+        <span class="ruby-identifier">op</span> = <span class="ruby-value str">&quot;&lt;span foreground='red'&gt;&quot;</span>
+        <span class="ruby-identifier">cl</span> = <span class="ruby-value str">&quot;&lt;/span&gt;&quot;</span>
+      <span class="ruby-keyword kw">else</span>
+        
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">make_label</span>(<span class="ruby-identifier">item</span>[<span class="ruby-identifier">:device</span>], <span class="ruby-identifier">op</span>, <span class="ruby-identifier">cl</span>), <span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+      <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">make_label</span>(<span class="ruby-identifier">item</span>[<span class="ruby-identifier">:mount</span>], <span class="ruby-identifier">op</span>, <span class="ruby-identifier">cl</span>), <span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+      <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">make_label</span>(<span class="ruby-identifier">item</span>[<span class="ruby-identifier">:used</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; / &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">item</span>[<span class="ruby-identifier">:size</span>], <span class="ruby-identifier">op</span>, <span class="ruby-identifier">cl</span>), <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+      <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">make_label</span>(<span class="ruby-identifier">item</span>[<span class="ruby-identifier">:avail</span>], <span class="ruby-identifier">op</span>, <span class="ruby-identifier">cl</span>), <span class="ruby-value">3</span>, <span class="ruby-value">4</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+      <span class="ruby-identifier">prog</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">ProgressBar</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">prog</span>.<span class="ruby-identifier">text</span> = <span class="ruby-identifier">item</span>[<span class="ruby-identifier">:perc</span>]
+      <span class="ruby-identifier">prog</span>.<span class="ruby-identifier">fraction</span> = <span class="ruby-identifier">perc</span> <span class="ruby-operator">/</span> <span class="ruby-value">100.0</span>
+      <span class="ruby-identifier">table</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">prog</span>, <span class="ruby-value">4</span>, <span class="ruby-value">5</span>, <span class="ruby-identifier">ii</span>, <span class="ruby-identifier">ii</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+      
+      <span class="ruby-identifier">ii</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">table</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

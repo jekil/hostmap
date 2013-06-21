@@ -1,0 +1,16 @@
+Aaron P <ruby.plugman@gmail.com>
+    for his ruby PlugMan library
+    
+Andres Riancho <andres.riancho@gmail.com>
+    for his web application audit and attack framework, w3af, http://w3af.sourceforge.net
+    
+Bernardo Damele Assumpcao Guimaraes <bernardo.damele@gmail.com>
+	for his SQL injection tool, sqlmap, http://sqlmap.sourceforge.net
+    for beta testing hostmap and bug reporting
+
+Hubert Seiwert
+    for beta testing hostmap and bug reporting
+    for submitting some patches
+
+H.D. Moore
+    for his exploiting framework, metasploit, http://www.metasploit.com

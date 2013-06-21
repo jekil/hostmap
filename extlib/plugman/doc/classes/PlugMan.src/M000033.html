@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>define (PlugMan)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/PlugMan.rb, line 343</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">define</span>(<span class="ruby-identifier">plug_name</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+
+      <span class="ruby-comment cmt"># create plugin object and execute the metadata block</span>
+      <span class="ruby-identifier">p</span> = <span class="ruby-constant">PlugMan</span><span class="ruby-operator">::</span><span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new</span>
+    
+      <span class="ruby-comment cmt"># set some plugin metadata</span>
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">name</span> <span class="ruby-identifier">plug_name</span>.<span class="ruby-identifier">to_sym</span>
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">source_file</span> <span class="ruby-ivar">@load_path</span>
+
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">instance_eval</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+
+      <span class="ruby-comment cmt"># check for existing plugin with this name</span>
+      <span class="ruby-identifier">exist</span> = <span class="ruby-ivar">@registered_plugins</span>[<span class="ruby-identifier">plug_name</span>.<span class="ruby-identifier">to_sym</span>]
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">exist</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">exist</span>.<span class="ruby-identifier">version</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">version</span>
+        <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;Plugin #{plug_name.inspect} already exists with newer version of #{exist.version.to_s} (attempted to register version #{p.version.to_s}.)&quot;</span> }
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">exist</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">exist</span>.<span class="ruby-identifier">version</span>
+          <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">warn</span> { <span class="ruby-node">&quot;Plugin #{plug_name.inspect} already exists with older version of #{exist.version.to_s}, replacing with version #{p.version.to_s}.&quot;</span> }      
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-ivar">@registered_plugins</span>[<span class="ruby-identifier">plug_name</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">p</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># set state to stopped (plugins must be started explicitly)</span>
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">state</span> <span class="ruby-identifier">:stopped</span>
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">extension_points</span> [] <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">extension_points</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">p</span>.<span class="ruby-identifier">requires</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">requires</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">p</span>.<span class="ruby-identifier">extends</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">extends</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">empty?</span>)
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">requires</span> [<span class="ruby-identifier">:root</span>] <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-constant">ROOT_PLUGIN</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-node">&quot;Created plugin #{plug_name.inspect}&quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">p</span>.<span class="ruby-identifier">extension_points</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span><span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;, extension points: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">extension_points</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;, &quot;</span>)) }
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

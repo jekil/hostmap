@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>plugin_info (src/demos/text_demo_plugins/core/Main.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/demos/text_demo_plugins/core/Main.rb, line 31</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">plugin_info</span>()
+    <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Registered plugins&quot;</span>
+    <span class="ruby-identifier">puts</span>
+    
+    <span class="ruby-comment cmt"># loop all the plugins in the system, sorting before we loop</span>
+    <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">registered_plugins</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment cmt"># printout plugin information</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Name:\t\t#{k.inspect}\nAuthor:\t\t#{v.author}\nVersion:\t#{v.version}&quot;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Requires:\t#{PlugMan.depends_on(k).sort{|a,b| a.to_s &lt;=&gt; b.to_s}.join(', ')}&quot;</span>
+      
+      <span class="ruby-comment cmt"># gather the plugins connected to the plugin's extension points</span>
+      <span class="ruby-identifier">str</span> = <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">v</span>.<span class="ruby-identifier">extension_points</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">extpt</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">conn</span> = []
+        <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">extensions</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">extpt</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pl</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">conn</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">pl</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;#{extpt.inspect}(#{conn.join(&quot;, &quot;)})&quot;</span>
+      <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">extension_points</span>
+      
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Ext points:\t#{str}&quot;</span>
+      <span class="ruby-identifier">puts</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

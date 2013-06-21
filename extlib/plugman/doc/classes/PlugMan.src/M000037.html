@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>stop_all_plugins (PlugMan)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/PlugMan.rb, line 421</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-constant">PlugMan</span>.<span class="ruby-identifier">stop_all_plugins</span>
+      <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> { <span class="ruby-value str">&quot;Stopping all plugins&quot;</span> }
+      <span class="ruby-ivar">@registered_plugins</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">stop_plugin</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">PluginError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+          <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">error</span> { <span class="ruby-node">&quot;Error stopping plugin #{name.inspect}, reason #{err.error_type}&quot;</span> }
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
