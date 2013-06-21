@@ -22,7 +22,7 @@ PlugMan.define :robtexbyaddress do
     end
 
     page.scan(/\" >([\w\-\_\.]+)<\/a><\/td><td/).each do |url|
-      @hosts << { :hostname => url.to_s }
+      @hosts << { :hostname => url[0].to_s }
     end
 
     return @hosts

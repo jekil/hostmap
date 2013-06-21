@@ -10,7 +10,6 @@ require 'core'
 require 'ui/cli/console'
 require 'options'
 
-
 #
 # Prints hostmap banner and credits
 #

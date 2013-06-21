@@ -21,8 +21,8 @@ PlugMan.define :gpgbydomain do
       return @hosts
     end
 
-    page.scan(/&lt;.*@(.*?)&gt;<\/a>/).each do |url|
-      @hosts << { :hostname => url.to_s }
+    page.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).scan(/&lt;.*@(.*?)&gt;<\/a>/).each do |url|
+      @hosts << { :hostname => url[0].to_s }
     end
 
     return @hosts

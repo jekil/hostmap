@@ -24,7 +24,7 @@ PlugMan.define :gigablastbyaddress do
     
     page.scan(/<a href=(.*?)><font /).each do |url|
       begin
-        @hosts << { :hostname => URI.parse(url.to_s).host }
+        @hosts << { :hostname => URI.parse(url[0].to_s).host }
       rescue
         next
       end

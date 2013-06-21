@@ -4,6 +4,9 @@ require 'set'
 #
 # Check against tomsdns.
 #
+
+# Non sembra funzionare il servizio di tomsdns
+
 PlugMan.define :tomsdnsbyaddress do
   author "Alessandro Tanasi"
   version "0.2.1"

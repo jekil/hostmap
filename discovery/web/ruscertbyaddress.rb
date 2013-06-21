@@ -17,12 +17,14 @@ PlugMan.define :ruscertbyaddress do
 
     begin
       page = open("http://www.bfk.de/bfk_dnslogger.html?query=#{ip}").read
+      #page.scan(/\">([\d\w\.-_]+)<\/a><\/tt><\/td><td><tt>/).each do |url|
+      page.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).scan(/\">([\d\w\.-_]+)<\/a><\/tt><\/td>/).each do |url|
+        #puts url.to_s
+        @hosts << { :hostname => url[0].to_s } 
+      #@hosts << "www.google.com"
+      end
     rescue
       return @hosts
-    end
-
-    page.scan(/\">([\d\w\.-_]+)<\/a><\/tt><\/td><td><tt>/).each do |url|
-      @hosts << { :hostname => url.to_s }
     end
 
     return @hosts
