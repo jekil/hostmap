@@ -24,6 +24,7 @@ module Hostmap
         self.engine = engine
         # Load plugins.
         self.load
+		@thread_list = []
         # Store plugin queue
         @queue = Queue.new                                                        
         # Callback to call when execution is done
@@ -70,34 +71,56 @@ module Hostmap
           when :ip then self.run_ip(value)
         end
         
+		sleep 3
         # Plugins pool
-        @pool = ThreadPool.new(self.engine.opts['timeout'].to_i, self.engine.opts['threads'].to_i)
+		
+        #@pool = ThreadPool.new(self.engine.opts['timeout'].to_i, self.engine.opts['threads'].to_i)
         
+		semaphore = Mutex.new
+        Thread.abort_on_exception=true
+		@thread_list = []
+		
         loop do
           @res = []
           until @queue.empty?
             job = @queue.pop
             key = job.keys[0]
             value = job.values[0]
-            @pool.process {
-              begin
-                $LOG.debug "Plugin #{key.name.inspect} started"
-                out = key.run(value, self.engine.opts)
-                # Reports the result
-                $LOG.debug "Plugin #{key.name.inspect} Output: #{set2txt(out)}"
-                @res << out
-              rescue Timeout::Error
-                @res << key.timeout
-                $LOG.warn "Plugin #{key.name.inspect} execution expired. Output: #{set2txt(out)}"
-              rescue Exception
-                $LOG.debug "Plugin #{key.name.inspect} got a unhandled exception #{$!}"
-              end
-            }
+            $LOG.debug "Plugin #{key.name.inspect}, #{value}"
+            #@pool.process {
+            #  begin
+            #    $LOG.debug "Plugin #{key.name.inspect} started"
+            #    out = key.run(value, self.engine.opts)
+            #    # Reports the result
+            #    $LOG.debug "Plugin #{key.name.inspect} Output: #{set2txt(out)}"
+            #    @res << out
+            #  rescue Timeout::Error
+            #    @res << key.timeout
+            #    $LOG.warn "Plugin #{key.name.inspect} execution expired. Output: #{set2txt(out)}"
+            #  rescue Exception
+            #    $LOG.debug "Plugin #{key.name.inspect} got a unhandled exception #{$!}"
+            #  end
+            #}
+		
+			#AAS manage threads in a simple way
+			begin 
+			 @thread_list << Thread.new(key) { |key_thr|
+				 	out = key_thr.run(value, self.engine.opts)
+            		$LOG.debug "Plugin #{key_thr.name.inspect}, #{value} started in thread"
+            	#	$LOG.info "Plugin #{key.name.inspect} Output: #{set2txt(out)}"
+					@res << out
+				}
+			rescue Exception => e
+				puts "Thread exception: #{e.inspect}"
+ 				puts "Message of the exception: #{e.message}"
+			end
           end
 
           # Time wait
-          @pool.join
+          @thread_list.each {|x| x.join}
           # Report
+		  @thread_list=[]
+			
           @res.each { |r| self.engine.host_discovery.report(r) }
 
           # Break loop if no more plugins
@@ -112,6 +135,7 @@ module Hostmap
       # Enqueue a plugin to be runned.
       #
       def enq(plugin, input)
+		#$LOG.debug "plugin #{plugin.name} enqueued"
         @queue << {plugin => input}
       end
 
@@ -137,7 +161,7 @@ module Hostmap
         # Load all the plugins
         PlugMan.load_plugins PLUGINDIR
 
-        # Start all the pluins
+        # Start all the plugins
         PlugMan.start_all_plugins
       end
 
