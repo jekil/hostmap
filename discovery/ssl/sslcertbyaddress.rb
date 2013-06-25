@@ -48,6 +48,7 @@ PlugMan.define :sslcertbyaddress do
       begin
         http = Net::HTTP.new(ip, port.to_i)
         http.use_ssl = true
+		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
         @cns = []
       
@@ -70,7 +71,7 @@ PlugMan.define :sslcertbyaddress do
             end
           }
         end
-      rescue Exception
+      rescue Exception => e
         next
       end
      
