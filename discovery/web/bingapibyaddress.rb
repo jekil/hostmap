@@ -39,8 +39,8 @@ PlugMan.define :bingapibyaddress do
           @hosts << { :hostname => URI.parse(url.to_s).host }
 		  @hosts << { :bingurl => url.to_s }
         end
-      rescue Exception
-        puts "BingApiPlugin error"   #Ogni tanto da un errore in maniera abbastanza random
+      rescue Exception => e
+        puts "BingApiPlugin Exception #{e.inspect}"   #Ogni tanto da un errore in maniera abbastanza random
         next        
       end
     end
