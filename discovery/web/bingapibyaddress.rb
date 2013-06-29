@@ -40,7 +40,13 @@ PlugMan.define :bingapibyaddress do
 		  @hosts << { :bingurl => url.to_s }
         end
       rescue Exception => e
-        puts "BingApiPlugin Exception #{e.inspect}"   #Ogni tanto da un errore in maniera abbastanza random
+		if e.to_s == "Timeout::Error"
+			$LOG.debug "Timeout for :bingapibyaddress plugin"
+			return @hosts
+		else
+			puts "BingApiPlugin Exception #{e.inspect}"   #Ogni tanto da un errore in maniera abbastanza random
+		end
+
         next        
       end
     end

@@ -44,8 +44,8 @@ PlugMan.define :netcraftbydomain do
     # header per far si che mi scambi per un browser
     begin
       page = open("http://searchdns.netcraft.com/?restriction=site+ends+with&host=#{domain}",:proxy =>"http://localhost:8080","Host" => "searchdns.netcraft.com","User-Agent" => "Mozilla/5.0 (X11; Linux x86_64; rv:20.0) Gecko/20100101 Firefox/20.0", "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "Accept-Language" => "en-US,en;q=0.5", "Accept-Encoding" => "gzip, deflate","Cookie" => "netcraft_js_verification_challenge=#{to_encode};netcraft_js_verification_response=#{encoded}","Connection"=>"keep-alive")
-    rescue
-      puts "Errore"
+    rescue Exception => e
+      puts ":netcraftbydomain error: #{e.inspect}"
       return @hosts
     end
 

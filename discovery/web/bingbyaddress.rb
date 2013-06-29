@@ -31,6 +31,7 @@ PlugMan.define :bingbyaddress do
       begin
         url=arr_url[0]
         @hosts << { :hostname => URI.parse(url.to_s).host }
+		@hosts << { :bingurl => url.to_s }
       rescue
         next
       end

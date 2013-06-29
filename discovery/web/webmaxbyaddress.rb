@@ -15,8 +15,12 @@ PlugMan.define :webmaxbyaddress do
   def run(ip, opts = {})
     @hosts = Set.new
 
+	#AAS il motore di ricerca non restituisce risultati. TODO: da ricontrollare tra qualche giorno
+	return @hosts
+
     begin
-      page = Net::HTTP.post_form(URI.parse('http://tools.web-max.ca/websitesonip.php'), {'ip' => ip, 'byip'=>'Search+by+specific+IP'})
+      #page = Net::HTTP.post_form(URI.parse('http://tools.web-max.ca/websitesonip.php'), {'ip' => ip, 'byip'=>'Search+by+specific+IP'})
+      page = Net::HTTP.post_form(URI.parse('http://tools.web-max.ca/index.php'), {'ip' => ip, 'byip'=>'Search+by+specific+IP'})
     rescue
       return @hosts
     end

@@ -74,6 +74,7 @@ module Hostmap
         end
         
 		sleep 3
+
         # Plugins pool
 		
         #@pool = ThreadPool.new(self.engine.opts['timeout'].to_i, self.engine.opts['threads'].to_i)
@@ -131,10 +132,12 @@ module Hostmap
                 			sleep 0.1
               			end
 					}
+            		$LOG.debug "Plugin #{key_thr.name.inspect} with target #{value_thr} started in thread"
+
 				 	out = key_thr.run(value_thr, opts_thr)
-            		$LOG.debug "Plugin #{key_thr.name.inspect}, #{value_thr} started in thread"
             		$LOG.info "Plugin #{key_thr.name.inspect} Output: #{set2txt(out)}"
 					@res << out
+
 		    		}
 			rescue Exception => e
 				puts "Exception in thread: #{e.inspect}"
