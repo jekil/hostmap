@@ -16,14 +16,14 @@ PlugMan.define :serversniff do
     @hosts = Set.new
 
     begin
-	  page=open("http://serversniff.net/hip-2.228.37.9").read
+	  page=open("http://serversniff.net/hip-#{ip}").read
     rescue Exception => e
 	  puts ":serversniff Error: #{e.inspect}"
       return @hosts
     end
     
 	page.scan(/<td>Name<\/td><\/tr><tr><td> # [0-9]+ <\/td> <td><b> (.*?) <\/b><\/td>/).each do |domain|
-      @hosts << { :domain => domain[0].to_s }
+      @hosts << { :hostname => domain[0].to_s }
     end
 
     return @hosts
