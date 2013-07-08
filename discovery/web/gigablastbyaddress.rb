@@ -18,7 +18,8 @@ PlugMan.define :gigablastbyaddress do
 
     begin
       #page = open("http://www.gigablast.com/search?n=100&q=ip:#{ip}").read
-	  page=open("http://www.gigablast.com/search?q=ip%3A2.228.37.9&id=2986944357&rand=1372440063123").read
+	  #page=open("http://www.gigablast.com/search?q=ip%3A#{ip}&id=2986944357&rand=1372440063123").read
+	  page=open("http://www.gigablast.com/search?q=ip:#{ip}&id=2986944357&rand=1372440063123").read
     rescue
       return @hosts
     end
