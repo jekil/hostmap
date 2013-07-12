@@ -126,6 +126,7 @@ module Hostmap
 					Thread.new (Thread.current) { |main|
 						sleep self.engine.opts['timeout'].to_i
               			while main.alive?
+							$LOG.info "Plugin #{key_thr.name.inspect} stil alive -> I'm going to kill it"
                 			main.raise Timeout::Error
 							#AAS Uccide brutalmente il thread
 							#@main_thr.kill
