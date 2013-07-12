@@ -5,6 +5,7 @@ base = __FILE__
 $:.unshift(File.join(File.expand_path(File.dirname(base)), 'lib'))
 $:.unshift(File.join(File.expand_path(File.dirname(base)), 'extlib/plugman/src'))
 $:.unshift(File.join(File.expand_path(File.dirname(base)), 'extlib/libxml/lib'))
+$:.unshift(File.join(File.expand_path(File.dirname(base)), 'extlib/net-dns/lib'))
 
 require 'libxml'
 include LibXML
@@ -17,6 +18,10 @@ require 'PlugMan'
 require 'thread'
 
 require 'set'
+
+require 'find'
+
+require 'optparse'
 
 
 class TestPlugin
@@ -39,6 +44,52 @@ class TestPlugin
 		@regexp=/(.*)?/
 	end
 end 
+
+def print_plugins_list ()
+	puts "List of plugins:"
+	index=0
+	$plugins_list.each do |plugin|
+		puts "\t#{index}.\t#{plugin}"
+		index = index + 1
+	end		
+	exit 1
+end
+
+
+$plugins_list=[]
+Find.find(PLUGINDIR+"/web") do |path|
+	if path =~ /\.rb$/
+		$plugins_list << path.split("/")[path.split("/").size-1].split(".")[0] 
+    end
+end
+
+options = {}
+opts = OptionParser.new do |opts|
+	opts.banner = "Usage: #$0 -p ALL|<plugin>"
+	options[:plugin_spec]= ""
+	opts.on("-p [STRING]", "--plugin [STRING]", "set target plugin: ALL for all web plugins") do |t|
+		options[:plugin_spec] = t
+	end
+end.parse!
+
+if options.size==0 || options[:plugin_spec].size==0
+	puts "Usage: #$0 -p ALL|<plugin>"
+	print_plugins_list
+end
+
+if options[:plugin_spec] != "ALL"
+	found=false
+	$plugins_list.each do |plugin|
+		if plugin == options[:plugin_spec]
+			found = true
+		end 
+	end	
+
+	if !found
+		puts "ERROR: plugin #{options[:plugin_spec]} does not exist"
+		print_plugins_list
+	end
+end
 
 dtd = XML::Dtd.new(File.read("#{ENV['PWD']}/test/conf/test.dtd"))
 
@@ -127,10 +178,17 @@ PlugMan.load_plugins PLUGINDIR
 #starting only plugins configured for test
 #PlugMan.start_plugin(:main)
 
-PlugMan.start_all_plugins
+if options[:plugin_spec] == "ALL"
+	PlugMan.start_all_plugins
+else
+	PlugMan.start_plugin(options[:plugin_spec].to_sym)
+end
 
 puts "\nTesting hostmap plugins .... this operation could take a while"
 puts "\n"
+
+dnsResolver = Net::DNS::Resolver.new
+dnsResolver.log_level = Net::DNS::UNKNOWN
 
 plugin_types.each do |type|
 
@@ -142,6 +200,25 @@ plugin_types.each do |type|
 
 				#puts "Testing plugin #{testplugin.name}"
 
+				tests_number=1
+				addresses=[]
+				
+				if type == "ip"
+					number=0
+					dnsResolver.query(testplugin.parm_value, Net::DNS::A).answer.each do |rr|
+						#puts rr.class
+						addresses << rr.address.to_s
+					end
+
+					testplugin.parm_value=addresses.shift
+
+					tests_number=addresses.size	
+
+					if tests_number <= 0 
+						puts "DNS query fails for plugin #{plugin.name.inspect}"
+					end
+				end
+
 				res=plugin.run(testplugin.parm_value,testplugin.opts)
 				
 				if  res.size > 0
@@ -149,14 +226,28 @@ plugin_types.each do |type|
 
 						puts "\033[32mPlugin \t#{plugin.name.inspect}\t=>\tOK\033[0m"
 					else
-						
 						puts "\033[31mPlugin \t#{plugin.name.inspect}\t=>\tKO : Not compatible results\033[0m"
-
 					end
 				else
 
-					puts "\033[31mPlugin \t#{plugin.name.inspect}\t=>\tKO : No results found\033[0m"	
-
+						is_ok=false
+						if type=="ip"	
+							addresses.each do |address|
+								res=plugin.run(address,testplugin.opts)
+								if res.size > 0
+									if res.entries[0][testplugin.results_var.to_sym][testplugin.regexp].size > 0
+										puts "\033[32mPlugin \t#{plugin.name.inspect}\t=>\tOK\033[0m"
+									else
+										puts "\033[31mPlugin \t#{plugin.name.inspect}\t=>\tKO : Not compatible results\033[0m"
+									end
+									is_ok=true
+									break
+								end
+							end
+						end
+						if ! is_ok
+							puts "\033[31mPlugin \t#{plugin.name.inspect}\t=>\tKO : No results found\033[0m"	
+						end
 				end
 
 			end

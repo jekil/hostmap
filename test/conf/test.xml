@@ -5,13 +5,13 @@
 	<source>
 		<description value="Bing web search plugin"/>
 		<plugin name=":bingbyaddress" type="ip"/>
-		<parameter value="173.194.35.63"/>	
+		<parameter value="google.it"/>	
 		<result var="hostname"/>
 	</source>
 	<source>
 		<description value="Bing API plugin"/>
 		<plugin name=":bingapibyaddress" type="ip"/>
-		<parameter value="173.194.35.63"/>	
+		<parameter value="google.it"/>	
 		<arroptions length="1">
 			<option name="bingApiKey" value="cuQH6n5qR5oSi3c7RsMV96Yk5PsVKUqQDHJlmL/fnwI="/>
 		</arroptions>
@@ -25,8 +25,9 @@
 	</source>
 	<source>
 		<description value="Gigablast plugin"/>
+		<!-- microsoft.com :D-->
 		<plugin name=":gigablastbyaddress" type="ip"/>
-		<parameter value="173.194.35.63"/>	
+		<parameter value="microsoft.com"/>	
 		<result var="hostname" regexp="google"/>
 	</source>
 	<source>
@@ -44,19 +45,19 @@
 	<source>
 		<description value="Robtex IP reverse DNS"/>
 		<plugin name=":robtexbyaddress" type="ip"/>
-		<parameter value="173.194.35.23"/>	
+		<parameter value="google.it"/>	
 		<result var="hostname" regexp="google"/>
 	</source>
 	<source>
 		<description value="ServerSniff reverse ip lookup"/>
 		<plugin name=":serversniff" type="ip"/>
-		<parameter value="173.194.35.63"/>	
+		<parameter value="www.google.it"/>	
 		<result var="hostname"/>
 	</source>
 	<source>
 		<description value="TomDns reverse ip lookup"/>
 		<plugin name=":tomsdnsbyaddress" type="ip"/>
-		<parameter value="173.194.35.63"/>	
+		<parameter value="google.it"/>	
 		<result var="hostname"/>
 	</source>
 	<source>
