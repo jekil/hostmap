@@ -20,7 +20,7 @@
 	<source>
 		<description value="DNS history by domain plugin"/>
 		<plugin name=":dnshistorybydomain" type="domain"/>
-		<parameter value="google.it"/>	
+		<parameter value="www.google.it"/>	
 		<result var="hostname" regexp="google"/>
 	</source>
 	<source>
@@ -51,7 +51,7 @@
 	<source>
 		<description value="ServerSniff reverse ip lookup"/>
 		<plugin name=":serversniff" type="ip"/>
-		<parameter value="www.google.it"/>	
+		<parameter value="google.it"/>	
 		<result var="hostname"/>
 	</source>
 	<source>
