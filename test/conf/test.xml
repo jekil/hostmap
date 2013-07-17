@@ -63,7 +63,7 @@
 	<source>
 		<description value="WebMax reverse ip lookup"/>
 		<plugin name=":webmaxbyaddress" type="ip"/>
-		<parameter value="173.194.35.63"/>	
+		<parameter value="google.it"/>	
 		<result var="hostname"/>
 	</source>
 </HostmapTests>

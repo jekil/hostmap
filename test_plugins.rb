@@ -207,7 +207,9 @@ plugin_types.each do |type|
 					number=0
 					dnsResolver.query(testplugin.parm_value, Net::DNS::A).answer.each do |rr|
 						#puts rr.class
-						addresses << rr.address.to_s
+						if rr.class == Net::DNS::RR::A
+							addresses << rr.address.to_s
+						end
 					end
 
 					testplugin.parm_value=addresses.shift
@@ -258,4 +260,5 @@ plugin_types.each do |type|
 
 end
 	
+puts ""
 PlugMan.stop_all_plugins
