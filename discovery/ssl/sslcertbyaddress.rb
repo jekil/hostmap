@@ -49,6 +49,7 @@ PlugMan.define :sslcertbyaddress do
         http = Net::HTTP.new(ip, port.to_i)
         http.use_ssl = true
 		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+		http.read_timeout = 5
 
         @cns = []
       
@@ -78,7 +79,6 @@ PlugMan.define :sslcertbyaddress do
      
       # Checks if is a wildcard certificate
       @cns.each do |cn|
-		puts "AAS #{@cns.class} #{cn}"
         if cn =~ /^\*\./
           $LOG.warn "Detected a wildcard entry in X.509 certificate for: #{cn}"
           next
