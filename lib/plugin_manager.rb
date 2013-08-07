@@ -24,6 +24,10 @@ module Hostmap
         self.engine = engine
         # Load plugins.
         self.load
+<<<<<<< HEAD
+=======
+		@thread_list = []
+>>>>>>> remotes/local_hostmap/master
         # Store plugin queue
         @queue = Queue.new                                                        
         # Callback to call when execution is done
@@ -65,11 +69,17 @@ module Hostmap
         # Set callback to later user
         @callback = callback
 
+<<<<<<< HEAD
+=======
+		@thread_list = []
+
+>>>>>>> remotes/local_hostmap/master
         # Select the right plugin to start
         case type
           when :ip then self.run_ip(value)
         end
         
+<<<<<<< HEAD
         # Plugins pool
         @pool = ThreadPool.new(self.engine.opts['timeout'].to_i, self.engine.opts['threads'].to_i)
         
@@ -98,6 +108,84 @@ module Hostmap
           # Time wait
           @pool.join
           # Report
+=======
+		sleep 3
+
+        # Plugins pool
+		
+        #@pool = ThreadPool.new(self.engine.opts['timeout'].to_i, self.engine.opts['threads'].to_i)
+        
+        Thread.abort_on_exception=true
+
+		#is_ok=true	
+
+        loop do
+          @res = []
+          until @queue.empty?
+
+		    #while is_ok == false
+		    #		sleep 0.1
+		    # end
+
+		    #is_ok = false
+
+            job = @queue.pop
+            key = job.keys[0]
+            value = job.values[0]
+            $LOG.debug "Plugin #{key.name.inspect}, #{value}"
+            #@pool.process {
+            #  begin
+				#AAS salva in variabile locale al thread i parametri che gli servono per eseguire correttamente il plugin ( corsa critica sulle variabili key, value , self.engine.opts)
+
+			#	tmp_key = key
+			#	tmp_value = value
+			#	opts=self.engine.opts
+			#	@thread_list << Thread.current
+			#	is_ok=true
+            #    $LOG.debug "Plugin #{tmp_key.name.inspect} started"
+            #    out = tmp_key.run(tmp_value, opts)
+			#	puts "#{Thread.current[:key]}"
+                # Reports the result
+            #    $LOG.debug "Plugin #{key.name.inspect} Output: #{set2txt(out)}"
+            #    @res << out
+            #  rescue Timeout::Error
+            #    @res << key.timeout
+            #    $LOG.warn "Plugin #{key.name.inspect} execution expired. Output: #{set2txt(out)}"
+            #  rescue Exception
+            #    $LOG.debug "Plugin #{key.name.inspect} got a unhandled exception #{$!}"
+            #  end
+            #}
+		
+			#AAS manage threads in a simple way
+			begin 
+			 @thread_list << Thread.new(key,value,self.engine.opts) { |key_thr,value_thr,opts_thr|
+					Thread.new (Thread.current) { |main|
+						sleep self.engine.opts['timeout'].to_i
+              			while main.alive?
+							$LOG.info "Plugin #{key_thr.name.inspect} stil alive -> I'm going to kill it"
+                			main.raise Timeout::Error
+							#AAS Uccide brutalmente il thread
+							#@main_thr.kill
+                			sleep 0.1
+              			end
+					}
+            		$LOG.debug "Plugin #{key_thr.name.inspect} with target #{value_thr} started in thread"
+
+				 	out = key_thr.run(value_thr, opts_thr)
+            		$LOG.info "Plugin #{key_thr.name.inspect} Output: #{set2txt(out)}"
+					@res << out
+
+		    		}
+			rescue Exception => e
+				puts "Exception in thread: #{e.inspect}"
+			end
+          end
+
+          # Time wait
+          @thread_list.each {|x| x.join}
+          # Report
+			
+>>>>>>> remotes/local_hostmap/master
           @res.each { |r| self.engine.host_discovery.report(r) }
 
           # Break loop if no more plugins
@@ -112,6 +200,10 @@ module Hostmap
       # Enqueue a plugin to be runned.
       #
       def enq(plugin, input)
+<<<<<<< HEAD
+=======
+		#$LOG.debug "plugin #{plugin.name} enqueued"
+>>>>>>> remotes/local_hostmap/master
         @queue << {plugin => input}
       end
 
@@ -137,7 +229,11 @@ module Hostmap
         # Load all the plugins
         PlugMan.load_plugins PLUGINDIR
 
+<<<<<<< HEAD
         # Start all the pluins
+=======
+        # Start all the plugins
+>>>>>>> remotes/local_hostmap/master
         PlugMan.start_all_plugins
       end
 
@@ -179,6 +275,11 @@ module Hostmap
               sleep timeout
               while @main.alive?
                 @main.raise Timeout::Error
+<<<<<<< HEAD
+=======
+				#AAS Uccide brutalmente il thread
+				@main.kill
+>>>>>>> remotes/local_hostmap/master
                 sleep 1
               end
             }
@@ -258,4 +359,8 @@ module Hostmap
       end
     end
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> remotes/local_hostmap/master

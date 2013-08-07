@@ -70,6 +70,7 @@ module Hostmap
                 when :domain then self.report_domain(value)
                 when :mx then self.report_mx(value)
                 when :ns then self.report_ns(value)
+				when :bingurl then self.report_bing(value)
               end
             end
           end
@@ -77,7 +78,14 @@ module Hostmap
 
         protected
 
+		#
+		# Report bing results
         #
+
+		def report_bing(url) 
+			@host.bingres << url
+		end
+
         # Report a found hostname
         #
         def report_hostname(name)
@@ -236,6 +244,7 @@ module Hostmap
           @ns = Set.new
           @alias = Set.new
           @domains = Set.new
+		  @bingres = []
         end
 
         #
@@ -281,6 +290,15 @@ module Hostmap
           else
             out << "No results found.\n"
           end
+			
+		  out << "Bing:\n"
+		  if @bingres.size > 0
+				@bingres.each { |url|
+					out << "\t#{url}\n"
+				}
+		  else
+				out << "\tNo results found\n"
+		  end
           out
         end
 
@@ -350,6 +368,12 @@ module Hostmap
         # List of domains for this host.
         #
         attr_accessor :domains
+
+		#
+		# List of bing results
+		#
+
+		attr_accessor :bingres
       end
 
     end

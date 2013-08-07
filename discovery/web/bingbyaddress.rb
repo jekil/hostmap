@@ -27,9 +27,11 @@ PlugMan.define :bingbyaddress do
       return @hosts
     end
 
-    page.scan(/<h3><a href=\"(.*?)\" /).each do |url|
+    page.scan(/<h3><a href=\"(.*?)\" /).each do |arr_url|
       begin
+        url=arr_url[0]
         @hosts << { :hostname => URI.parse(url.to_s).host }
+		@hosts << { :bingurl => url.to_s }
       rescue
         next
       end
