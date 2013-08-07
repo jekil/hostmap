@@ -48,12 +48,12 @@
 		<parameter value="google.it"/>	
 		<result var="hostname" regexp="google"/>
 	</source>
-	<source>
+	<!--source>
 		<description value="ServerSniff reverse ip lookup"/>
 		<plugin name=":serversniff" type="ip"/>
 		<parameter value="google.it"/>	
 		<result var="hostname"/>
-	</source>
+	</source-->
 	<source>
 		<description value="TomDns reverse ip lookup"/>
 		<plugin name=":tomsdnsbyaddress" type="ip"/>
@@ -63,6 +63,12 @@
 	<source>
 		<description value="WebMax reverse ip lookup"/>
 		<plugin name=":webmaxbyaddress" type="ip"/>
+		<parameter value="google.it"/>	
+		<result var="hostname"/>
+	</source>
+	<source>
+		<description value="Ruscert plugin"/>
+		<plugin name=":ruscertbyaddress" type="ip"/>
 		<parameter value="google.it"/>	
 		<result var="hostname"/>
 	</source>

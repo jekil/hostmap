@@ -47,7 +47,7 @@ end
 
 def print_plugins_list ()
 	puts "List of plugins:"
-	index=0
+	index=1
 	$plugins_list.each do |plugin|
 		puts "\t#{index}.\t#{plugin}"
 		index = index + 1
