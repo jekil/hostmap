@@ -20,15 +20,9 @@ PlugMan.define :bingapibyaddress do
     # Skip check if without API key
     return @hosts if !opts['bingApiKey']
 
-    #bingApiKey2="uI1pIkWj+LY2FRwPgCPXtDGCJJeAc3RfNB4b2mbt3Vw"
-
-    #url="https://api.datamarket.azure.com/Bing/SearchWeb/Web?Query=%27#{ip}%27&skip=#{offset}"
-
     # Go!
     Range.new(0,1000).step(50) do |offset|
       begin
-		#AAS la ricerca tira fuori URL impensabili -> TODO: da ricontrollare 
-        #page = open("https://api.datamarket.azure.com/Bing/SearchWeb/Web?Query=%27#{ip}%27&$skip=#{offset}",:http_basic_authentication=>['',opts['bingApiKey']]).read
 		page=open("https://api.datamarket.azure.com/Bing/Search/v1/Web?Query=%27ip%3A%20#{ip}%27&$skip=#{offset}",:http_basic_authentication=>[opts['bingApiKey'],opts['bingApiKey']]).read
         page.scan(/<d:Url m:type="Edm.String">(.*?)<\/d:Url>/).each do |arr_url|
           # Il page.scan non fa un array di stringhe, ma un array di array di stringhe.

@@ -15,7 +15,6 @@ PlugMan.define :webmaxbyaddress do
   def run(ip, opts = {})
     @hosts = Set.new
 
-	#AAS il motore di ricerca non restituisce risultati. TODO: da ricontrollare tra qualche giorno
 	return @hosts
 
     begin

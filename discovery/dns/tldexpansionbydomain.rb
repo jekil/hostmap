@@ -66,7 +66,7 @@ PlugMan.define :tldexpansionbydomain do
       rescue Timeout::Error
         timeout()
       rescue Exception => e
-        next
+		return @hosts
       end
     end
 

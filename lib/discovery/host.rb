@@ -112,7 +112,7 @@ module Hostmap
             @host.alias << name
           end
 
-          $LOG.info "Found new hostname #{name}"
+          $LOG.debug "Found new hostname #{name}"
 
           # Report the domain too
           domain = Hostmap::Utils.parse_domain(name)
@@ -139,7 +139,7 @@ module Hostmap
             return
           end
 
-          $LOG.info "Found new domain #{name}"
+          $LOG.debug "Found new domain #{name}"
           
           @host.domains << name
 
@@ -166,7 +166,7 @@ module Hostmap
             return
           end
 
-          $LOG.info "Found new nameserver #{name}"
+          $LOG.debug "Found new nameserver #{name}"
 
           @host.ns << name
 
@@ -193,7 +193,7 @@ module Hostmap
             return
           end
 
-          $LOG.info "Found new mail server #{name}"
+          $LOG.debug "Found new mail server #{name}"
 
           @host.mx << name
 

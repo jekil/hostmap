@@ -24,10 +24,7 @@ module Hostmap
         self.engine = engine
         # Load plugins.
         self.load
-<<<<<<< HEAD
-=======
 		@thread_list = []
->>>>>>> remotes/local_hostmap/master
         # Store plugin queue
         @queue = Queue.new                                                        
         # Callback to call when execution is done
@@ -69,52 +66,15 @@ module Hostmap
         # Set callback to later user
         @callback = callback
 
-<<<<<<< HEAD
-=======
 		@thread_list = []
 
->>>>>>> remotes/local_hostmap/master
         # Select the right plugin to start
         case type
           when :ip then self.run_ip(value)
         end
         
-<<<<<<< HEAD
-        # Plugins pool
-        @pool = ThreadPool.new(self.engine.opts['timeout'].to_i, self.engine.opts['threads'].to_i)
-        
-        loop do
-          @res = []
-          until @queue.empty?
-            job = @queue.pop
-            key = job.keys[0]
-            value = job.values[0]
-            @pool.process {
-              begin
-                $LOG.debug "Plugin #{key.name.inspect} started"
-                out = key.run(value, self.engine.opts)
-                # Reports the result
-                $LOG.debug "Plugin #{key.name.inspect} Output: #{set2txt(out)}"
-                @res << out
-              rescue Timeout::Error
-                @res << key.timeout
-                $LOG.warn "Plugin #{key.name.inspect} execution expired. Output: #{set2txt(out)}"
-              rescue Exception
-                $LOG.debug "Plugin #{key.name.inspect} got a unhandled exception #{$!}"
-              end
-            }
-          end
-
-          # Time wait
-          @pool.join
-          # Report
-=======
 		sleep 3
 
-        # Plugins pool
-		
-        #@pool = ThreadPool.new(self.engine.opts['timeout'].to_i, self.engine.opts['threads'].to_i)
-        
         Thread.abort_on_exception=true
 
 		#is_ok=true	
@@ -123,40 +83,11 @@ module Hostmap
           @res = []
           until @queue.empty?
 
-		    #while is_ok == false
-		    #		sleep 0.1
-		    # end
-
-		    #is_ok = false
-
             job = @queue.pop
             key = job.keys[0]
             value = job.values[0]
             $LOG.debug "Plugin #{key.name.inspect}, #{value}"
-            #@pool.process {
-            #  begin
-				#AAS salva in variabile locale al thread i parametri che gli servono per eseguire correttamente il plugin ( corsa critica sulle variabili key, value , self.engine.opts)
-
-			#	tmp_key = key
-			#	tmp_value = value
-			#	opts=self.engine.opts
-			#	@thread_list << Thread.current
-			#	is_ok=true
-            #    $LOG.debug "Plugin #{tmp_key.name.inspect} started"
-            #    out = tmp_key.run(tmp_value, opts)
-			#	puts "#{Thread.current[:key]}"
-                # Reports the result
-            #    $LOG.debug "Plugin #{key.name.inspect} Output: #{set2txt(out)}"
-            #    @res << out
-            #  rescue Timeout::Error
-            #    @res << key.timeout
-            #    $LOG.warn "Plugin #{key.name.inspect} execution expired. Output: #{set2txt(out)}"
-            #  rescue Exception
-            #    $LOG.debug "Plugin #{key.name.inspect} got a unhandled exception #{$!}"
-            #  end
-            #}
-		
-			#AAS manage threads in a simple way
+			# manage threads in a simple way
 			begin 
 			 @thread_list << Thread.new(key,value,self.engine.opts) { |key_thr,value_thr,opts_thr|
 					Thread.new (Thread.current) { |main|
@@ -164,7 +95,6 @@ module Hostmap
               			while main.alive?
 							$LOG.info "Plugin #{key_thr.name.inspect} stil alive -> I'm going to kill it"
                 			main.raise Timeout::Error
-							#AAS Uccide brutalmente il thread
 							#@main_thr.kill
                 			sleep 0.1
               			end
@@ -172,7 +102,7 @@ module Hostmap
             		$LOG.debug "Plugin #{key_thr.name.inspect} with target #{value_thr} started in thread"
 
 				 	out = key_thr.run(value_thr, opts_thr)
-            		$LOG.info "Plugin #{key_thr.name.inspect} Output: #{set2txt(out)}"
+            		$LOG.debug "Plugin #{key_thr.name.inspect} Output: #{set2txt(out)}"
 					@res << out
 
 		    		}
@@ -185,7 +115,6 @@ module Hostmap
           @thread_list.each {|x| x.join}
           # Report
 			
->>>>>>> remotes/local_hostmap/master
           @res.each { |r| self.engine.host_discovery.report(r) }
 
           # Break loop if no more plugins
@@ -200,10 +129,7 @@ module Hostmap
       # Enqueue a plugin to be runned.
       #
       def enq(plugin, input)
-<<<<<<< HEAD
-=======
 		#$LOG.debug "plugin #{plugin.name} enqueued"
->>>>>>> remotes/local_hostmap/master
         @queue << {plugin => input}
       end
 
@@ -229,11 +155,7 @@ module Hostmap
         # Load all the plugins
         PlugMan.load_plugins PLUGINDIR
 
-<<<<<<< HEAD
-        # Start all the pluins
-=======
         # Start all the plugins
->>>>>>> remotes/local_hostmap/master
         PlugMan.start_all_plugins
       end
 
@@ -258,109 +180,6 @@ module Hostmap
 
     end
 
-
-    #
-    # Handles a basic thread pool.
-    #
-    class ThreadPool
-
-      #
-      # Thread consumer.
-      #
-      class Worker
-        def initialize(timeout, pool, block)
-          Thread.abort_on_exception=true
-          @main = Thread.new {
-            @timer = Thread.new {
-              sleep timeout
-              while @main.alive?
-                @main.raise Timeout::Error
-<<<<<<< HEAD
-=======
-				#AAS Uccide brutalmente il thread
-				@main.kill
->>>>>>> remotes/local_hostmap/master
-                sleep 1
-              end
-            }
-            begin
-              block.call
-            ensure
-              @timer.kill if @timer.alive?
-              pool.stop_worker(self)
-            end
-          }
-        end
-      end
-
-      attr_accessor :max_size
-      attr_reader :workers
-
-      def initialize(timeout, max_size = 10)
-        @max_size = max_size
-        @timeout = timeout
-        @workers = []
-        @mutex = Mutex.new
-      end
-
-      #
-      # Return the size of the current pool.
-      #
-      def size
-        @workers.size
-      end
-
-      #
-      # If the pool is busy.
-      #
-      def busy?
-        !@workers.empty?
-      end
-
-      #
-      # Wait to finish
-      #
-      def join
-        while busy?
-          sleep 1
-        end
-      end
-
-      #
-      # Runs a block
-      #
-      def process(&block)
-        while true
-          @mutex.synchronize do
-            worker = create_worker(block)
-            if worker
-              return worker
-            end
-          end
-          sleep 1
-        end
-      end
-
-      #
-      # Create a worker
-      #
-      def create_worker(block)
-        return nil if @workers.size >= @max_size
-        worker = Worker.new(@timeout, self, block)
-        @workers << worker
-        worker
-      end
-
-      #
-      # Stops a running worker.
-      #
-      def stop_worker(worker)
-        @workers.delete(worker)
-      end
-    end
   end
-<<<<<<< HEAD
+
 end
-=======
-end
->>>>>>> remotes/local_hostmap/master
