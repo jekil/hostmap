@@ -60,7 +60,7 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
       rescue Timeout::Error
         raise Timeout::Error
       rescue Exception => e
-        next
+		return @hosts
       end
     end
 

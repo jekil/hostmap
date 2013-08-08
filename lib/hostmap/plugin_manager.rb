@@ -126,7 +126,9 @@ module Hostmap
         loop do
           @res = []
           until @queue.empty?
+            puts @queue.size
             job = @queue.pop
+            puts @queue
             key = job.keys[0]
             puts key.info[:name]
             value = job.values[0]

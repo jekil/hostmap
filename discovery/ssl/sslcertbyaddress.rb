@@ -47,15 +47,18 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
       return @res
     end
 
-    opts['httpports'].split(',').each do |port|
+    opts['httpports'].to_s.split(",").each do |port|
       begin
         http = Net::HTTP.new(ip, port.to_i)
         http.use_ssl = true
+		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+		http.read_timeout = 5
 
         @cns = []
       
         http.start() do |conn|
           cert = OpenSSL::X509::Certificate.new conn.peer_cert
+		  $LOG.debug("SSL connection performed")
           # Get data from issuer CN field
           cert.issuer.to_a.each{|oid, value|
             @cns << value if oid == "CN"
@@ -73,7 +76,7 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
             end
           }
         end
-      rescue Exception
+      rescue Exception => e
         next
       end
      

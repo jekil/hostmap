@@ -1,33 +1,34 @@
 require 'open-uri'
 require 'set'
-require 'plugins'
 
 #
 # Check against GPG keyserver.
 #
-class HostmapPlugin < Hostmap::Plugins::BasePlugin
+PlugMan.define :gpgbydomain do
+  author "Alessandro Tanasi"
+  version "0.2.1"
+  extends({ :main => [:domain] })
+  requires []
+  extension_points []
+  params({ :description => "Check against GPG keyserver" })
 
-  def info
-    {
-      :name => "GPGByDomain",
-      :author => "Alessandro Tanasi",
-      :version => "0.3",
-      :require => :domain,
-      :description => "Check against GPG keyserver."
-    }
-  end
+  def run(domain, opts = {})
+    @hosts = Set.new
 
-  def execute(domain, opts = {})
     begin
       page = open("http://pgp.mit.edu:11371/pks/lookup?search=#{domain}&op=index").read
     rescue
-      return @res
+      return @hosts
     end
 
-    page.scan(/&lt;.*@(.*?)&gt;<\/a>/).each do |url|
-      @res << { :hostname => url.to_s }
+    page.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).scan(/&lt;.*@(.*?)&gt;<\/a>/).each do |url|
+      @hosts << { :hostname => url[0].to_s }
     end
 
-    return @res
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

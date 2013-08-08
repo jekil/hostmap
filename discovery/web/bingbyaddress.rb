@@ -1,43 +1,46 @@
 require 'open-uri'
 require 'uri'
 require 'set'
-require 'plugins'
 
 #
 # Check against Bing.
 #
-class HostmapPlugin < Hostmap::Plugins::BasePlugin
+PlugMan.define :bingbyaddress do
+  author "Alessandro Tanasi"
+  version "0.2.1"
+  extends({ :main => [:ip] })
+  requires []
+  extension_points []
+  params({ :description => "Check against Bing." })
 
-  def info
-    {
-      :name => "BingByAddress",
-      :author => "Alessandro Tanasi",
-      :version => "0.3",
-      :require => :ip,
-      :description => "Check against Bing."
-    }
-  end
-
-  def execute(ip, opts = {})
+  def run(ip, opts = {})
+    @hosts = Set.new
+    
     # Skip check if with API key
     if opts['bingApiKey']
-      return @res
+      return @hosts
     end
 
     begin
       page = open("http://www.bing.com/search?q=ip:#{ip}").read
     rescue
-      return @res
+      return @hosts
     end
 
-    page.scan(/<h3><a href=\"(.*?)\" /).each do |url|
+    page.scan(/<h3><a href=\"(.*?)\" /).each do |arr_url|
       begin
-        @res << { :hostname => URI.parse(url.to_s).host }
+        url=arr_url[0]
+        @hosts << { :hostname => URI.parse(url.to_s).host }
+		@hosts << { :bingurl => url.to_s }
       rescue
         next
       end
     end
 
-    return @res
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end

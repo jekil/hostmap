@@ -1,33 +1,34 @@
 require 'open-uri'
 require 'set'
-require 'plugins'
 
 #
 # Check against RUS CERT-DB.
 #
-class HostmapPlugin < Hostmap::Plugins::BasePlugin
+PlugMan.define :robtexbyaddress do
+  author "Alessandro Tanasi"
+  version "0.2.1"
+  extends({ :main => [:ip] })
+  requires []
+  extension_points []
+  params({ :description => "Check against Robtex" })
 
-  def info
-    {
-      :name => "RobtexByAddress",
-      :author => "Alessandro Tanasi",
-      :version => "0.3",
-      :require => :ip,
-      :description => "Check against Robtex."
-    }
-  end
+  def run(ip, opts = {})
+    @hosts = Set.new
 
-  def execute(ip, opts = {})
     begin
       page = open("http://www.robtex.com/ip/#{ip}.html").read
     rescue
-      return @res
+      return @hosts
     end
 
-    page.scan(/\">([\w\-\_\.]+)<\/a><\/span><\/td><td/).each do |url|
-      @res << { :hostname => url.to_s }
+    page.scan(/\" >([\w\-\_\.]+)<\/a><\/td><td/).each do |url|
+      @hosts << { :hostname => url[0].to_s }
     end
 
-    return @res
+    return @hosts
+  end
+
+  def timeout
+    return @hosts
   end
 end
