@@ -1,39 +1,38 @@
 require 'open-uri'
 require 'uri'
 require 'set'
+require 'plugins'
 
 #
 # Check against gigablast.
 #
-PlugMan.define :gigablastbyaddress do
-  author "Alessandro Tanasi"
-  version "0.2.2"
-  extends({ :main => [:ip] })
-  requires []
-  extension_points []
-  params({ :description => "Check against gigablast." })
+class HostmapPlugin < Hostmap::Plugins::BasePlugin
 
-  def run(ip, opts = {})
-    @hosts = Set.new
+  def info
+    {
+      :name => "GigablastByAddress",
+      :author => "Alessandro Tanasi",
+      :version => "0.3",
+      :require => :ip,
+      :description => "Check against gigablast."
+    }
+  end
 
+  def execute(ip, opts = {})
     begin
-	  page=open("http://www.gigablast.com/search?q=ip:#{ip}&id=2986944357&rand=1372440063123").read
+      page = open("http://www.gigablast.com/search?n=100&q=ip:#{ip}").read
     rescue
-      return @hosts
+      return @res
     end
     
-	page.scan(/<a href=(.*?)\/><i>/).each do |url|
+    page.scan(/<a href=(.*?)><font /).each do |url|
       begin
-        @hosts << { :hostname => URI.parse(url[0].to_s).host }
+        @res << { :hostname => URI.parse(url.to_s).host }
       rescue
         next
       end
     end
 
-    return @hosts
-  end
-
-  def timeout
-    return @hosts
+    return @res
   end
 end

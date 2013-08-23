@@ -77,7 +77,7 @@ module Hostmap
       end
 
       # Check if it's a particular TLD
-      $MTLD.each_line do |tld|
+      $MTLD.each("\n") do |tld|
         # Skip comments
         if fqdn =~ /^#/
           next

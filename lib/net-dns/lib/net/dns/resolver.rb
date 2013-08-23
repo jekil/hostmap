@@ -1220,7 +1220,7 @@ module Net # :nodoc:
         # because the comparison will fail when running on JRuby.
         # On JRuby RUBY_PLATFORM == 'java'.
         def platform_windows?
-          !!(RbConfig::CONFIG["host_os"] =~ /msdos|mswin|djgpp|mingw/i)
+          !!(Config::CONFIG["host_os"] =~ /msdos|mswin|djgpp|mingw/i)
         end
 
       end
