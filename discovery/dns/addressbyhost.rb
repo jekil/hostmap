@@ -16,7 +16,7 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
       :author => "Alessandro Tanasi",
       :version => "0.3",
       :require => :hostname,
-      :description => "Return IP addreess with reverse DNS (A) query."
+      :description => "Return IP addresses with reverse DNS (A) query."
     }
   end
 

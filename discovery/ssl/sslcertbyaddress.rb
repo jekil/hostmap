@@ -65,7 +65,7 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
             @cns << value if oid == "CN"
           }
           cert.extensions.each { |ext|
-            # Fucking hack because OpenSSL::X509::Extension documentaion is missing
+            # Fucking hack because OpenSSL::X509::Extension documentation is missing
             if ext.to_s =~ /^subjectAltName =/
               ext.to_s.gsub(/^subjectAltName = /, '').split(',').each do |cn|
                   @cns << cn.downcase.split('dns:')[1] if cn.downcase =~ /^dns:/
