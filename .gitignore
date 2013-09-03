@@ -1,0 +1,6 @@
+# VIM
+*.swp
+*.bck
+
+# Rubymine
+.idea/workspace.xml
