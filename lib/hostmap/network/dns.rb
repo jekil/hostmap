@@ -1,3 +1,5 @@
+require 'net/dns'
+
 module Hostmap
   module Network
 
@@ -17,9 +19,9 @@ module Hostmap
 
       def self.query(query, type=nil)
         if type
-          @@resolver.query(query, type)
+          @@resolver.search(query, type)
         else
-          @@resolver.query(query)
+          @@resolver.search(query)
         end
       end
     end

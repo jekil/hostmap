@@ -1,6 +1,4 @@
-require 'net/dns/resolver'
-require 'net/dns/packet'
-require 'net/dns/rr'
+require 'net/dns'
 require 'set'
 require 'plugins'
 require 'network/dns'
@@ -21,8 +19,13 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
   end
 
   def execute(name, opts = {})
-    begin
-      Hostmap::Network::Dns.query(name).answer.each do |rr|
+    puts 'start'
+    puts name
+    #begin
+      a=Hostmap::Network::Dns.query(IPAddr.new(name))
+      puts a
+      a.answer.each do |rr|
+        puts rr
         if rr.class == Net::DNS::RR::CNAME
           @res << { :hostname => rr.cname.chop }
         end
@@ -30,9 +33,9 @@ class HostmapPlugin < Hostmap::Plugins::BasePlugin
           @res << { :ip => rr.address.to_s }
         end
       end
-    rescue
-      return @res
-    end
+    #rescue
+    #  return @res
+    #end
 
     return @res
   end
