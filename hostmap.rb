@@ -4,7 +4,6 @@
 base = __FILE__
 $:.unshift(File.join(File.expand_path(File.dirname(base)), File.join('lib', 'hostmap')))
 $:.unshift(File.join(File.expand_path(File.dirname(base)), File.join('lib', 'hostmap-cli')))
-$:.unshift(File.join(File.expand_path(File.dirname(base)), 'lib/net-dns/lib')) # TODO: move this import to library
 
 require 'console'
 
@@ -14,15 +13,15 @@ puts "Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>"
 puts
 
 # Start hostmap
-begin
+#begin
   Hostmap::Ui::Cli.new(ARGV).run
-rescue Interrupt
-  puts "\nExecution aborted by user."
-rescue SystemExit
-  # Do nothing and exit.
-rescue Exception => e
-  puts "Unhandled exception. Please report this bug sending an email to alessandro@tanasi.it attaching the following text:"
-  puts "Message:\n #{e.message}"
-  puts "Inspection:\n #{e.inspect}"
-  puts "Backtrace of the exception:\n #{e.backtrace.join("\n ")}"
-end
+#rescue Interrupt
+#  puts "\nExecution aborted by user."
+#rescue SystemExit
+#  # Do nothing and exit.
+#rescue Exception => e
+#  puts "Unhandled exception. Please report this bug sending an email to alessandro@tanasi.it attaching the following text:"
+#  puts "Message:\n #{e.message}"
+#  puts "Inspection:\n #{e.inspect}"
+#  puts "Backtrace of the exception:\n #{e.backtrace.join("\n ")}"
+#end
