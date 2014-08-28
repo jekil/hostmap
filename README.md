@@ -9,14 +9,6 @@ Download
 ========
 You can download latest stable hostmap release from website: http://hostmap.lonerunners.net
 
-Branches
-========
-
-Github code organization:
-
-* `master`: stable release
-* `development`: next release (please send push requests on this branch)
-
 Documentation
 =============
 
