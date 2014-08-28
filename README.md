@@ -12,7 +12,7 @@ You can download latest stable hostmap release from website: http://hostmap.lone
 Documentation
 =============
 
-You can get all the documentation files, changelog and license in "doc" folder.
+You can get all the documentation files, changelog and license in "docs" folder.
 
 Contributors
 ============
