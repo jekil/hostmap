@@ -1,0 +1,54 @@
+hostmap-0.2.2
+
+    * Fixed hostname dictionary "big" list name.
+    * Fixed DNS AXFR zone transfer check that was prone to false positives under some circumstances.
+    * Added automatic check for new updates. You can disable it in configuration file or using the option --without-update.
+    * Fixed DNS History plugin that can raise SystemExit under some strange circumstances.
+    * Changed the job scheduler. Now is more fast, robust and fine tuned.
+    * Added a dynamic thread pool, now you can use --threads to choose the number of concurrent threads.
+    * Some minor fixes.
+    
+hostmap-0.2.1
+
+    * Fixed handling of Errno::ECONNRESET in SSL certificate plugin.
+    * Upgraded net-dns to latest version from git repository.
+    * Fixed traceback on Mac OSX due to net-dns bug.
+    * Added check to enumerate host names with DNS TLD expansion.
+    * Added --print-maltego to get output in Maltego XML format.
+    * Fixed the exception handling architecture, now unknown exceptions that can be raised on not supported system are handled.
+    * Fixed traceback on FreeBSD due to raising of different exceptions.
+    * Added Metasploit auxiliary module in extra folder.
+    * Added validation of -t option, if it isn't an IP address hostmap is stopped.
+    * Added enumeration plugin timeout, by default at 10 minutes. Can be changed with user supplied --timeout option.
+    * Moved website from http://hostmap.sourceforge.net to http://hostmap.lonerunners.net
+    * Added warning message to fix traceback if missing libopenssl-ruby.
+
+hostmap-0.2
+
+    * Fully refactored and rewritten in Ruby.
+    * Removed whois.webhosting.info check due to captcha authentication.
+    * Removed domainsdb.net check because the website is down.
+    * Fixed brute forcing of DNS names with multiple A records.
+    * User requested interrupt (CTRL+C) now is handled.
+    * Added Rakefile to automatize task. For example readme and API documentation rebuilding.
+    * Changed info gathering plugin architecture. Now using PlugMan library.
+    * Added some host names to brute forcing dictionaries.
+    * Added parsing of alternate subject (subjectAltName) from X.509 certificates.
+    * Added info gathering plugin using dnshistory.org.
+
+hostmap-0.1.1 (private release)
+
+    * Added wildcard domains detection.
+    * Added wildcard X.509 certificate detection.
+    * Added -d option to use a user supplied list of DNS servers    
+    * Added blacklist for second level TLD (for example co.uk) detection.
+    * Fixed the Microsoft Live enumeration plugin to use Microsoft Bing.
+    * Added an enumeration plugin to use Microsoft Bing via API. API key must be provided in configuration file.
+    * Added a configuration file (hostmap.conf) to keep user settings.
+    * Added option --http-ports to specify the ports to check for an HTTP/HTTPS service.
+    * Fixed "too many open files" bug when opening dictionary files.
+    * Some code refactoring.
+    
+hostmap-0.1
+    
+    * Initial release.

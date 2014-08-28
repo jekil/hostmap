@@ -1,0 +1,2804 @@
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+hostmap User Guide
+\end_layout
+
+\begin_layout Date
+release 0.2.2
+\end_layout
+
+\begin_layout Author
+by Alessandro `jekil` Tanasi 
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+It is said that if you know your enemies and know yourself, you will not
+ be imperiled in a hundred battles; if you do not know your enemies but
+ do know yourself, you will win one and lose one; if you do not know your
+ enemies nor yourself, you will be imperiled in every single battle.
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ -- Sun Tzu, The Art of War
+\end_layout
+
+\begin_layout Abstract
+\SpecialChar \textcompwordmark{}
+
+\end_layout
+
+\begin_layout Abstract
+This paper is the hostmap user guide.
+ Get the latest version in the project homepage: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://hostmap.lonerunners.net
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+This is the official user guide for version 0.2.2 of the hostmap host name
+ discovery tool.
+ This guide is designed to explain what hostmap is, how it works, and what
+ you can do with it.
+\end_layout
+
+\begin_layout Standard
+The latetest version of this document can be found on the hostmap web site:
+ 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://hostmap.lonerunners.net
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The hostmap host name discovery tool is an utility designed to discover
+ the host names related to a given IP address, generally speaking, all applicati
+on level host names related to a server (example: DNS names, HTTP virtual
+ hosts).
+\end_layout
+
+\begin_layout Standard
+The primary users of hostmap are professionals performing vulnerability
+ assessments and penetration tests.
+\end_layout
+
+\begin_layout Subsection
+Requirements
+\end_layout
+
+\begin_layout Standard
+hostmap is fully implemented using Ruby, an object oriented programming
+ language.
+ The Ruby interpreter is freely downloadable from its official site: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://ruby-lang.org/
+\end_layout
+
+\end_inset
+
+.
+ It's installable in GNU/Linux, Apple OSX and Microsoft Windows.
+\end_layout
+
+\begin_layout Standard
+hostmap is fully portable in GNU/Linux, Apple OSX and Microsoft Windows.
+\end_layout
+
+\begin_layout Subsection
+Use case
+\end_layout
+
+\begin_layout Standard
+In the real world an IP address can be registered in a DNS server with multiple
+ host names, because it can have some aliases or it is hosting a bunch of
+ websites.
+\end_layout
+
+\begin_layout Standard
+For example the IP address 1.2.3.4 has the following names registered, as you
+ can see from a piece of the BIND zone configuration file:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+www.foo.com     CNAME foo.com
+\end_layout
+
+\begin_layout Plain Layout
+
+foo.com         A     1.2.3.4
+\end_layout
+
+\begin_layout Plain Layout
+
+mail.foo.com    A     1.2.3.4
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An user, or a penetration tester, that needs to test the security of the
+ 1.2.3.4 machine needs to known all his host names.
+\end_layout
+
+\begin_layout Standard
+This is needed to achieve a complete test on system 1.2.3.4, because several
+ application, for example the web server, exposes different attacck points,
+ in that case virtual hosts, for each different host name requested so each
+ one must be fully tested.
+\end_layout
+
+\begin_layout Standard
+The purpose of hostmap is to discover all this registered DNS names, also
+ called host names or virtual hosts, to provide a better knowledge of the
+ target and an extended attack surface to the user.
+\end_layout
+
+\begin_layout Subsection
+How to get hostmap
+\end_layout
+
+\begin_layout Standard
+You can get the latest hostmap version from the official website 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://hostmap.lonerunners.net
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+hostmap is available in several packaging formats to fit your own requirements.
+\end_layout
+
+\begin_layout Subsection
+History
+\end_layout
+
+\begin_layout Standard
+The following is the hostmap development timeline and history of notable
+ events.
+\end_layout
+
+\begin_layout Description
+09-05-2010 Released hostmap 0.2.2 with a lot of bug fixes a some new features.
+\end_layout
+
+\begin_layout Description
+26-12-2009 Released hostmap 0.2.1 with a lot of bug fixes a some new features.
+\end_layout
+
+\begin_layout Description
+16-12-2009 Released hostmap 0.2 fully rewritten in Ruby with new cool features.
+\end_layout
+
+\begin_layout Description
+09-05-2009 Initial release.
+ A lot of time has passed after the born of the first private release, today
+ hostmap 0.1 is released to public.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Installation
+\end_layout
+
+\begin_layout Standard
+There are several ways and packages to use or install hostmap, choose one
+ of the following.
+\end_layout
+
+\begin_layout Standard
+If you don't know what you need, use the zip archive so you don't need to
+ install it, simply download, unpack and run.
+\end_layout
+
+\begin_layout Subsection
+Zip and tar.gz archive
+\end_layout
+
+\begin_layout Standard
+The operating system independent compressed sources can be downloaded from
+ hostmap homepage 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://hostmap.lonerunners.net
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+You need only to decompress the archive and run hostmap as explained in
+ the Quick Start Guide.
+ See 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sec:Quick-start-guide"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Development release
+\end_layout
+
+\begin_layout Standard
+The latest development release is available for users that want to run an
+ always update release.
+\end_layout
+
+\begin_layout Standard
+To download you need to install subversion, if you don't already have it,
+ and checkot the sources with: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+$ svn co http://svn.lonerunners.net/projects/hostmap/trunk hostmap
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This creates a folder called hostmap with updated sources inside.
+\end_layout
+
+\begin_layout Standard
+If you want to update the sources before their use simply enter in that
+ folder and type:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+$ svn update
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Windows users needs to install a subversion client.
+ I suggest TortoiseSVN, an easy and free client which can be downloaded
+ from 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://tortoisesvn.net/
+\end_layout
+
+\end_inset
+
+.
+ When installed you can checkout the hostmap sources in a graphical manner,
+ followin the wizard for svn checkout.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Quick-start-guide"
+
+\end_inset
+
+Quick start guide
+\end_layout
+
+\begin_layout Standard
+A ten seconds guide to use hostmap! Now the scenario is: you have an IP
+ address and you want to know all the host names related.
+ 
+\end_layout
+
+\begin_layout Subsection
+Your first discovery
+\end_layout
+
+\begin_layout Standard
+To start a discovery with hostmap using the default options you need only
+ to use the -t options followed by the target IP address, see an example:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+$ ruby hostmap.rb -t 94.23.200.187
+\end_layout
+
+\begin_layout Plain Layout
+
+hostmap 0.2 codename prematurata
+\end_layout
+
+\begin_layout Plain Layout
+
+Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:08] Found new hostname rps9072.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:08] Found new domain ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:08] Found new hostname www.tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:08] Found new domain tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:08] Found new hostname www.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:08] Found new domain lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:08] Found new hostname lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:08] Found new hostname angelo.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:08] Found new hostname lab.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:09] Found new hostname secdocs.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Skipping DNS Zone transfer because it is disabled
+\end_layout
+
+\begin_layout Plain Layout
+
+by default, you must enable it from from command line.
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new mail server 2.kmx.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Skipping DNS Zone transfer because it is disabled
+\end_layout
+
+\begin_layout Plain Layout
+
+by default, you must enable it from from command line.
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver dns13.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new mail server 1.kmx.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver ns1.th.seeweb.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Skipping DNS Zone transfer because it is disabled
+\end_layout
+
+\begin_layout Plain Layout
+
+by default, you must enable it from from command line.
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new mail server aspmx3.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver ns13.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver ns2.th.seeweb.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new mail server aspmx5.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver dns10.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new mail server alt2.aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver ns38.domaincontrol.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new mail server aspmx2.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new mail server aspmx4.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver ns12.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver ns37.domaincontrol.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new mail server alt1.aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new mail server aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver dns15.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver ns15.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver ns11.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver ns10.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver dns12.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:12] Found new nameserver dns11.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:15] Found new hostname ww.tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:15] Found new hostname wwww.tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:15] Found new hostname wwww.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 19:15] Found new hostname ww.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Results for 94.23.200.187
+\end_layout
+
+\begin_layout Plain Layout
+
+Served by name server (probably)
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns37.domaincontrol.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns2.th.seeweb.it
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns13.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns10.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns11.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns13.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns12.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns15.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns1.th.seeweb.it
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns15.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns38.domaincontrol.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns11.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns10.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns12.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+Served by mail exchange (probably)
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx2.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	alt2.aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx3.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx4.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	2.kmx.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	alt1.aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx5.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	1.kmx.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+Hostnames:
+\end_layout
+
+\begin_layout Plain Layout
+
+	ww.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	secdocs.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	angelo.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	rps9072.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	wwww.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	lab.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	www.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	www.tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+	lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	wwww.tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+	ww.tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Fast and furious
+\end_layout
+
+\begin_layout Standard
+To speed up your discovery you can disable the brute forcing enumeration
+ check, so you can miss some results but you can get the best performances.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim} 
+\end_layout
+
+\begin_layout Plain Layout
+
+$ ruby hostmap.rb -t 94.23.200.187 --without-bruteforce
+\end_layout
+
+\begin_layout Plain Layout
+
+hostmap 0.2 codename prematurata
+\end_layout
+
+\begin_layout Plain Layout
+
+Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:52] Found new hostname www.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:52] Found new hostname www.tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:52] Found new domain lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:52] Found new domain tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:52] Found new hostname lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:52] Found new hostname rps9072.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:52] Found new hostname angelo.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:52] Found new domain ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:53] Found new hostname secdocs.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:53] Found new hostname lab.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Skipping DNS Zone transfer because it is disabled
+\end_layout
+
+\begin_layout Plain Layout
+
+by default, you must enable it from from command line.
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Skipping DNS bruteforce because it is disabled from
+\end_layout
+
+\begin_layout Plain Layout
+
+command line
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver ns1.th.seeweb.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Skipping DNS Zone transfer because it is disabled
+\end_layout
+
+\begin_layout Plain Layout
+
+by default, you must enable it from from command line.
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new mail server aspmx3.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver ns2.th.seeweb.it
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Skipping DNS bruteforce because it is disabled from
+\end_layout
+
+\begin_layout Plain Layout
+
+command line
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Skipping DNS Zone transfer because it is disabled
+\end_layout
+
+\begin_layout Plain Layout
+
+by default, you must enable it from from command line.
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new mail server aspmx5.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new mail server alt2.aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver ns38.domaincontrol.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver ns13.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Skipping DNS bruteforce because it is disabled from
+\end_layout
+
+\begin_layout Plain Layout
+
+command line
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new mail server aspmx4.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new mail server 2.kmx.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver dns13.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new mail server aspmx2.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver ns37.domaincontrol.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new mail server 1.kmx.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver dns10.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new mail server alt1.aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new mail server aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver dns15.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver ns12.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver ns15.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver ns10.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver ns11.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver dns12.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+[2009-12-16 12:55] Found new nameserver dns11.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Results for 94.23.200.187
+\end_layout
+
+\begin_layout Plain Layout
+
+Served by name server (probably)
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns37.domaincontrol.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns13.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns2.th.seeweb.it
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns10.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns11.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns13.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns12.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns15.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns1.th.seeweb.it
+\end_layout
+
+\begin_layout Plain Layout
+
+	dns15.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns38.domaincontrol.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns11.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns10.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	ns12.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+Served by mail exchange (probably)
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx2.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	alt2.aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx3.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	2.kmx.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx4.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	alt1.aspmx.l.google.com
+\end_layout
+
+\begin_layout Plain Layout
+
+	1.kmx.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	aspmx5.googlemail.com
+\end_layout
+
+\begin_layout Plain Layout
+
+Hostnames:
+\end_layout
+
+\begin_layout Plain Layout
+
+	secdocs.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	angelo.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	rps9072.ovh.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	lab.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	www.tanasi.it
+\end_layout
+
+\begin_layout Plain Layout
+
+	www.lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+	lonerunners.net
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Features and techniques
+\end_layout
+
+\begin_layout Standard
+The aim of hostmap is to enumerate all the virtual hosts and DNS names of
+ an IP address, and do this in the fastest and detailed way.
+\end_layout
+
+\begin_layout Standard
+To achieve this hostmap uses a lot of techniques, some never used by any
+ other tool, combined with development technologies to get the best performances.
+\end_layout
+
+\begin_layout Subsection
+Features
+\end_layout
+
+\begin_layout Itemize
+DNS names and virtual host enumeration
+\end_layout
+
+\begin_layout Itemize
+Multiple discovery techniques
+\end_layout
+
+\begin_layout Itemize
+Results correlation, aggregation and normalization
+\end_layout
+
+\begin_layout Itemize
+Multi thread and event based engine
+\end_layout
+
+\begin_layout Itemize
+Platform independent: hostmap can run on GNU/Linux, Microsoft Windows, Apple
+ OSX and in each system where Ruby works.
+\end_layout
+
+\begin_layout Subsection
+Techniques
+\end_layout
+
+\begin_layout Standard
+To enumerate all the alias of a target machine hostmap uses a lot of techniques
+ based on protocols, exposed services, target weakness, target vulnerabilities,
+ brute forcing techniques, public databases and search engines that can
+ reveal a target's alias.
+\end_layout
+
+\begin_layout Standard
+The data are fetched at run time from this data sources using multi thread
+ engine to speed up the fetching phase.
+ 
+\end_layout
+
+\begin_layout Standard
+All data fetched being aggregated, normalized, correlated and the results
+ are checked at run time to avoid false positives.
+\end_layout
+
+\begin_layout Standard
+The hostmap engine is based on the knowledge of event, each enumeration
+ action can get results, based on type of enumeration action and the type
+ of the results hostmap dynamically choose the next action to take and the
+ next enumeration check to launch.
+ hostmap uses an adaptive engine written to get much more results possible.
+\end_layout
+
+\begin_layout Standard
+The techniques used by hostmap are the following.
+\end_layout
+
+\begin_layout Subsubsection
+DNS enumeration techniques
+\end_layout
+
+\begin_layout Standard
+The following enumeration techniques are based on the DNS protocol and are:
+\end_layout
+
+\begin_layout Itemize
+Reverse DNS lookup
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Performs a PTR request to get the host name from IP address.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Name servers record lookup
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Get the authoritative name server for each domain enumerated on the target
+ host.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Mail exchange record lookup
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Get the MX records for each domain enumerated on the target host.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+DNS AXFR zone transfer
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The name server that serve the target machine's domain zone can be prone
+ to a zone transfer vulnerability.
+ This allow an attacker to perform a AXFR zone transfer and get a dump of
+ the complete DNS zone, so all records, served by this name server.
+ The AXFR vulnerability can already simply be checked with dig utility.
+ For example if we want to check the DNS server 1.2.3.4, authoritative name
+ server for domain foo.com we can do it with the following syntax and if
+ you get an output like that the DNS server is vulnerable.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+$ dig -t axfr @1.2.3.4 foo.com
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+; <<>> DiG 9.6.1-P2 <<>> -t axfr @1.2.3.4 foo.com
+\end_layout
+
+\begin_layout Plain Layout
+
+; (1 server found)
+\end_layout
+
+\begin_layout Plain Layout
+
+;; global options: +cmd
+\end_layout
+
+\begin_layout Plain Layout
+
+foo.com.		38400	IN	SOA	ns1.foo.com.
+ admin.foo.com.
+ 2006081401 28800 3600 604800
+\end_layout
+
+\begin_layout Plain Layout
+
+38400
+\end_layout
+
+\begin_layout Plain Layout
+
+foo.com.		38400	IN	NS	127.0.0.1.foo.com.
+\end_layout
+
+\begin_layout Plain Layout
+
+foo.com.		38400	IN	MX	10 mta.foo.com.
+\end_layout
+
+\begin_layout Plain Layout
+
+mta.foo.com.	38400	IN	A	192.168.0.3
+\end_layout
+
+\begin_layout Plain Layout
+
+ns1.foo.com.	38400	IN	A	127.0.0.1
+\end_layout
+
+\begin_layout Plain Layout
+
+www.foo.com.	38400	IN	A	192.168.0.2
+\end_layout
+
+\begin_layout Plain Layout
+
+foo.com.		38400	IN	SOA	ns1.foo.com.
+ admin.foo.com.
+ 2006081401 28800 3600 604800
+\end_layout
+
+\begin_layout Plain Layout
+
+38400
+\end_layout
+
+\begin_layout Plain Layout
+
+;; Query time: 0 msec
+\end_layout
+
+\begin_layout Plain Layout
+
+;; SERVER: 1.2.3.4#53(1.2.3.4)
+\end_layout
+
+\begin_layout Plain Layout
+
+;; WHEN: Wed Dec 23 15:27:24 2009
+\end_layout
+
+\begin_layout Plain Layout
+
+;; XFR size: 7 records (messages 1, bytes 207)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Host name brute-forcing
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Using a brute-forcing tries to guess an host name on the enumerated domain
+ that resolve as the target IP address.
+ For example if the domain foo.com has been enumerated the host name brute
+ forcer will check for third level names like: www.foo.com, www1.foo.com, db.foo.com
+ and whatever word listed in the dictionary used.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+DNS TLD expansion
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Use a brute-forcing of top level domain part for already enumerated domain.
+ For example if the domain foo.com has been enumerated the TLD expansion
+ or TLD brute-forcing plugin will check for different TLD for the same domain
+ like: foo.org, foo.net, foo.it and whatever TLD listed in the TLD dictionary.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+SSL/TLS Protocol enumeration techniques
+\end_layout
+
+\begin_layout Standard
+The following enumeration techniques are based on the SSL/TLS protocol and
+ are:
+\end_layout
+
+\begin_layout Itemize
+X.509 Certificate Parsing
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Sometimes the target machine can publish some HTTPS services.
+ A connection is tried to the common HTTP and HTTPS service ports and is
+ tried to negotiate an SSL/TLS connection, if the remote server supply a
+ X.509 certificate the host name is taken from the issuer and subject Common
+ Name (CN) field and from alternate subject extension field.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Passive web enumeration techniques
+\end_layout
+
+\begin_layout Standard
+The following enumeration techniques are based on third party web sites
+ and public databases.
+\end_layout
+
+\begin_layout Itemize
+Search engines
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The following search engines are used:
+\end_layout
+
+\begin_layout Itemize
+Microsoft Bing (with and without search API): 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://search.msn.com
+\end_layout
+
+\end_inset
+
+ It's suggested to use this with API key which improves the amount of results
+ fetched and the plugin speed.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+GPG/PGP key databases
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The following public databases are used:
+\end_layout
+
+\begin_layout Itemize
+MIT GPG key server: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://pgp.mit.edu:11371
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+DNS/WHOIS databases
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Public WHOIS information database, like RIPE, or DNS snapshot database are
+ used to passively enumerate host name and track his history.
+\end_layout
+
+\begin_layout Standard
+The following public databases are used:
+\end_layout
+
+\begin_layout Itemize
+DNShistory: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://dnshistory.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Domainsdb: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.domainsdb.net/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Fbk.de: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.bfk.de/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Gigablast: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.gigablast.com
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Netcraft: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://searchdns.netcraft.com
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Robtex: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.robtex.com
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Tomdns: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.tomdns.net
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Web-max: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.web-max.ca
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Usage
+\end_layout
+
+\begin_layout Standard
+You can use hostmap from command line interface with following:
+\end_layout
+
+\begin_layout Quotation
+ruby hostmap.rb OPTIONS -t TARGET
+\end_layout
+
+\begin_layout Standard
+Where TARGET is the IP address of the host against you want a host discovery
+ and OPTIONS is a list of hostmap's options.
+\end_layout
+
+\begin_layout Standard
+Available options are explained here.
+\end_layout
+
+\begin_layout Subsection
+Show help
+\end_layout
+
+\begin_layout Description
+Option: -h or --help
+\end_layout
+
+\begin_layout Standard
+Show the help screen with all options available.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+$ ruby hostmap.rb -h
+\end_layout
+
+\begin_layout Plain Layout
+
+hostmap 0.2 codename prematurata
+\end_layout
+
+\begin_layout Plain Layout
+
+Coded by Alessandro `jekil` Tanasi <alessandro@tanasi.it>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Usage: hostmap.rb [options] -t [target]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Target options:
+\end_layout
+
+\begin_layout Plain Layout
+
+    -t, --target [STRING]            set target domain
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Discovery options:
+\end_layout
+
+\begin_layout Plain Layout
+
+        --with-zonetransfer
+\end_layout
+
+\begin_layout Plain Layout
+
+                                     enable DNS zone transfer check
+\end_layout
+
+\begin_layout Plain Layout
+
+        --without-bruteforce
+\end_layout
+
+\begin_layout Plain Layout
+
+                                     disable DNS bruteforcing
+\end_layout
+
+\begin_layout Plain Layout
+
+        --bruteforce-level [STRING]
+\end_layout
+
+\begin_layout Plain Layout
+
+                                     set bruteforce aggressivity,
+\end_layout
+
+\begin_layout Plain Layout
+
+values are lite, custom or full (default is lite)
+\end_layout
+
+\begin_layout Plain Layout
+
+        --without-be-paranoid
+\end_layout
+
+\begin_layout Plain Layout
+
+                                     don't check the results
+\end_layout
+
+\begin_layout Plain Layout
+
+consistency
+\end_layout
+
+\begin_layout Plain Layout
+
+        --http-ports [STRING]
+\end_layout
+
+\begin_layout Plain Layout
+
+                                     set a comma separated list of
+\end_layout
+
+\begin_layout Plain Layout
+
+custom HTTP ports to check
+\end_layout
+
+\begin_layout Plain Layout
+
+        --only-passive
+\end_layout
+
+\begin_layout Plain Layout
+
+                                     passive discovery, don't make
+\end_layout
+
+\begin_layout Plain Layout
+
+network activity to the target network
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Common options:
+\end_layout
+
+\begin_layout Plain Layout
+
+    -d, --dns [STRING]               set a comma separated list of DNS
+\end_layout
+
+\begin_layout Plain Layout
+
+servers IP addresses to use instead of system defaults
+\end_layout
+
+\begin_layout Plain Layout
+
+    -v, --verbose                    set verbose mode
+\end_layout
+
+\begin_layout Plain Layout
+
+    -h, --help                       show this help message
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Show version
+\end_layout
+
+\begin_layout Description
+Option: --version
+\end_layout
+
+\begin_layout Standard
+Show the hostmap version.
+\end_layout
+
+\begin_layout Subsection
+Target
+\end_layout
+
+\begin_layout Description
+Option: -t or --target
+\end_layout
+
+\begin_layout Standard
+The host IP address that will be scanned for host names.
+\end_layout
+
+\begin_layout Standard
+A target must be always set.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Show-debug-messagges"
+
+\end_inset
+
+Show debug messages
+\end_layout
+
+\begin_layout Description
+Option: -v or --verbose
+\end_layout
+
+\begin_layout Standard
+Show all debug messages, this can give a more detailed view of hostmap work.
+\end_layout
+
+\begin_layout Subsection
+Use a user defined DNS server
+\end_layout
+
+\begin_layout Description
+Option: -d or --dns
+\end_layout
+
+\begin_layout Standard
+Use a user specified DNS server for all DNS queries.
+ You use this option with a comma separated list of DNS server IP addresses
+ to as parameters.
+\end_layout
+
+\begin_layout Subsection
+DNS Zone Transfer check
+\end_layout
+
+\begin_layout Description
+Option: --with-zone-transfer
+\end_layout
+
+\begin_layout Standard
+Performs a DNS AXFR zone transfer check against name servers that handle
+ the target host.
+\end_layout
+
+\begin_layout Standard
+This option can discover a misconfigured DNS server that allow a full zone
+ transfer, an attacker that use this type of vulnerability can get the full
+ list of the names handled by the vulnerable DNS server.
+\end_layout
+
+\begin_layout Standard
+Some system administrators can see this type of check as an attack against
+ his systems, so this option is disabled by default and use it carefully
+ at your own risk.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Without-hostname-bruteforcing"
+
+\end_inset
+
+Without host name brute-forcing
+\end_layout
+
+\begin_layout Description
+Option: --without-brute-force
+\end_layout
+
+\begin_layout Standard
+Disable the host name brute forcing check.
+\end_layout
+
+\begin_layout Standard
+Disabling brute forcing you get a fastest scan but you can miss same results
+ that are enumerated only with brute forcing.
+\end_layout
+
+\begin_layout Subsection
+Without DNS TLD expansion
+\end_layout
+
+\begin_layout Description
+Option: --without-dnsexpansion
+\end_layout
+
+\begin_layout Standard
+Disable the DNS TLD expansion check.
+\end_layout
+
+\begin_layout Standard
+Disabling his check you get a fastest scan but you can miss same results.
+\end_layout
+
+\begin_layout Subsection
+Brute-force aggressivity
+\end_layout
+
+\begin_layout Description
+Option: --brute-force-level
+\end_layout
+
+\begin_layout Standard
+With this option you can choose the aggressivity of the DNS host name brute-forc
+ing.
+ 
+\end_layout
+
+\begin_layout Standard
+Accepted values are 
+\emph on
+lite
+\emph default
+, 
+\emph on
+custom
+\emph default
+ or 
+\emph on
+full
+\emph default
+.
+ The default value is 
+\emph on
+lite
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+You can see the dictionary used by each level in the dictionaries folder
+ of hostmap.
+\end_layout
+
+\begin_layout Standard
+If you need to edit default dictionaries or edit you own we suggest to use
+ 
+\emph on
+custom.txt
+\emph default
+ under the 
+\emph on
+dictionaries
+\emph default
+ directory.
+\end_layout
+
+\begin_layout Subsection
+Enumeration plugin timeout
+\end_layout
+
+\begin_layout Description
+Option: --timeout
+\end_layout
+
+\begin_layout Standard
+If an enumeration plugin is running, by default after 10 minutes, it's killed
+ and the partial results produced are reported.
+ With this option you can change the default timeout.
+\end_layout
+
+\begin_layout Subsection
+Concurrent threads number
+\end_layout
+
+\begin_layout Description
+Option: --threads
+\end_layout
+
+\begin_layout Standard
+A concurret thread system is used by hostmap to optimize performances, by
+ default hostmap uses 5 concurrent threads.
+ With this option you can change the default number of maximum threads used.
+ 
+\end_layout
+
+\begin_layout Standard
+This is the upper bound that hostmap will use during the event based discovery,
+ sometimes the number of real running threads can be lower because only
+ these are needed.
+\end_layout
+
+\begin_layout Standard
+Please note that if you set this options too high you can flood the DNS
+ server or overload your network and slow down hostmap or take down your
+ connection.
+ Use only with care.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Only-passive-discovery"
+
+\end_inset
+
+Only passive discovery
+\end_layout
+
+\begin_layout Description
+Option: --only-passive
+\end_layout
+
+\begin_layout Standard
+Runs only the enumeration checks that don't performs any activity with the
+ target.
+\end_layout
+
+\begin_layout Standard
+Use this if you want to run a stealth discovery.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Without-paranoid-check"
+
+\end_inset
+
+Without paranoid check
+\end_layout
+
+\begin_layout Description
+Option: --without-be-paranoid
+\end_layout
+
+\begin_layout Standard
+By defaults for each enumerated alias hostmap performs a paranoid check
+ to assure that the enumerated DNS name resolves with the target IP address.
+ 
+\end_layout
+
+\begin_layout Standard
+With this check hostmap confirms the enumerated alias and assure the quality
+ of his results.
+\end_layout
+
+\begin_layout Standard
+In same cases, this can be prone to false positives, because an alias can
+ be discarded if it doesn't resolve with the target IP address but some
+ services on the target host are still configured to serve that alias.
+\end_layout
+
+\begin_layout Standard
+An example can be a web server, that is configured for virtual hosting,
+ and is configured to serve antani.gov website.
+ After an year of activity antani.gov is moved to another hosting company,
+ so the DNS records are changed to point to the new company web servers,
+ but the system administrator of the old hosting company miss to delete
+ the virtual host from the web server configuration.
+ So we have a virtual host that is alive in a service (HTTP) but his DNS
+ record point to a IP address that isn't the target IP address.
+\end_layout
+
+\begin_layout Standard
+This strange behavior can't be detected by hostmap, but using the --without-be-p
+aranoid option you can skip the paranoid check and get the list of all enumerate
+d alias for your target.
+\end_layout
+
+\begin_layout Standard
+The use of --without-be-paranoid slows hostmap execution and is useful only
+ when the hostmap results are post processed by user.
+\end_layout
+
+\begin_layout Subsection
+Output in Maltego XML format
+\end_layout
+
+\begin_layout Description
+Option: --print-maltego
+\end_layout
+
+\begin_layout Standard
+Prints the output in XML formatted standard used by Maltego 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.paterva.com/web4/index.php/maltego
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Without update check
+\end_layout
+
+\begin_layout Description
+Option: --without-update
+\end_layout
+
+\begin_layout Standard
+By defaults at each run hostmap checks for new releases.
+ If a new release is available the download link is displayed, now hostmap
+ contiues it's run.
+\end_layout
+
+\begin_layout Standard
+This behaviour can be disabled with --without-update parameter supplied
+ by command line or disabling the automatic update check in the configuration
+ file.
+\end_layout
+
+\begin_layout Subsection
+Using the configuration file
+\end_layout
+
+\begin_layout Standard
+The file hostmap.conf is used to store some common user settings.
+ You need to simply edit and save it to change the settings automatically
+ loaded at each hostmap run.
+\end_layout
+
+\begin_layout Standard
+The options in the configuration file are overrided by the supplied command
+ line options.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Feedback-and-bug"
+
+\end_inset
+
+Feedback and bug reports
+\end_layout
+
+\begin_layout Standard
+Any kind of feedback is very appreciated!
+\end_layout
+
+\begin_layout Standard
+If you have feature requests, ideas, bug reports or simply you want to give
+ your feedback about hostmap write to alessandro@tanasi.it 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+mailto:alessandro@tanasi.it
+\end_layout
+
+\end_inset
+
+.
+ I am happy to read your opinion.
+\end_layout
+
+\begin_layout Standard
+If you need live help you can interact with other members of the lonerunners
+ community on the official #lonerunners IRC channel.
+ 
+\end_layout
+
+\begin_layout Description
+Server: irc.freenode.net 
+\end_layout
+
+\begin_layout Description
+Channel: #lonerunners 
+\end_layout
+
+\begin_layout Standard
+For more information about freenode, visit 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://freenode.net/faq.shtml"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Copyright-and-license"
+
+\end_inset
+
+Copyright and license
+\end_layout
+
+\begin_layout Standard
+hostmap is copyrighted by Alessandro Tanasi and is licensed under GNU General
+ Public License version 3.
+\end_layout
+
+\begin_layout Standard
+hostmap is free software: you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation, either version 3 of the License, or (at your option) any later
+ version.
+ 
+\end_layout
+
+\begin_layout Standard
+See the GNU General Public License for more details, the full software license
+ is available in the LICENSE.txt file.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Disclaimer
+\end_layout
+
+\begin_layout Standard
+hostmap is distributed in the hope that it will be useful, but WITHOUT ANY
+ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.
+ 
+\end_layout
+
+\begin_layout Standard
+hostmap is a PoC (Proof of Concept) it's not written to real use because
+ if you use it you can violate the policy of same search engines ;)
+\end_layout
+
+\begin_layout Standard
+Whatever you do with this tool is uniquely your responsability.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+FAQ
+\end_layout
+
+\begin_layout Subsection
+General questions
+\end_layout
+
+\begin_layout Subsubsection
+Can i redistribute hostmap?
+\end_layout
+
+\begin_layout Standard
+Yes, you can.
+ hostmap is licensed under the GNU General Public License version 3.
+ See 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sec:Copyright-and-license"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Can i include hostmap in my closed source commercial product?
+\end_layout
+
+\begin_layout Standard
+Generally no, you can't.
+ hostmap is licensed under the GNU General Public License version 3.
+ See 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sec:Copyright-and-license"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+I want to help hostmap, what can i do?
+\end_layout
+
+\begin_layout Standard
+Your help is very appreciated, you can help hostmap in several ways, from
+ coding to send bug reports.
+ See 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sub:Feedback-questions"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Usage questions
+\end_layout
+
+\begin_layout Subsubsection
+How can i improve hostmap performances?
+\end_layout
+
+\begin_layout Standard
+hostmap try to get the best performances available with your connection
+ speed, if you want to speed up hostmap you can try to run it without DNS
+ brute-force using the option --without-brute-force documented in 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sub:Without-hostname-bruteforcing"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If this is not enough for you, try to use only active checks and skip all
+ requests to web services with --only-passive documented in 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sub:Only-passive-discovery"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Remember that this restrict the number on analysis and you can get less
+ results.
+\end_layout
+
+\begin_layout Subsubsection
+Some alias and virtual hosts weren't enumerated or there was a difference
+ between two hostmap runs
+\end_layout
+
+\begin_layout Standard
+Some alias or virtual hosts cannot be enumerated for one or more times for
+ the following reasons:
+\end_layout
+
+\begin_layout Itemize
+Network connectivity issue: DNS traffic use the UDP protocol that is a best
+ effort not reliable protocol, so sometimes if there is a network issue
+ packets can be lost.
+\end_layout
+
+\begin_layout Itemize
+Plugin trace back: A plugin can get a trace back if there is a bug or in
+ most cases if the service used (like a remote web site) is offline.
+ hostmap use third party services as data mining sources so hostmap results
+ depends on the data sources availability.
+\end_layout
+
+\begin_layout Itemize
+Application level virtual hosts that have a wrong DNS record: if hostmap
+ detect an alias or virtual host that doesn't resolve with the target IP
+ address drops this result.
+ To read more about this see 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sub:Without-paranoid-check"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+hostmap try to do the best to limit this strange behavior but sometimes
+ there is situations (like network congestion) that can be influenced by
+ hostmap.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Feedback-questions"
+
+\end_inset
+
+Feedback questions
+\end_layout
+
+\begin_layout Subsubsection
+I found a bug or i want to suggest some features
+\end_layout
+
+\begin_layout Standard
+Any feedback is welcome, write an e-mail to Alessandro Tanasi at alessandro@tana
+si.it and you will get an answer to your questions.
+ See the 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sec:Feedback-and-bug"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+I want to help but i haven't time
+\end_layout
+
+\begin_layout Standard
+There are many ways to help hostmap: coding, testing, donating money, reviewing
+ code and documentation or submitting bug reports and feedback.
+ To do this you don't need to spend a lot of time.
+ Simply reading this user guide and submitting bug reports related to English
+ errors is a great help.
+\end_layout
+
+\begin_layout Subsubsection
+Getting live help
+\end_layout
+
+\begin_layout Standard
+If writin an email to Alessandro Tanasi at alessandro@tanasi.it insn't enough,
+ you can get live help in our IRC channel.
+ See the 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "sec:Feedback-and-bug"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+This software is shit and you are an idiot
+\end_layout
+
+\begin_layout Standard
+Yeah, can be true.
+ Write an e-mail to Alessandro Tanasi at alessandro@tanasi.it if you need
+ to talk about idiots, we can have fun together.
+\end_layout
+
+\end_body
+\end_document
