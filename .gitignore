@@ -4,3 +4,6 @@
 
 # Rubymine
 .idea/workspace.xml
+
+# hostmap configuration
+*hostmap.conf
